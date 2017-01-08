@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 1, Suggested Problems 1: Hartree-Fock}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  For the integral-operator definition of $\op{a}_p$, show that
+  \begin{enumerate}
+  \item
+  $
+    (\op{a}_p\F_{(p_1\cd p_n)})(2,\cd,n)
+  =
+  \left\{
+  \ar{
+    (-)^{k-1}\F_{(p_1\cd \cancel{p_k}\cd p_n)}(2,\cd,n) & p=p_k\in(p_1\cd p_n)\\[5pt]
+    0 & \text{otherwise}
+  }
+  \right.
+  $
+  \item
+  $\op{a}_p\op{a}_q = - \op{a}_q\op{a}_p$
+  \item
+  $\ds{
+    \Y(1,\cd,n)
+  =
+    \fr{1}{\sqrt{n}}
+    \sum_p^\infty\y_p(1)\pr{\op{a}_p\Y}(2,\cd,n)
+  }$
+  \hspace{20pt}
+  (Hint: Use resolution of the identity.)  \item
+  $\ds{
+    \Y(1,\cd,n)
+  =
+    \fr{1}{\sqrt{n(n-1)}}
+    \sum_{pq}^\infty
+    \y_p(1)\y_q(2)(\op{a}_q\op{a}_p\Y)(3,\cd,n)
+  }$
+  \end{enumerate}
+
+
+\item
+  
+\end{enumerate}
+
+\end{document}

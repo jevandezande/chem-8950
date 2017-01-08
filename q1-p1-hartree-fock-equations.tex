@@ -1,0 +1,52 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 1, Suggested Problems 1: Hartree-Fock}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Define the Hartree-Fock optimization problem in one sentence.
+\item
+  Define canonical Hartree-Fock orbitals in one sentence.
+\item
+  Briefly explain in your own words why the Lagrangian approach to constrained optimization works.
+  Draw pictures where necessary.
+\item
+  Determine the functional derivatives of the Hartree-Fock Lagrangian,
+  $\dfr{\d\mc{L}}{\d\y_k^*}$
+  and
+  $\dfr{\d\mc{L}}{\d\y_k}$.
+\item
+  Derive the following expression for the energy expectation value of a Slater determinant, known as the \textit{first Slater rule}.
+\begin{align*}
+  \ip{\F|\op{H}_e|\F}
+=
+\sum_{i}^n
+  \ip{\y_i|\op{h}|\y_i}
++\fr{1}{2}\sum_{ij}^n
+  \ip{\y_i\y_j||\y_i\y_j}
+\end{align*}
+\end{enumerate}
+
+\end{document}
