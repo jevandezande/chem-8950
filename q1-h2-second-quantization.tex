@@ -30,7 +30,7 @@
 \section{Second Quantization}
 
 
-\begin{dfn}\label{slater-determinant}
+\begin{dfn}\label{dfn:slater-determinant}
 \thmtitle{Slater determinant}
 An \textit{Slater determinant} is a normalized antisymmetric product of spin-orbitals
 \begin{align}\label{eq:slater-determinant-position-representation}
@@ -44,7 +44,7 @@ An \textit{Slater determinant} is a normalized antisymmetric product of spin-orb
 where $\pi\in\mr{S}_n$ is a permutation of $1\cd n$ with signature $\e_{\pi}$.\footnote{The signature of a permutation is $(-)^{\text{\# transpositions}}$.}
 \end{dfn}
 
-\subsection{Deriving the second-quantized Hamiltonian}\label{direct-derivation-of-second-quantization}
+\subsection{Deriving the second-quantized Hamiltonian from first quantization}\label{ssec:direct-derivation-of-second-quantization}
 
 
 Let $\mc{F}_n$ denote the span of $n$-electron determinants and consider the integral operator $\op{a}_p:\mc{F}_n\rightarrow \mc{F}_{n-1}$ given by
@@ -53,7 +53,7 @@ Let $\mc{F}_n$ denote the span of $n$-electron determinants and consider the int
 \equiv
   \sqrt{n}\int d(1) \y_p^*(1)\Y(1,2,\cd,n)\,.
 \end{align}
-This operator acts on a Slater determinant as follows.
+This operator acts on Slater determinants as follows.
 \begin{align}
   (\op{a}_p\F_{(p_1\cd p_n)})(2,\cd,n)
 =
@@ -65,22 +65,21 @@ This operator acts on a Slater determinant as follows.
 \right.
 \end{align}
 In words, it deletes $\y_p$ from $\F_{(p_1\cd p_n)}$ if present, otherwise killing the determinant.
-The restriction to an antisymmetric space makes these operators anticommute, $\op{a}_p\op{a}_q=-\op{a}_q\op{a}_p$, which can be demonstrated as follows.
+The restriction to an antisymmetric space makes these operaors anticommute, $\op{a}_p\op{a}_q=-\op{a}_q\op{a}_p$, since it can be shown that for $\Y\in\mc{F}_n$
 \begin{align*}
   \int d(1)d(2)\y_p^*(1)\y_q^*(2)\Y(1,2,\cd,n)
 =&\
-  \int d(2)d(1)\y_p^*(2)\y_q^*(1)\Y(2,1,\cd,n)
-\\=&\
 -
   \int d(1)d(2)\y_q^*(1)\y_p^*(2)\Y(1,2,\cd,n)
 \end{align*}
-These deletion operators provide the following decompositions of functions in $F_n$.
+by swapping integration variables.
+These operators can be used to generate the following decompositions.\footnote{These follow from substituting in the definition of $\op{a}_p$ and applying resolution of the identity to each argument.}
 \begin{align}
   \Y(1,\cd,n)
-=
+=&\
   \tfr{1}{\sqrt{n}}
   \sum_p^\infty\y_p(1)\pr{\op{a}_p\Y}(2,\cd,n)
-=
+\\=&\
   \tfr{1}{\sqrt{n(n-1)}}
   \sum_{pq}^\infty
   \y_p(1)\y_q(2)(\op{a}_q\op{a}_p\Y)(3,\cd,n)
@@ -128,6 +127,69 @@ A defining feature of the second quantization formalism is that $\op{H}_e$ is in
 
 \subsection{Formal treatment of second quantization}
 
+\begin{dfn}\label{dfn:direct-sum-and-direct-product}
+\thmtitle{Direct sums and products}
+\begin{samepage}
+The \textit{direct sum}, $\oplus$, and \textit{direct product}\footnote{Also known as a \textit{tensor product}}, $\otimes$, are operations defining two different ways of combining vector spaces.
+Each operation takes a vector from one space and a vector the other to form an ordered pair, but they behave differently under vector addition and scalar multiplication.
+In a direct sum space $V\oplus V'\equiv\{v\oplus v'\,|\,v\in V,\,v'\in V'\}$,
+vector addition and scalar multilication are defined by
+\begin{align}
+  v_1\oplus v_1'
++
+  v_2\oplus v_2'
+=
+  (v_1 + v_2)
+\oplus
+  (v_1' + v_2')
+&&
+  c(v\oplus v')
+=
+  cv\oplus cv'\,,
+\end{align}
+whereas, in a direct product space $V\otimes V'\equiv\{\sum v\otimes v'\,|\,v\in V,\,v'\in V'\}$, they are defined as follows.
+\begin{align}
+  v_1\otimes v'
++
+  v_2\otimes v'
+=
+  (v_1 + v_2)\otimes v'
+&&
+  v\otimes v_1'
++
+  v\otimes v_2'
+=
+  v\otimes(v_1' + v_2')
+&&
+  c(v\otimes v')
+=
+  (cv)\otimes v'
+=
+  v\otimes(cv')
+\end{align}
+Note that $\oplus$ behaves like addition and $\otimes$ behaves like multiplication.
+If $\{e_i\}$ and $\{e_{i'}'\}$ are basis sets for $V$ and $V'$, respectively, then $\{e_i\oplus0'\}\cup\{0\oplus e_{i'}'\}$ is a basis for their direct sum and $\{e_i\otimes e_{i'}'\}$ is a basis for their direct product.
+The dimension of the direct sum space is the sum of their dimensions,
+$\dim V+\dim V'$,
+and that of the direct product space is the product of their dimensions,
+$\dim V\cdot \,\dim V'$.
+Finally, if $\ip{\cdot|\cdot}_V$ and $\ip{\cdot|\cdot}_{V'}$ are inner products on $V$ and $V'$, then the following are inner products on the combined spaces.
+\begin{align}
+  \ip{v\oplus v'|w\oplus w'}_{V\oplus V'}
+\equiv
+  \ip{v|w}_V
++
+  \ip{v'|w'}_{V'}
+&&
+  \ip{v\otimes v'|w\otimes w'}_{V\otimes V'}
+\equiv
+  \ip{v|w}_V
+\cdot
+  \ip{v'|w'}_{V'}
+\end{align}
+\end{samepage}
+\end{dfn}
+
 
 \begin{dfn}
 \thmtitle{Hilbert space}
@@ -135,8 +197,7 @@ If $\mc{H}$ is a one-electron Hilbert space spanned by a set of spin-orbitals $\
 \end{dfn}
 
 
-
-\begin{dfn}\label{fock-space}
+\begin{dfn}\label{dfn:fock-space}
 \thmtitle{Fock space}
 Let $\mc{F}_n(\mc{H})$ denote $\spn\{\F_{(p_1\cd p_n)}\}$,\footnote{
 These basis vectors are Slater determinants, abstracted from position space:
@@ -150,31 +211,31 @@ $
 $.
 Equation \ref{eq:slater-determinant-position-representation} corresponds to
 $
-  \ip{1\otimes\cd\otimes n|\F_{(p_1\cd p_n)}}
+  \ip{1\otimes\cd\otimes n|\F_{(p_1\cd p_n)}}= \F_{(p_1\cd p_n)}(1,\ld,n)
 $.
 }
 the antisymmetric subspace of $\mc{H}^{\otimes n}$.
-The fermionic \textit{Fock space} is the union of all of these spaces, $\mc{F}(\mc{H})=\mc{F}_0(\mc{H})\oplus \mc{F}_1(\mc{H})\oplus \mc{F}_2(\mc{H})\oplus\cd\oplus \mc{F}_{\infty}(\mc{H})$, which comprises all possible electronic wavefunctions.
+\textit{Fock space} is the union of these spaces, $\mc{F}(\mc{H})=\mc{F}_0(\mc{H})\oplus \mc{F}_1(\mc{H})\oplus \mc{F}_2(\mc{H})\oplus\cd\oplus \mc{F}_{\infty}(\mc{H})$, comprising all possible electronic wavefunctions.
 \end{dfn}
 
 \begin{dfn}\label{occupation-number-representation}
-\thmtitle{The occupation number representation of $\mc{F}(\mc{H})$}
-In the \textit{occupation number representation} of Fock space, the basis vectors are represented as lists of 1s and 0s,
+\thmtitle{Occupation vectors}
+In the \textit{occupation number formalism}, Fock space basis states are represented as \textit{occupation vectors}.
+These are denoted by a series of bits,
 $
   \kt{\bo{n}}
 \equiv
   \kt{n_1,n_2,n_3,\cd,n_\infty}
 $,
-where $n_p=1$ when $\y_p$ is occupied and $n_p=0$ when $\y_p$ is unoccupied in the state.
-One possible basis for $\mc{F}(\mc{H})$ is given by distributing 1s and 0s over the occupation vector in all possible ways.
-The state in which no spin-orbitals are occupied is called the \textit{vacuum state}, denoted $\kt{\vac}$, which spans $\mc{F}_0(\mc{H})$.
+where $n_p=1$ when $\y_p$ is occupied and $n_p=0$ when it isn't.
+The fully unoccupied state is called the \textit{vacuum}, denoted $\kt{\vac}$, which spans $\mc{F}_0(\mc{H})$.
 \end{dfn}
 
-\begin{dfn}\label{particle-hole-operators}
+\begin{dfn}\label{dfn:particle-hole-operators}
 \thmtitle{Particle-hole operators}
 \textit{Particle-hole operators} change the occupation numbers of one-particle states.
 The \textit{annihilation operator} of $\y_p$ is a linear mapping $a_p:\mc{F}_n(\mc{H})\rightarrow \mc{F}_{n-1}(\mc{H})$ defined by
-\begin{align}\label{occ-num-annihilation-operator-action}
+\begin{align}\label{eq:occ-num-annihilation-operator-action}
   a_p\kt{\cd n_p\cd}
 =
   (-)^{n_1+\cd+n_{p-1}}
@@ -187,7 +248,7 @@ The \textit{annihilation operator} of $\y_p$ is a linear mapping $a_p:\mc{F}_n(\
 \ \ \ \text{if $n_p=0$}
 \end{align}
 and the \textit{creation operator} of $\y_p$ is a linear mapping $c_p:\mc{F}_n(\mc{H})\rightarrow \mc{F}_{n+1}(\mc{H})$ defined by
-\begin{align}\label{occ-num-creation-operator-action}
+\begin{align}\label{eq:occ-num-creation-operator-action}
   c_p\kt{\cd n_p\cd}
 =
   (-)^{n_1+\cd+n_{p-1}}
@@ -211,9 +272,9 @@ and the \textit{creation operator} of $\y_p$ is a linear mapping $c_p:\mc{F}_n(\
 }
 \end{prop}
 
-\begin{prop}\label{particle-hole-operator-anticommutator}
+\begin{prop}\label{prop:particle-hole-operator-anticommutator}
 \thmtitle{$[q,q']_+=\d_{q'q\dg}$}
-\thmstatement{Particle-hole operators $q$ and $q'$ anticommute unless $q'=q\dg$, for which $[q,q\dg]_+=1$.}
+\thmstatement{Particle-hole operators $q$ and $q'$ anticommute unless $q'=q\dg$, for which $[q,q\dg]_+=1$.}~\footnote{These are anticommuator brackets, $[q, q']_+ \equiv qq' + q'q$.}
 \thmproof{
   Let $q$ and $q'$ be arbitrary particle-hole operators acting on $\y_p$ and $\y_{p'}$, respectively.
   First, suppose $p\neq p'$. Then
@@ -241,11 +302,11 @@ and the \textit{creation operator} of $\y_p$ is a linear mapping $c_p:\mc{F}_n(\
 \end{prop}
 
 \begin{rmk}
-\thmtitle{Relating the determinant and occupation number representations}
+\thmtitle{Relating the determinant and occupation number formalisms}
 When $p_1<\cd<p_n$, $\F_{(p_1\cd p_n)}$ is equivalent to the occupation vector $\kt{\bo{n}_{(p_1\cd p_n)}}$ with 1s at $p_1,\cd,p_n$.
 Otherwise, this determinant is equivalent to $\e_{\pi}\kt{\bo{n}_{(p_1\cd p_n)}}$ for $\pi\in\mr{S}_n$ such that $p_{\pi(1)}<\cd<p_{\pi(n)}$.
 The actions of $a_p$ and $a_p\dg$ on $\F_{(p_1\cd p_n)}$ are given by
-\begin{align}\label{abstract-annihilation-operator-action}
+\begin{align}\label{eq:abstract-annihilation-operator-action}
   a_p\F_{(p_1\cd p_n)}
 =
   (-)^{k-1}\F_{(p_1\cd\cancel{p_k}\cd p_n)}
@@ -255,7 +316,7 @@ The actions of $a_p$ and $a_p\dg$ on $\F_{(p_1\cd p_n)}$ are given by
 =
   0
   \ \text{if $p\notin(p_1\cd p_n)$}
-\\\label{abstract-creation-operator-action}
+\\\label{eq:abstract-creation-operator-action}
   a_p\dg\F_{(p_1\cd p_n)}
 =
   (-)^{k-1}\F_{(p_1\cd p_{k-1}pp_k\cd p_n)}
@@ -266,10 +327,10 @@ The actions of $a_p$ and $a_p\dg$ on $\F_{(p_1\cd p_n)}$ are given by
   0
   \ \text{if $p\in(p_1\cd p_n)$}
 \end{align}
-which follows directly from \Cref{occ-num-annihilation-operator-action,occ-num-creation-operator-action} when $p_1<\cd<p_n$.
+which follows directly from \Cref{eq:occ-num-annihilation-operator-action,eq:occ-num-creation-operator-action} when $p_1<\cd<p_n$.
 Other cases follow from the fact that any sign factors for permuting $(p_1\cd p_n)$ cancel on both sides of the equation, including the position of insertion or deletion, $p_k$, whose phase is tracked by $(-)^{k-1}$ on the right.
 That is, both sides of the equation are antisymmetric to permutations of $(1\cd n)$.
-Note that \Cref{abstract-annihilation-operator-action} was also derived in \Cref{direct-derivation-of-second-quantization} using the position-space representation of $a_p$.
+Note that \Cref{eq:abstract-annihilation-operator-action} was also derived in \Cref{ssec:direct-derivation-of-second-quantization} using the position-space representation of $a_p$.
 One advantage of the determinant basis is that, unlike occupation vectors, determinants translate directly into strings of creations operators
 \begin{align}
   \kt{\F_{(p_1\cd p_n)}}
@@ -277,7 +338,7 @@ One advantage of the determinant basis is that, unlike occupation vectors, deter
   a_{p_1}\dg\cd a_{p_n}\dg\kt{\vac}
 \end{align}
 without any phase ambiguity.
-Together with the second quantized form of the electronic Hamiltonian (\Cref{second-quantized-hamiltonian}), this boils much of the grunt work of electronic structure theory down to particle-hole operator algebra.
+Together with the second quantized form of the electronic Hamiltonian, this boils much of the grunt work of electronic structure theory down to particle-hole operator algebra.
 \end{rmk}
 
 \begin{dfn}
@@ -294,7 +355,210 @@ For a given reference determinant $\F$, excited determinants can be constructed 
 where $i_1,\cd,i_m$ are occupied and $a_1,\cd,a_m$ are virtual indices with respect to $\F$.
 \end{dfn}
 
+\begin{dfn}\label{dfn:particle-hole-isomorphism}
+\thmtitle{Particle-hole isomorphism}
+The \textit{particle-hole isomorphism} with respect to the reference determinant $\kt{\F}=\kt{\underset{\text{$n$ times}}{1\cd1}\,0\,0\cd}$ is a mapping $F(\mc{H})\rightarrow F(\mc{H})$ that inverts the bits occupied in $\F$:
+\begin{align*}
+  \kt{k_1\cd k_nk_{n+1}k_{n+1}\cd}
+\mapsto
+  \kt{\ol{k}_1\cd \ol{k}_nk_{n+1}k_{n+2}\cd}
+\sp
+  \text{where $\ol{k}_i=1-k_i$.}
+\end{align*}
+Physically, this corresponds to shift in perspective from the \textit{particle frame} to a \textit{quasiparticle frame}, where the first $n$ states are viewed as \textit{holes} rather than \textit{particles}.
+This makes $\kt{\vac}\mapsto\kt{\underset{\text{$n$ times}}{\ol{1}\cd\ol{1}}\,0\,0\cd}$ a state of $n$ holes and no particles.  $\kt{\F}\mapsto\kt{\underset{\text{$n$ times}}{\ol{0}\cd\ol{0}}\,0\,0\cd}$ becomes the \textit{quasiparticle vacuum state}, in which all hole and particle states are unoccupied.
+\end{dfn}
 
+\begin{dfn}
+\thmtitle{Quasiparticle creation and annihilation operators}
+If we apply \Cref{dfn:particle-hole-operators} to the new quasiparticle Fock space, we end up with a new system of \textit{quasi-particle-hole operators} $\{b_p\}\cup\{b_p\dg\}$, related to the old set via
+\begin{align}
+&&
+  a_i
+\mapsto
+  b_i\dg
+&&
+  a_i\dg
+\mapsto
+  b_i
+&&
+  a_a
+\mapsto
+  b_a
+&&
+  a_a\dg
+\mapsto
+  b_a\dg
+\end{align}
+where $i$ and $a$ are occupied and virtual indices with respect to the reference determinant $\F$.
+$\{a_i\}\cup\{a_a\}\mapsto\{b_p\}$ are therefore \textit{quasiparticle annihilation operators} and $\{a_i\}\cup\{a_a\dg\}\mapsto\{b_p\dg\}$ are \textit{quasiparticle creation operators}.
+\end{dfn}
+
+\begin{rmk}
+The standard expression for the second-quantized Hamiltonian is
+\begin{align}
+  H_e
+=
+  \sum_{pq}
+  h_{pq}\,
+  a_p\dg a_q
++
+  \tfr{1}{4}
+  \sum_{pqrs}
+  \ip{pq||rs}\,
+  a_p\dg a_q\dg a_sa_r
+\end{align}
+where the summations run over the full set of spin-orbitals.
+Note that this matches \Cref{eq:second-quantized-hamiltonian}, except that we have rearranged the second term to express it in terms of antisymmetrized integrals.
+In terms of quasi-particle-hole operators,
+\begin{align}
+\nonumber
+  H_e
+=&\
+  \sum_{ab}
+  h_{ab}\,
+  b_a\dg b_b
++
+  \sum_{ai}
+  h_{ai}\,
+  b_a\dg b_i\dg
++
+  \sum_{ia}
+  h_{ia}\,
+  b_i b_a
++
+  \sum_{ij}
+  h_{ij}
+  b_i b_j\dg
+\\\nonumber&\
++
+  \tfr{1}{4}
+  \sum_{abcd}
+  \ip{ab||cd}\,
+  b_a\dg b_b\dg b_d b_c
++
+  \tfr{1}{2}
+  \sum_{abci}
+  \ip{ab||ci}\,
+  b_a\dg b_b\dg b_i\dg b_c
++
+  \tfr{1}{2}
+  \sum_{aibc}
+  \ip{ai||bc}\,
+  b_a\dg b_i b_c b_b
++
+  \tfr{1}{4}
+  \sum_{abij}
+  \ip{ab||ij}\,
+  b_a\dg b_b\dg b_j\dg b_i\dg
++
+  \sum_{aibj}
+  \ip{ai||bj}\,
+  b_a\dg b_i b_j\dg b_b
+\\&\
++
+  \tfr{1}{4}
+  \sum_{ijab}
+  \ip{ij||ab}\,
+  b_i b_j b_b b_a
++
+  \tfr{1}{2}
+  \sum_{iajk}
+  \ip{ia||jk}\,
+  b_i b_a\dg b_k\dg b_j\dg
++
+  \tfr{1}{2}
+  \sum_{ijka}
+  \ip{ij||ka}\,
+  b_i b_j b_a b_k\dg
++
+  \tfr{1}{4}
+  \sum_{ijkl}
+  \ip{ij||kl}\,
+  b_i b_j b_l\dg b_k\dg
+\end{align}
+where we have split the full summations above into summations over occupied and virtual orbitals and grouped like terms.
+\end{rmk}
+
+\begin{dfn}
+\thmtitle{Normal order}
+A string $q_1\cd q_n$ of particle-hole operators is in \textit{normal order} when all of its creation operators sit to the left of its annihilation operators.
+That is, when the string has the form $a_{p_1}\dg\cd a_{p_m}\dg a_{r_1}\cd q_{r_{m'}}$.
+This guarantees that its vacuum expectation value vanishes, $\ip{\vac|q_1\cd q_n|\vac}=0$.
+More generally, we say that $q_1\cd q_n$ is in \textit{$\F$-normal order} if it maps into a string of the form $b_{p_1}\dg\cd b_{p_m}\dg b_{r_1}\cd b_{r_{m'}}$ under particle-hole isomorphism referenced to $\F$, since this guarantees that
+$\ip{\F|q_1\cd q_n|\F}=0$.
+\end{dfn}
+
+\begin{ex}
+In second quantization, any operator string can be expanded as a linear combination of strings which are in normal order.
+The expectation value of a string is always equal to the constant term in this expansion.
+For example:
+\begin{align*}
+  a_p a_q\dg
+=
+-
+  a_q\dg a_p
++
+  \d_{pq}
+&\implies
+  \ip{\vac|a_p a_q\dg|\vac}
+=
+  \d_{pq}
+\\
+  a_p a_q a_s\dg a_r\dg
+=
+  a_r\dg a_s\dg a_q a_p
++
+  \d_{pq}
+  a_r\dg a_q
+-
+  \d_{pr}
+  a_s\dg a_q
+-
+  \d_{qs}
+  a_r\dg a_p
++
+  \d_{qr}
+  a_s\dg a_p
+-
+  \d_{pq}\d_{sr}
++
+  \d_{pq}\d_{qs}
+&\implies
+  \ip{\vac|a_p a_q a_s\dg a_r\dg|\vac}
+=
+  \d_{pq}\d_{qs}
+-
+  \d_{pq}\d_{sr}
+\end{align*}
+where we have made repeated use of \Cref{prop:particle-hole-operator-anticommutator} to arrive at these expansions.
+This strategy becomes unwieldy for expectation values of a reference determinant $\F$, in which case it is more convenient to use particle-hole isomorphism.
+For example, consider the following matrix element of the core Hamiltonian.
+\begin{align*}
+  \sum_{pq}
+  h_{pq}
+  \ip{\F|a_p\dg a_q|\F_i^a}
+=
+  \sum_{bc}
+  h_{bc}\,
+  \cancel{\ip{\F|b_b\dg b_c b_a\dg b_i\dg|\F}}
++
+  \sum_{bj}
+  h_{bj}\,
+  \cancel{\ip{\F|b_b\dg b_j\dg b_a\dg b_i\dg|\F}}
++
+  \sum_{jb}
+  h_{jb}\,
+  \cancelto{\d_{ab}\d_{ij}}{\ip{\F|b_j b_b b_a\dg b_i\dg|\F}}
++
+  \sum_{jk}
+  h_{jk}
+  \cancel{\ip{\F|b_j b_k\dg b_a\dg b_i\dg|\F}}
+=
+  h_{ia}
+\end{align*}
+Only the third term survives, because the others generate a ket state with a different number of quasi-particles from the bra state.
+\end{ex}
 
 
 \end{document}

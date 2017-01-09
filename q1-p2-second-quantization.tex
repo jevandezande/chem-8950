@@ -18,7 +18,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{Quiz 1, Suggested Problems 1: Hartree-Fock}
+\fancyhead[LE,RO]{Quiz 1, Suggested Problems 2: Second Quantization}
 \fancyfoot[CE,CO]{\thepage}
 \usepackage{url}
 
@@ -26,42 +26,142 @@
 
 \begin{enumerate}
 \item
-  For the integral-operator definition of $\op{a}_p$, show that
+  Show why the following relationships hold for antisymmetric functions $\Y,\Y'\in\mc{F}_n$.
+  \begin{align*}
+    \sum_{i=1}^n
+    \ip{\Y|\op{h}(i)\Y'}
+  =
+    n\ip{\Y|\op{h}(1)\Y'}
+  &&
+    \sum_{i<j}^n
+    \ip{\Y|\op{g}(i,j)\Y'}
+  =
+    \tfr{n(n-1)}{2}
+    \ip{\Y|\op{g}(1,2)\Y'}
+  \end{align*}
+
+\item
+  Show how to make the following rearrangement.
+  \begin{align*}
+    \tfr{1}{2}
+    \sum_{pqrs}
+    \ip{pq|rs}
+    a_p\dg a_q\dg a_s a_r
+  =
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    a_p\dg a_q\dg a_s a_r
+  \end{align*}
+
+\item
+  For the integral-operator definition of $\op{a}_p$, show that the following relationships hold.
   \begin{enumerate}
   \item
-  $
-    (\op{a}_p\F_{(p_1\cd p_n)})(2,\cd,n)
-  =
-  \left\{
-  \ar{
-    (-)^{k-1}\F_{(p_1\cd \cancel{p_k}\cd p_n)}(2,\cd,n) & p=p_k\in(p_1\cd p_n)\\[5pt]
-    0 & \text{otherwise}
-  }
-  \right.
-  $
+    $
+      (\op{a}_p\F_{(p_1\cd p_n)})(2,\cd,n)
+    =
+    \left\{
+    \ar{
+      (-)^{k-1}\F_{(p_1\cd \cancel{p_k}\cd p_n)}(2,\cd,n) & p=p_k\in(p_1\cd p_n)\\[5pt]
+      0 & \text{otherwise}
+    }
+    \right.
+    $
+
   \item
-  $\op{a}_p\op{a}_q = - \op{a}_q\op{a}_p$
+    $\op{a}_p\op{a}_q = - \op{a}_q\op{a}_p$
+
   \item
-  $\ds{
-    \Y(1,\cd,n)
-  =
-    \fr{1}{\sqrt{n}}
-    \sum_p^\infty\y_p(1)\pr{\op{a}_p\Y}(2,\cd,n)
-  }$
-  \hspace{20pt}
-  (Hint: Use resolution of the identity.)  \item
-  $\ds{
-    \Y(1,\cd,n)
-  =
-    \fr{1}{\sqrt{n(n-1)}}
-    \sum_{pq}^\infty
-    \y_p(1)\y_q(2)(\op{a}_q\op{a}_p\Y)(3,\cd,n)
-  }$
+    $\ds{
+      \Y(1,\cd,n)
+    =
+      \tfr{1}{\sqrt{n}}
+      \sum_p^\infty\y_p(1)\pr{\op{a}_p\Y}(2,\cd,n)
+    }$
+
+  \item
+    $\ds{
+      \Y(1,\cd,n)
+    =
+      \tfr{1}{\sqrt{n(n-1)}}
+      \sum_{pq}^\infty
+      \y_p(1)\y_q(2)(\op{a}_q\op{a}_p\Y)(3,\cd,n)
+    }$
   \end{enumerate}
 
 
 \item
-  
+  Using your own words, prove that $c_p=a_p\dg$.
+  You may use either the determinant formalism or the occupation number formalism.
+
+\item
+  Verify the anticommutator relation $[q,q']_+=\d_{q'q\dg}$ by proving each of the following cases.
+  \begin{align*}
+    [a_p, a_q]_+
+  =
+    0
+  &&
+    [a_p\dg, a_q\dg]_+
+  =
+    0
+  &&
+    [a_p, a_q\dg]_+
+  =
+    0
+  \hspace{5pt} (p\neq q)
+  &&
+    [a_p, a_p\dg]_+
+  =
+    1
+  \end{align*}
+
+\item
+  Show that the occupation-number definition of $a_p$ and $c_p$ is consistent with the determinant definition.
+
+\item
+  Do Problem 1.4 in Helgaker's big purple book.
+
+\item
+  Derive Slater's rules using second quantization.
+  Where necessary, explain in words why a given term vanishes.
+  (Hint: Use particle-hole isomorphism.)
+  \begin{enumerate}
+  \item
+    $\ds{
+      \ip{\F|H_e|\F}
+    =
+      \sum_i
+      h_{ii}
+    +
+      \tfr{1}{2}
+      \sum_{ij}
+      \ip{ij||ij}
+    }$
+  \item
+    $\ds{
+      \ip{\F|H_e|\F_i^a}
+    =
+      h_{ia}
+    +
+      \sum_j
+      \ip{ij||aj}
+    }$
+  \item
+    $\ds{
+      \ip{\F|H_e|\F_{ij}^{ab}}
+    =
+      \ip{ij||ab}
+      \vphantom{\sum_j}
+    }$
+  \item
+    $\ds{
+      \ip{\F|H_e|\F_{ijk}^{abc}}
+    =
+      0
+    }$
+  \end{enumerate}
+  For extra credit, show how to derive them without using particle-hole isomorphism.
 \end{enumerate}
 
 \end{document}
