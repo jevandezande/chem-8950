@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 2, Handout 2: Wick's Theorem}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Evaluate each of the following using the definition of contraction.
+  \begin{align*}
+    \no{\ctr{}{a}{_p}{a} a_p a_q}
+  =
+    \,\,?
+  &&
+    \no{\ctr[0.5]{}{a}{_p\dg}{a} a_p\dg a_q}
+  =
+    \,\,?
+  &&
+    \no{\ctr{}{a}{_p}{a} a_p a_q\dg}
+  =
+    \,\,?
+  &&
+    \no{\ctr[0.5]{}{a}{_p\dg}{a} a_p\dg a_q\dg}
+  =
+    \,\,?
+  \\
+    \gno{\ctr{}{a}{_a}{a} a_a a_b}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_a\dg}{a} a_a\dg a_b}
+  =
+    \,\,?
+  &&
+    \gno{\ctr{}{a}{_a}{a} a_a a_b\dg}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_a\dg}{a} a_a\dg a_b\dg}
+  =
+    \,\,?
+  \\
+    \gno{\ctr{}{a}{_a}{a} a_a a_i}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_a\dg}{a} a_a\dg a_i}
+  =
+    \,\,?
+  &&
+    \gno{\ctr{}{a}{_a}{a} a_a a_i\dg}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_a\dg}{a} a_a\dg a_i\dg}
+  =
+    \,\,?
+  \\
+    \gno{\ctr{}{a}{_i}{a} a_i a_a}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_i\dg}{a} a_i\dg a_a}
+  =
+    \,\,?
+  &&
+    \gno{\ctr{}{a}{_i}{a} a_i a_a\dg}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_i\dg}{a} a_i\dg a_a\dg}
+  =
+    \,\,?
+  \\
+    \gno{\ctr{}{a}{_i}{a} a_i a_j}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_i\dg}{a} a_i\dg a_j}
+  =
+    \,\,?
+  &&
+    \gno{\ctr{}{a}{_i}{a} a_i a_j\dg}
+  =
+    \,\,?
+  &&
+    \gno{\ctr[0.5]{}{a}{_i\dg}{a} a_i\dg a_j\dg}
+  =
+    \,\,?
+  \end{align*}
+\item
+  Assuming Wick's theorem, prove the following corollaries in your own words.
+  \begin{enumerate}
+  \item
+    A product of normal-ordered operators equals the normal-ordering of their product plus all cross-contractions.
+  \item
+    The vacuum expectation value of an operator is the sum of its complete contractions.
+  \end{enumerate}
+\item
+  Visually illustrate the proof of the phase factor for completely contracted products with a non-trivial example -- something with more than two line intersections.
+\item
+  Derive the expansion of $H_e$ in terms of $\F$-normal-ordered excitations.
+\item
+  
+\end{enumerate}
+
+
+\end{document}

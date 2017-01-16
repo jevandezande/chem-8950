@@ -1,0 +1,605 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 2, Handout 2: Wick's Theorem}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+
+\setcounter{section}{1}
+\section{Wick's theorem}
+
+\begin{dfn}
+\thmtitle{Normal ordering}
+The \textit{normal ordering} of a string $q_1\cd q_n$ of particle-hole operators is the mapping $q_1\cd q_n\mapsto\no{q_1\cd q_n}\equiv\e_{\pi}q_{\pi(1)}\cd q_{\pi(n)}$ where $\pi\in\mr{S}_n$ is a permutation that puts the string in normal order.
+More generally, \textit{$\F$-normal ordering} maps the string into 
+$\gno{q_1\cd q_n}\equiv\e_{\si}q_{\si(1)}\cd q_{\si(n)}$ where $\si$ puts the string in $\F$-normal order.
+\end{dfn}
+
+\begin{dfn}\label{dfn:contraction}
+\thmtitle{Contraction}
+A \textit{contraction} of two particle particle-hole operators $q_1$ and $q_2$ is the difference between their product and its normal-ordering, $\no{\ctr{}{q}{_1}{q}q_1q_2}\equiv q_1q_2 - \no{q_1q_2}$.
+This associates a scalar value with every pair in $\{a_p\}\cup\{a_p\dg\}$.
+\begin{align}
+\begin{array}{l@{\hspace{2cm}}l}
+  \no{\ctr{}{a}{_p}{a} a_pa_q}
+=
+  a_pa_q
+-
+  a_pa_q
+=
+  0
+&
+  \no{\ctr[0.5]{}{a}{_p\dg}{a} a_p\dg a_q}
+=
+  a_p\dg a_q
+-
+  a_p\dg a_q
+=
+  0
+\\[5pt]
+  \no{\ctr[0.5]{}{a}{_p\dg}{a} a_p\dg a_q\dg}
+=
+  a_p\dg a_q\dg
+-
+  a_p\dg a_q\dg
+=
+  0
+&
+  \no{\ctr{}{a}{_p}{a} a_p a_q\dg}
+=
+  a_p a_q\dg
++
+  a_q\dg a_p
+=
+  \d_{pq}
+\end{array}
+\end{align}
+More generally, we can define a \textit{$\F$-normal contraction} of two operators by subtracting their $\F$-normal-ordering instead, $\gno{\ctr{}{q}{_1}{q}q_1q_2}\equiv q_1q_2 - \gno{q_1q_2}$.
+In this case, contractions of like operators still vanish but the mixed cases are more complicated.
+\begin{align}
+  \gno{\ctr[0.5]{}{a}{_p\dg}{a} a_p\dg a_q}
+=
+  \g_{pq}
+&&
+  \gno{\ctr{}{a}{_p}{a} a_p a_q\dg}
+=
+  \h_{pq}
+&&
+  \g_{pq}
+\equiv
+\left\{
+\begin{array}{cc}
+\d_{pq} & \text{$p,q$ occupied in $\F$} \\
+0 & \text{$p,q$ virtual} 
+\end{array}
+\right.
+&&
+  \h_{pq}
+\equiv
+\left\{
+\begin{array}{cc}
+0 & \text{$p,q$ occupied in $\F$} \\
+\d_{pq} & \text{$p,q$ virtual} 
+\end{array}
+\right.
+\end{align}
+In words, dagger-on-the-left contractions (``hole contractions'') are elements of a matrix $\bm{\g}$ which is zero everywhere but its occupied block, where $\g_{ij}=\d_{ij}$, whereas daggers-on-the-right contractions (``particle contractions'') are elements of a matrix $\bm{\h}$ which is zero everywhere but its virtual block, $\h_{ab}=\d_{ab}$.
+Noting that $\gno{\ctr{}{q}{_1}{q}q_1q_2}=\ip{\F|q_1q_2 - \gno{q_1q_2}|\F}=\ip{\F|q_1q_2|\F}$, these matrices can be identified as
+$\g_{pq}=\ip{\F|a_p\dg a_q|\F}$
+and
+$\h_{pq}=\ip{\F|a_p a_q\dg|\F}$, known as the \textit{one-particle} and \textit{one-hole density matrices} of $\F$, respectively.
+\end{dfn}
+
+
+\begin{ntt}\label{ntt:normal-ordering-with-contraction}
+\thmtitle{Normal-ordered strings with contractions}
+Let the notation $\gno{q_1\cd\ctr{}{q}{_i\cd}{q}q_i\cd q_j\cd q_n}$ stand for
+\begin{align}
+&&
+  \gno{q_1\cd\ctr{}{q}{_i\cd}{q}q_i\cd q_j\cd q_n}
+\equiv
+  (-)^{j-i-1}\ctr{}{q}{_i}{q}\,q_iq_j\,\gno{q_1\cd\cancel{q_i}\cd\cancel{q_j}\cd q_n}
+\end{align}
+where the phase factor corresponds to the signature of the permutation required to bring $q_i$ and $q_j$ together.  The same rule applies for normal-ordered strings with multiple contraction lines.
+\end{ntt}
+
+\begin{prob}\label{prob:wick-example}
+Show that the expansion of $a_p a_q a_s\dg a_r\dg$ in terms of strings that are in normal order
+\begin{align}
+  a_p a_q a_s\dg a_r\dg
+=&\
+  a_s\dg a_r\dg a_p a_q
++
+  \d_{ps} a_r\dg a_q
+-
+  \d_{pr} a_s\dg a_q
+-
+  \d_{qs} a_r\dg a_p
++
+  \d_{qr} a_s\dg a_p
+-
+  \d_{ps}\d_{qr}
++
+  \d_{pr}\d_{qs}
+\\
+\intertext{can be expressed as follows, using \cref{ntt:normal-ordering-with-contraction}.}
+\label{eq:wicks-theorem-first-example}
+  a_p a_q a_s\dg a_r\dg
+=&\
+  \no{a_pa_qa_s\dg a_r\dg}
++
+  \no{\ctr{}{a}{_pa_q}{a}          a_pa_qa_s\dg a_r\dg}
++
+  \no{\ctr[0.5]{}{a}{_pa_qa_s\dg}{a}a_pa_qa_s\dg a_r\dg}
++
+  \no{\ctr{a_p}{a}{_q}{a}          a_pa_qa_s\dg a_r\dg}
++
+  \no{\ctr{a_p}{a}{_qa_s\dg}{a}    a_pa_qa_s\dg a_r\dg}
++
+  \no{\ctr[0]{}{a}{_pa_q}{a}
+      \ctr[1]{a_p}{a}{_qa_s\dg}{a} a_pa_qa_s\dg a_r\dg}
++
+  \no{\ctr[1]{}{a}{_pa_qa_s\dg}{a}
+      \ctr[0]{a_p}{a}{_q}{a}       a_pa_qa_s\dg a_r\dg}
+\end{align}
+That is, the string equals its normal-ordering plus all possible contractions.
+This is one example of a general a result known as Wick's theorem, which will be proven below after we introduce some convenient notation.
+\end{prob}
+
+\begin{ntt}\label{ntt:contraction-notation}
+For a particle-hole operator string $Q=q_1\cd q_n$, let the $\gno{Q(\ctr{}{q}{_i}{q}q_iq_j)}$ denote $\gno{q_1\cd\ctr{}{q}{_i\cd}{q}q_i\cd q_j\cd q_n}$.
+This is well-defined as long as $i<j$.
+Let $\gno{\ol{Q}}$ stand for the sum of all unique single, double, triple, etc. contractions of $Q$
+\begin{align*}
+  \gno{\ol{Q}}
+\equiv
+  \sum_{k=1}^{\floor{\sfr{n}{2}}}
+  \sum_{(i_1j_1)\cd(i_kj_k)}^{\mr{Ctr}_k(Q)}
+  \no{Q(
+    \ctr{}{q}{_{i_1}}{q}
+    q_{i_1}q_{j_1}
+    \cd
+    \ctr{}{q}{_{i_k}}{q}
+    q_{i_k}q_{j_k}
+  )}
+\end{align*}
+where $\mr{Ctr}_k(Q)$ runs over all unique sets $\{(i_1j_2)\cd(i_kj_k)\,|\,i_p<j_p\}$ of $k$ pairs of operator indices in $Q$ and $\floor{\cdot}$ is the floor function.
+Let $\gno{\ol{\ol{Q}}}$ denote the sum of all \textit{complete contractions}: the terms from $\gno{\ol{Q}}$ in which every operator in $Q$ is involved in a contraction.
+Finally, let $\gno{\ctr{}{Q}{}{Q} QQ'}$ denote the sum of all single, double, etc.~\textit{cross contractions}: those in which all contractions have an operator from $Q$ on the left and one from $Q'$ on the right.
+In this context, contractions involving two operators from $Q$ or two operators from $Q'$ are called \textit{internal contractions} of $Q$ or $Q'$.
+To review, in this notation equation \ref{eq:wicks-theorem-first-example} would be written as
+$
+  a_p a_q a_s\dg a_r\dg
+=
+  \no{a_pa_qa_s\dg a_r\dg}
++
+  \no{\ol{a_pa_qa_s\dg a_r\dg}}
+$
+and the last two terms on the right equal
+$
+  \no{\ol{\ol{a_pa_qa_s\dg a_r\dg}}}
+$.
+\end{ntt}
+
+\begin{lem}\label{lem:pre-wick-lemma}
+\thmtitle{$\gno{Q}q=\gno{Qq}+\sum_k\gno{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}$}
+\begin{samepage}
+\thmproof{
+  Let $n$ be the number of operators in $Q$ and assume, without loss of generality, that $Q$ is already in normal order so that $\gno{Q}=Q$.
+  If $q$ is a quasiparticle annihilation operator then $\gno{Qq}=Qq$ and all cross-contractions vanish, so the statement holds trivially.
+  If $q$ is a quasiparticle creation operator then $\gno{Qq}=(-)^nqQ$ and, using an anticommutator relation derived in the appendix (\cref{prop:pull-through-relation}),
+  \begin{align*}
+    Qq
+  =
+    (-)^n qQ
+  +
+    \sum_{k=1}^n
+    (-)^{n-k}
+    q_1\cd [q_k,q]_+\cd q_n
+  =
+    \gno{Qq}
+  +
+    \sum_{k=1}^n
+    \gno{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}
+  \end{align*}
+  since $\gno{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}=(-)^{n-k}\gno{q_1\cd\ctr{}{q}{_k}{q}q_kq\cd q_n}$ and $\ctr{}{q}{_k}{q} q_kq=[q_k,q]_+$ when $q$ is a quasiparticle creation operator (see \cref{dfn:contraction}).
+}
+\end{samepage}
+\end{lem}
+
+\begin{thm}\label{wicks-theorem}
+\thmtitle{Wick's theorem (time-independent)} $Q=\gno{Q}+\gno{\ol{Q}}$\vspace{5pt}
+\thmproof{
+  Let $n$ be the length of $Q$.
+  The result holds for $n=2$ since $q_1q_2=\gno{q_1q_2}+\ctr{}{q}{_1}{q} q_1q_2$ by the definition of contraction.
+  Now, assume it holds for $n$ operators and consider $Qq$.
+  By our inductive assumption, $Qq=\gno{Q}q + \gno{\ol{Q}}q$.
+  Applying \cref{lem:pre-wick-lemma} to $\no{Q}q$ gives
+  $\gno{Q}q=\gno{Qq}+\sum_i\gno{\ctr{Q(}{q}{_i)}{q} Q(q_i)q}$.
+  Expanding $\gno{\ol{Q}}q$ and applying \cref{lem:pre-wick-lemma} to each term gives
+  \\[5pt]
+  {\footnotesize
+  $\begin{array}{rl}\displaystyle
+    \sum_{k=1}^{\floor{\sfr{n}{2}}}
+    \sum_{(i_1j_1)\cd(i_kj_k)}^{\mr{Ctr}_k(Q)}
+    \gno{Q(
+      \ctr{}{q}{_{i_1}}{q} q_{i_1}q_{j_1}
+      \ctr{}{q}{_{i_k}}{q} q_{i_k}q_{j_k}
+    )}
+    q
+  =&\displaystyle
+    \sum_{k=1}^{\floor{\sfr{n}{2}}}
+    \sum_{(i_1j_1)\cd(i_kj_k)}^{\mr{Ctr}_k(Q)}
+    \gno{Q(
+      \ctr{}{q}{_{i_1}}{q} q_{i_1}q_{j_1}
+      \ctr{}{q}{_{i_k}}{q} q_{i_k}q_{j_k}
+      )q
+    }
+  +
+    \sum_{k=1}^{\floor{\sfr{n}{2}}}
+    \sum_{(i_1j_1)\cd(i_kj_k)}^{\mr{Ctr}_k(Q)}
+    \sum_{i\notin\{i_1,j_1,\cd,i_k,j_k\}}
+    %\sum_{\substack{i\,\notin\\\{i_1,j_1,\cd,i_k,j_k\}}}
+    \gno{Q(
+      \ctr{}{q}{_{i_1}}{q} q_{i_1}q_{j_1}
+      \ctr{}{q}{_{i_k}}{q} q_{i_k}q_{j_k}
+      \ctr{}{q}{_i)}{q}    q_i)q
+    }
+  \\=&\displaystyle
+    \sum_{(i_1j_1)}^{\mr{Ctr}_1(Q)}
+    \gno{Q(
+      \ctr{}{a}{_{i_1}}{q} q_{i_1}q_{j_1}
+      )q
+    }
+  +
+    \sum_{k=2}^{\floor{\sfr{(n+1)}{2}}}
+    \sum_{(i_1j_2)\cd(i_kj_k)}^{\mr{Ctr}_k(Qq)}
+    \gno{Qq(
+      \ctr{}{q}{_{i_1}}{q}  q_{i_1}q_{j_1}
+      \cd
+      \ctr{}{q}{_{i_k}}{q}  q_{i_k}q_{j_k}
+    )}
+  \end{array}$}\\
+  and, combining these results, we find
+  \\[5pt]
+  {\footnotesize
+  $\begin{array}{rl}\displaystyle
+    Qq
+  =
+    \gno{Q}q
+  +
+    \gno{\ol{Q}}q
+  =&\displaystyle
+    \gno{Qq}
+  +
+    \sum_{i=1}^n
+    \gno{Q(
+      \ctr{}{q}{_i)}{q}  q_i)q
+    }
+  +
+    \sum_{(i_1j_1)}^{\mr{Ctr}_1(Q)}
+    \gno{Q(
+      \ctr{}{a}{_{i_1}}{q} q_{i_1}q_{j_1}
+      )q
+    }
+  +
+    \sum_{k=2}^{\floor{\sfr{(n+1)}{2}}}
+    \sum_{(i_1j_2)\cd(i_kj_k)}^{\mr{Ctr}_k(Qq)}
+    \gno{Qq(
+      \ctr{}{q}{_{i_1}}{q}  q_{i_1}q_{j_1}
+      \cd
+      \ctr{}{q}{_{i_k}}{q}  q_{i_k}q_{j_k}
+    )}
+  \\[20pt]=&\displaystyle
+    \gno{Qq}
+  +
+    \sum_{k=1}^{\floor{\sfr{(n+1)}{2}}}
+    \sum_{(i_1j_2)\cd(i_kj_k)}^{\mr{Ctr}_k(Qq)}
+    \gno{Qq(
+      \ctr{}{q}{_{i_1}}{q}  q_{i_1}q_{j_1}
+      \cd
+      \ctr{}{q}{_{i_k}}{q}  q_{i_k}q_{j_k}
+    )}
+  \end{array}$}\\
+  which is $\gno{Qq}+\gno{\ol{Qq}}$.
+  So if the statement holds for strings of length $n$ it must also hold for strings of length $n+1$.
+  By induction, the theorem holds for $Q$ of arbitrary length.
+}
+\end{thm}
+
+
+\begin{cor}\label{wick-operator-product}
+\thmtitle{Wick's theorem for operator products}\vspace{5pt}
+$\gno{Q}\gno{Q'}=\gno{QQ'}+\gno{\ctr{}{Q}{}{Q}  QQ'}$
+\thmproof{
+  By Wick's theorem $\gno{Q}\gno{Q'}=\gno{QQ'}+\gno{\pr{\ol{\gno{Q}\gno{Q'}}}}$ and since $\gno{Q}$ and $\gno{Q'}$ are in normal order their contractions vanish, leaving $\gno{\pr{\ol{\gno{Q}\gno{Q'}}}}=\gno{\ctr{}{Q}{}{Q} QQ'}$.
+}
+\end{cor}
+
+\begin{cor}\label{wick-expectation-value}
+\thmtitle{Wick's theorem for expectation values}\vspace{5pt}
+$\ip{\vac|Q|\vac}=\gno{\ol{\ol{Q}}}$
+\thmproof{
+  From Wick's theorem $\ip{\vac|Q|\vac}=\ip{\vac|\gno{Q}|\vac}+\ip{\vac|\gno{\ol{Q}}|\vac}$ and any incompletely contractioned terms have vanishing expectation values.  Therefore, $\ip{\vac|\gno{Q}|\vac}=0$ and $\ip{\vac|\gno{\ol{Q}}|\vac}=\gno{\ol{\ol{Q}}}$.
+}
+\end{cor}
+
+\begin{rmk}
+To recap, let's state Wick's theorem and its corollaries in words as the following three rules.
+\begin{enumerate}
+\item
+  An operator string equals its normal ordering plus all contractions.
+\item
+  A product of normal-ordered operators equals the normal ordering of the product plus all cross-contractions.
+\item
+  The expectation value of a string equals the sum of its complete contractions.
+\end{enumerate}
+The next proposition proves a convenient rule for evaluating completely contracted operator strings, relating the overall sign of the term to the number of times its contraction lines cross.
+\end{rmk}
+
+\begin{prop}
+\thmstatement{The sign of a completely contracted string is $\pr{-}^c$ where $c$ is the number of contraction line intersections.}\vspace{5pt}
+\thmproof{
+  Let
+  $\e_{\pi}
+  \gno{
+    \ctr{}{q}{_{\pi(1)}}{q}     q_{\pi(1)}q_{\pi(2)}
+    \cd
+    \ctr{}{q}{_{\pi(n-1)}}{q}  q_{\pi(n-1)}q_{\pi(n)}
+  }$
+  be the disentangled form of a complete contraction of $q_1\cd q_n$, where $n$ is an even integer.
+  The phase factor for the contraction, $\e_{\pi}$, is equal to the signature of the disentangling permutation, which is equal to the signature of the inverse permutation $\pi^{-1}$, restoring the original ordering of the operators.
+  $\pi^{-1}$ can be expressed as a series of transpositions swapping pairs of operators not connected by a contraction line.
+  Since every operator has a contraction line overhead, each of these transpositions changes the number of line intersections by exactly $\pm1$, so $\e_{\pi}=(-)^c$ where $c$ is the number of intersections in the original contraction pattern.
+}
+\end{prop}
+
+
+\begin{dfn}
+\thmtitle{Correlation component of $H_e$}
+Using Wick's theorem, we can expand $\vac$-normal one- and two-particle excitations as linear combinations of $\F$-normal-ordered ones.
+\begin{align}
+&
+  a_p\dg a_q
+=
+  \gno{a_p\dg a_q}
++
+  \g_{pq}
+&&
+  a_p\dg a_q\dg a_sa_r
+=
+  \gno{a_p\dg a_q\dg a_sa_r}
+-
+  \g_{pq}\gno{a_q\dg a_r}
++
+  \g_{pr}\gno{a_q\dg a_s}
++
+  \g_{qs}\gno{a_p\dg a_r}
+-
+  \g_{qr}\gno{a_p\dg a_s}
++
+  \g_{pr}\g_{qs}
+-
+  \g_{ps}\g_{qr}
+\end{align}
+Substituting these into the electronic Hamiltonian leads to an expression for $H_e$ in terms of $\F$-normal operators.
+\begin{align}
+&&
+  H_e
+=
+  E_0
++
+  \sum_{pq}^\infty
+  f_{pq}
+  \gno{a_p\dg a_q}
++
+  \tfr{1}{4}
+  \sum_{pqrs}^\infty
+  \ip{pq||rs}
+  \gno{a_p\dg a_q\dg a_sa_r}
+&&
+\begin{array}{r@{\ }l}
+  E_0
+\equiv&
+\ds{
+  \sum_{pq}^\infty
+  h_{pq}\g_{pq}
++
+  \tfr{1}{2}
+  \sum_{pqrs}^\infty
+  \ip{pq||rs}
+  \g_{pr}\g_{qs}
+}
+\\[5pt]
+  f_{pq}
+\equiv&
+  h_{pq}
++
+  \ds{\sum_{rs}^{\infty}}
+  \ip{pr||qs}
+  \g_{rs}
+\end{array}
+\end{align}
+Note that $E_0$ is another expression for the Hartree-Fock energy, $E_0=\ip{\F|\op{H}_e|\F}$, and $f_{pq}$ is the matrix representation of the the Fock operator in the spin-orbital basis, $\bm{f}=[f_{pq}]$ where $f_{pq}=\ip{\y_p|\op{f}\y_q}$.
+The second and third terms in this expression together make up the \textit{correlation component} of the electronic Hamiltonian, $H_\mr{c}\equiv H_e - \ip{\F|H_e|\F}$.
+\end{dfn}
+
+\begin{ex}
+\thmtitle{Derivation of CIS equations}
+The configuration interaction singles (CIS) equations take the form
+\begin{align}
+  \sum_{jb}
+  \ip{\F_i^a|H_e - E_0|\F_j^b}\,
+  (\bo{c}_k)_b^j
+=
+  \w_k\, 
+  (\bo{c}_k)_a^i
+\end{align}
+where $\w_k$ approximates the excitation energy of the $k\eth$ state, $\w_k=E_k-E_0$.
+In order to solve the CIS eigenvalue problem, we need to have an expression for the matrix elements
+$\ip{\F_i^a|H_\mr{c}|\F_j^b}$ in terms of our known quantities, the one- and two-electron integrals.
+To do this, we can evaluate
+$\ip{\F_i^a|\gno{a_p\dg a_q}|\F_j^b}$
+and
+$\ip{\F_i^a|\gno{a_p\dg a_q\dg a_s a_r}|\F_j^b}$
+using Wick's theorem.
+\begin{align*}
+  \ip{\F|\gno{a_i\dg a_a}\,\gno{a_p\dg a_q}\,\gno{a_b\dg a_j}|\F}
+=&\
+  \gno{
+    \ctr[1]{}{a}{_i\dg a_a a_p\dg a_q a_b\dg }{a}
+    \ctr{a_i\dg }{a}{_a}{a}
+    \ctr{a_i\dg a_aa_p\dg}{a}{_q}{a}
+    a_i\dg a_a a_p\dg a_q a_b\dg a_j
+  }
++
+  \gno{
+    \ctr[1.5]{}{a}{_i\dg a_a a_p\dg }{a}
+    \ctr[2.0]{a_i\dg a_a}{a}{_p\dg a_q a_b\dg}{a}
+    \ctr[0.5]{a_i\dg}{a}{_a a_p\dg a_q}{a}
+    a_i\dg a_a a_p\dg a_q a_b\dg a_j
+  }
+=
+  \g_{ij}
+  \h_{ap}
+  \h_{qb}
+-
+  \g_{iq}
+  \g_{pj}
+  \h_{ab}
+\\
+  \ip{\F|\gno{a_i\dg a_a}\,\gno{a_p\dg a_q\dg a_s a_r}\,\gno{a_b\dg a_j}|\F}
+=&\
+  \gno{
+    \ctr[1]{}{a}{_i\dg a_a a_p\dg a_q\dg }{a}
+    \ctr{a_i\dg }{a}{_a}{a}
+    \ctr[2]{a_i\dg a_a a_p\dg }{a}{_q\dg a_s a_r a_b\dg }{a}
+    \ctr{a_i\dg a_a a_p\dg a_q\dg a_s}{a}{_r}{a}
+    a_i\dg a_a a_p\dg a_q\dg a_s a_r a_b\dg a_j
+  }
++
+  \gno{
+    \ctr[1]{}{a}{_i\dg a_a a_p\dg a_q\dg }{a}
+    \ctr{a_i\dg }{a}{_a a_p\dg}{a}
+    \ctr[2]{a_i\dg a_a }{a}{_p\dg a_q\dg a_s a_r a_b\dg }{a}
+    \ctr{a_i\dg a_a a_p\dg a_q\dg a_s}{a}{_r}{a}
+    a_i\dg a_a a_p\dg a_q\dg a_s a_r a_b\dg a_j
+  }
+\\&\
++
+  \gno{
+    \ctr[1]{}{a}{_i\dg a_a a_p\dg a_q\dg a_s}{a}
+    \ctr{a_i\dg }{a}{_a}{a}
+    \ctr[2]{a_i\dg a_a a_p\dg }{a}{_q\dg a_s a_r a_b\dg }{a}
+    \ctr{a_i\dg a_a a_p\dg a_q\dg}{a}{_s a_r}{a}
+    a_i\dg a_a a_p\dg a_q\dg a_s a_r a_b\dg a_j
+  }
++
+  \gno{
+    \ctr[1]{}{a}{_i\dg a_a a_p\dg a_q\dg a_s}{a}
+    \ctr{a_i\dg }{a}{_a a_p\dg}{a}
+    \ctr[2]{a_i\dg a_a }{a}{_p\dg a_q\dg a_s a_r a_b\dg }{a}
+    \ctr{a_i\dg a_a a_p\dg a_q\dg}{a}{_s a_r}{a}
+    a_i\dg a_a a_p\dg a_q\dg a_s a_r a_b\dg a_j
+  }
+\\=&\
+-
+  \g_{is}
+  \h_{ap}
+  \g_{qj}
+  \h_{rb}
++
+  \g_{is}
+  \h_{aq}
+  \g_{pj}
+  \h_{rb}
++
+  \g_{ir}
+  \h_{ap}
+  \g_{qj}
+  \h_{sb}
+-
+  \g_{ir}
+  \h_{aq}
+  \g_{pj}
+  \h_{sb}
+\end{align*}
+Multiplying these by $f_{pq}$ and $\tfr{1}{4}\ip{pq||rs}$ and summing over Hamiltonian indices yields the following.
+\begin{align*}
+  \ip{\F_i^a|H_\mr{c}|\F_j^b}
+=
+  f_{ab}\g_{ij}
+-
+  f_{ji}
+  \h_{ab}
+-
+  \ip{aj||bi}
+\end{align*}
+\end{ex}
+
+
+
+
+\newpage
+\appendix
+\section{The pull-through relation}
+
+\begin{prop}\label{prop:pull-through-relation}
+\thmtitle{Pull-through relation}
+\thmstatement{
+  For any non-commuting $x_1,\ld,x_n$, and $y$ for which addition, subtraction and multiplication are defined, $x_1\cd x_ny=\pr{\mp}^nyx_1\cd x_n+\sum_{k=1}^n\pr{\mp}^{n-k}x_1\cd[x_k,y]_{\pm}\cd x_n$, where $[x,y]_{\pm}\equiv xy\pm yx$.
+}
+\thmproof{
+  The $n=1$ case folows from the definition of the commutator brackets: $xy=\mp yx+[x,y]_{\pm}$.
+  Now, assume it holds for $n$ and consider the $n+1$ case.
+  Since $x_1\cd x_{n+1}y=x_1\cd x_n(\mp yx_{n+1}+[x_{n+1},y]_{\pm})$, we find
+  \begin{align*}
+    x_1\cd x_{n+1}y
+  =&\
+  \mp
+    \pr{
+      \pr{\mp}^nyx_1\cd x_n
+    +
+      \sum_{k=1}^n
+      \pr{\mp}^{n-k}
+      x_1\cd [x_k,y]_{\pm}\cd x_n
+    }
+    x_{n+1}
+  +
+    x_1\cd x_n[x_{n+1},y]_{\pm}
+  \\=&\
+    \pr{\mp}^{n+1}
+    yx_1\cd x_{n+1}
+  +
+    \sum_{k=1}^{n+1}
+    \pr{\mp}^{n+1-k}
+    x_1\cd[x_k,y]_{\pm}\cd x_{n+1}
+  \end{align*}
+  and, by induction, the result holds for all $n$.
+}
+\end{prop}
+
+
+\end{document}

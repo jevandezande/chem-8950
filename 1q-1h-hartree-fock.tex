@@ -399,11 +399,17 @@ Requiring the multiplier matrix to be Hermitian makes the second condition in \c
 \overset{!}=
   \bm{\ev}\dg
 \end{align}
-To review, these conditions define the orbitals which optimize $\ip{\F|\op{H}_e|\F}$ subject to the constraint $\ip{\y_i|\y_j}=\d_{ij}$.
-The next section shows that this set of equations can be decoupled by diagonalizing the multiplier matrix.
+To review, these conditions define orbitals which optimize $\ip{\F|\op{H}_e|\F}$ subject to the constraint $\ip{\y_i|\y_j}=\d_{ij}$.
+
 
 
 \subsection{The canonical Hartree-Fock equations}
+
+
+\Cref{app:hartree-fock-orbital-invariance} shows that the Hartree-Fock energy and the orthogonality relations are invariant to unitary mixing of the orbitals in $\F$.
+This implies that the solution to the Hartree-Fock optimization problem is not unique, because any unitary transformation of the orbitals in $\F$ is also a solution.
+In this section we show how to use this freedom to our advantage, by choosing orbitals which diagonalize the Lagrange multiplier matrix, partially decoupling \cref{eq:hartree-fock-noncanonical-stationarity-condition}.
+These orbitals are known as \textit{canonical Hartree-Fock orbitals}.
 
 In matrix notation, the Hatree-Fock equations can be written as follows.
 \begin{align}\label{eq:hartree-fock-noncanonical-stationarity-condition-matrix-form}
@@ -454,7 +460,7 @@ which shows that the problem can be decoupled by using a new set of orbitals  $\
 =
   \sum_{j=1}^n U_{ji}^*\y_j
 \end{align}
-We can show that this transformation of the orbitals leaves the Fock operator $\op{f}$ and the expectation value $\ip{\F|\op{H}_e|\F}$ unchanged without breaking orthonormality (see \cref{app:hartree-fock-orbital-invariance}).
+It can be shown that the Fock operator $\op{f}$ is invariant to this type of transformation (see \cref{app:hartree-fock-orbital-invariance}).
 
 Substituting the new orbitals into \cref{eq:hartree-fock-noncanonical-stationarity-condition-matrix-form} and dropping tildes yields the \textit{canonical Hartree-Fock equations}.
 \begin{align*}
@@ -465,7 +471,7 @@ Substituting the new orbitals into \cref{eq:hartree-fock-noncanonical-stationari
   i=1,\ld,n
 \end{align*}
 Since $\bm{\ev}$ is Hermitian, the Lagrangian eigenvalues are real.
-Note that these equations are not fully decoupled, since $\op{f}$ depends on the full orbital set $\{\y_i\}$.
+Note that these equations are not fully decoupled, since $\op{f}$ still depends on the full orbital set $\{\y_i\}$.
 Solving them amounts to solving for the {\it self-consistent field} 
 \begin{align}
   \op{v}(1)

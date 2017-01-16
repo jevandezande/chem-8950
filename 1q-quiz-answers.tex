@@ -1,0 +1,173 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 1}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Answer each of the following in one sentence, using words only.
+  \begin{enumerate}
+  \item
+    Define canonical Hartree-Fock orbitals.\\
+    \textbf{Answer:}
+    Hartree-Fock orbitals are ``canonical'' when the Lagrange multiplier matrix is diagonal.
+  \item
+    Explain why the choice of Hartree-Fock orbitals is not unique.\\
+    \textbf{Answer:}
+    The Hartree-Fock energy and the orbital overlaps are invariant to a unitary transformation, so any unitary variation of the canonical orbitals satisfies the Hartree-Fock optimization conditions.
+  \end{enumerate}
+
+\item
+  Expand $a_pa_qa_s\dg a_r\dg$ as a linear combination of strings which are in normal order.
+  Identify the vacuum expectation value of this operator product.\\
+  \textbf{Answer:}
+  \begin{align*}
+    a_p a_q a_s\dg a_r\dg
+  =&\
+    \d_{qs} a_p a_r\dg
+  -
+    a_p a_s\dg a_q a_r\dg
+  \\=&\
+    \d_{qs} (\d_{pr} - a_r\dg a_p)
+  -
+    (\d_{ps} - a_s\dg a_p)(\d_{qr} - a_r\dg a_q)
+  \\=&\
+    \d_{qs} \d_{pr}
+  -
+    \d_{qs} a_r\dg a_p
+  -
+    \d_{ps}\d_{qr}
+  +
+    \d_{ps} a_r\dg a_q
+  +
+    \d_{qr} a_s\dg a_p
+  -
+    a_s\dg a_p a_r\dg a_q
+  \\=&\
+    \d_{qs} \d_{pr}
+  -
+    \d_{qs} a_r\dg a_p
+  -
+    \d_{ps}\d_{qr}
+  +
+    \d_{ps} a_r\dg a_q
+  +
+    \d_{qr} a_s\dg a_p
+  -
+    \d_{pr} a_s\dg a_q
+  +
+    a_s\dg a_r\dg a_p a_q
+  \\
+    \ip{\vac|a_p a_q a_s\dg a_r\dg|\vac}
+  =&\
+    \d_{qs} \d_{pr}
+  -
+    \d_{ps}\d_{qr}
+  \end{align*}
+
+\item
+  Derive the Slater determinant expectation value of a two-electron operator in terms of two-electron integrals, showing your steps along the way.
+  You may use second quantization methods (and your result from problem 2.) if you first expand the expectation value in terms of particle-hole operators.\footnote{
+  You may take the following expansion as given:
+  \begin{align*}
+    \Y(1,2,3\ld,n)
+  =
+    \fr{1}{\sqrt{n(n-1)}}
+    \sum_{pq}^\infty
+    \y_p(1)
+    \y_q(2)
+    (\op{a}_q\op{a}_p\Y)(3,\ld,n)
+  \end{align*}
+  }
+  \begin{align*}
+    \tfr{1}{2}
+    \sum_{i\neq j}^n
+    \ip{\F|\op{g}(i,j)\F}
+  =
+    \,\,?
+  \end{align*}
+  \textbf{Answer:}
+  \begin{align*}
+    \fr{1}{2}
+    \sum_{i\neq j}^n
+    \ip{\F|\op{g}(i,j)\F}
+  =&\
+    \fr{n^2 - n}{2}
+    \ip{\F|\op{g}(1,2)\F}
+  &&
+    \begin{array}{l}
+      \text{Changing integration variables}\\
+      \text{and using antisymmetry of $\F$}
+    \end{array}
+  \\=&\
+    \fr{\cancel{n^2 - n}}{2}
+    \fr{1}{\cancel{n(n-1)}}
+    \sum_{pqrs}^\infty
+    \ip{pq|rs}
+    \ip{a_qa_p\F|a_sa_r\F}
+  &&
+    \begin{array}{l}
+      \text{Using expansion from footnote}\\
+      \text{in bra and ket}
+    \end{array}
+  \\=&\
+    \fr{1}{2}
+    \sum_{pqrs}^\infty
+    \ip{pq|rs}
+    \ip{\F|a_p\dg a_q\dg a_sa_r\F}
+  &&
+    \begin{array}{l}
+      \text{Definition of adjoint}
+    \end{array}
+  \\=&\
+    \fr{1}{2}
+    \sum_{ijkl}^n
+    \ip{ij|kl}
+    \ip{\widetilde{\vac}|b_ib_jb_l\dg b_k\dg|\widetilde{\vac}}
+  &&
+    \begin{array}{l}
+      \text{Particle-hole isomorphism}
+    \end{array}
+  \\=&\
+    \fr{1}{2}
+    \sum_{ijkl}^n
+    \ip{ij|kl}
+    \pr{
+      \d_{ik}\d_{jl}
+    -
+      \d_{il}\d_{jk}
+    }
+  &&
+    \begin{array}{l}
+      \text{Result from problem 2.}
+    \end{array}
+  \\=&\
+    \fr{1}{2}
+    \sum_{ij}^n
+    \ip{ij||ij}
+  \end{align*}
+  On the fourth line, we omit all other contributions to the quasiparticle expansion because either they don't have a balanced number of quasiparticle creation and annihilation operators or because they are in $\F$-normal order.
+\end{enumerate}
+
+\end{document}
