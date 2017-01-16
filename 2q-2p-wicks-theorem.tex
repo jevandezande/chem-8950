@@ -18,7 +18,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{Quiz 2, Handout 2: Wick's Theorem}
+\fancyhead[LE,RO]{Quiz 2, Suggested Problems 2: Wick's Theorem}
 \fancyfoot[CE,CO]{\thepage}
 \usepackage{url}
 
@@ -121,7 +121,32 @@
 \item
   Derive the expansion of $H_e$ in terms of $\F$-normal-ordered excitations.
 \item
-  
+  Derive Slater's rules using Wick's theorem.
+  \begin{align*}
+    \ip{\F|H_e|\F}
+  =
+    \sum_i
+    h_{ii}
+  +
+    \tfr{1}{2}
+    \sum_{ij}
+    \ip{ij||ij}
+  &&
+    \ip{\F|H_e|\F_i^a}
+  =
+    h_{ia}
+  +
+    \sum_j
+    \ip{ij||aj}
+  &&
+    \ip{\F|H_e|\F_{ij}^{ab}}
+  =
+    \ip{ij||ab}
+  \end{align*}
+  Also, explain why the second equation evaluates to zero for canonical Hartree-Fock orbitals.\footnote{Hint: Project the canonical Hartree-Fock equation by another spin-orbital and expand $f_{pq}=\ip{\y_p|\op{f}\y_q}$ in terms of one- and two-electron integrals.}
+  This is known as \textit{Brillouin's theorem}.
+\item
+  Derive the CIS matrix elements using Wick's theorem.
 \end{enumerate}
 
 

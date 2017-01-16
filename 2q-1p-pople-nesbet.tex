@@ -1,0 +1,78 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 2, Handout 1: Roothaan-Hall/Pople-Nesbet}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Show that the canonical Hartree-Fock equations can be expressed in terms of spatial orbitals as follows.
+  \begin{align*}
+  &
+    \op{f}_\a \f_{p_\a}
+  =
+    \ev_{p_\a} \f_{p_\a}
+  &&
+    \op{f}_\a
+  =
+    \op{h}
+  +
+    \sum_{i_\a}^{n_\a}
+    (\op{J}_{i_\a} - \op{K}_{i_\a})
+  +
+    \sum_{i_\b}^{n_\b}
+    \op{J}_{i_\b}
+  \\
+  &
+    \op{f}_\b \f_{p_\b}
+  =
+    \ev_{p_\b} \f_{p_\b}
+  &&
+    \op{f}_\b
+  =
+    \op{h}
+  +
+    \sum_{i_\a}^{n_\a}
+    \op{J}_{i_\a}
+  +
+    \sum_{i_\b}^{n_\b}
+    (\op{J}_{i_\b} - \op{K}_{i_\b})
+  \end{align*}
+
+\item
+  Expand the spatial orbtials in problem 1.~as
+  $
+    \f_{p_\w}
+  =
+    \sum_\nu
+    \x_\nu\,
+    C_{\mu p_\w}
+  $
+  and project each equation by $\x_\nu$ in order to arrive at the Pople-Nesbet equations.
+
+\item
+  Write out a complete algorithm for solving the Pople-Nesbet equations.
+\end{enumerate}
+
+
+\end{document}
