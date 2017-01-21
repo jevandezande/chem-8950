@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 2}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  In solving the canonical Hartree-Fock equations, it is common to use eigenfunctions of the core Hamiltonian as starting guesses for the canonical molecular orbitals.
+  This eigenvalue equation looks as follows
+  \begin{align*}
+    \op{h}
+    \f_{p}
+  =
+    \ev_{p}
+    \f_{p}
+  \end{align*}
+  where $\f_p$ is a spatial function.
+  Project this equation by $\x_\mu$ and then expand $\f_p$ as a linear combination of atomic orbitals, $\f_p=\sum_\nu \x_\nu\, C_{\nu p}$, in order to arrive at the following matrix equation for the core guess.
+  \begin{align*}
+    \bo{H}\bo{C}
+  =
+    \bo{S}\bo{C}\bm{\ev}
+  &&
+    (\bo{H})_{\mu\nu}
+  =
+    \ip{\x_\mu|\op{h}|\x_\nu}
+  &&
+    (\bo{S})_{\mu\nu}
+  =
+    \ip{\x_\mu|\x_\nu}
+  &&
+    (\bo{C})_{\mu p}
+  =
+    C_{\mu p}
+  &&
+    (\bm{\ev})_{pq}
+  =
+    \ev_p\d_{pq}
+  \end{align*}
+  \textbf{For extra credit}, you may also briefly answer the following question in words: For an open-shell system, why do we end up with different spatial orbitals for different spins, even though the initial core-guess orbitals are the same for each spin?
+  
+  
+
+\newpage
+\item
+  Derive the expansion of $H_e$ in terms of $\F$-normal-ordered excitations.
+
+
+\newpage
+\item
+  Derive the second Slater rule using Wick's theorem, and explain why this matrix element evaluates to zero for canonical Hartree-Fock orbitals.
+  \begin{align*}
+    \ip{\F|H_e|\F_i^a}
+  =
+    \,\,?
+  \end{align*}
+\end{enumerate}
+
+
+\end{document}

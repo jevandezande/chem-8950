@@ -340,9 +340,9 @@ $\gno{Q}\gno{Q'}=\gno{QQ'}+\gno{\ctr{}{Q}{}{Q}  QQ'}$
 
 \begin{cor}\label{wick-expectation-value}
 \thmtitle{Wick's theorem for expectation values}\vspace{5pt}
-$\ip{\vac|Q|\vac}=\gno{\ol{\ol{Q}}}$
+$\ip{\F|Q|\F}=\gno{\ol{\ol{Q}}}$
 \thmproof{
-  From Wick's theorem $\ip{\vac|Q|\vac}=\ip{\vac|\gno{Q}|\vac}+\ip{\vac|\gno{\ol{Q}}|\vac}$ and any incompletely contracted terms have vanishing expectation values.  Therefore, $\ip{\vac|\gno{Q}|\vac}=0$ and $\ip{\vac|\gno{\ol{Q}}|\vac}=\gno{\ol{\ol{Q}}}$.
+  From Wick's theorem $\ip{\F|Q|\F}=\ip{\F|\gno{Q}|\F}+\ip{\F|\gno{\ol{Q}}|\F}$ and any incompletely contracted terms have vanishing expectation values.  Therefore, $\ip{\F|\gno{Q}|\F}=0$ and $\ip{\F|\gno{\ol{Q}}|\F}=\gno{\ol{\ol{Q}}}$.
 }
 \end{cor}
 
@@ -354,7 +354,7 @@ To recap, let's state Wick's theorem and its corollaries in words as the followi
 \item
   A product of normal-ordered operators equals the normal ordering of the product plus all cross-contractions.
 \item
-  The expectation value of a string equals the sum of its complete contractions.
+  The reference expectation value of a string equals the sum of its complete contractions.
 \end{enumerate}
 The next proposition proves a convenient rule for evaluating completely contracted operator strings, relating the overall sign of the term to the number of times its contraction lines cross.
 \end{rmk}
@@ -392,7 +392,7 @@ Using Wick's theorem, we can expand $\vac$-normal one- and two-particle excitati
 =
   \gno{a_p\dg a_q\dg a_sa_r}
 -
-  \g_{pq}\gno{a_q\dg a_r}
+  \g_{ps}\gno{a_q\dg a_r}
 +
   \g_{pr}\gno{a_q\dg a_s}
 +
