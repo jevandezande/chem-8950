@@ -1,0 +1,302 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 2}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  In solving the canonical Hartree-Fock equations, it is common to use eigenfunctions of the core Hamiltonian as starting guesses for the canonical molecular orbitals.
+  This eigenvalue equation looks as follows
+  \begin{align*}
+    \op{h}
+    \f_{p}
+  =
+    \ev_{p}
+    \f_{p}
+  \end{align*}
+  where $\f_p$ is a spatial function.
+  Project this equation by $\x_\mu$ and then expand $\f_p$ as a linear combination of atomic orbitals, $\f_p=\sum_\nu \x_\nu\, C_{\nu p}$, in order to arrive at the following matrix equation for the core guess.
+  \begin{align*}
+    \bo{H}\bo{C}
+  =
+    \bo{S}\bo{C}\bm{\ev}
+  &&
+    (\bo{H})_{\mu\nu}
+  =
+    \ip{\x_\mu|\op{h}|\x_\nu}
+  &&
+    (\bo{S})_{\mu\nu}
+  =
+    \ip{\x_\mu|\x_\nu}
+  &&
+    (\bo{C})_{\mu p}
+  =
+    C_{\mu p}
+  &&
+    (\bm{\ev})_{pq}
+  =
+    \ev_p\d_{pq}
+  \end{align*}
+  For extra credit, you may also briefly answer the following question in words: For an open-shell system, why do we end up with different spatial orbitals for different spins, even though the initial core-guess orbitals are the same for each spin?\\[1cm]
+  \textbf{Answer}:
+  \begin{align*}
+  \left.
+  \begin{array}{r@{\ }l}
+    \ip{\x_\mu|\op{h}|\f_p}
+  &=
+  \ds{
+    \sum_\nu
+    \ip{\x_\mu|\op{h}|\x_\nu}
+    C_{\nu p}
+  }
+  =
+    (\bo{H}\bo{C})_{\mu p}
+  \\
+    \ip{\x_\mu|\f_p}
+    \ev_p
+  &=
+  \ds{
+    \sum_\nu
+    \ip{\x_\mu|\x_\nu}
+    C_{\nu p}
+    \ev_p
+  }
+  =
+    (\bo{S}\bo{C}\bm{\ev})_{\mu p}
+  \end{array}
+  \right\}
+  \implies
+    \bo{H}\bo{C}
+  =
+    \bo{S}\bo{C}\bm{\ev}
+  \end{align*}
+  Since there are different numbers of occupied $\a$ and $\b$ orbitals, the $\a$ and $\b$ density matrices will differ even for matching MO coefficients.
+  This results in different exchange fields for $\op{f}_\a$ and $\op{f}_\b$, breaking the orbital degeneracy.
+  
+
+\newpage
+\item
+  Derive the expansion of $H_e$ in terms of $\F$-normal-ordered excitations.\\[1cm]
+  \textbf{Answer}:
+  \begin{align*}
+  &
+    \sum_{pq}
+    h_{pq}
+    a_p\dg a_q
+  +
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    a_p\dg a_q\dg a_s a_r
+  \\&=
+    \sum_{pq}
+    h_{pq}
+    (
+      \gno{
+        a_p\dg a_q
+      }
+    +
+      \gno{
+        \ctr[0.5]{}{a}{_p\dg}{a}
+        a_p\dg a_q
+      }
+    )
+  \\
+  &\ +
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \left(
+      \gno{
+        a_p\dg a_q\dg a_s a_r
+      }
+    +
+      \gno{
+        \ctr[0.5]{}{a}{_p\dg a_q\dg}{a}
+        a_p\dg a_q\dg a_s a_r
+      }
+    +
+      \gno{
+        \ctr[0.5]{}{a}{_p\dg a_q\dg a_s}{a}
+        a_p\dg a_q\dg a_s a_r
+      }
+    +
+      \gno{
+        \ctr[0.5]{a_p\dg}{a}{_q\dg}{a}
+        a_p\dg a_q\dg a_s a_r
+      }
+    +
+      \gno{
+        \ctr[0.5]{a_p\dg}{a}{_q\dg a_s}{a}
+        a_p\dg a_q\dg a_s a_r
+      }
+    +
+      \gno{
+        \ctr[1.5]{a_p\dg }{a}{_q\dg a_s}{a}
+        \ctr[0.5]{}{a}{_p\dg a_q\dg}{a}
+        a_p\dg a_q\dg a_s a_r
+      }
+    +
+      \gno{
+        \ctr[1.5]{}{a}{_p\dg a_q\dg a_s}{a}
+        \ctr[0.5]{a_p\dg }{a}{_q\dg}{a}
+        a_p\dg a_q\dg a_s a_r
+      }
+    \right)
+  \\&=
+    \sum_{pq}
+    h_{pq}
+    \g_{pq}
+  +
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \g_{pr}\g_{qs}
+  -
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \g_{ps}\g_{qr}
+  +
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \gno{a_p\dg a_q\dg a_s a_r}
+  +
+    \sum_{pq}
+    h_{pq}
+    \gno{a_p\dg a_q}
+  \\
+  &\ -
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \g_{ps}
+    \gno{a_q\dg a_r}
+  +
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \g_{pr}
+    \gno{a_q\dg a_s}
+  +
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \g_{qs}
+    \gno{a_p\dg a_r}
+  -
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \g_{qr}
+    \gno{a_p\dg a_s}
+  \\&=
+  \underset{\ds{E_0}}{\underbrace{
+    \sum_{pq}
+    h_{pq}\g_{pq}
+  +
+    \tfr{1}{2}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \g_{pr}\g_{qs}
+  }}
+  +
+    \tfr{1}{4}
+    \sum_{pqrs}
+    \ip{pq||rs}
+    \gno{a_p\dg a_q\dg a_s a_r}
+  +
+    \sum_{pq}
+    \underset{\ds{f_{pq}}}{\underbrace{
+    (
+      h_{pq}
+    +
+      \sum_{rs}
+      \ip{pr||qs}
+      \g_{rs}
+    )
+    }}
+    \gno{a_p\dg a_q}
+  \end{align*}
+  In the final step, we have relabeled summation indices and made use of the antisymmetry of $\ip{pq||rs}$ in order to combine the second and third terms as well as the last four terms.
+
+\newpage
+\item
+  Derive the second Slater rule using Wick's theorem, and explain why this matrix element evaluates to zero for canonical Hartree-Fock orbitals.
+  \begin{align*}
+    \ip{\F|H_e|\F_i^a}
+  =
+    \,\,?
+  \end{align*}
+  \\
+  \textbf{Answer}:
+  Note that $a_a\dg a_i=\gno{a_a\dg a_i}$, since this pair is already in $\F$-normal order.
+  \begin{align*}
+    \ip{\F|H_e\gno{a_a\dg a_i}|\F}
+  =&\
+    E_0
+    \ip{\F|\gno{a_a\dg a_i}|\F}
+  +
+    \sum_{pq}
+    f_{pq}
+    \ip{\F|\gno{a_p\dg a_q}\gno{a_a\dg a_i}|\F}
+  +
+    \tfr{1}{4}
+    \sum_{pq}
+    \ip{pq||rs}
+    \ip{\F|\gno{a_p\dg a_q\dg a_s a_r}\gno{a_a\dg a_i}|\F}
+  \\=&\
+    \sum_{pq}
+    f_{pq}
+    \gno{
+      \ctr[1]{}{a}{_p\dg a_q a_a\dg}{a}
+      \ctr[0]{a_p\dg}{a}{_q}{a}
+      a_p\dg a_q a_a\dg a_i
+    }
+  \\=&\
+    \sum_{pq}
+    f_{pq}
+    \g_{pi}
+    \h_{qa}
+  \\=&\
+    f_{ia}
+  \end{align*}
+  On the right-hand side of the first line, term one vanishes because $a_a\dg a_i$ is in $\F$-normal order and term three vanishes because there are no complete cross-contractions between two strings with different numbers of operators.\\
+  Projecting the canonical Hartree-Fock equation by some $\y_q$ leads to
+  \begin{align*}
+    f_{pq}
+  =
+    \ip{\y_q|\op{f}\y_p}
+  =
+    \ev_p\ip{\y_q|\y_p}
+  =
+    \ev_p
+    \d_{qp}
+  \end{align*}
+  due to spin-orbital orthonormality, showing that the Fock matrix is diagonal and $f_{ia}=0$.
+\end{enumerate}
+
+
+\end{document}

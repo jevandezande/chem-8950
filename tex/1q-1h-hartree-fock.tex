@@ -499,7 +499,7 @@ In this approach, we define the ``Lagrangian function'' $\mc{L}$ as
   \la(g(x,y)-c)
 \end{align}
 where the parameter $\la$ is called the Lagrange multiplier.
-The contrained optimization problem can be solved solved by optimizing $\mc{L}$ with respect $x$, $y$, and $\la$.
+The contrained optimization problem can be solved solved by optimizing $\mc{L}$ with respect to $x$, $y$, and $\la$.
 To see why, consider the stationarity conditions for $\mc{L}$.
 \begin{align}
   \pd{\mc{L}}{x}
@@ -669,7 +669,7 @@ This can be verified as follows
 =
   \d_{ij}
 \end{align*}
-using $\sum_i U_{ki}U_{kj}^*=(\bo{U}\bo{U}\dg)_{ji}=(\bo{1})_{ji}=\d_{ji}$.
+using $\sum_k U_{ki}U_{kj}^*=(\bo{U}\bo{U}\dg)_{ji}=(\bo{1})_{ji}=\d_{ji}$.
 
 \paragraph{Fock operator.}
 Only the Coulomb and exchange parts of the Fock operator depend on the orbital set.
@@ -692,7 +692,7 @@ For the Coulomb part, we have
 using the fact that $\sum_i U_{ji}U_{ki}^*=\d_{jk}$.
 For the exchange part, we have the same thing with a $\op{P}(1,2)$ sandwiched in there.
 
-\paragraph{Hamiltonian expectation value}
+\paragraph{Hamiltonian expectation value.}
 The vector notation $\bm\y$ for our orbitals allows us to express $\F$ and $\tl\F$ as
 \begin{align*}
   \F(1,\ld,n)
@@ -714,7 +714,7 @@ which, noting that the matrix $\ma{\tl{\bm\y}(1)\ \cd\ \tl{\bm\y}(n)}$ is simply
   \bo{U}\dg\ma{\bm\y(1)\ \cd\ \bm\y(n)}
 \end{align*}
 implies $\tl\F=\det(\bo{U}\dg)\F=\det(\bo{U})^*\F$.
-Therefore, $\tl{\F}$ and $\F$ have the same the energy expectation values.
+Therefore, $\tl{\F}$ and $\F$ have the same energy expectation values.
 \begin{align}
   \ip{\tl\F|\op{H}_e|\tl\F}
 =

@@ -1,0 +1,602 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 3, Handout 1: Kutzelnigg-Mukherjee}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+
+\setcounter{section}{2}
+\section{Kutzelnigg-Mukherjee tensor notation}
+
+\begin{ntt}\label{ntt:kutzelnigg-mukherjee-notation}
+\thmtitle{Kutzelnigg-Mukherjee tensor notation}
+In \textit{Kutzelnigg-Mukherjee (KM) tensor notation}, creation operators are denoted using superscripts, $a^p\equiv a_p\dg$.
+Consequently, the one-particle and one-hole density matrices are written as
+$
+  \g^p_q
+\equiv
+  \ip{\F|a^pa_q|\F}
+$
+and
+$
+  \h_p^q
+\equiv
+  \ip{\F|a_p a^q|\F}
+$,
+respectively.
+The one- and two-electron integrals are also written with upper and lower indices: lower indices denote spin-orbitals in the bra and upper ones refer to spin-orbitals in the ket.
+\begin{align}
+  h_p^q
+\equiv
+  \ip{\y_p|\op{h}|\y_q}
+&&
+  g_{pq}^{rs}
+\equiv
+  \ip{pq|rs}
+&&
+  \ol{g}_{pq}^{rs}
+\equiv
+  \ip{pq||rs}
+\end{align}
+Vacuum-normal-ordered excitations are given the compact notation
+$
+  a^{p_1\cd p_m}_{q_1\cd q_m}
+\equiv
+  a^{p_1}\cd a^{p_m}a_{q_m}\cd a_{q_1}
+$
+and $\F$-normal-ordered excitations are written as
+$
+  \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
+\equiv
+  \gno{a^{p_1}\cd a^{p_m}a_{q_m}\cd a_{q_1}}
+$.
+Using upper and lower indices enables one to employ the \textit{Einstein summation convention}, in which any index that appears twice in a product, once as a lower index and once as an upper one, is implicitly summed over.
+As an example, consider the electronic Hamiltonian as expressed in KM notation.
+\begin{align}
+  H_e
+=
+  h_p^q
+  a^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  a^{pq}_{rs}
+=
+  E_0
++
+  H_\mr{c}
+&&
+  H_{\mr{c}}
+=
+  f_p^q
+  \tl{a}^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \tl{a}^{pq}_{rs}
+&&
+  E_0
+\equiv
+  h_p^q
+  \g^p_q
++
+  \tfr{1}{2}
+  \ol{g}_{pr}^{qs}
+  \g^p_q
+  \g^r_s
+&&
+  f_p^q
+\equiv
+  h_p^q
++
+  \ol{g}_{pr}^{qs}
+  \g_s^r
+\end{align}
+Here, $E_0$ is the Hartree-Fock reference energy, $f_p^q$ denotes a matrix element of the Fock operator, and $H_\mr{c}$ denotes the correlation component of the Hamiltonian.
+More generally, if $\op{v}$ is an \textit{$m$-electron operator}, i.e. an operator that acts on $m$ electronic coordinates, its second quantized form is expressed in KM notation as
+\begin{align}\label{eq:interaction-tensor}
+  \left.
+  \op{v}\,
+  \right|_{\mc{F}(\mc{H})}
+=&\
+  \tfr{1}{m!}
+  v_{p_1\cd p_m}^{q_1\cd q_m}
+  a^{p_1\cd p_m}_{q_1\cd q_m}
+&
+  v_{p_1\cd p_m}^{q_1\cd q_m}
+\equiv
+  \int
+  d(1\cd m)\,
+  \y_{p_1}^*(1)\cd \y_{p_m}^*(m)
+  \op{v}(1,\ld,m)
+  \y_{q_1}(1)\cd \y_{q_m}(m)
+&
+\\
+\intertext{
+where $v_{p_1\cd p_m}^{q_1\cd q_m}$ is the \textit{interaction tensor} of $\op{v}$.
+Equivalently, $\op{v}$ can also be expressed as
+}
+\label{eq:antisymmetrized-interaction-tensor}
+  \left.
+  \op{v}
+  \right|_{\mc{F}(\mc{H})}
+=&\
+  (\tfr{1}{m!})^2\,
+  \ol{v}_{p_1\cd p_m}^{q_1\cd q_m}
+  a^{p_1\cd p_m}_{q_1\cd q_m}
+&
+  \ol{v}_{p_1\cd p_m}^{q_1\cd q_m}
+\equiv
+  \sum_{\pi\in\mr{S}_m}
+  \e_\pi
+  v_{p_1\hphantom{_{\pi()}}\cd p_m}^{q_{\pi(1)}\cd q_{\pi(m)}}
+\hspace{3cm}&
+\end{align}
+where $\ol{v}_{p_1\cd p_m}^{q_1\cd q_m}$ is an \textit{antisymmetrized interaction tensor}.
+Ordinary interaction tensors are symmetric under simultaneous permutation of upper and lower indices, which is equivalent to changing integration variables in equation \ref{eq:interaction-tensor}.
+Antisymmetrized interaction tensors allow for independent permutations of upper and lower indices, with a sign factor corresponding to the parity of the permutation.
+The same permutational symmetries are shared by the excitation operators
+\begin{align}\label{eq:excitation-permutational-symmetries-1}
+  \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
+=
+  \e_{\pi}
+  \tl{a}^{p_{\pi(1)}\cd p_{\pi(m)}}_{q_1\hphantom{_{\pi()}}\cd q_m}
+=
+  \e_{\pi}
+  \tl{a}^{p_1\hphantom{_{\pi()}}\cd p_m}_{q_{\pi(1)}\cd q_{\pi(m)}}
+=
+  \tl{a}^{p_{\pi(1)}\cd p_{\pi(m)}}_{q_{\pi(1)}\cd q_{\pi(m)}}
+&&
+  \text{for all $\pi\in\mr{S}_m$}
+\end{align}
+since creation operators anticommute with each other, as do annihilation operators.
+Note also the following rearrangements
+\begin{align}\label{eq:excitation-permutational-symmetries-2}
+  \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
+=
+  \gno{a^{p_1}_{q_1}\cd a^{p_m}_{q_m}}
+&&
+  \gno{a^{p_1\cd p_m}_{q_1\cd q_m}a^{r_1\cd r_n}_{s_1\cd s_n}}
+=
+  \gno{a^{p_1}_{q_1}\cd a^{p_m}_{q_m}a^{r_1}_{s_1}\cd a^{r_n}_{s_n}}
+=
+  \tl{a}^{p_1\cd p_mr_1\cd r_n}_{q_1\cd q_ms_1\cd s_n}
+\end{align}
+which follow from the fact that the normal-ordering mapping is antisymmetric with respect to its operator string.
+\end{ntt}
+
+
+\begin{ntt}\label{ntt:dot-notation}
+\thmtitle{Dot notation for contractions}
+To make the notation more flexible, we here augment the traditional KM notation with the following definitions of \textit{particle $\ptcl$ contractions} and \textit{hole $\hole$ contractions}.\footnote{The dot notation is borrowed from physics: \url{https://en.wikipedia.org/wiki/Wick's_theorem#Definition_of_contraction}}
+\begin{align}
+&&
+  a_{p^\ptcl}a^{q^\ptcl}
+\equiv
+  \ctr{}{a}{_p}{a} a_pa^q
+&&
+  a^{q^\ptcl}a_{p^\ptcl}
+\equiv
+-
+  \ctr{}{a}{_p}{a} a_pa^q
+&&
+  a^{q^\hole}a_{p^\hole}
+\equiv
+  \ctr{}{a}{^q}{a} a^qa_p
+&&
+  a_{p^\hole}a^{q^\hole}
+\equiv
+-
+  \ctr{}{a}{^q}{a} a^qa_p
+\end{align}
+Note that $a^{p^\ptcl}_{q^\ptcl}=-\h^p_q$ and $a^{p^\hole}_{q^\hole}=\g_q^p$.
+In $\vac$-normal ordering, the hole contractions vanish and the particle contractions become Kronecker deltas.
+For multiply contracted strings, different contractions will be distinguished with repeated dots, $a_{p^{\ptcl\ptcl}}a^{p^{\ptcl\ptcl}}$, or dots with numbers, $a_{p^{\ptcl2}}a^{p^{\ptcl2}}$.
+This notation allows for normal ordered strings with contractions to keep all of the permutational symmetries shown in equations \ref{eq:excitation-permutational-symmetries-1} and \ref{eq:excitation-permutational-symmetries-2}.
+\end{ntt}
+
+\begin{ex}\label{ex:km-notation-wick-expansions}
+Using notations \ref{ntt:kutzelnigg-mukherjee-notation} and \ref{ntt:dot-notation}, the Wick expansions for vacuum-normal single and double excitations in terms of $\F$-normal ones look as follows.
+The signs are determined by pairing up contracted indices using \cref{eq:excitation-permutational-symmetries-1,eq:excitation-permutational-symmetries-2}.
+\begin{align*}
+  a^p_q
+=&\
+  \tl{a}^p_q
++
+  \tl{a}^{p^\hole}_{q^\hole}
+=
+  \tl{a}^p_q
++
+  \g^p_q
+\\
+  a^{pq}_{rs}
+=&\
+  \tl{a}^{pq}_{rs}
++
+  \tl{a}^{p^\hole q}_{r^\hole s}
++
+  \tl{a}^{p^\hole q}_{r\ s^\hole}
++
+  \tl{a}^{p\ q^\hole}_{r^\hole s}
++
+  \tl{a}^{p q^\hole}_{r s^\hole}
++
+  \tl{a}^{p^\hole q^{\hole\hole}}_{r^\hole s^{\hole\hole}}
++
+  \tl{a}^{p^{\hole\hphantom{\hole}} q^{\hole\hole}}_{r^{\hole\hole} s^\hole}
+\\=&\
+  \tl{a}^{pq}_{rs}
++
+  \g^p_r
+  \tl{a}^{pq}_{rs}
+-
+  \g^p_s
+  \tl{a}^{q}_{r}
+-
+  \g^q_r
+  \tl{a}^{p}_{s}
++
+  \g^q_s
+  \tl{a}^{p}_{r}
++
+  \g^p_r
+  \g^q_s
+-
+  \g^p_s
+  \g^q_r
+\end{align*}
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Index antisymmetrizers}
+Let $\op{P}_{(p_1/\cd/p_m)}$ denote an \textit{index antisymmetrizer}, which antisymmetrizes a term with respect to $p_1,\ld,p_m$ by summing over all permutations with an appropriate sign factor.
+\begin{align*}
+  \op{P}_{(p_1/\cd/p_m)}
+  t_{p_1\cd p_m}
+\equiv
+  \sum_{\pi\in\mr{S}_m}
+  \e_\pi
+  t_{p_{\pi(1)}\cd p_{\pi(m)}}
+\end{align*}
+These operators can be expressed in terms of index transposition operators $\op{p}_{pq}$, defined by $\op{p}_{pq}t_{pq}\equiv t_{qp}$.
+For example,
+\begin{align*}
+  \op{P}_{(p/q)}
+\equiv
+  1
+-
+  \op{p}_{pq}
+&&
+  \op{P}_{(p/q/r)}
+\equiv
+  1
+-
+  \op{p}_{pq}
+-
+  \op{p}_{pr}
+-
+  \op{p}_{qr}
++
+  \op{p}_{pq}\op{p}_{qr}
++
+  \op{p}_{pr}\op{p}_{qr}
+\end{align*}
+are the antisymmetrizers for two and three indices.
+More generally, antisymmetrizers of the form $\op{P}_{(p_1\cd p_{m}/q_1\cd q_{n}/\cd)}$ serve to antisymmetrize a term for which groups of indices are already antisymmetric.
+For example,
+\begin{align*}
+  \op{P}_{(p/qr)}
+=
+  1
+-
+  \op{p}_{pq}
+-
+  \op{p}_{pr}
+\end{align*}
+antisymmetrizes a term which is already antisymmetric with respect to $q$ and $r$.
+These can be determined by generating permutations of $(p,q,r)$ while treating $q$ and $r$ as indistinguishable.\footnote{For example, $(p,q,r)$ and $(p,r,q)$ would be treated as equivalent permutations. Only one of these is used, and it doesn't matter which one.  Note however that, in determining the sign factor for a permutation, $q$ and $r$ are again treated as distinct.}
+In general, the antisymmetrizer $\op{P}_{(R_1/\cd/R_k)}$ involves a sum over
+$
+  \fr{
+    (|R_1|+\cd+|R_k|)!
+  }{
+    |R_1|!\cd|R_k|!
+  }
+$
+permutations, where each $R_i$ is a set of indices and $|R_i|$ is its cardinality.
+To antisymmetrize multiple disjoint sets of indices, we use the compact notation
+$
+  \op{P}^{(X_1|\cd|X_l)}_{(Y_1|\cd|Y_m)}
+\equiv
+  \op{P}^{(X_1)}\cd \op{P}^{(X_l)}
+  \op{P}_{(Y_1)}\cd \op{P}_{(Y_m)}
+$.
+For example,
+\begin{align}
+  \op{P}^{(p/q|r/st)}_{(u/v)}
+\equiv
+  \op{P}^{(p/q)}
+  \op{P}^{(r/st)}
+  \op{P}_{(u/v)}
+=
+  (1 - \op{p}^{pq})
+  (1 - \op{p}^{rs} - \op{p}^{rt})
+  (1 - \op{p}_{uv})
+\end{align}
+would antisymmetrize a term $t^{pqrst}_{uv}$ with respect to $(p,q)$, $(u,v)$, and $(r,s,t)$, assuming $s$ and $t$ are already antisymmetric.\footnote{For some more examples, see p.~324 of Shavitt and Bartlett, \textit{Many-Body Methods in Chemistry and Physics} (2009).}
+\end{dfn}
+
+
+\begin{ex}
+Using index antisymmetrizers, the second Wick expansion in \cref{ex:km-notation-wick-expansions} can be expressed even more compactly.
+\begin{align*}
+  a^{pq}_{rs}
+=&\
+  \tl{a}^{pq}_{rs}
++
+  \op{P}^{(p/q)}_{(r/s)}
+  \tl{a}^{p^\hole q}_{r^\hole s}
++
+  \op{P}_{(r/s)}
+  \tl{a}^{p^\hole q^{\hole\hole}}_{r^\hole s^{\hole\hole}}
+=
+  \tl{a}^{pq}_{rs}
++
+  \op{P}^{(p/q)}_{(r/s)}
+  \g^p_r
+  \tl{a}^{pq}_{rs}
++
+  \op{P}_{(r/s)}
+  \g^p_r
+  \g^q_s
+\end{align*}
+In general, this allows us to reduce Wick expansions to a sum over unique contraction ``patterns'', with the remaining contractions generated from these by index antisymmetrizers.
+The next two examples show how this works in practice.
+\end{ex}
+
+
+
+\begin{ex}
+\thmtitle{Derivation of CIS equations in KM notation}
+A programmable expression for the CI singles Hamiltonian matrix elements, $\ip{\F_i^a|H_c|\F_j^b}$,  can be derived in KM notation as follows.
+\begin{align*}
+&
+  \ip{\F|\tl{a}_a^i\tl{a}_q^p\tl{a}_j^b|\F}
+=
+  \gno{
+    a_{a^\ptcl}^{i^\hole}
+    a_{q^{\ptcl\ptcl}}^{p^\ptcl}
+    a_{j^\hole}^{b^{\ptcl\ptcl}}
+  }
++
+  \gno{
+    a_{a^\ptcl}^{i^{\hole}}
+    a_{q^{\hole}}^{p^{\hole\hole}}
+    a_{j^{\hole\hole}}^{b^{\ptcl}}
+  }
+=
+  \g^i_j\h_a^p\h_q^b
+-
+  \g_q^i\g_j^p\h_a^b
+\\
+&
+  \ip{\F|\tl{a}_a^i\tl{a}^{pq}_{rs}\tl{a}_j^b|\F}
+=
+  \op{P}^{(p/q)}_{(r/s)}
+  \gno{
+    \tl{a}^{i^\hole}_{a^\ptcl}
+    \tl{a}^{p^\ptcl q^{\hole\hole}}_{r^\hole s^{\ptcl\ptcl}}
+    \tl{a}^{b^{\ptcl\ptcl}}_{j^{\hole\hole}}
+  }
+=
+  \op{P}^{(p/q)}_{(r/s)}
+  \g^i_r\h^p_a\g^q_j\h^b_s
+\\
+&
+\implies
+  \ip{\F_i^a|H_\mr{c}|\F_j^b}
+=
+  f_p^q\pr{
+    \g^i_j\h_a^p\h_q^b
+  -
+    \g_q^i\g_j^p\h_a^b
+  }
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}\pr{
+    \op{P}^{(p/q)}_{(r/s)}
+    \g^i_r\h^p_a\g^q_j\h^b_s
+  }
+=
+  f_a^b\g_j^i
+-
+  f_j^i\h_a^b
++
+  \ol{g}^{ib}_{aj}
+\end{align*}
+which simplifies to
+$\ip{\F_i^a|H_\mr{c}|\F_j^b}=f_a^b\d_j^i-f_j^i\d_a^b+\ol{g}^{ib}_{aj}$.
+Here, we have used the fact that $\tl{a}_i^a=a_i^a$ and $\tl{a}_a^i=a_a^i$.
+\end{ex}
+
+\begin{ex}
+\thmtitle{Derivation of CID equations in KM notation}
+Projecting the CI doubles Schr\"odinger equation, $H_\mr{c}\Y=E_\mr{c}\Y$ where $\Y=(1+\tfr{1}{4}c_{cd}^{kl}\tl{a}_{kl}^{cd})\F$, by $\F$ and $\F_{ij}^{ab}$
+gives a system of linear equations
+\begin{align*}
+  E_\mr{c}
+=&\
+  \ip{\F|H_\mr{c}(1+\tfr{1}{4}c_{cd}^{kl}\tl{a}_{kl}^{cd})|\F}
+&&
+  \implies
+&
+  E_\mr{c}
+=&\
+  \tfrac{1}{4}
+  \ip{\F|H_c|\F_{kl}^{cd}}c_{cd}^{kl}
+\\
+  E_\mr{c}c_{ab}^{ij}
+=&\
+  \ip{\F_{ij}^{ab}|H_\mr{c}(1+\tfr{1}{4}c_{cd}^{kl}\tl{a}_{kl}^{cd})|\F}
+&&
+  \implies
+&
+  E_\mr{c}c_{ab}^{ij}
+=&\
+  \ip{\F_{ij}^{ab}|H_\mr{c}|\F}
++
+  \tfrac{1}{4}
+  \ip{\F_{ij}^{ab}|H_\mr{c}|\F_{kl}^{cd}}c_{cd}^{kl}
+\end{align*}
+which can be simplified into programmable expressions as follows.\\[5pt]
+$
+\begin{array}{rl}
+  \ip{\F|\tl{a}^{pq}_{rs}\tl{a}_{kl}^{cd}|\F}
+=&
+  \op{P}^{(p/q)}_{(r/s)}
+  \g_k^p\g_l^q\h_r^c\h_s^d
+\\
+  \ip{\F|\tl{a}_{ab}^{ij}\tl{a}_q^p\tl{a}_{kl}^{cd}|\F}
+=&
+  \op{P}^{(c/d)}
+        _{(a/b|k/l)}
+  \gno{
+    \tl{a}_{a^{\ptcl1}b^{\ptcl3}}
+          ^{i^{\hole1}j^{\hole2}}
+    \tl{a}_{q^{\ptcl2}}
+          ^{p^{\ptcl1}}
+    \tl{a}_{k^{\hole1}l^{\hole2}}
+          ^{c^{\ptcl2}d^{\ptcl3}}
+  }
++
+  \op{P}^{(i/j|c/d)}
+        _{(k/l)}
+  \gno{
+    \tl{a}_{a^{\ptcl1}b^{\ptcl2}}
+          ^{i^{\hole1}j^{\hole3}}
+    \tl{a}_{q^{\hole1}}
+          ^{p^{\hole2}}
+    \tl{a}_{k^{\hole2}l^{\hole3}}
+          ^{c^{\ptcl1}d^{\ptcl2}}
+  }
+\\=&
+  \op{P}^{(c/d)}
+        _{(a/b|k/l)}
+  \h_a^p\h_q^c\h_b^d\g_k^i\g_l^j
+-
+  \op{P}^{(i/j|c/d)}
+        _{(k/l)}
+  \g_q^i\g_k^p\g_l^j\h_a^c\h_b^d
+\\
+  \ip{\F|\tl{a}_{ab}^{ij}\tl{a}_{rs}^{pq}\tl{a}_{kl}^{cd}|\F}
+=&
+  \op{P}^{(c/d)}
+        _{(a/b|k/l)}
+  \gno{
+    \tl{a}_{a^{\ptcl1}b^{\ptcl2}}
+          ^{i^{\hole1}j^{\hole2}}
+    \tl{a}_{r^{\ptcl3}s^{\ptcl4}}
+          ^{p^{\ptcl1}q^{\ptcl2}}
+    \tl{a}_{k^{\hole1}l^{\hole2}}
+          ^{c^{\ptcl3}d^{\ptcl4}}
+  }
++
+  \op{P}^{(i/j|c/d)}
+        _{(k/l)}
+  \gno{
+    \tl{a}_{a^{\ptcl1}b^{\ptcl2}}
+          ^{i^{\hole1}j^{\hole2}}
+    \tl{a}_{r^{\hole1}s^{\hole2}}
+          ^{p^{\hole3}q^{\hole4}}
+    \tl{a}_{k^{\hole3}l^{\hole4}}
+          ^{c^{\ptcl1}d^{\ptcl2}}
+  }
++
+  \op{P}^{(p/q|i/j|c/d)}
+        _{(r/s|k/l|a/b)}
+  \gno{
+    \tl{a}_{a^{\ptcl1}b^{\ptcl3}}
+          ^{i^{\hole1}j^{\hole3}}
+    \tl{a}_{r^{\hole1}s^{\ptcl2}}
+          ^{p^{\hole2}q^{\ptcl1}}
+    \tl{a}_{k^{\hole2}l^{\hole3}}
+          ^{c^{\ptcl2}d^{\ptcl3}}
+  }
+\\=&
+  \op{P}^{(c/d)}
+        _{(a/b|k/l)}
+  \h_a^p\h_b^q\h_r^c\h_s^d
+  \g_k^i\g_l^j
++
+  \op{P}^{(i/j|c/d)}
+        _{(k/l)}
+  \g_r^i\g_s^j\g_k^p\g_l^q
+  \h_a^c\h_b^d
+-
+  \op{P}^{(p/q|i/j|c/d)}
+        _{(r/s|k/l|a/b)}
+  \g_r^i\g_k^p\g_l^j
+  \h_a^q\h_s^c\h_b^d
+\end{array}$
+\begin{align*}
+&
+  \implies
+&&
+  E_\mr{c}
+=
+  \tfr{1}{4}
+  \ol{g}_{kl}^{cd}c_{cd}^{kl}
+&&
+  E_\mr{c}c_{ab}^{ij}
+=
+  \ol{g}_{ab}^{ij}
++
+  \op{P}_{(a/b)}
+  f_a^c
+  c_{cb}^{ij}
+-
+  \op{P}^{(i/j)}
+  f_k^i
+  c_{ab}^{kj}
++
+  \tfrac{1}{2}
+  \ol{g}_{ab}^{cd}
+  c_{cd}^{ij}
++
+  \tfrac{1}{2}
+  \ol{g}_{kl}^{ij}
+  c_{ab}^{kl}
++
+  \op{P}^{(i/j)}
+        _{(a/b)}
+  \ol{g}_{ak}^{ic}
+  c_{bc}^{jk}
+\end{align*}
+\end{ex}
+
+
+
+
+\end{document}

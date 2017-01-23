@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm} % 
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 3, Suggested Problems 1: Kutzelnigg-Mukherjee}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Derive the expansion of $H_e$ in terms of $\F$-normal excitations using KM notation with index antisymmetrizers.
+
+\item
+  Evaluate the following expectation values by Wick's theorem, using KM notation.
+\begin{align*}
+  \ip{\F|a^p_q|\F}
+=&\
+  \,\,?
+&
+  \ip{\F|a^p_qa^a_i|\F}
+=&\
+  \,\,?
+&
+  \ip{\F|a^p_qa^{ab}_{ij}|\F}
+=&\
+  \,\,?
+&
+  \ip{\F|a^p_qa^{abc}_{ijk}|\F}
+=&\
+  \,\,?
+\\
+  \ip{\F|a^{pq}_{rs}|\F}
+=&\
+  \,\,?
+&
+  \ip{\F|a^{pq}_{rs}a^a_i|\F}
+=&\
+  \,\,?
+&
+  \ip{\F|a^{pq}_{rs}a^{ab}_{ij}|\F}
+=&\
+  \,\,?
+&
+  \ip{\F|a^{pq}_{rs}a^{abc}_{ijk}|\F}
+=&\
+  \,\,?
+\end{align*}
+  Substitute your results into $\ip{\F|H_e|\F}$, $\ip{\F|H_e|\F_i^a}$, $\ip{\F|H_e|\F_{ij}^{ab}}$, and $\ip{\F|H_e|\F_{ijk}^{abc}}$ to get the Slater rules.
+
+\item
+  Show that
+\begin{align*}
+  \tfr{1}{m!}
+  v_{p_1\cd p_m}^{q_1\cd q_m}
+  a^{p_1\cd p_m}_{q_1\cd q_m}
+=
+  (\tfr{1}{m!})^2\,
+  \ol{v}_{p_1\cd p_m}^{q_1\cd q_m}
+  a^{p_1\cd p_m}_{q_1\cd q_m}
+\end{align*}
+  which proves that any $m$-electron operator can be represented with an antisymmetrized interaction tensor.
+  This generalizes the expression for electron repulsion in terms of antisymmetrized two-electron integrals.
+
+\item
+  Prove the following identities.
+\begin{align*}
+  \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
+=
+  \gno{a^{p_1}_{q_1}\cd a^{p_m}_{q_m}}
+&&
+  \gno{a^{p_1\cd p_m}_{q_1\cd q_m}a^{r_1\cd r_n}_{s_1\cd s_n}}
+=
+  \gno{a^{p_1}_{q_1}\cd a^{p_m}_{q_m}a^{r_1}_{s_1}\cd a^{r_n}_{s_n}}
+=
+  \tl{a}^{p_1\cd p_mr_1\cd r_n}_{q_1\cd q_ms_1\cd s_n}
+\end{align*}
+  Furthermore, explain how the presence of a contraction line restricts which rearrangements are possible, and how this is remedied by the use of dot notation.
+
+\item
+  Show algebraically that $\op{P}_{(p/q/r)}=\op{P}_{(p/qr)}\op{P}_{(q/r)}=\op{P}_{(pq/r)}\op{P}_{(p/q)}$ and explain why these identities follow from the definition of the index antisymmetrizers.
+
+\item
+  Show that the following identity holds for any four-index tensor $t^{pq}_{rs}$, whether antisymmetric or not.
+  \begin{align*}
+    \ol{g}_{pq}^{rs}\,
+    \op{P}^{(p/q)}_{(r/s)}\,
+    t^{pq}_{rs}
+  =
+    4\,
+    \ol{g}_{pq}^{rs}\,
+    t^{pq}_{rs}
+  \end{align*}
+
+\item
+  Show that the following identity holds for any $w^{pqr}$ if $v_{pqr}$ is antisymmetric.
+  \begin{align*}
+    v_{pqr}
+    \op{P}^{(p/qr)}
+    w^{pqr}
+  =
+    3\,
+    v_{pqr}\,
+    w^{pqr}
+  \end{align*}
+
+\item
+  Derive the Wick expansion of $a^{pqr}_{stu}$ in terms of $\F$-normal excitations, using index antisymmetrizers to generate the full expansion from the unique contraction patterns.
+
+\item
+  Derive the CIS equations in KM notation.
+
+\item
+  Derive the CID equations in KM notation.
+\end{enumerate}
+
+
+\end{document}
