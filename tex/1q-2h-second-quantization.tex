@@ -65,7 +65,7 @@ This operator acts on Slater determinants as follows.
 \right.
 \end{align}
 In words, it deletes $\y_p$ from $\F_{(p_1\cd p_n)}$ if present, otherwise killing the determinant.
-The restriction to an antisymmetric space makes these operaors anticommute, $\op{a}_p\op{a}_q=-\op{a}_q\op{a}_p$, since it can be shown that for $\Y\in\mc{F}_n$
+The restriction to an antisymmetric space makes these operators anticommute, $\op{a}_p\op{a}_q=-\op{a}_q\op{a}_p$, since it can be shown that for $\Y\in\mc{F}_n$
 \begin{align*}
   \int d(1)d(2)\y_p^*(1)\y_q^*(2)\Y(1,2,\cd,n)
 =&\
@@ -303,7 +303,7 @@ and the \textit{creation operator} of $\y_p$ is a linear mapping $c_p:\mc{F}_n(\
 
 \begin{rmk}
 \thmtitle{Relating the determinant and occupation number formalisms}
-When $p_1<\cd<p_n$, $\F_{(p_1\cd p_n)}$ is equivalent to the occupation vector $\kt{\bo{n}_{(p_1\cd p_n)}}$ with 1s at $p_1,\cd,p_n$.
+When $p_1<\cd<p_n$, $\F_{(p_1\cd p_n)}$ is equivalent to the occupation vector $\kt{\bo{n}_{(p_1\cd p_n)}}$ with ones at $p_1,\cd,p_n$.
 Otherwise, this determinant is equivalent to $\e_{\pi}\kt{\bo{n}_{(p_1\cd p_n)}}$ for $\pi\in\mr{S}_n$ such that $p_{\pi(1)}<\cd<p_{\pi(n)}$.
 The actions of $a_p$ and $a_p\dg$ on $\F_{(p_1\cd p_n)}$ are given by
 \begin{align}\label{eq:abstract-annihilation-operator-action}
@@ -391,7 +391,7 @@ If we apply \Cref{dfn:particle-hole-operators} to the new quasiparticle Fock spa
   b_a\dg
 \end{align}
 where $i$ and $a$ are occupied and virtual indices with respect to the reference determinant $\F$.
-$\{a_i\}\cup\{a_a\}\mapsto\{b_p\}$ are therefore \textit{quasiparticle annihilation operators} and $\{a_i\}\cup\{a_a\dg\}\mapsto\{b_p\dg\}$ are \textit{quasiparticle creation operators}.
+$\{a_i\dg\}\cup\{a_a\}\mapsto\{b_p\}$ are therefore \textit{quasiparticle annihilation operators} and $\{a_i\}\cup\{a_a\dg\}\mapsto\{b_p\dg\}$ are \textit{quasiparticle creation operators}.
 \end{dfn}
 
 \begin{rmk}
@@ -509,7 +509,7 @@ For example:
 =
   a_r\dg a_s\dg a_q a_p
 +
-  \d_{pq}
+  \d_{ps}
   a_r\dg a_q
 -
   \d_{pr}
@@ -521,15 +521,15 @@ For example:
   \d_{qr}
   a_s\dg a_p
 -
-  \d_{pq}\d_{sr}
+  \d_{ps}\d_{qr}
 +
-  \d_{pq}\d_{qs}
+  \d_{pr}\d_{qs}
 &\implies
   \ip{\vac|a_p a_q a_s\dg a_r\dg|\vac}
 =
-  \d_{pq}\d_{qs}
+  \d_{pr}\d_{qs}
 -
-  \d_{pq}\d_{sr}
+  \d_{ps}\d_{qr}
 \end{align*}
 where we have made repeated use of \Cref{prop:particle-hole-operator-anticommutator} to arrive at these expansions.
 This strategy becomes unwieldy for expectation values of a reference determinant $\F$, in which case it is more convenient to use particle-hole isomorphism.
