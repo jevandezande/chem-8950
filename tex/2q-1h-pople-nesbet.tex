@@ -4,7 +4,7 @@
 \usepackage{avcgreek}
 \usepackage{avcfonts}
 \usepackage{avcmath}
-\usepackage[numberby=section]{avcthm} % 
+\usepackage[numberby=section]{avcthm}
 \usepackage{qcmacros}
 \usepackage{goldstone}
 %%MACROS FOR THIS DOCUMENT
@@ -69,7 +69,7 @@ A complete set of one-electron functions (spin-orbitals) comes in $\a,\b$-pairs.
 =
   \f_{p_\b}(\bo{r})\b(s)
 \end{align}
-The spatial components of these functions can be expanded in terms of a set of AO basis functions $\{\x_\nu\}$ as 
+The spatial components of these functions can be expanded in terms of a set of AO basis functions $\{\x_\nu\}$ as
 \begin{align}\label{eq:space-orb}
   \f_{p_\a}
 =
@@ -323,7 +323,7 @@ After diagonalizing the transformed Fock matrix, $\tl{\bo{F}}$, the MO coefficie
 
 \begin{samepage}
 Equation \ref{orthogonalized-roothaan-hall} is still not exactly an ordinary eigenvalue problem because $\bo{F}$ depends on the MOs via the density matrix $\bo{D}$.
-The standard procedure for solving the Roothan-Hall equations repeatedly diagonalizes $\tl{\bo{F}}$ and feeds in the new density until the equation becomes self-consistent.
+The standard procedure for solving the Roothaan-Hall equations repeatedly diagonalizes $\tl{\bo{F}}$ and feeds in the new density until the equation becomes self-consistent.
 The algorithm looks as follows.
 \begin{enumerate}
   \item Get integrals $\ip{\x_\mu|\x_\nu}, \ip{\x_\mu|\op{h}|\x_\nu}, \ip{\x_\mu\x_\nu|\x_\rho\x_\si}$ and form orthogonalizer $\bo{S}^{-\frac{1}{2}}$

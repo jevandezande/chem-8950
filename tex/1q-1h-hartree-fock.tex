@@ -4,7 +4,7 @@
 \usepackage{avcgreek}
 \usepackage{avcfonts}
 \usepackage{avcmath}
-\usepackage[numberby=section]{avcthm} % 
+\usepackage[numberby=section]{avcthm}
 \usepackage{qcmacros}
 \usepackage{goldstone}
 %%MACROS FOR THIS DOCUMENT
@@ -411,7 +411,7 @@ This implies that the solution to the Hartree-Fock optimization problem is not u
 In this section we show how to use this freedom to our advantage, by choosing orbitals which diagonalize the Lagrange multiplier matrix, partially decoupling \cref{eq:hartree-fock-noncanonical-stationarity-condition}.
 These orbitals are known as \textit{canonical Hartree-Fock orbitals}.
 
-In matrix notation, the Hatree-Fock equations can be written as follows.
+In matrix notation, the Hartree-Fock equations can be written as follows.
 \begin{align}\label{eq:hartree-fock-noncanonical-stationarity-condition-matrix-form}
   \op{f}\bm\y
 \overset{!}=
@@ -472,7 +472,7 @@ Substituting the new orbitals into \cref{eq:hartree-fock-noncanonical-stationari
 \end{align*}
 Since $\bm{\ev}$ is Hermitian, the Lagrangian eigenvalues are real.
 Note that these equations are not fully decoupled, since $\op{f}$ still depends on the full orbital set $\{\y_i\}$.
-Solving them amounts to solving for the {\it self-consistent field} 
+Solving them amounts to solving for the {\it self-consistent field}
 \begin{align}
   \op{v}(1)
 \equiv
@@ -499,7 +499,7 @@ In this approach, we define the ``Lagrangian function'' $\mc{L}$ as
   \la(g(x,y)-c)
 \end{align}
 where the parameter $\la$ is called the Lagrange multiplier.
-The contrained optimization problem can be solved solved by optimizing $\mc{L}$ with respect to $x$, $y$, and $\la$.
+The constrained optimization problem can be solved solved by optimizing $\mc{L}$ with respect to $x$, $y$, and $\la$.
 To see why, consider the stationarity conditions for $\mc{L}$.
 \begin{align}
   \pd{\mc{L}}{x}
