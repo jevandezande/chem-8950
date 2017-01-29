@@ -1,0 +1,290 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 3}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Translate the following expression from KM notation into our original notation, using daggers to denote creation operators and lines to denote contractions.
+\begin{align*}
+  \gno{
+    a^{p^\hole q^{\ptcl\phantom{\ptcl}} r^{\ptcl\ptcl}}
+     _{s^\ptcl t^{\ptcl\ptcl} u^\hole}
+  }
+=
+  \,\,?
+\end{align*}
+  Your final expression should be a $\F$-normal-ordered string of six operators with three contraction lines.\\[1cm]
+  \textbf{Answer}:
+  \begin{align*}
+  \gno{
+    a^{p^\hole q^{\ptcl\phantom{\ptcl}} r^{\ptcl\ptcl}}
+     _{s^\ptcl t^{\ptcl\ptcl} u^\hole}
+  }
+  =
+  \gno{
+    a^{p^\hole q^\ptcl r^{\ptcl\ptcl}}
+     _{u^\hole s^\ptcl t^{\ptcl\ptcl}}
+  }
+  =
+  \gno{
+    a^{p^\hole}_{u^\hole}
+    a^{q^\ptcl}_{s^\ptcl}
+    a^{r^{\ptcl\ptcl}}_{t^{\ptcl\ptcl}}
+  }
+  =
+  \gno{
+    \ctr[0.5]{}{a}{_p\dg}{a}
+    a_p\dg a_u
+    (
+    -
+      \ctr[0.5]{}{a}{_s}{a}
+      a_s a_q\dg
+    )
+    (
+    -
+      \ctr[0.5]{}{a}{_t}{a}
+      a_t a_r\dg
+    )
+  }
+  =
+  \gno{
+    \ctr[0.5]{}{a}{_p\dg}{a}
+    a_p\dg a_u
+    \ctr[0.5]{}{a}{_s}{a}
+    a_s a_q\dg
+    \ctr[0.5]{}{a}{_t}{a}
+    a_t a_r\dg
+  }
+  \end{align*}
+
+\newpage
+\item
+  Expand the following as a linear combination of $\F$-normal-ordered operators.
+  \begin{align*}
+    \tl{a}^p_q
+    \tl{a}^{rs}_{tu}
+  =
+    \,\,?
+  \end{align*}
+  \textbf{Answer}:
+  \begin{align*}
+    \tl{a}^p_q
+    \tl{a}^{rs}_{tu}
+  =&\
+    \tl{a}^{prs}_{qtu}
+  +
+    \op{P}^{(r/s)}
+    \tl{a}^{p^{\phantom{\ptcl}}r^\ptcl s}_{q^\ptcl t^{\phantom{\ptcl}}u}
+  +
+    \op{P}_{(t/u)}
+    \tl{a}^{p^\hole r^{\phantom{\hole}} s}_{q^{\phantom{\hole}}t^\hole u}
+  +
+    \op{P}^{(r/s)}_{(t/u)}
+    \tl{a}^{p^\hole r^\ptcl s}_{q^\ptcl t^\hole u}
+  \\=&\
+    \tl{a}^{prs}_{qtu}
+  -
+    \op{P}^{(r/s)}
+    \tl{a}^{r^\ptcl p s}_{q^\ptcl t u}
+  -
+    \op{P}_{(t/u)}
+    \tl{a}^{p^\hole r s}_{t^\hole q u}
+  -
+    \op{P}^{(r/s)}_{(t/u)}
+    \tl{a}^{p^\hole r^\ptcl s}_{t^\hole q^\ptcl u}
+  \\=&\
+    \tl{a}^{prs}_{qtu}
+  -
+    \op{P}^{(r/s)}
+    (-\h^r_q)
+    \tl{a}^{p s}_{t u}
+  -
+    \op{P}_{(t/u)}
+    \g^p_t
+    \tl{a}^{r s}_{q u}
+  -
+    \op{P}^{(r/s)}_{(t/u)}
+    \g^p_t
+    (-\h^r_q)
+    \tl{a}^s_u
+  \\=&\
+    \tl{a}^{prs}_{qtu}
+  +
+    \op{P}^{(r/s)}
+    \h^r_q
+    \tl{a}^{p s}_{t u}
+  -
+    \op{P}_{(t/u)}
+    \g^p_t
+    \tl{a}^{r s}_{q u}
+  +
+    \op{P}^{(r/s)}_{(t/u)}
+    \g^p_t
+    \h^r_q
+    \tl{a}^s_u
+  \end{align*}
+
+\newpage
+\item
+  Evaluate the following matrix element.\footnote{You may use either of the following equivalent expressions for the Hamiltonian. (I recommend the one on the right!)
+  \begin{align*}
+    H_e
+  =
+    h_p^q
+    a^p_q
+  +
+    \tfr{1}{4}
+    \ol{g}_{pq}^{rs}
+    a^{pq}_{rs}
+  &&
+    H_e
+  =
+    E_0
+  +
+    f_p^q
+    \tl{a}^p_q
+  +
+    \tfr{1}{4}
+    \ol{g}_{pq}^{rs}
+    \tl{a}^{pq}_{rs}
+  \end{align*}
+  }
+  \begin{align*}
+    \ip{\F_i^a|H_e - E_0|\F_j^b}
+  =
+    \,\,?
+  \end{align*}
+  \textbf{Answer}:
+  \begin{align*}
+    \ip{\F_i^a|H_e - E_0|\F_j^b}
+  =&\
+    f_p^q
+    \ip{\F|
+      \tl{a}^i_a
+      \tl{a}^p_q
+      \tl{a}^b_j
+    |\F}
+  +
+    \tfr{1}{4}
+    \ol{g}_{pq}^{rs}
+    \ip{\F|
+      \tl{a}^i_a
+      \tl{a}^{pq}_{rs}
+      \tl{a}^b_j
+    |\F}
+  \\
+    \ip{\F|
+      \tl{a}^i_a
+      \tl{a}^p_q
+      \tl{a}^b_j
+    |\F}
+  =&\
+    \tl{a}^{i^\hole p^{\ptcl\phantom{\ptcl}} b^{\ptcl\ptcl}}
+          _{a^\ptcl q^{\ptcl\ptcl} j^\hole}
+  +
+    \tl{a}^{i^\hole p^{\hole\hole} b^\ptcl}
+          _{a^\ptcl q^{\hole\phantom{\hole}} j^{\hole\hole}}
+  =
+    \g^i_j
+    (-\h^p_a)
+    (-\h^b_q)
+  +
+    \g^i_q
+    \g^p_j
+    (-\h^b_a)
+  =
+    \g^i_j
+    \h^p_a
+    \h^b_q
+  -
+    \g^i_q
+    \g^p_j
+    \h^b_a
+  \\
+    \ip{\F|
+      \tl{a}^i_a
+      \tl{a}^{pq}_{rs}
+      \tl{a}^b_j
+    |\F}
+  =&\
+    \op{P}^{(p/q)}_{(r/s)}
+    \tl{a}^{i^\hole p^\ptcl q^{\hole\hole} b^{\ptcl\ptcl}}
+          _{a^\ptcl r^\hole s^{\ptcl\ptcl} j^{\hole\hole}}
+  =
+    \op{P}^{(p/q)}_{(r/s)}
+    \g^i_r
+    (-\h^p_a)
+    \g^q_j
+    (-\h^b_s)
+  =
+    \op{P}^{(p/q)}_{(r/s)}
+    \g^i_r
+    \h^p_a
+    \g^q_j
+    \h^b_s
+  \end{align*}
+  Substituting the last two equations into the first gives the final result.
+  \begin{align*}
+    \ip{\F_i^a|H_e - E_0|\F_j^b}
+  =&\
+    f_p^q
+    (
+      \g^i_j
+      \h^p_a
+      \h^b_q
+    -
+      \g^i_q
+      \g^p_j
+      \h^b_a
+    )
+  +
+    \tfr{1}{4}
+    \ol{g}_{pq}^{rs}
+    \op{P}^{(p/q)}_{(r/s)}
+    \g^i_r
+    \h^p_a
+    \g^q_j
+    \h^b_s
+  \\=&\
+    \g^i_j
+    f_a^b
+  -
+    \h^b_a
+    f_j^i
+  +
+    \ol{g}_{aj}^{ib}
+  \\=&\
+    \d^i_j
+    f_a^b
+  -
+    \d^b_a
+    f_j^i
+  +
+    \ol{g}_{aj}^{ib}
+  \end{align*}
+
+\end{enumerate}
+
+\end{document}

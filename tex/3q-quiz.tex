@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 3}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Translate the following expression from KM notation into our original notation, using daggers to denote creation operators and lines to denote contractions.
+\begin{align*}
+  \gno{
+    a^{p^\hole q^{\ptcl\phantom{\ptcl}} r^{\ptcl\ptcl}}
+     _{s^\ptcl t^{\ptcl\ptcl} u^\hole}
+  }
+=
+  \,\,?
+\end{align*}
+  Your final expression should be a $\F$-normal-ordered string of six operators with three contraction lines.
+
+\newpage
+\item
+Expand the following as a linear combination of $\F$-normal-ordered operators.
+\begin{align*}
+  \tl{a}^p_q
+  \tl{a}^{rs}_{tu}
+=
+  \,\,?
+\end{align*}
+
+
+\newpage
+\item
+Evaluate the following matrix element.\footnote{You may use either of the following equivalent expressions for the Hamiltonian. (I recommend the one on the right!)
+\begin{align*}
+  H_e
+=
+  h_p^q
+  a^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  a^{pq}_{rs}
+&&
+  H_e
+=
+  E_0
++
+  f_p^q
+  \tl{a}^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \tl{a}^{pq}_{rs}
+\end{align*}
+}
+\begin{align*}
+  \ip{\F_i^a|H_e - E_0|\F_j^b}
+=
+  \,\,?
+\end{align*}
+\end{enumerate}
+
+\end{document}
