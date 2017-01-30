@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 4, Suggested Problems 1: Diagrams}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\usepackage{multicol}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Come up with an example to illustrate each of the following terms:
+  \begin{multicols}{3}
+  \begin{enumerate}
+  \item
+    equivalent lines
+  \item
+    closed graph
+  \item
+    open graph
+  \item
+    interchangeable operators
+  \item
+    equivalent operators
+  \item
+    interchangeable subgraphs
+  \item
+    equivalent subgraphs
+  \item
+    Goldstone path
+  \item
+    Hugenholtz path
+  \item
+    open cycle
+  \item
+    loop
+  \item
+    connected graph
+  \item
+    disconnected graph
+  \item
+    unlinked graph
+  \item
+    equivalent contractions
+  \item
+    energy graph
+  \item
+    coefficient graph
+  \item
+    wavefunction graph
+  \end{enumerate}
+  \end{multicols}
+\item
+  Prove the following identity.
+\begin{align*}
+  \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
+=
+  (\tfr{1}{m!})^2\,
+  \ol{\d}_{p_1'\cd p_m'}^{q_1'\cd q_m'}\,
+  \tl{a}^{p_1'\cd p_m'}_{q_1'\cd q_m'}
+&&
+  \ol{\d}^{q_1'\cd q_m'}_{p_1'\cd p_m'}
+\equiv
+  \op{P}^{(p_1/\cd /p_m)}
+        _{(q_1/\cd /q_m)}
+  \d^{p_1}_{p_1'}\cd \d^{p_m}_{p_m'}
+  \d^{q_1'}_{q_1}\cd \d^{q_m'}_{q_m}
+\end{align*}
+\end{enumerate}
+
+
+\end{document}
