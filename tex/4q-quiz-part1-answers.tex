@@ -1,0 +1,466 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 4, Part 1}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Give an example of each of the following.
+  \begin{enumerate}
+  \item
+    A closed, connected graph of at least two operators.\\[10pt]
+    \textbf{Answer}:
+    \begin{align*}
+    \diagram{
+      \node[draw] (vlabel) at (-0.7,+1.0) {\bm{v}};
+      \node[draw] (wlabel) at (+2.7,+0.0) {\bm{w}};
+      \node[draw] (xlabel) at (-0.7,-1.0) {\bm{x}};
+      \interaction{2}{v}{(0,+1.0)}{ddot}{solid};
+      \interaction{2}{w}{(1,+0.0)}{ddot}{solid};
+      \draw (0,-1.0) node[ddot] (x1) {}
+        to (2,-1.0) node[ddot] (x2) {};
+      \draw (vlabel) to (v1);
+      \draw (wlabel) to (w2);
+      \draw (xlabel) to (x1);
+      \draw[->-, bend left =20] (x1) to (v1);
+      \draw[-<-, bend right=20] (x1) to (v1);
+      \draw[->-, bend left ] (w1) to (v2);
+      \draw[-<-, bend right] (w1) to (v2);
+      \draw[->-, bend left ] (x2) to (w2);
+      \draw[-<-, bend right] (x2) to (w2);
+    }
+    \end{align*}
+    \vspace{1cm}
+  \item
+    A Hugenholtz path of at least three lines that doesn't qualify as a Goldstone path.\\[10pt]
+    \textbf{Answer}:
+    The sequence of lines $(l_1,l_2,l_3)$ in the following graph.
+    \begin{align*}
+    \diagram{
+      \node[draw] (vlabel) at (-0.7,+1.0) {\bm{v}};
+      \node[draw] (wlabel) at (+2.7,+0.0) {\bm{w}};
+      \node[draw] (xlabel) at (-0.7,-1.0) {\bm{x}};
+      \interaction{2}{v}{(0,+1.0)}{ddot}{solid};
+      \interaction{2}{w}{(1,+0.0)}{ddot}{solid};
+      \draw (0,-1.0) node[ddot] (x1) {}
+        to (2,-1.0) node[ddot] (x2) {};
+      \draw (vlabel) to (v1);
+      \draw (wlabel) to (w2);
+      \draw (xlabel) to (x1);
+      \draw[->-, bend left =20] (x1) to node[midway,label=west:$l_3$] {} (v1);
+      \draw[-<-, bend right=20] (x1) to (v1);
+      \draw[->-, bend left ] (w1) to (v2);
+      \draw[-<-, bend right] (w1) to node[midway,label=east:$l_1$] {} (v2);
+      \draw[->-, bend left ] (x2) to (w2);
+      \draw[-<-, bend right] (x2) to node[midway,label=east:$l_2$] {} (w2);
+    }
+    \end{align*}
+    \vspace{1cm}
+  \item
+    Non-equivalent, interchangeable subgraphs, where at least one subgraph contains multiple operators.\\[10pt]
+    \textbf{Answer}:
+    The subgraphs $G[\{\bm{w}\}]$ and $G[\{\bm{x},\bm{y}\}]$ in the following.
+    \begin{align*}
+    \diagram{
+      \node[draw] (vlabel) at (-0.7,+1.0) {\bm{v}};
+      \node[draw] (wlabel) at (-0.7,-0.5) {\bm{w}};
+      \node[draw] (xlabel) at (+2.7,+0.0) {\bm{x}};
+      \node[draw] (ylabel) at (+2.7,-1.0) {\bm{y}};
+      \draw (vlabel)
+        to (0.0,+1.0) node[ddot=white] (v1) {}
+        to (1.0,+1.0) node[ddot=white] (v2) {};
+      \draw (wlabel)
+        to (+0.0,-0.5) node[ddot=white] (w1) {};
+      \draw (1.0,+0.0) node[ddot=white] (x1) {}
+        to (2.0,+0.0) node[ddot] (x2) {}
+        to (xlabel);
+      \draw (1.0,-1.0) node[ddot=white] (y1) {}
+        to (2.0,-1.0) node[ddot] (y2) {}
+        to (ylabel);
+      \draw[->-] (v1) to ++(0,+0.6);
+      \draw[->-] (v2) to ++(0,+0.6);
+      \draw[->-] (w1) to (v1);
+      \draw[-<-] (w1) to ++(0,-0.75);
+      \draw[->-] (x1) to (v2);
+      \draw[->-] (y1) to (x1);
+      \draw[->-, bend left ] (y2) to (x2);
+      \draw[-<-, bend right] (y2) to (x2);
+      \draw[-<-] (y1) to ++(0,-0.6);
+    }
+    \end{align*}
+    \vspace{1cm}
+  \item
+    A graph that is disconnected and linked.\\[10pt]
+    \textbf{Answer}:
+    \begin{align*}
+    \diagram{
+      \node[draw] (vlabel) at (-0.7,+2.0) {\bm{v}};
+      \node[draw] (wlabel) at (-0.7,+1.0) {\bm{w}};
+      \node[draw] (xlabel) at (-0.7,+0.0) {\bm{x}};
+      \node[draw] (ylabel) at (-0.7,-1.0) {\bm{y}};
+      \node[draw] (zlabel) at (+0.5,-1.0) {\bm{z}};
+      \draw (vlabel)
+        to ++(0.7,0) node[ddot] (v1) {}
+        to ++(1.2,0) node[ddot] (v2) {};
+      \draw (wlabel)
+        to ++(0.7,0) node[ddot] (w1) {}
+        to ++(1.2,0) node[ddot] (w2) {}
+        to ++(1.2,0) node[ddot] (w3) {};
+      \draw (xlabel)
+        to ++(0.7,0) node[ddot] (x1) {}
+        to ++(1.2,0) node[ddot] (x2) {};
+      \draw (ylabel)
+        to ++(0.7,0) node[ddot] (y1) {};
+      \draw (zlabel)
+        to ++(0.7,0) node[ddot] (z1) {}
+        to ++(1.0,0) node[ddot] (z2) {};
+      \draw[->-, bend left ] (w1) to (v1);
+      \draw[-<-, bend right] (w1) to (v1);
+      \draw[->-, bend left ] (w2) to (v2);
+      \draw[-<-, bend right] (w2) to (v2);
+      \draw[-<-] (w3) to ++(-0.25,-0.6);
+      \draw[-<-] (w3) to ++(+0.25,-0.6);
+      \draw[-<-] (x1) to ++(0,+0.6);
+      \draw[->-] (x2) to ++(0,+0.6);
+      \draw[-<-] (y1) to (x1);
+      \draw[->-] (y1) to ++(0,-0.6);
+      \draw[->-] (z1) to (x2);
+      \draw[-<-] (z1) to ++(0,-0.6);
+      \draw[-<-] (z2) arc (0:360:-0.3) {};
+    }
+    \end{align*}
+  \end{enumerate}
+
+\newpage
+\item
+  Interpret the following graph algebraically, and then simplify your expression as much as possible.\footnotemark
+\begin{align*}
+\diagram{
+  \draw[overhang] (0,-0.5) node[ddot] (c1) {};
+  \draw[overhang] (1,-0.5) node[ddot] (c2) {};
+  \draw[sawtooth] (0.5,0) node[ddot] (g1) {}
+    to (2.0,0) node[ddot] (g2) {};
+  \interaction{2}{2c}{(2,-0.5)}{ddot}{overhang};
+  \draw[->-=0.7] (c1) to ++(-0.25,1);
+  \draw[-<-] (c1) to (g1);
+  \draw[->-] (c2) to (g1);
+  \draw[-<-=0.7] (c2) to ++(+0.25,1);
+  \draw[->-,bend left=40] (2c1) to (g2);
+  \draw[-<-,bend right=40] (2c1) to (g2);
+  \draw[->-] (2c2) to ++(-0.25,1);
+  \draw[-<-] (2c2) to ++(+0.25,1);
+}
+\end{align*}
+  \vspace{10pt}
+  \textbf{Answer}:
+\begin{align*}
+\diagram{
+  \draw[overhang] (0,-0.5) node[ddot] (c1) {};
+  \draw[overhang] (1,-0.5) node[ddot] (c2) {};
+  \draw[sawtooth] (0.5,0) node[ddot] (g1) {}
+    to (2.0,0) node[ddot] (g2) {};
+  \interaction{2}{2c}{(2,-0.5)}{ddot}{overhang};
+  \draw[->-=0.7] (c1) to ++(-0.25,1);
+  \draw[-<-] (c1) to (g1);
+  \draw[->-] (c2) to (g1);
+  \draw[-<-=0.7] (c2) to ++(+0.25,1);
+  \draw[->-,bend left=40] (2c1) to (g2);
+  \draw[-<-,bend right=40] (2c1) to (g2);
+  \draw[->-] (2c2) to ++(-0.25,1);
+  \draw[-<-] (2c2) to ++(+0.25,1);
+}
+=&\
+  \sum_{\substack{abcd\\ijkl}}
+\diagram{
+  \draw[overhang] (0,-0.5) node[ddot] (c1) {};
+  \draw[overhang] (1,-0.5) node[ddot] (c2) {};
+  \draw[sawtooth] (0.5,0) node[ddot] (g1) {}
+    to (2.0,0) node[ddot] (g2) {};
+  \interaction{2}{2c}{(2,-0.5)}{ddot}{overhang};
+  \draw[->-=0.7] (c1) to node[pos=0.7,left=1pt,label=center:$a$] {} ++(-0.25,1);
+  \draw[-<-] (c1) to node[midway,above left=0.5pt,label=center:$i$] {} (g1);
+  \draw[->-] (c2) to node[midway,below left=0.5pt,label=center:$b$] {} (g1);
+  \draw[-<-=0.7] (c2) to node[pos=0.7,right=1pt,label=center:$j$] {} ++(+0.25,1);
+  \draw[->-,bend left=40] (2c1) to node[midway,left=1pt,label=center:$c$] {} (g2);
+  \draw[-<-,bend right=40] (2c1) to node[midway,right=1pt,label=center:$k$] {} (g2);
+  \draw[->-] (2c2) to node[midway,left=1pt,label=center:$d$] {} ++(-0.25,1);
+  \draw[-<-] (2c2) to node[midway,right=1pt,label=center:$l$] {} ++(+0.25,1);
+}
+=
+  \sum_{\substack{abcd\\ijkl}}
+  \ol{g}_{ik}^{bc}
+  c_a^i
+  c_b^j
+  c_{cd}^{kl}\,
+  \gno{
+    a^{i^\hole k^{\hole\hole}}_{b^\ptcl c^{\ptcl\ptcl}}
+    a^a_{i^\hole}
+    a^{b^\ptcl}_j
+    a^{c^{\ptcl\ptcl}d}_{k^{\hole\hole}l}
+  }
+\\
+  \gno{
+    a^{i^\hole k^{\hole\hole}}_{b^\ptcl c^{\ptcl\ptcl}}
+    a^a_{i^\hole}
+    a^{b^\ptcl}_j
+    a^{c^{\ptcl\ptcl}d}_{k^{\hole\hole}l}
+  }
+=&\
+  \tl{a}^{i^\hole k^{\hole\hole}ab^\ptcl c^{\ptcl\ptcl}d}
+        _{b^\ptcl c^{\ptcl\ptcl}i^\hole jk^{\hole\hole}l}
+=
+-
+  \tl{a}^{i^\hole k^{\hole\hole}ab^\ptcl c^{\ptcl\ptcl}d}
+        _{b^\ptcl c^{\ptcl\ptcl}ji^\hole k^{\hole\hole}l}
+=
+-
+  \g^i_i
+  \g^k_k
+  (-\h^b_b)
+  (-\h^c_c)
+  \tl{a}^{ad}_{jl}
+=
+-
+  \tl{a}^{ad}_{jl}
+\end{align*}
+  Substituting the second equation into the first gives the final answer.
+\begin{align*}
+\diagram{
+  \draw[overhang] (0,-0.5) node[ddot] (c1) {};
+  \draw[overhang] (1,-0.5) node[ddot] (c2) {};
+  \draw[sawtooth] (0.5,0) node[ddot] (g1) {}
+    to (2.0,0) node[ddot] (g2) {};
+  \interaction{2}{2c}{(2,-0.5)}{ddot}{overhang};
+  \draw[->-=0.7] (c1) to ++(-0.25,1);
+  \draw[-<-] (c1) to (g1);
+  \draw[->-] (c2) to (g1);
+  \draw[-<-=0.7] (c2) to ++(+0.25,1);
+  \draw[->-,bend left=40] (2c1) to (g2);
+  \draw[-<-,bend right=40] (2c1) to (g2);
+  \draw[->-] (2c2) to ++(-0.25,1);
+  \draw[-<-] (2c2) to ++(+0.25,1);
+}
+=
+-
+  \sum_{\substack{abcd\\ijkl}}
+  \ol{g}_{ik}^{bc}
+  c_a^i
+  c_b^j
+  c_{cd}^{kl}\,
+  \tl{a}^{ad}_{jl}
+\end{align*}
+
+\footnotetext{
+  The operators in this graph are defined as follows.
+  \begin{align*}
+  \diagram{
+    \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }
+  \equiv
+    \pr{
+      \tfr{1}{2!}
+    }^2
+    \sum_{pqrs}
+    \ol{g}_{pq}^{rs}
+    \tl{a}^{pq}_{rs}
+  &&
+  \diagram{
+    \draw[overhang] (0,-0.25) node[ddot] (t1) {};
+    \draw[->-] (t1) to ++(-0.25,+0.5);
+    \draw[-<-] (t1) to ++(+0.25,+0.5);
+  }
+  \equiv
+    \sum_{ia}
+    c_a^i
+    \tl{a}^a_i
+  &&
+  \diagram{
+    \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
+    \draw[->-] (t1) to ++(-0.25,+0.5);
+    \draw[-<-] (t1) to ++(+0.25,+0.5);
+    \draw[->-] (t2) to ++(-0.25,+0.5);
+    \draw[-<-] (t2) to ++(+0.25,+0.5);
+  }
+  \equiv
+    \pr{
+      \tfr{1}{2!}
+    }^2
+    \sum_{ijab}
+    c_{ab}^{ij}
+    \tl{a}_{ij}^{ab}
+  \end{align*}
+}
+
+
+
+
+\newpage
+\item
+  Write the following algebraic expression as a graph.\footnotemark
+\begin{align*}
+  \sum_{\substack{abcd\\ijkl}}
+  \ol{v}_{ij}^{ab}
+  \ol{w}_{bcd}^{jkl}
+  \gno{
+    a^{ij^\hole}_{ab^\ptcl}
+    a^{b^\ptcl cd}_{j^\hole kl}
+  }
+\end{align*}
+  \vspace{10pt}
+  \textbf{Answer}:
+  This is a contraction of the following two diagrams
+\begin{align*}
+\diagram{
+  \node[draw] (label) at (-0.7,+0.25) {\bm{v}};
+  \interaction{2}{v}{(0,+0.25)}{ddot}{solid};
+  \draw (label) to (v1);
+  \draw[-<-] (v1) to ++(-0.25,-0.5);
+  \draw[->-] (v1) to ++(+0.25,-0.5);
+  \draw[-<-] (v2) to ++(-0.25,-0.5);
+  \draw[->-] (v2) to ++(+0.25,-0.5);
+}
+=
+  \pr{\tfr{1}{2!}}^2
+  \sum_{ijab}
+  \ol{v}_{ij}^{ab}
+  \tl{a}^{ab}_{ij}
+&&
+\diagram{
+  \node[draw] (label) at (-0.7,-0.25) {\bm{w}};
+  \interaction{3}{w}{(0,-0.25)}{ddot}{solid};
+  \draw (label) to (w1);
+  \draw[->-] (w1) to ++(-0.25,+0.5);
+  \draw[-<-] (w1) to ++(+0.25,+0.5);
+  \draw[->-] (w2) to ++(-0.25,+0.5);
+  \draw[-<-] (w2) to ++(+0.25,+0.5);
+  \draw[->-] (w3) to ++(-0.25,+0.5);
+  \draw[-<-] (w3) to ++(+0.25,+0.5);
+}
+=
+  \pr{\tfr{1}{3!}}^2
+  \sum_{ijkabc}
+  \ol{w}_{abc}^{ijk}
+  \tl{a}^{ijk}_{abc}
+\end{align*}
+  joining them by a hole line and a particle line.
+  The labeled graph looks as follows.
+\begin{align*}
+  \ol{v}_{ij}^{ab}
+  \ol{w}_{bcd}^{jkl}
+  \gno{
+    a^{ij^\hole}_{ab^\ptcl}
+    a^{b^\ptcl cd}_{j^\hole kl}
+  }
+=
+\diagram{
+  \node[draw] (vlabel) at (-0.7,+0.5) {\bm{v}};
+  \node[draw] (wlabel) at (+3.7,-0.5) {\bm{w}};
+  \interaction{2}{v}{(0,+0.5)}{ddot}{solid};
+  \interaction{3}{w}{(1,-0.5)}{ddot}{solid};
+  \draw (vlabel) to (v1);
+  \draw (wlabel) to (w3);
+  \draw[-<-] (v1) to node[midway, left =1pt, label=center:$a$] {} ++(-0.25,-1.0);
+  \draw[->-] (v1) to node[midway, right=1pt, label=center:$i$] {} ++(+0.25,-1.0);
+  \draw[->-, bend left ] (w1) to node[midway, left =1pt, label=center:$b$] {} (v2);
+  \draw[-<-, bend right] (w1) to node[midway, right=1pt, label=center:$j$] {} (v2);
+  \draw[->-] (w2) to node[midway, left =1pt, label=center:$c$] {} ++(-0.25,+1.0);
+  \draw[-<-] (w2) to node[midway, right=1pt, label=center:$k$] {} ++(+0.25,+1.0);
+  \draw[->-] (w3) to node[midway, left =1pt, label=center:$d$] {} ++(-0.25,+1.0);
+  \draw[-<-] (w3) to node[midway, right=1pt, label=center:$l$] {} ++(+0.25,+1.0);
+}
+\end{align*}
+  Noting that $\bm{w}$ has two pairs of equivalent lines leads to the final result.
+\begin{align*}
+  \sum_{\substack{abcd\\ijkl}}
+  \ol{v}_{ij}^{ab}
+  \ol{w}_{bcd}^{jkl}
+  \gno{
+    a^{ij^\hole}_{ab^\ptcl}
+    a^{b^\ptcl cd}_{j^\hole kl}
+  }
+=
+  4\cdot
+\diagram{
+  \node[draw] (vlabel) at (-0.7,+0.5) {\bm{v}};
+  \node[draw] (wlabel) at (+3.7,-0.5) {\bm{w}};
+  \interaction{2}{v}{(0,+0.5)}{ddot}{solid};
+  \interaction{3}{w}{(1,-0.5)}{ddot}{solid};
+  \draw (vlabel) to (v1);
+  \draw (wlabel) to (w3);
+  \draw[-<-] (v1) to ++(-0.25,-1.0);
+  \draw[->-] (v1) to ++(+0.25,-1.0);
+  \draw[->-, bend left ] (w1) to (v2);
+  \draw[-<-, bend right] (w1) to (v2);
+  \draw[->-] (w2) to ++(-0.25,+1.0);
+  \draw[-<-] (w2) to ++(+0.25,+1.0);
+  \draw[->-] (w3) to ++(-0.25,+1.0);
+  \draw[-<-] (w3) to ++(+0.25,+1.0);
+}
+\end{align*}
+
+\footnotetext{
+  Use the following to denote the operators in your graph.
+\begin{align*}
+  \pr{\tfr{1}{2!}}^2
+  \sum_{pqrs}
+  \ol{v}_{pq}^{rs}
+  \tl{a}^{pq}_{rs}
+\equiv
+\diagram{
+  \node[draw] (label) at (-0.7,0) {\bm{v}};
+  \interaction{2}{v}{(0,0)}{ddot=white}{solid};
+  \draw (label) to (v1);
+  \draw[->-] (v1) to ++(0,+0.45);
+  \draw[-<-] (v1) to ++(0,-0.45);
+  \draw[->-] (v2) to ++(0,+0.45);
+  \draw[-<-] (v2) to ++(0,-0.45);
+}
+&&
+  \pr{\tfr{1}{3!}}^2
+  \sum_{\substack{pqr\\stu}}
+  \ol{w}_{pqr}^{stu}
+  \tl{a}^{pqr}_{stu}
+\equiv
+\diagram{
+  \node[draw] (label) at (-0.7,0) {\bm{w}};
+  \interaction{3}{w}{(0,0)}{ddot=white}{solid};
+  \draw (label) to (w1);
+  \draw[->-] (w1) to ++(0,+0.45);
+  \draw[-<-] (w1) to ++(0,-0.45);
+  \draw[->-] (w2) to ++(0,+0.45);
+  \draw[-<-] (w2) to ++(0,-0.45);
+  \draw[->-] (w3) to ++(0,+0.45);
+  \draw[-<-] (w3) to ++(0,-0.45);
+}
+\end{align*}
+}
+
+
+\end{enumerate}
+
+\end{document}
