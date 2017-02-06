@@ -21,6 +21,12 @@
 \fancyhead[LE,RO]{Quiz 4, Handout 1: Diagrams}
 \fancyfoot[CE,CO]{\thepage}
 \usepackage{url}
+\makeatother
+\newcommand{\resolventline}[2][1]{
+  \tikz[overlay]{
+      \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
+  }
+}
 
 \begin{document}
 
@@ -380,17 +386,6 @@ The \textit{rules of interpretation} for translating $G$ into an algebraic expre
 \footnotetext{In graph theory jargon this is essentially a \textit{directed multigraph}, except that the vertical ordering of operators matters.}
 
 
-\begin{dfn}\label{dfn:equivalent-subgraphs}
-\thmtitle{Equivalent subgraphs}
-Repeated copies of the same operator are formally distinguished as elements of a graph's operator set and are termed \textit{identical operators}.
-Operators that can be interchanged without altering the graph are termed \textit{interchangeable operators}.
-This occurs when they are connected to the same set of operators in the same way.
-When identical operators are also interchangeable, we call them \textit{equivalent operators}.
-More generally, if $G[O']$ denotes the subgraph associated with\footnote{See \url{https://en.wikipedia.org/wiki/Induced_subgraph}} some subset $O'\subset O$ of the operators in $G$,
-then two disjoint subgraphs\footnote{That is, $G[O_1]$ and $G[O_2]$ with $O_1\cap O_2=\O$.} can also be classified as \textit{identical}, \textit{interchangeable}, or \textit{equivalent}.
-\end{dfn}
-
-
 \begin{dfn}
 \thmtitle{Connected and linked graphs}
 Two lines are \textit{adjacent} if they share a non-free end.
@@ -404,6 +399,18 @@ Otherwise, it forms a \textit{loop}.
 A graph is considered \textit{connected} if there is a Hugenholtz path connecting any two of its operators.
 A closed, disconnected subgraph is considered \textit{unlinked} from the rest of the graph.
 Note this last distinction: A \textit{disconnected} graph is still classified as \textit{linked}, as long as none of its disconnected subgraphs are closed.
+\end{dfn}
+
+
+\begin{dfn}\label{dfn:equivalent-subgraphs}
+\thmtitle{Equivalent subgraphs}
+Repeated copies of the same operator are formally distinguished as elements of a graph's operator set and are termed \textit{identical operators}.
+Operators that can be interchanged without altering the graph are termed \textit{interchangeable operators}.
+This occurs when they are connected to the same set of operators in the same way.
+When identical operators are also interchangeable, we call them \textit{equivalent operators}.
+More generally, if $G[O']$ denotes the subgraph associated with\footnote{See \url{https://en.wikipedia.org/wiki/Induced_subgraph}} some subset $O'\subset O$ of the operators in $G$,
+then two disjoint subgraphs\footnote{That is, $G[O_1]$ and $G[O_2]$ with $O_1\cap O_2=\O$.} can also be classified as \textit{identical}, \textit{interchangeable}, or \textit{equivalent}.
+For our purposes, these terms will be restricted to \textit{connected subgraphs}.
 \end{dfn}
 
 
@@ -424,7 +431,7 @@ Formally, this can be defined as follows.
 If $S=\{s_1,\ld,s_n\}$ is the label set of $\Si(G)$ and $s(l_i)=s_i$ is its label map, we can define a new summand graph $\Si_{\pi}(G)=(G, S, s_{\pi})$ with a permuted label map $s_\pi$ given by $s_{\pi}(l_i)=s_{\pi(i)}$, where $\pi$ is a permutation in $\mr{S}_n$.
 Then $\mr{dg}(G)$ is the number of $\Si_{\pi}(G)$ that are equal to $\Si(G)$.
 Assuming no identical operators, the degeneracy of $G$ is simply given by $\mr{dg}(G)=|L_1|!\cd|L_h|!$ where $L_1\cup\cd\cup L_h$ partitions its line set into subsets of equivalent lines and $|L_i|$ denotes the number of elements in $L_i$.
-When the graph does contain identical operators, there is an additional factor of $k!$ for each set $\{G_1,\ld,G_k\}$ of equivalent subgraphs.
+When the graph does contain identical operators, there is an additional factor of $k!$ for each set $\{G[O_1],\ld,G[O_k]\}$ of equivalent subgraphs.
 \end{dfn}
 
 
@@ -464,28 +471,26 @@ which will be used to prove a more elegant graphical formulation of Wick's theor
 
 
 \begin{samepage}
-\begin{rmk}
-The following proof assumes a graph with no identical operators to avoid consideration of equivalent subgraphs when counting line degeneracies, but the statement is actually true in general.
-\end{rmk}
-%%
-%%
 \begin{lem}\label{lem:pattern-degeneracy-no-identical-operators}
 \thmstatement{The pattern degeneracy of a contraction $c$ is $\mr{pat}(c)=\dfr{\mr{dg}(G)}{\mr{dg}(c(G))}$.
 }
 \begin{addmargin}[1em]{0em}
-  Proof, assuming no identical operators:
-  Let $L$ be the line set of $G$ and let $L_c$ be the line set of the contraction $c(G)$.
-  If $L=L_1\cup\cd\cup L_m$ partitions $L$ into equivalent lines, let $L_{i,j}=L_{j,i}$ denote the subset of lines in $L_c$ that result from contracting lines from $L_i$ with lines from $L_j$.
-  Let $L_{i,0}$ denote the subset of lines from $L_i$ unchanged by $c$.
-  Then $L_c=\bigcup_{i>j} L_{i,j}=\bigcup_{i=1}^m \pr{L_{i,0}\cup L_{i,1}\cup\cd L_{i,i-1}}$ partitions $L_c$ into equivalent lines.
-  The number of equivalent ways of partitioning $L_i$ for contraction is $\fr{|L_i|!}{|L_{i,0}|!|L_{i,1}|!\cd|L_{i,m}|!}$, and the number of ways of forming $L_{i,j}$ from a given partition of $L_i$ and $L_j$ is $|L_{i,j}|!=|L_{j,i}|!$.
+{\renewcommand*{\thefootnote}{\fnsymbol{footnote}}%
+  Proof\footnotemark[3]:%
+\footnotetext[3]{%
+  Note that this proof is limited in scope.  See \cref{rmk:caveat-on-wicks-theorem-for-graphs}.%
+}}
+  Assume $G$ has no identical operators, so that equivalent subgraphs do not contribute to the line degeneracies.
+  If $L=L_1\cup\cd\cup L_m$ partitions $G$'s line set into equivalent lines, let $L_{i,j}=L_{j,i}$ denote lines in $c(G)$ produced by contracting lines from $L_i$ and $L_j$, and let $L_{i,0}$ denote lines from $L_i$ unaffected by $c$.
+  Then the number of equivalent ways to partition $L_i$ for contraction is $\fr{|L_i|!}{|L_{i,0}|!|L_{i,1}|!\cd|L_{i,m}|!}$, and the number of ways of forming each $L_{i,j}$ from a given partition of $L_i$ and $L_j$ is $|L_{i,j}|!$.
   Therefore, the total pattern degeneracy of $c$ is given by the following.
   \begin{align*}
     \mr{pat}(c)
   =
     \prod_{i=1}^m
     \fr{|L_i|!}{|L_{i,0}|!|L_{i,1}|!\ld|L_{i,m}|!}
-    \prod_{j=i+1}^m
+    \,\cdot\,
+    \prod_{i>j}^m
     |L_{i,j}|!
   =
     \fr{
@@ -499,12 +504,25 @@ The following proof assumes a graph with no identical operators to avoid conside
   =
     \fr{\mr{dg}(G)}{\mr{dg}(c(G))}
   \end{align*}
+  The final step follows from the fact that, according to our definitions, $\bigcup_{i=1}^m \pr{L_{i,0}\cup L_{i,1}\cup\cd L_{i,i-1}}$ partitions the line set of $c(G)$ into equivalent lines and therefore the denominator equals $\mr{dg}(c(G))$.
 \end{addmargin}
 \end{lem}
+%%
+%%
+\begin{rmk}\label{rmk:caveat-on-wicks-theorem-for-graphs}
+The assumption that $G$ contains no identical operators limits the scope of \cref{lem:pattern-degeneracy-no-identical-operators} and of the next theorem, which derives from it.
+We can generalize this result to allow identical operators if we assume that the contraction $c$ does not create any new pairs of equivalent subgraphs.\footnote{
+  This encompasses most cases of interest, but it is not completely general, so be cautious about when you apply \cref{thm:wicks-theorem-for-graphs}.
+}
+The proof is as follows:
+Each set $E=\{O_1,\ld,O_k\}$ of equivalent subgraph generators\footnote{By this we mean that $O_1,\ld,O_k$ are connected subsets of $O$ such that $G[O_1],\ld,G[O_k]$ are equivalent subgraphs.} for $G$ partitions into  $E_1\cup\cd\cup E_n$, where $E_i\subset E$ generates a set of equivalent subgraphs in $c(G)$.
+By our assumption, tallying up these partitions for each $E$ exhausts the sets of equivalent subgraph generators for $c(G)$.
+Then for each $E$ there will be a factor of $|E|!$ in the line degeneracy of $G$, a factor of $|E_1|!\cd|E_n|!$ in the line degeneracy of $c(G)$, and a factor of $\fr{|E|!}{|E_1|!\cd|E_n|!}$ in the pattern degeneracy of the contraction, so that \cref{lem:pattern-degeneracy-no-identical-operators} still holds.
+\end{rmk}
 \end{samepage}
 
 
-\begin{thm}\label{thm:wicks-theorem-for-diagrams}
+\begin{thm}\label{thm:wicks-theorem-for-graphs}
 \thmtitle{Wick's theorem for Graphs}
 \thmstatement{
 $\ds{
@@ -539,16 +557,8 @@ $\ds{
   \sum_{c\in\mr{Ctr}(G)}
   \gno{c(G)}
 \end{align*}
-  In words, any graph is equal to its normal-ordering plus the sum over all unique graph contractions.
 }
 \end{thm}
-
-
-\begin{rmk}
-The practical advantage of the graphical form of Wick's theorem is that there are far fewer unique graph contractions than there are algebraic contractions.
-Effectively, graphical notation makes the permutational symmetries of $m$-electron operators obvious, which tends to make them easier to manipulate.
-\end{rmk}
-
 
 
 \begin{drv}\label{drv:phase-rule-for-goldstone-cycles}
@@ -679,6 +689,7 @@ Applying the same procedure to a loop gives $(-)^h a^{d^\ptcl}_{d^\ptcl}=(-)^h(-
 Since the lines of any Goldstone graph uniquely partition into Goldstone cycles, these rules provide a quick way to resolve the operator component of any diagram into a normal-ordered product of uncontracted operators times a phase factor.
 \end{drv}
 
+\begin{samepage}
 \begin{cor}
 \thmtitle{Phase rule for closed graphs}
 \thmstatement{
@@ -697,6 +708,7 @@ Since the lines of any Goldstone graph uniquely partition into Goldstone cycles,
   $.
 }
 \end{cor}
+\end{samepage}
 
 
 \begin{samepage}
@@ -721,6 +733,7 @@ A closed graph with no coefficient lines is sometimes called an \textit{energy g
 \end{dfn}
 \end{samepage}
 
+
 \begin{rmk}\label{rmk:algebraic-interpretation-of-coefficient-graph}
 The algebraic interpretation of a coefficient graph with the operator in eq~\ref{eq:excitation-as-m-electron-operator} has the form
 \begin{align}\label{eq:coefficient-diagram-interpretation-1}
@@ -741,18 +754,18 @@ Then eq~\ref{eq:coefficient-diagram-interpretation-1} simplifies as follows.
   \op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}\,
   T^{p_{1,1}\cd p_{h,m_h}}_{q_{1,1}\cd q_{k,n_k}}
 \end{align}
-Notice that the factorials on the right exactly cancel the contribution of the coefficient lines to the degeneracy factor.
+Notice that the factorials on the right exactly cancel the contribution of equivalent coefficient lines to the degeneracy factor.
 This equation defines a simplified rule for interpreting these kinds of graphs.
 \end{rmk}
 
 
-
-\begin{rmk}
-A few of the results from the preceding discussion are particularly useful for algebraically interpreting a graph according to \cref{ax:rules-of-interpretation}.
+\begin{rmk}\label{rmk:useful-rules}
+\thmtitle{Useful results for interpreting graphs}
+A few results from the preceding discussion are particularly useful for algebraically interpreting a graph according to \cref{ax:rules-of-interpretation}.
 For easy reference, let's summarize them here.
 \begin{enumerate}
 \item
-  Each set of $k$ equivalent internal lines\footnote{If rule \ref{item:rule-for-coefficient-lines} is used, this excludes equivalent coefficient lines.} or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
+  Each set of $k$ equivalent internal lines\footnote{If rule \ref{item:rule-for-coefficient-lines} is used, this excludes coefficient lines.} or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
 \item
   Each closed loop contributes $(-)^{h_i+1}$ to the overall sign, where $h_i$ is the number of hole lines.
 \item
@@ -947,37 +960,37 @@ The degeneracy factors fall into three cases: $\{l_1,l_2\}\cup\{l_3,l_4\}\implie
 In terms of Hugenholtz diagrams, these are written as follows.
 \begin{align}
 \diagram{
-  \node[dot=white] (h) at (0,0) {};
+  \node[flexdot={2.5pt}{white}] (h) at (0,0) {};
   \draw[->-] (h) to ++(0,+0.5);
   \draw[-<-] (h) to ++(0,-0.5);
 }
 =
 \diagram{
-  \node[dot] (h) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (h) at (0,0) {};
   \draw[->-] (h) to ++(0,+0.5);
   \draw[-<-] (h) to ++(0,-0.5);
 }
 +
 \diagram{
-  \node[dot] (h) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (h) at (0,0) {};
   \draw[->-] (h) to ++(-0.25,+0.5);
   \draw[-<-] (h) to ++(+0.25,+0.5);
 }
 +
 \diagram{
-  \node[dot] (h) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (h) at (0,0) {};
   \draw[-<-] (h) to ++(-0.25,-0.5);
   \draw[->-] (h) to ++(+0.25,-0.5);
 }
 +
 \diagram{
-  \node[dot] (h) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (h) at (0,0) {};
   \draw[-<-] (h) to ++(0,+0.5);
   \draw[->-] (h) to ++(0,-0.5);
 }
 &&
 \diagram{
-  \node[dot=white] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{white}] (g) at (0,0) {};
   \draw[->-] (g) to ++(-0.25,+0.5);
   \draw[->-] (g) to ++(+0.25,+0.5);
   \draw[-<-] (g) to ++(-0.25,-0.5);
@@ -985,7 +998,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 }
 =
 \diagram{
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[->-] (g) to ++(-0.25,+0.5);
   \draw[->-] (g) to ++(+0.25,+0.5);
   \draw[-<-] (g) to ++(-0.25,-0.5);
@@ -993,7 +1006,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 }
 +
 \diagram{
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[->-] (g) to ++(0,+0.5);
   \draw[-<-] (g) to ++(0,-0.5);
   \draw[-<-] (g) to ++(50:0.5);
@@ -1001,7 +1014,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 }
 +
 \diagram{
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[->-] (g) to ++(0,+0.5);
   \draw[-<-] (g) to ++(0,-0.5);
   \draw[-<-] (g) to ++(-50:0.5);
@@ -1010,7 +1023,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 +
 \diagram{
   \newcommand{\ang}{40};
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[-<-] (g) to ++(90-1.5*\ang:0.5);
   \draw[-<-] (g) to ++(90-0.5*\ang:0.5);
   \draw[->-] (g) to ++(90+0.5*\ang:0.5);
@@ -1018,7 +1031,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 }
 +
 \diagram{
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[-<-] (g) to ++(-0.25,+0.5);
   \draw[->-] (g) to ++(+0.25,+0.5);
   \draw[-<-] (g) to ++(-0.25,-0.5);
@@ -1027,7 +1040,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 +
 \diagram{
   \newcommand{\ang}{40};
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[-<-] (g) to ++(-90+1.5*\ang:0.5);
   \draw[-<-] (g) to ++(-90+0.5*\ang:0.5);
   \draw[->-] (g) to ++(-90-0.5*\ang:0.5);
@@ -1035,7 +1048,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 }
 +
 \diagram{
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[-<-] (g) to ++(0,+0.5);
   \draw[->-] (g) to ++(0,-0.5);
   \draw[-<-] (g) to ++(50:0.5);
@@ -1043,7 +1056,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 }
 +
 \diagram{
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[-<-] (g) to ++(0,+0.5);
   \draw[->-] (g) to ++(0,-0.5);
   \draw[-<-] (g) to ++(-50:0.5);
@@ -1051,7 +1064,7 @@ In terms of Hugenholtz diagrams, these are written as follows.
 }
 +
 \diagram{
-  \node[dot] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{black}] (g) at (0,0) {};
   \draw[-<-] (g) to ++(-0.25,+0.5);
   \draw[-<-] (g) to ++(+0.25,+0.5);
   \draw[->-] (g) to ++(-0.25,-0.5);
@@ -1164,24 +1177,24 @@ In terms of Goldstone diagrams and Hugenholtz diagrams, these equations are writ
 \updownarrow\hspace{1pt}&
 \\
 \diagram{
-  \node[dot=white] (h) at (0,0) {};
+  \node[flexdot={2.5pt}{white}] (h) at (0,0) {};
   \draw[->-] (h) to ++(0,+0.5);
   \draw[-<-] (h) to ++(0,-0.5);
 }
 =&\
 \diagram{
-  \node[ddot=white] (h) at (0,0) {};
+  \node[flexddot={2.5pt}{white}] (h) at (0,0) {};
   \draw[->-]  (h) to ++(0,+0.5);
   \draw[-<-]  (h) to ++(0,-0.5);
 }
 +
 \diagram{
-  \node[ddot=white] (h) at (0,0) {};
+  \node[flexddot={2.5pt}{white}] (h) at (0,0) {};
   \draw[-<-]  (h) arc (0:360:-0.25);
 }
 &
 \diagram{
-  \node[dot=white] (g) at (0,0) {};
+  \node[flexdot={2.5pt}{white}] (g) at (0,0) {};
   \draw[->-] (g) to ++(+0.25,+0.5);
   \draw[-<-] (g) to ++(+0.25,-0.5);
   \draw[->-] (g) to ++(-0.25,+0.5);
@@ -1189,7 +1202,7 @@ In terms of Goldstone diagrams and Hugenholtz diagrams, these equations are writ
 }
 =&\
 \diagram{
-  \node[ddot=white] (g) at (0,0) {};
+  \node[flexddot={2.5pt}{white}] (g) at (0,0) {};
   \draw[->-] (g) to ++(+0.25,+0.5);
   \draw[-<-] (g) to ++(+0.25,-0.5);
   \draw[->-] (g) to ++(-0.25,+0.5);
@@ -1197,14 +1210,14 @@ In terms of Goldstone diagrams and Hugenholtz diagrams, these equations are writ
 }
 +
 \diagram{
-  \node[ddot=white] (g) at (0,0) {};
+  \node[flexddot={2.5pt}{white}] (g) at (0,0) {};
   \draw[->-] (g) arc (0:360:+0.25);
   \draw[->-] (g) to ++(0,+0.5);
   \draw[-<-] (g) to ++(0,-0.5);
 }
 +
 \diagram{
-  \node[ddot=white] (g) at (0,0) {};
+  \node[flexddot={2.5pt}{white}] (g) at (0,0) {};
   \draw[->-] (g) arc (0:360:+0.25);
   \draw[-<-] (g) arc (0:360:-0.25);
 }
@@ -1305,67 +1318,842 @@ Open graphs with a ket at the bottom are sometimes classified as \textit{wavefun
 \end{ntt}
 
 
-\begin{ex}
-The first and second Slater rules take the following form in diagram notation.
+\begin{rmk}
+The singles, doubles, triples, etc. configuration interaction (CI) operators will here be denoted as follows.
 \begin{align}
-&&
-  \ip{\F|\tl{a}^i_a H_c|\F}
-=
-\diagram[top, bottom]{
-  \node[ddot=black] (a1) at (0.2,+0.7) {};
-  \draw (-0.8,-0.5) node[circlex] (f) {} to ++(0.5,0) node[ddot=white] (f1) {};
-  \node at (0.2,-0.5) {+};
-  \interaction{2}{g}{(0.7,-0.5)}{ddot=white}{sawtooth};
-  \draw[->-] (a1) to ++(-0.25,-0.5) node[left]  {\scriptsize$i$};
-  \draw[-<-] (a1) to ++(+0.25,-0.5) node[left]  {\scriptsize$a$};
-  \draw[->-] (f1) to ++(0,+0.5);
-  \draw[-<-] (f1) to ++(0,-0.5);
-  \draw[->-] (g1) to ++(0,+0.5);
-  \draw[-<-] (g1) to ++(0,-0.5);
-  \draw[->-] (g2) to ++(0,+0.5);
-  \draw[-<-] (g2) to ++(0,-0.5);
-}
-=
+  C_1
+\equiv
+  c_a^i
+  \tl{a}^a_i
+\equiv
 \diagram{
-  \draw (0,-0.5) node[circlex] (f) {} to ++(0.5,0) node[ddot] (f1) {};
-  \draw[-<-] (f1) to ++(-0.25,+1) node[smalldot,label=north:\scriptsize$i$] {};
-  \draw[->-] (f1) to ++(+0.25,+1) node[smalldot,label=north:\scriptsize$a$] {};
+  \draw[overhang] (0,-0.25) node[ddot] (t1) {};
+  \draw[->-] (t1) to ++(-0.25,+0.5);
+  \draw[-<-] (t1) to ++(+0.25,+0.5);
 }
-=
-  f_a^i
 &&
-  \ip{\F|\tl{a}^{ij}_{ab}H_c|\F}
-=
-\diagram[top, bottom]{
-  \interaction{2}{a}{(0,+0.7)}{ddot=black}{densely dotted};
-  \draw (-0.8,-0.5) node[circlex] (f) {} to ++(0.5,0) node[ddot=white] (f1) {};
-  \node at (0.2,-0.5) {+};
-  \interaction{2}{g}{(0.7,-0.5)}{ddot=white}{sawtooth};
-  \draw[->-] (a1) to ++(-0.25,-0.5) node[left]  {\scriptsize$i$};
-  \draw[-<-] (a1) to ++(+0.25,-0.5) node[left]  {\scriptsize$a$};
-  \draw[->-] (a2) to ++(-0.25,-0.5) node[right] {\scriptsize$j$};
-  \draw[-<-] (a2) to ++(+0.25,-0.5) node[right] {\scriptsize$b$};
-  \draw[->-] (f1) to ++(0,+0.5);
-  \draw[-<-] (f1) to ++(0,-0.5);
-  \draw[->-] (g1) to ++(0,+0.5);
-  \draw[-<-] (g1) to ++(0,-0.5);
-  \draw[->-] (g2) to ++(0,+0.5);
-  \draw[-<-] (g2) to ++(0,-0.5);
-}
-=
+  C_2
+\equiv
+  (
+    \tfr{1}{2!}
+  )^2
+  c_{ab}^{ij}
+  \tl{a}_{ij}^{ab}
+\equiv
 \diagram{
-  \interaction{2}{g}{(0,-0.5)}{ddot=black}{sawtooth};
-  \draw[-<-] (g1) to ++(-0.25,+1) node[smalldot,label=north:\scriptsize$i$] {};
-  \draw[->-] (g1) to ++(+0.25,+1) node[smalldot,label=north:\scriptsize$a$] {};
-  \draw[-<-] (g2) to ++(-0.25,+1) node[smalldot,label=north:\scriptsize$j$] {};
-  \draw[->-] (g2) to ++(+0.25,+1) node[smalldot,label=north:\scriptsize$b$] {};
+  \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(-0.25,+0.5);
+  \draw[-<-] (t1) to ++(+0.25,+0.5);
+  \draw[->-] (t2) to ++(-0.25,+0.5);
+  \draw[-<-] (t2) to ++(+0.25,+0.5);
 }
-=
-  \ol{g}_{ab}^{ij}
+&&
+  C_3
+\equiv
+  (
+    \tfr{1}{3!}
+  )^2
+  c_{abc}^{ijk}
+  \tl{a}_{ijk}^{abc}
+\equiv
+\diagram{
+  \interaction{3}{t}{(0,-0.25)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(-0.25,+0.5);
+  \draw[-<-] (t1) to ++(+0.25,+0.5);
+  \draw[->-] (t2) to ++(-0.25,+0.5);
+  \draw[-<-] (t2) to ++(+0.25,+0.5);
+  \draw[->-] (t3) to ++(-0.25,+0.5);
+  \draw[-<-] (t3) to ++(+0.25,+0.5);
+}
+&&
+  \cd
 \end{align}
+CI theory uses these operators to define a linear parametrization of the wavefunction,
+$
+  \Y_{\mr{CI}}
+=
+  (
+    1
+  +
+    C_1
+  +
+    \cd
+  +
+    C_n
+  )
+  \F
+$.\footnotemark\ 
+Coupled-cluster (CC) theory employs a similar series of operators
+$
+  T_k
+\equiv
+  (\tfr{1}{k!})^2
+  t_{a_1\cd a_k}^{i_1\cd i_k}
+  \tl{a}^{a_1\cd a_k}_{i_1\cd i_k}
+$
+to define an exponential parametrization
+$
+  \Y_{\mr{CC}}
+=
+  \mr{exp}(
+    T_1
+  +
+    \cd
+  +
+    T_n
+  )
+  \F
+$.
+\end{rmk}
+\footnotetext{
+  This expansion assumes ``intermediate normalization'', in which we normalize the wavefunction to satisfy $\ip{\F|\Y}=1$.
+  In standard normalization, the CI wavefunction is given by
+$
+  \Y_{\mr{CI}}
+=
+  (
+    c_0
+  +
+    C_1
+  +
+    \cd
+  +
+    C_n
+  )
+  \F
+$,
+  where $c_0$ is the scalar weight of the reference function.
+}
+
+
+\begin{ex}
+\thmtitle{Derivation of CIS in diagram notation}
+The CI singles transition energy to an excited state is
+$
+  \w
+\equiv
+  E
+-
+  E_0
+=
+  \ip{\F|C_1\dg H_\mr{c} C_1|\F}
+$.
+Using Wick's theorem for graphs (WTG), we can evaluate this expectation value as
+\begin{align*}
+  \w
+=
+\diagram[top, bottom]{
+%top
+  \draw[overhang] (0.0,1.1) node[ddot] (c1*) {};
+  \draw[-<-] (c1*) to ++(-0.25,-0.5);
+  \draw[->-] (c1*) to ++(+0.25,-0.5);
+%middle
+  \node at (0,0) {
+  $\left(
+  \diagram{
+    \draw (-0.5,0) node[circlex](f){} -- (0,0) node[ddot=white](f1){};
+    \draw[->-] (f1) to ++(0,+0.5);
+    \draw[-<-] (f1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }\right)$
+  };
+%bottom
+  \draw[overhang] (0.0,-1.1) node[ddot] (c1) {};
+  \draw[->-] (c1) to ++(-0.25,+0.5);
+  \draw[-<-] (c1) to ++(+0.25,+0.5);
+}
+=
+\diagram{
+  \draw[overhang] (0,+0.5) node[ddot] (c1*) {};
+  \draw[overhang] (0,-0.5) node[ddot] (c1)  {};
+  \draw[->-=0.25,->-=0.75,bend left ] (c1) to node[midway,ddot] (f1) {} (c1*);
+  \draw[-<-,bend right] (c1) to (c1*);
+  \draw (f1) to ++(-0.5,0) node[circlex] {};
+}
++
+\diagram{
+  \draw[overhang] (0,+0.5) node[ddot] (c1*) {};
+  \draw[overhang] (0,-0.5) node[ddot] (c1)  {};
+  \draw[-<-=0.25,-<-=0.75,bend left] (c1) to node[midway,ddot] (f1) {} (c1*);
+  \draw[->-,bend right] (c1) to (c1*);
+  \draw (f1) to ++(-0.5,0) node[circlex] {};
+}
++
+\diagram{
+  \interaction{2}{g}{(0,0)}{ddot}{sawtooth};
+  \draw[overhang] (0,-1) node[ddot] (c1)  {};
+  \draw[overhang] (1,+1) node[ddot] (c1*) {};
+  \draw[->-,bend left ] (c1) to (g1);
+  \draw[-<-,bend right] (c1) to (g1); 
+  \draw[->-,bend left ] (g2) to (c1*);
+  \draw[-<-,bend right] (g2) to (c1*);
+}
+=
+  c_i^a
+  (
+    f_a^b\d_j^i
+  -
+    f_j^i\d_a^b
+  +
+    \ol{g}_{ja}^{bi}
+  )
+  c_b^j
+\end{align*}
+where the expression in parentheses defines the CIS matrix, $\ip{\F_i^a|H_\mr{c}|\F_j^b}$, which we could have evaluated separately as a coefficient graph.
+The main consideration in evaluating such expectation values is to identify which terms in the quasiparticle expansion of $H_\mr{c}$ can form complete contractions with the CI operators in the bra and the ket.
 \end{ex}
 
 
+\begin{ex}
+\thmtitle{Derivation of the CI energy expression}
+Projecting the CI Schr\"odinger equation\footnotemark\ by $\F$, the exact ground-state correlation energy can be expressed in CI as
+$
+  E_\mr{c}
+=
+  \ip{\F|
+    H_\mr{c}
+    (1 + C_1 + \cd + C_n)
+  |\F}
+$.
+Using WTG, we find
+\begin{align*}
+  E_\mr{c}
+=
+\diagram[top, bottom]{
+%middle
+  \node at (0,0.3) {
+  $\left(
+  \diagram{
+    \draw (-0.5,0) node[circlex](f){} -- (0,0) node[ddot=white](f1){};
+    \draw[->-] (f1) to ++(0,+0.5);
+    \draw[-<-] (f1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }\right)$
+  };
+%bottom
+  \node at (0,-0.5) {
+  $\left(
+    1
+  +
+  \diagram{
+    \draw[overhang] (0.0,-0.25) node[ddot] (c1) {};
+    \draw[->-] (c1) to ++(-0.25,+0.5);
+    \draw[-<-] (c1) to ++(+0.25,+0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{c}{(0,-0.25)}{ddot}{overhang};
+    \draw[->-] (c1) to ++(-0.25,+0.5);
+    \draw[-<-] (c1) to ++(+0.25,+0.5);
+    \draw[->-] (c2) to ++(-0.25,+0.5);
+    \draw[-<-] (c2) to ++(+0.25,+0.5);
+  }
+  +
+    \cd
+  \right)$
+  };
+}
+=
+\diagram{
+  \draw (-0.5,+0.5) node[circlex] (f) {} to (0,+0.5) node[ddot] (f1) {};
+  \draw[overhang] (0,-0.5) node[ddot] (c1) {};
+  \draw[-<-,bend right] (f1) to (c1);
+  \draw[->-,bend left ] (f1) to (c1);
+}
++
+\diagram{
+  \interaction{2}{g}{(0,+0.5)}{ddot}{sawtooth};
+  \interaction{2}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-,bend right] (g1) to (c1);
+  \draw[->-,bend left ] (g1) to (c1);
+  \draw[-<-,bend right] (g2) to (c2);
+  \draw[->-,bend left ] (g2) to (c2);
+}
+=
+  f_i^a
+  c_a^i
++
+  (\tfr{1}{2})^2
+  \ol{g}_{ij}^{ab}
+  c_{ab}^{ij}
+\end{align*}
+where the first term evaluates to zero whenever Brillouin's theorem applies.
+This shows that the CI energy depends on the triples, quadruples, etc. only indirectly, through their influence on $C_1$ and $C_2$.
+\end{ex}
+\footnotetext{
+  By this we mean
+  $H_\mr{c}\Y_{\mr{CI}}=E_\mr{c}\Y_{\mr{CI}}$, where $E_\mr{c}=E-E_0$ is the correlation energy.
+}
+
+\begin{ex}\label{ex:cid-coefficients}
+\thmtitle{Derivation of the CID coefficient equations}
+Projecting the CID Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CID coefficient equations, $\ip{\F_{ij}^{ab}|H_\mr{c}(1+C_2)|\F} = E_\mr{c}\, c_{ab}^{ij}$, which can be evaluated as follows using WTG. 
+\begin{align}
+\nonumber
+\diagram[top, bottom]{
+%top
+  \node at (0,+0.75) {
+  $
+  \diagram{
+    \interaction{2}{c}{(0,+0.25)}{ddot}{densely dotted};
+    \draw[->-] (c1) to ++(-0.25,-0.5);
+    \draw[-<-] (c1) to ++(+0.25,-0.5);
+    \draw[->-] (c2) to ++(-0.25,-0.5);
+    \draw[-<-] (c2) to ++(+0.25,-0.5);
+  }$
+  };
+%middle
+  \node at (0,0) {
+  $\left(
+  \diagram{
+    \draw (-0.5,0) node[circlex](f){} -- (0,0) node[ddot=white](f1){};
+    \draw[->-] (f1) to ++(0,+0.5);
+    \draw[-<-] (f1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }\right)$
+  };
+%bottom
+  \node at (0,-0.8) {
+  $\left(
+    1
+  +
+  \diagram{
+    \interaction{2}{c}{(0,-0.25)}{ddot}{overhang};
+    \draw[->-] (c1) to ++(-0.25,+0.5);
+    \draw[-<-] (c1) to ++(+0.25,+0.5);
+    \draw[->-] (c2) to ++(-0.25,+0.5);
+    \draw[-<-] (c2) to ++(+0.25,+0.5);
+  }
+  \right)$
+  };
+}
+=&\
+\diagram{
+  \interaction{2}{g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-] (g1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (g1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (g2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (g2) to ++(+0.25,1) node[dot] {};
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (t1) to node[midway,ddot] (f1) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[-<-] (t1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (t2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (t2) to ++(+0.25,1) node[dot] {};
+  \draw (f1) to ++(-0.5,0) node[circlex] {};
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-=0.25,-<-=0.75] (t1) to node[midway,ddot] (f1) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[->-] (t1) to ++(+0.25,1) node[dot] {};
+  \draw[-<-] (t2) to ++(-0.25,1) node[dot] {};
+  \draw[->-] (t2) to ++(+0.25,1) node[dot] {};
+  \draw (f1) to ++(-0.5,0) node[circlex] {};
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.7] (t1) to ++(+0.25,1) node[dot] {};
+  \draw[->-=0.25,->-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.7] (t2) to ++(+0.25,1) node[dot] {};
+  \draw[sawtooth] (g1)--(g2);
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-=0.25,-<-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[->-=0.7] (t1) to ++(+0.25,1) node[dot] {};
+  \draw[-<-=0.25,-<-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[->-=0.7] (t2) to ++(+0.25,1) node[dot,label] {};
+  \draw[sawtooth] (g1)--(g2);
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,+0.0)}{ddot}{sawtooth};
+  \draw[->-] (t1) to ++(-0.25,1) node[dot,label] {};
+  \draw[-<-] (t1) to ++(+0.25,1) node[dot,label] {};
+  \draw[->-,bend left] (t2) to (g1);
+  \draw[-<-,bend right] (t2) to (g1);
+  \draw[->-] (g2) to ++(-0.25,0.5) node[dot] {};
+  \draw[-<-] (g2) to ++(+0.25,0.5) node[dot] {};
+}
+\\
+\nonumber
+\updownarrow\hspace{1pt}&
+\\
+\label{eq:cid-coefficient-equations}
+  \ip{\F_{ij}^{ab}|H_\mr{c}(1 + C_2)|\F}
+=&\
+  \ol{g}_{ab}^{ij}
++
+  \op{P}_{(a/b)}
+  f_a^c
+  c_{cb}^{ij}
+-
+  \op{P}^{(i/j)}
+  f_k^i
+  c_{ab}^{kj}
++
+  \tfr{1}{2}
+  \ol{g}_{ab}^{cd}
+  c_{cd}^{ij}
++
+  \tfr{1}{2}
+  \ol{g}_{kl}^{ij}
+  c_{ab}^{kl}
++
+  \op{P}_{(a/b)}^{(i/j)}
+  \ol{g}_{kb}^{cj}
+  c_{ac}^{ik}
+\end{align}
+Note that the equivalent coefficient lines in these diagrams don't appear in the degeneracy factors here, since these have been canceled using \cref{item:rule-for-coefficient-lines} in \cref{rmk:useful-rules}.
+The minus sign in the third term comes from the fact that its diagram has three holes and two loops, $(-1)^{3+2}=-1$.
+\end{ex}
+
+
+\begin{ex}\label{ex:ccd-amplitudes}
+\thmtitle{Derivation of the CCD amplitude equations}
+Projecting the CCD Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CCD amplitude equations, $\ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}=E_\mr{c}\, t_{ab}^{ij}$, which can be evaluated as follows.\vspace{15pt}
+\begin{align*}
+\begin{minipage}[c][2pt]{2.5cm}
+\diagram[top, bottom]{
+%top
+  \node at (0,+0.75) {
+  $
+  \diagram{
+    \interaction{2}{c}{(0,+0.25)}{ddot}{densely dotted};
+    \draw[->-] (c1) to ++(-0.25,-0.5);
+    \draw[-<-] (c1) to ++(+0.25,-0.5);
+    \draw[->-] (c2) to ++(-0.25,-0.5);
+    \draw[-<-] (c2) to ++(+0.25,-0.5);
+  }$
+  };
+%middle
+  \node at (0,0) {
+  $\left(
+  \diagram{
+    \draw (-0.5,0) node[circlex](f){} -- (0,0) node[ddot=white](f1){};
+    \draw[->-] (f1) to ++(0,+0.5);
+    \draw[-<-] (f1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }\right)$
+  };
+%bottom
+  \node at (0,-0.8) {
+    $\exp\left(
+    \diagram{
+      \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
+      \draw[->-] (t1) to ++(-0.25,+0.5);
+      \draw[-<-] (t1) to ++(+0.25,+0.5);
+      \draw[->-] (t2) to ++(-0.25,+0.5);
+      \draw[-<-] (t2) to ++(+0.25,+0.5);
+    }
+    \right)$
+  };
+}
+\end{minipage}
+=&\
+  \ip{\F_{ij}^{ab}|H_\mr{c}(1 + T_2)|\F}
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,0)}{ddot}{sawtooth};
+  \draw[->-=0.7] (ta1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.3] (ta1) to (g1);
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.3] (ta2) to (g2);
+  \draw[->-=0.3] (tb1) to (g1);
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[->-=0.3] (tb2) to (g2);
+  \draw[-<-=0.7] (tb2) to ++(+0.25,1) node[dot] {};
+}
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,0.5)}{ddot}{sawtooth};
+  \draw[->-] (ta1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (ta1) to ++(+0.25,1) node[dot] {};
+  \draw[->-,bend left]  (ta2) to (g1);
+  \draw[-<-,bend right] (ta2) to (g1);
+  \draw[->-,bend left]  (tb1) to (g2);
+  \draw[-<-,bend right] (tb1) to (g2);
+  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
+}
+\\&\
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (ta2) to (g2);
+  \draw[->-] (tb1) to (g2);
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
+}
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[-<-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
+  \draw[->-] (ta2) to (g2);
+  \draw[-<-] (tb1) to (g2);
+  \draw[->-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[->-] (tb2) to ++(+0.25,1) node[dot] {};
+}
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(0,+0.5)}{ddot}{sawtooth};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[->-,bend left]  (ta2) to (g2);
+  \draw[-<-,bend right] (ta2) to (g2);
+  \draw[->-] (tb1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
+}
+\\
+\updownarrow\hspace{1pt}&
+\\
+  \ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}
+=&\
+  \ip{\F_{ij}^{ab}|H_\mr{c}(1 + T_2)|\F}
++
+  (\tfr{1}{2})^2\,
+  \ol{g}_{kl}^{cd}
+  t_{ab}^{kl}
+  t_{cd}^{ij}
++
+  \tfr{1}{2}
+  \op{P}^{(a/b)}_{(i/j)}
+  \ol{g}_{kl}^{cd}
+  t_{ac}^{ik}
+  t_{db}^{lj}
+\\&\
+-
+  \tfr{1}{2}
+  \op{P}_{(a/b)}\,
+  \ol{g}_{kl}^{cd}
+  t_{ca}^{kl}
+  t_{db}^{ij}
+-
+  \tfr{1}{2}
+  \op{P}^{(i/j)}
+  \ol{g}_{kl}^{cd}
+  t_{cd}^{ki}
+  t_{ab}^{lj}
++
+  E_\mr{c}\,
+  t_{ab}^{ij}
+\end{align*}
+Note that terms cubic and higher in $T_2$ cannot be fully contracted with $\tl{a}_{ab}^{ij}H_\mr{c}$, which is why we see at most quadratic terms in this equation.
+If we substitute the CI coefficients for CC amplitudes, $c_{ab}^{ij}\leftrightarrow t_{ab}^{ij}$, the terms arising from $\ip{\F_{ij}^{ab}|H_c(1+T_2)|\F}$ correspond to those derived in \cref{ex:cid-coefficients} for CID.
+In the last term, we have substituted in the CCD energy expression
+\begin{align}
+  E_\mr{c}
+=
+\diagram{
+  \interaction{2}{g}{(0,+0.5)}{ddot}{sawtooth};
+  \interaction{2}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-,bend right] (g1) to (c1);
+  \draw[->-,bend left ] (g1) to (c1);
+  \draw[-<-,bend right] (g2) to (c2);
+  \draw[->-,bend left ] (g2) to (c2);
+}
+=
+  (\tfr{1}{2})^2
+  \ol{g}_{ij}^{ab}
+  t_{ab}^{ij}
+\end{align}
+which is the same in CID.
+Note that the term $E_\mr{c} t_{ab}^{ij}$ actually cancels with the right-hand side of projected Schr\"odinger equation.
+Since this term is the only unlinked graph in the expansion, we can write the amplitude equations as
+\begin{align}
+  \ip{\F_{ij}^{ab}|H_\mr{c}\mr{exp}(T_2)|\F}_\mr{L}
+=
+  0
+\end{align}
+where the subscript indicates that only linked graphs are included.
+This cancellation of unlinked terms is a general feature of coupled-cluster theory.
+Finally, note that when Brillouin's theorem holds the second and third terms in eq~\ref{eq:cid-coefficient-equations} become
+\begin{align*}
+  \op{P}_{(a/b)}
+  f_a^c
+  t_{cb}^{ij}
+-
+  \op{P}^{(i/j)}
+  f_k^i
+  f_{ab}^{kj}
+=
+-
+  (\ev_i + \ev_j - \ev_a - \ev_b)
+  t_{ab}^{ij}
+\end{align*}
+where $\{\ev_p=f_p^p\}$ are canonical Hartree-Fock orbital energies.
+Subtracting this contribution from both sides leads to
+\begin{align}
+\label{eq:ccd-amplitude-equation-final}
+  t_{ab}^{ij}
+=
+  (\mc{E}_{ab}^{ij})^{-1}
+  \ip{\F_{ij}^{ab}|(H_\mr{c} - f_p^p\tl{a}^p_p)\mr{exp}(T_2)|\F}_\mr{L}
+&&
+  \mc{E}_{ab}^{ij}
+\equiv
+  \ev_i + \ev_j - \ev_a - \ev_b
+\end{align}
+which is the most common expression for the $T_2$ amplitude equations.
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Resolvent line}
+Complete contractions through a  \textit{resolvent line}
+$
+\resolventline[0.6]{}\hspace{3pt}
+$
+are defined as follows.
+\begin{align*}
+&&
+  \gno{
+  \ctr[4]
+    {}
+    {a}
+    {^{i_1}\cd a^{i_k}a_{a_1}\cd a_{a_k}\,a^{b_1}\cd a^{b_k}a_{j_1}\cd }
+    {a}
+  \ctr[3]
+    {a^{i_1}\cd}
+    {a}
+    {^{i_k}a_{a_1}\cd a_{a_k}\,a^{b_1}\cd a^{b_k}}
+    {a}
+  \ctr[2]
+    {a^{i_1}\cd a^{i_k}}
+    {a}
+    {_{a_1}\cd a_{a_k}\,a^{b_1}\cd}
+    {a}
+  \ctr[1]
+    {a^{i_1}\cd a^{i_k}a_{a_1}\cd}
+    {a}
+    {_{a_k}\,}
+    {a}
+  a^{i_1}\cd a^{i_k}
+  a_{a_1}\cd a_{a_k}
+  \resolventline[1.3]{}\,
+  a^{b_1}\cd a^{b_k}
+  a_{j_1}\cd a_{j_k}
+  }
+\equiv
+  \fr{\gno{
+    \ctr[4]
+      {}
+      {a}
+      {^{i_1}\cd a^{i_k}a_{a_1}\cd a_{a_k}a^{b_1}\cd a^{b_k}a_{j_1}\cd }
+      {a}
+    \ctr[3]
+      {a^{i_1}\cd}
+      {a}
+      {^{i_k}a_{a_1}\cd a_{a_k}a^{b_1}\cd a^{b_k}}
+      {a}
+    \ctr[2]
+      {a^{i_1}\cd a^{i_k}}
+      {a}
+      {_{a_1}\cd a_{a_k}a^{b_1}\cd}
+      {a}
+    \ctr[1]
+      {a^{i_1}\cd a^{i_k}a_{a_1}\cd}
+      {a}
+      {_{a_k}}
+      {a}
+    a^{i_1}\cd a^{i_k}
+    a_{a_1}\cd a_{a_k}
+    a^{b_1}\cd a^{b_k}
+    a_{j_1}\cd a_{j_k}
+  }}{
+    \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+  }
+&&
+  \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+\equiv
+  \sum_{r=1}^k
+  \ev_{i_r}
+-
+  \sum_{r=1}^k
+  \ev_{a_r}
+\end{align*}
+This can be denoted in a graph by drawing a horizontal dotted line through several contraction lines.
+\end{dfn}
+
+\newpage
+\begin{ex}
+Using the notion of a resolvent lines equation \ref{eq:ccd-amplitude-equation-final} can be written in diagram notation as follows.
+\begin{align}
+\nonumber
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (t1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (t2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (t2) to ++(+0.25,1) node[dot] {};
+}
+=&\
+\diagram{
+  \interaction{2}{g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-] (g1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (g1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (g2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (g2) to ++(+0.25,1) node[dot] {};
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.7] (t1) to ++(+0.25,1) node[dot] {};
+  \draw[->-=0.25,->-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.7] (t2) to ++(+0.25,1) node[dot] {};
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-=0.25,-<-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[->-=0.7] (t1) to ++(+0.25,1) node[dot] {};
+  \draw[-<-=0.25,-<-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1) node[dot] {};
+  \draw[->-=0.7] (t2) to ++(+0.25,1) node[dot,label] {};
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+}
++
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,+0.0)}{ddot}{sawtooth};
+  \draw[->-] (t1) to ++(-0.25,1) node[dot,label] {};
+  \draw[-<-] (t1) to ++(+0.25,1) node[dot,label] {};
+  \draw[->-,bend left] (t2) to (g1);
+  \draw[-<-,bend right] (t2) to (g1);
+  \draw[->-] (g2) to ++(-0.25,0.5) node[dot] {};
+  \draw[-<-] (g2) to ++(+0.25,0.5) node[dot] {};
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(2.8,0);
+}
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,0)}{ddot}{sawtooth};
+  \draw[->-=0.7] (ta1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.3] (ta1) to (g1);
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-=0.3] (ta2) to (g2);
+  \draw[->-=0.3] (tb1) to (g1);
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[->-=0.3] (tb2) to (g2);
+  \draw[-<-=0.7] (tb2) to ++(+0.25,1) node[dot] {};
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(3.8,0);
+}
+\\&\
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,0)}{ddot}{sawtooth};
+  \draw[->-] (ta1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (ta1) to ++(+0.25,1) node[dot] {};
+  \draw[->-,bend left]  (ta2) to (g1);
+  \draw[-<-,bend right] (ta2) to (g1);
+  \draw[->-,bend left]  (tb1) to (g2);
+  \draw[-<-,bend right] (tb1) to (g2);
+  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(3.8,0);
+}
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (ta2) to (g2);
+  \draw[->-] (tb1) to (g2);
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
+  \draw[thick,flexdotted] (0.6,+0.35) to ++(2.8,0);
+}
++
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[-<-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
+  \draw[->-] (ta2) to (g2);
+  \draw[-<-] (tb1) to (g2);
+  \draw[->-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[->-] (tb2) to ++(+0.25,1) node[dot] {};
+  \draw[thick,flexdotted] (0.6,+0.35) to ++(2.8,0);
+}
+\end{align}
+\end{ex}
 
 
 
