@@ -715,7 +715,7 @@ Since the lines of any Goldstone graph uniquely partition into Goldstone cycles,
 \begin{dfn}
 \thmtitle{Coefficient graph}
 A \textit{coefficient graph} is a closed graph in which one of the interaction tensors is an antisymmetrized Kronecker delta,
-$\ol{\d}^{q_1'\cd q_m'}_{p_1'\cd p_m'}=\op{P}^{(p_1/\cd /p_m)}_{(q_1/\cd /q_m)}\d^{p_1}_{p_1'}\cd \d^{p_m}_{p_m'}\d^{q_1'}_{q_1}\cd \d^{q_m'}_{q_m}$.\footnote{This is equivalent to plugging in a dummy interaction vertex $\ol{v}^{q_1'\cd q_m'}_{p_1'\cd p_m'}$ and taking the derivative with respect to $\ol{v}^{q_1\cd q_m}_{p_1\cd p_m}$.}
+$\ol{\d}^{q_1'\cd q_m'}_{p_1'\cd p_m'}=\op{P}^{(p_1/\cd /p_m)}_{(q_1/\cd /q_m)}\d^{p_1}_{p_1'}\cd \d^{p_m}_{p_m'}\d^{q_1'}_{q_1}\cd \d^{q_m'}_{q_m}$.\footnote{The unprimed indices are fixed.  This equals the derivative of a generic interaction tensor $\ol{v}^{q_1'\cd q_m'}_{p_1'\cd p_m'}$ with respect to $\ol{v}^{q_1\cd q_m}_{p_1\cd p_m}$.}
 Using the identity
 \begin{align}\label{eq:excitation-as-m-electron-operator}
   \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
@@ -744,18 +744,18 @@ The algebraic interpretation of a coefficient graph with the operator in eq~\ref
   T^{p_1\cd p_m}_{q_1\cd q_m}
 \end{align}
 where $T^{p_1'\cd p_m'}_{q_1'\cd q_m'}$ is the product of interaction tensors contracted with $\ol{\d}_{p_1'\cd p_m'}^{q_1'\cd q_m'}$, scaled by appropriate sign and degeneracy factors according to \cref{ax:rules-of-interpretation}.
-Suppose $p_1,\ld,p_m$ and $q_1,\cd,q_m$ can be partitioned as $P_1\cup\cd\cup P_h$ and $Q_1\cup\cd\cup Q_k$ where $P_i=\{p_{i,1},\ld,p_{i,m_i}\}$ and $Q_i=\{q_{i,1},\ld,q_{i,n_i}\}$ label equivalent coefficient lines.
+Suppose $\{p_1,\ld,p_m\}$ and $\{q_1,\cd,q_m\}$ can be partitioned as $P_1\cup\cd\cup P_h$ and $Q_1\cup\cd\cup Q_k$ where $P_i=\{p_{i,1},\ld,p_{i,|P_i|}\}$ and $Q_i=\{q_{i,1},\ld,q_{i,|Q_i|}\}$ label equivalent coefficient lines.
 Then eq~\ref{eq:coefficient-diagram-interpretation-1} simplifies as follows.
 \begin{align}
-  \op{P}^{(p_{1,1}/\cd /p_{h,m_h})}_{(q_{1,1}/\cd /q_{k,n_k})}
-  T^{p_{1,1}\cd p_{h,m_h}}_{q_{1,1}\cd q_{k,n_k}}
+  \op{P}^{(p_1/\cd /p_m)}_{(q_1/\cd /q_m)}
+  T^{p_1\cd p_m}_{q_1\cd q_m}
 =
   |P_1|!\cd|P_h|!|Q_1|!\cd|Q_k|!\,
   \op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}\,
-  T^{p_{1,1}\cd p_{h,m_h}}_{q_{1,1}\cd q_{k,n_k}}
+  T^{p_1\cd p_m}_{q_1\cd q_m}
 \end{align}
 Notice that the factorials on the right exactly cancel the contribution of equivalent coefficient lines to the degeneracy factor.
-This equation defines a simplified rule for interpreting these kinds of graphs.
+This equation defines a simplified rule for interpreting coefficient graphs.
 \end{rmk}
 
 
