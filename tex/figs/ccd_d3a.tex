@@ -10,18 +10,19 @@
 
 \begin{document}
 
-\begin{tikzpicture}[scale=0.85,every note/.style={scale=0.85,font=\small}]
+\begin{tikzpicture}[baseline=-2.5pt,scale=0.85,every node/.style={scale=0.85,font=\small}]
   \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
   \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
   \interaction{2}{g}{(1,0)}{ddot}{sawtooth};
-  \draw[->-=0.7] (ta1) to ++(-0.25,1) node[dot] {};
+  \draw[->-=0.7] (ta1) to ++(-0.25,1) node[smalldot] {};
   \draw[-<-=0.3] (ta1) to (g1);
-  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[smalldot] {};
   \draw[-<-=0.3] (ta2) to (g2);
   \draw[->-=0.3] (tb1) to (g1);
-  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[smalldot] {};
   \draw[->-=0.3] (tb2) to (g2);
-  \draw[-<-=0.7] (tb2) to ++(+0.25,1) node[dot] {};
+  \draw[-<-=0.7] (tb2) to ++(+0.25,1) node[smalldot] {};
+  \padborder{2pt};
 \end{tikzpicture}
 
 \end{document}

@@ -14,14 +14,15 @@
   \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
   \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
   \interaction{2}{g}{(1,0.5)}{ddot}{sawtooth};
-  \draw[->-] (ta1) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (ta1) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (ta1) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (ta1) to ++(+0.25,1) node[smalldot] {};
   \draw[->-,bend left]  (ta2) to (g1);
   \draw[-<-,bend right] (ta2) to (g1);
   \draw[->-,bend left]  (tb1) to (g2);
   \draw[-<-,bend right] (tb1) to (g2);
-  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[smalldot] {};
+  \padborder{2pt};
 \end{tikzpicture}
 
 \end{document}
