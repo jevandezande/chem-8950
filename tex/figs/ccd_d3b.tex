@@ -1,0 +1,27 @@
+\documentclass[11pt]{standalone}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+
+\begin{document}
+
+\begin{tikzpicture}[scale=0.85,every note/.style={scale=0.85,font=\small}]
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,0.5)}{ddot}{sawtooth};
+  \draw[->-] (ta1) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (ta1) to ++(+0.25,1) node[dot] {};
+  \draw[->-,bend left]  (ta2) to (g1);
+  \draw[-<-,bend right] (ta2) to (g1);
+  \draw[->-,bend left]  (tb1) to (g2);
+  \draw[-<-,bend right] (tb1) to (g2);
+  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
+\end{tikzpicture}
+
+\end{document}

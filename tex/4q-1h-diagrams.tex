@@ -1438,7 +1438,7 @@ $
 =
   \ip{\F|C_1\dg H_\mr{c} C_1|\F}
 $.
-Using Wick's theorem for graphs (WTG), we can evaluate this expectation value as
+Using Wick's theorem for graphs, we can evaluate this expectation value as
 \begin{align*}
   \w
 =
@@ -1506,13 +1506,13 @@ Using Wick's theorem for graphs (WTG), we can evaluate this expectation value as
   )
   c_b^j
 \end{align*}
-where the expression in parentheses defines the CIS matrix, $\ip{\F_i^a|H_\mr{c}|\F_j^b}$, which we could have evaluated separately as a coefficient graph.
+where the expression in parentheses on the right defines the CIS matrix, $\ip{\F_i^a|H_\mr{c}|\F_j^b}$, which we could have also evaluated separately as a coefficient graph.
 The main consideration in evaluating such expectation values is to identify which terms in the quasiparticle expansion of $H_\mr{c}$ can form complete contractions with the CI operators in the bra and the ket.
 \end{ex}
 
 
 \begin{ex}
-\thmtitle{Derivation of the CI energy expression}
+\thmtitle{Derivation of the ground-state CI energy}
 Projecting the CI Schr\"odinger equation\footnotemark\ by $\F$, the exact ground-state correlation energy can be expressed in CI as
 $
   E_\mr{c}
@@ -1592,7 +1592,7 @@ Using WTG, we find
   c_{ab}^{ij}
 \end{align*}
 where the first term evaluates to zero whenever Brillouin's theorem applies.
-This shows that the CI energy depends on the triples, quadruples, etc. only indirectly, through their influence on $C_1$ and $C_2$.
+This shows that the CI energy depends on triples, quadruples, etc. only indirectly, through their influence on $C_1$ and $C_2$.
 \end{ex}
 \footnotetext{
   By this we mean
@@ -1600,8 +1600,9 @@ This shows that the CI energy depends on the triples, quadruples, etc. only indi
 }
 
 \begin{ex}\label{ex:cid-coefficients}
-\thmtitle{Derivation of the CID coefficient equations}
-Projecting the CID Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CID coefficient equations, $\ip{\F_{ij}^{ab}|H_\mr{c}(1+C_2)|\F} = E_\mr{c}\, c_{ab}^{ij}$, which can be evaluated as follows using WTG. 
+\thmtitle{Derivation of the CID coefficient equation}
+Projecting the CID Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CID coefficient equation, $\ip{\F_{ij}^{ab}|H_\mr{c}(1+C_2)|\F} = E_\mr{c}\, c_{ab}^{ij}$.
+The left-hand side can be evaluated as follows. 
 \begin{align}
 \nonumber
 \diagram[top, bottom]{
@@ -1738,16 +1739,17 @@ Projecting the CID Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CID coe
   \ol{g}_{kb}^{cj}
   c_{ac}^{ik}
 \end{align}
-Note that the equivalent coefficient lines in these diagrams don't appear in the degeneracy factors here, since these have been canceled using \cref{item:rule-for-coefficient-lines} in \cref{rmk:useful-rules}.
+Note that the equivalent coefficient lines in these diagrams don't contribute to the degeneracy factors here, since these have been canceled using \cref{item:rule-for-coefficient-lines} in \cref{rmk:useful-rules}.
 The minus sign in the third term comes from the fact that its diagram has three holes and two loops, $(-1)^{3+2}=-1$.
 \end{ex}
 
 
 \begin{ex}\label{ex:ccd-amplitudes}
-\thmtitle{Derivation of the CCD amplitude equations}
-Projecting the CCD Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CCD amplitude equations, $\ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}=E_\mr{c}\, t_{ab}^{ij}$, which can be evaluated as follows.\vspace{15pt}
+\thmtitle{Derivation of the CCD amplitude equation}
+Projecting the CCD Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CCD amplitude equation, $\ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}=E_\mr{c}\, t_{ab}^{ij}$.
+Note that terms cubic and higher in $T_2$ cannot form complete contractions with $\tl{a}_{ab}^{ij}H_\mr{c}$, reducing the left-hand side to $\ip{\F_{ij}^{ab}|H_\mr{c}\,(1 + T_2 + \tfr{1}{2}T_2^2)|\F}$.
+If we exchange CI coefficients for CC amplitudes the linear terms are given by equation~\ref{eq:cid-coefficient-equations}, so only the quadratic term remains to be evaluated.
 \begin{align*}
-\begin{minipage}[c][2pt]{2.5cm}
 \diagram[top, bottom]{
 %top
   \node at (0,+0.75) {
@@ -1779,7 +1781,14 @@ Projecting the CCD Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CCD amp
   };
 %bottom
   \node at (0,-0.8) {
-    $\exp\left(
+    $
+    \diagram{
+      \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
+      \draw[->-] (t1) to ++(-0.25,+0.5);
+      \draw[-<-] (t1) to ++(+0.25,+0.5);
+      \draw[->-] (t2) to ++(-0.25,+0.5);
+      \draw[-<-] (t2) to ++(+0.25,+0.5);
+    }\ \ 
     \diagram{
       \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
       \draw[->-] (t1) to ++(-0.25,+0.5);
@@ -1787,90 +1796,45 @@ Projecting the CCD Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CCD amp
       \draw[->-] (t2) to ++(-0.25,+0.5);
       \draw[-<-] (t2) to ++(+0.25,+0.5);
     }
-    \right)$
+    $
   };
 }
-\end{minipage}
 =&\
-  \ip{\F_{ij}^{ab}|H_\mr{c}(1 + T_2)|\F}
+\begin{tikzpicture}[baseline=-2.5pt,every node/.style={inner sep=0pt,outer sep=0pt}]
+  \node at (0,0) {
+    \includegraphics[height=0.84cm]{figs/ccd_d3a.pdf}
+  };
+\end{tikzpicture}
 +
-\diagram{
-  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
-  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(1,0)}{ddot}{sawtooth};
-  \draw[->-=0.7] (ta1) to ++(-0.25,1) node[dot] {};
-  \draw[-<-=0.3] (ta1) to (g1);
-  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
-  \draw[-<-=0.3] (ta2) to (g2);
-  \draw[->-=0.3] (tb1) to (g1);
-  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
-  \draw[->-=0.3] (tb2) to (g2);
-  \draw[-<-=0.7] (tb2) to ++(+0.25,1) node[dot] {};
-}
+\begin{tikzpicture}[baseline=-2.5pt,every node/.style={inner sep=0pt,outer sep=0pt}]
+  \node at (0,0) {
+    \includegraphics[height=0.84cm]{figs/ccd_d3b.pdf}
+  };
+\end{tikzpicture}
 +
-\diagram{
-  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
-  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(1,0.5)}{ddot}{sawtooth};
-  \draw[->-] (ta1) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (ta1) to ++(+0.25,1) node[dot] {};
-  \draw[->-,bend left]  (ta2) to (g1);
-  \draw[-<-,bend right] (ta2) to (g1);
-  \draw[->-,bend left]  (tb1) to (g2);
-  \draw[-<-,bend right] (tb1) to (g2);
-  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
-}
-\\&\
+\begin{tikzpicture}[baseline=-2.5pt,every node/.style={inner sep=0pt,outer sep=0pt}]
+  \node at (0,0) {
+    \includegraphics[height=0.84cm]{figs/ccd_d3d.pdf}
+  };
+\end{tikzpicture}
 +
-\diagram{
-  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
-  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
-  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
-  \draw[->-,bend left]  (ta1) to (g1);
-  \draw[-<-,bend right] (ta1) to (g1);
-  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (ta2) to (g2);
-  \draw[->-] (tb1) to (g2);
-  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
-  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
-}
+\begin{tikzpicture}[baseline=-2.5pt,every node/.style={inner sep=0pt,outer sep=0pt}]
+  \node at (0,0) {
+    \includegraphics[height=0.84cm]{figs/ccd_d3c.pdf}
+  };
+\end{tikzpicture}
 +
-\diagram{
-  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
-  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
-  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
-  \draw[->-,bend left]  (ta1) to (g1);
-  \draw[-<-,bend right] (ta1) to (g1);
-  \draw[-<-=0.7] (ta2) to ++(-0.25,1) node[dot] {};
-  \draw[->-] (ta2) to (g2);
-  \draw[-<-] (tb1) to (g2);
-  \draw[->-=0.7] (tb1) to ++(+0.25,1) node[dot] {};
-  \draw[-<-] (tb2) to ++(-0.25,1) node[dot] {};
-  \draw[->-] (tb2) to ++(+0.25,1) node[dot] {};
-}
-+
-\diagram{
-  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
-  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(0,+0.5)}{ddot}{sawtooth};
-  \draw[->-,bend left]  (ta1) to (g1);
-  \draw[-<-,bend right] (ta1) to (g1);
-  \draw[->-,bend left]  (ta2) to (g2);
-  \draw[-<-,bend right] (ta2) to (g2);
-  \draw[->-] (tb1) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (tb1) to ++(+0.25,1) node[dot] {};
-  \draw[->-] (tb2) to ++(-0.25,1) node[dot] {};
-  \draw[-<-] (tb2) to ++(+0.25,1) node[dot] {};
-}
+\begin{tikzpicture}[baseline=-2.5pt,every node/.style={inner sep=0pt,outer sep=0pt}]
+  \node at (0,0) {
+    \includegraphics[height=0.84cm]{figs/ccd_d3e.pdf}
+  };
+\end{tikzpicture}
 \\
 \updownarrow\hspace{1pt}&
 \\
-  \ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}
+  \tfr{1}{2}
+  \ip{\F_{ij}^{ab}|H_\mr{c}\,T_2^2|\F}
 =&\
-  \ip{\F_{ij}^{ab}|H_\mr{c}(1 + T_2)|\F}
-+
   (\tfr{1}{2})^2\,
   \ol{g}_{kl}^{cd}
   t_{ab}^{kl}
@@ -1881,7 +1845,6 @@ Projecting the CCD Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CCD amp
   \ol{g}_{kl}^{cd}
   t_{ac}^{ik}
   t_{db}^{lj}
-\\&\
 -
   \tfr{1}{2}
   \op{P}_{(a/b)}\,
@@ -1898,11 +1861,43 @@ Projecting the CCD Schr\"odinger equation by $\F_{ij}^{ab}$ leads to the CCD amp
   E_\mr{c}\,
   t_{ab}^{ij}
 \end{align*}
-Note that terms cubic and higher in $T_2$ cannot be fully contracted with $\tl{a}_{ab}^{ij}H_\mr{c}$, which is why we see at most quadratic terms in this equation.
-If we substitute the CI coefficients for CC amplitudes, $c_{ab}^{ij}\leftrightarrow t_{ab}^{ij}$, the terms arising from $\ip{\F_{ij}^{ab}|H_c(1+T_2)|\F}$ correspond to those derived in \cref{ex:cid-coefficients} for CID.
-In the last term, we have substituted in the CCD energy expression
+In the last term, we have substituted in the CCD energy expression, which is the same graph as the CID energy expression.
 \begin{align}
   E_\mr{c}
+=
+\diagram[top, bottom]{
+%middle
+  \node at (0,0.3) {
+  $\left(
+  \diagram{
+    \draw (-0.5,0) node[circlex](f){} -- (0,0) node[ddot=white](f1){};
+    \draw[->-] (f1) to ++(0,+0.5);
+    \draw[-<-] (f1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }\right)$
+  };
+%bottom
+  \node at (0,-0.5) {
+  $
+  \mr{exp}
+  \left(
+  \diagram{
+    \interaction{2}{c}{(0,-0.25)}{ddot}{overhang};
+    \draw[->-] (c1) to ++(-0.25,+0.5);
+    \draw[-<-] (c1) to ++(+0.25,+0.5);
+    \draw[->-] (c2) to ++(-0.25,+0.5);
+    \draw[-<-] (c2) to ++(+0.25,+0.5);
+  }
+  \right)$
+  };
+}
 =
 \diagram{
   \interaction{2}{g}{(0,+0.5)}{ddot}{sawtooth};
@@ -1917,9 +1912,8 @@ In the last term, we have substituted in the CCD energy expression
   \ol{g}_{ij}^{ab}
   t_{ab}^{ij}
 \end{align}
-which is the same in CID.
-Note that the term $E_\mr{c} t_{ab}^{ij}$ actually cancels with the right-hand side of projected Schr\"odinger equation.
-Since this term is the only unlinked graph in the expansion, we can write the amplitude equations as
+Note that the term $E_\mr{c} t_{ab}^{ij}$ actually cancels with the right-hand side of the projected Schr\"odinger equation.
+Since this is the only unlinked graph in the expansion, we can write the amplitude equation as
 \begin{align}
   \ip{\F_{ij}^{ab}|H_\mr{c}\mr{exp}(T_2)|\F}_\mr{L}
 =
@@ -1954,7 +1948,7 @@ Subtracting this contribution from both sides leads to
 \equiv
   \ev_i + \ev_j - \ev_a - \ev_b
 \end{align}
-which is the most common expression for the $T_2$ amplitude equations.
+which is the standard form for the $T_2$ amplitude equation.
 \end{ex}
 
 \begin{dfn}
