@@ -8,7 +8,6 @@
 \usepackage{qcmacros}
 \usepackage{goldstone}
 %%MACROS FOR THIS DOCUMENT
-\numberwithin{equation}{section}
 \usepackage[
   margin=1.5cm,
   includefoot,
@@ -28,7 +27,7 @@
 \begin{enumerate}
 \item
   Prove the following identity.
-\begin{align*}
+\begin{align}
   \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
 =
   (\tfr{1}{m!})^2\,
@@ -41,10 +40,104 @@
         _{(q_1/\cd /q_m)}
   \d^{p_1}_{p_1'}\cd \d^{p_m}_{p_m'}
   \d^{q_1'}_{q_1}\cd \d^{q_m'}_{q_m}
-\end{align*}
+\end{align}
 
 \item
-  
+  Derive each of the following rules in your own words.
+{\small
+\begin{enumerate}
+\item
+  Each set of $k$ equivalent internal lines\footnote{If rule \ref{item:rule-for-coefficient-lines} is used, this excludes coefficient lines.  Otherwise, replace rule \ref{item:rule-for-coefficient-lines} with the full antisymmetrizer.} or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
+\item
+  Each open cycle contributes $(-)^{h_i}a^p_q$ to the normal-ordered product, where and $p$ and $q$ label the free ends.
+\item
+  Each closed loop contributes $(-)^{h_i+1}$ to the overall sign, where $h_i$ is the number of hole lines.
+\item
+  The overall sign of a closed graph is $(-)^{h+l}$, where $h$ and $l$ denote the total number of hole lines and loops.
+\item\label{item:rule-for-coefficient-lines}
+  For each bare excitation operator in a coefficient graph, the coefficient lines contribute an antisymmetrizer
+  $\op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}$
+  where the $P_i$'s and $Q_i$'s label subsets of equivalent creation and annihilation lines, respectively.
+\end{enumerate}}
+
+\item
+  Assuming Lemma 4.1 holds true, prove Wick's Theorem for Graphs (WTG) in your own words.
+
+\item
+  Expand the full electronic Hamiltonian $H$ in terms of $\F$-normal-ordered operators using WTG.
+
+\item
+  Using KM notation, split the Einstein summations in $H_\mr{c}$ into summations over occupied and virtual indices.
+  After combining like terms in your expansion, translate each one into a graph.
+
+\item
+  Derive the CIS Hamiltonian matrix as a coefficient graph using WTG.
+
+\item
+  Derive the CID energy and coefficient equations using WTG.
+
+\item\label{item:ccd}
+  Derive the CCD energy and coefficient (``amplitude'') equations using WTG.
+
+\item
+  Compare the CID and CCD equations, and explain the cancellation of unlinked terms in the CCD amplitude equation.
+
+\item\label{item:ccd-final}
+  Show that the CCD amplitude equation can be written as
+\begin{align}
+\label{eq:ccd-amplitude-equations}
+  t_{ab}^{ij}
+=
+  (\mc{E}_{ab}^{ij})^{-1}
+  \ip{\F|
+    (H_\mr{c} - f_p^p\tl{a}^p_p)
+    \mr{exp}(T_2)
+  |\F}_{\mr{L}}
+&&
+  \mc{E}_{ab}^{ij}
+\equiv
+  f_i^i
++
+  f_j^j
+-
+  f_a^a
+-
+  f_b^b
+\end{align}
+  for a general, possibly non-canonical, reference determinant.
+  Write this equation in graphical form using resolvent lines.
+
+\item
+  If $\F$ is an excellent approximation to the wavefunction the coupled-cluster amplitudes will be very small, leading to $T_2\approx 0\implies\mr{exp}(T_2)\approx 1$.
+  This is the so-called \textit{first-order approximation} of equation~\ref{eq:ccd-amplitude-equations}.
+  Write down graphical and algebraic expressions for these \textit{first-order amplitudes}, ${}\ord{1}t_{ab}^{ij}$, assuming $\F$ is a canonical Hartree-Fock reference function.
+  Substitute these amplitudes into the CCD energy expression to derive the \textit{second-order energy}, $E_c\ord{2}$.
+  This is the MP2 energy expression.\footnote{MP2 stands for ``second-order M\o ller-Plesset perturbation theory''.}
+
+\item
+  If the $T_2$ amplitudes are small but not negligible, we can improve upon the first-order approximation using $\mr{exp}(T_2)\approx 1 + T_2$, which is known as linearized CCD or ``CEPA$_0$''.\footnote{CEPA stands for ``coupled electron-pair approximation''.}
+  Write down the CEPA$_0$ amplitude equation in graphical form.
+
+\begin{samepage}
+\item
+  Whereas the MP2 energy can be determined in a single step, the CEPA$_0$ and CCD equations require iterative solution.
+  Typically, this is achieved by starting from a guess of $T_2\approx 0$ and repeatedly substituting the amplitudes into the right-hand side of equation~\ref{eq:ccd-amplitude-equations} until self-consistency is reached.\footnote{The numbers in square brackets refer to the iteration.}
+\begin{align}
+  {}^{[n+1]}t_{ab}^{ij}
+=
+  (\mc{E}_{ab}^{ij})^{-1}
+  \ip{\F|
+    (H_\mr{c} - f_p^p\tl{a}^p_p)
+    \mr{exp}({}^{[n]}T_2)
+  |\F}_{\mr{L}}
+&&
+  {}^{[0]}t_{ab}^{ij}
+\equiv
+  0
+\end{align}
+  Write down graphical and algebraic expressions for the first- and second-iteration CEPA$_0$ amplitudes, as well as the corresponding energies.
+  This procedure can be carried out indefinitely, which shows that the exact CEPA$_0$ and CCD amplitudes contain contributions to infinite order in perturbation theory.
+\end{samepage}
 \end{enumerate}
 
 
