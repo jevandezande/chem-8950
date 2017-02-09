@@ -567,12 +567,12 @@ The summand graph of a pair of $m$-electron operators with a single particle or 
 \begin{align}
 \diagram{
   %top operator
-  \node[dot=white] (a1) at (0.0,+1) {};
+  \node[ddot=white] (a1) at (0.0,+1) {};
   \path (a1) to
     ++(0.6,0) node (adots1) {$\cdots$} to
-    ++(0.6,0) node[dot=white] (ai) {} to 
+    ++(0.6,0) node[ddot=black] (ai) {} to 
     ++(0.6,0) node (adots2) {$\cdots$} to
-    ++(0.6,0) node[dot=white] (am) {};
+    ++(0.6,0) node[ddot=white] (am) {};
   \path (am) to ++(+0.6,0) node[draw] (alabel) {$\bm{v}$};
   \draw[->-] (a1) to ++(0,+0.5) node[above] {$p_1$};
   \draw[-<-] (a1) to ++(0,-0.5) node[below] {$q_1$};
@@ -581,12 +581,12 @@ The summand graph of a pair of $m$-electron operators with a single particle or 
   \draw[-<-] (am) to ++(0,-0.5) node[below] {$q_m$};
   \draw (a1) to (adots1) to (ai) to (adots2) to (am) to (alabel);
   %bottom operator
-  \node[dot=white] (b1) at (0.6,-1) {};
+  \node[ddot=white] (b1) at (0.6,-1) {};
   \path (b1) to
     ++(0.6,0) node (bdots1) {$\cdots$} to
-    ++(0.6,0) node[dot=white] (bj) {} to 
+    ++(0.6,0) node[ddot=black] (bj) {} to 
     ++(0.6,0) node (bdots2) {$\cdots$} to
-    ++(0.6,0) node[dot=white] (bn) {};
+    ++(0.6,0) node[ddot=white] (bn) {};
   \path (b1) to ++(-0.6,0) node[draw] (blabel) {$\bm{w}$};
   \draw (blabel) to (b1) to (bdots1) to (bj) to (bdots2) to (bn);
   \draw[->-] (b1) to ++(0,+0.5) node[above] {$r_1$};
@@ -613,12 +613,12 @@ The summand graph of a pair of $m$-electron operators with a single particle or 
 &&
 \diagram{
   %top operator
-  \node[dot=white] (a1) at (0.0,+1) {};
+  \node[ddot=white] (a1) at (0.0,+1) {};
   \path (a1) to
     ++(0.6,0) node (adots1) {$\cdots$} to
-    ++(0.6,0) node[dot=black] (ai) {} to 
+    ++(0.6,0) node[ddot=black] (ai) {} to 
     ++(0.6,0) node (adots2) {$\cdots$} to
-    ++(0.6,0) node[dot=white] (am) {};
+    ++(0.6,0) node[ddot=white] (am) {};
   \path (am) to ++(+0.6,0) node[draw] (alabel) {$\bm{v}$};
   \draw[->-] (a1) to ++(0,+0.5) node[above] {$p_1$};
   \draw[-<-] (a1) to ++(0,-0.5) node[below] {$q_1$};
@@ -627,12 +627,12 @@ The summand graph of a pair of $m$-electron operators with a single particle or 
   \draw[-<-] (am) to ++(0,-0.5) node[below] {$q_m$};
   \draw (a1) to (adots1) to (ai) to (adots2) to (am) to (alabel);
   %bottom operator
-  \node[dot=white] (b1) at (0.6,-1) {};
+  \node[ddot=white] (b1) at (0.6,-1) {};
   \path (b1) to
     ++(0.6,0) node (bdots1) {$\cdots$} to
-    ++(0.6,0) node[dot=black] (bj) {} to 
+    ++(0.6,0) node[ddot=black] (bj) {} to 
     ++(0.6,0) node (bdots2) {$\cdots$} to
-    ++(0.6,0) node[dot=white] (bn) {};
+    ++(0.6,0) node[ddot=white] (bn) {};
   \path (b1) to ++(-0.6,0) node[draw] (blabel) {$\bm{w}$};
   \draw (blabel) to (b1) to (bdots1) to (bj) to (bdots2) to (bn);
   \draw[->-] (b1) to ++(0,+0.5) node[above] {$r_1$};
@@ -684,7 +684,7 @@ The contracted pair of operators can then be eliminated as follows.
 -
   a^{r_j}_{q_i}
 \end{align}
-Repeatedly applying this rule to each internal line in an open cycle leaves $(-)^h a^p_q$ where $h$ is the number of holes in the cycle and $p$ and $q$ are indices of the free ends.
+Applying this rule to each internal line in an open cycle leaves $(-)^h a^p_q$ where $h$ is the number of hole contractions in the cycle and $p$ and $q$ are indices of the free ends.
 Applying the same procedure to a loop gives $(-)^h a^{d^\ptcl}_{d^\ptcl}=(-)^h(-\h^d_d)=(-)^{h+1}$.
 Since the lines of any Goldstone graph uniquely partition into Goldstone cycles, these rules provide a quick way to resolve the operator component of any diagram into a normal-ordered product of uncontracted operators times a phase factor.
 \end{drv}
@@ -767,9 +767,8 @@ For easy reference, let's summarize them here.
 \item
   Each set of $k$ equivalent internal lines\footnote{If rule \ref{item:rule-for-coefficient-lines} is used, this excludes coefficient lines.  Otherwise, replace rule \ref{item:rule-for-coefficient-lines} with the full antisymmetrizer.} or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
 \item
-  Each open cycle contributes $(-)^{h_i}a^p_q$ to the normal-ordered product, where and $p$ and $q$ label the free ends.
-\item
-  Each closed loop contributes $(-)^{h_i+1}$ to the overall sign, where $h_i$ is the number of hole contractions.
+  Each open cycle contributes $(-)^{h_i}a^p_q$ to the normal-ordered product, where and $p$ and $q$ label the free ends and $h_i$ is the number of hole contractions in the cycle.
+  A closed cycle (loop) contributes $(-)^{h_i+1}$.
 \item
   The overall sign of a closed graph is $(-)^{h+l}$, where $h$ and $l$ denote the total number of hole lines and loops.
 \item\label{item:rule-for-coefficient-lines}
