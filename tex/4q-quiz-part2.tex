@@ -1,0 +1,161 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 4, Part 2}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Expand the electronic Hamiltonian $H_e$ in terms of $\F$-normal-ordered operators using Wick's theorem for graphs, writing the core Hamiltonian and electron repulsion operators as 
+$
+\diagram{
+  \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[dot=white] (h1) {}; 
+  \draw[->-] (h1) to ++(0,+0.35);
+  \draw[-<-] (h1) to ++(0,-0.35);
+}
+\equiv
+  h_p^qa_q^p
+$
+and
+$
+\diagram{
+  \interaction{2}{g}{(0,0)}{dot=white}{sawtooth};
+  \draw[->-] (g1) to ++(0,+0.35);
+  \draw[-<-] (g1) to ++(0,-0.35);
+  \draw[->-] (g2) to ++(0,+0.35);
+  \draw[-<-] (g2) to ++(0,-0.35);
+}
+\equiv
+  \textstyle\frac{1}{4}\overline{g}_{pq}^{rs}a_{rs}^{pq}
+$.
+  \begin{align*}
+    H_e
+  =
+  \diagram{
+    \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[dot=white] (h1) {};
+    \draw[->-] (h1) to ++(0,+0.5);
+    \draw[-<-] (h1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{dot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }
+  =
+  \,\,?
+  \end{align*}
+
+
+\newpage
+\item
+  Evaluate the following using Wick's theorem for graphs.
+  Fully simplify your answer assuming the indices refer to a basis of canonical Hartree-Fock spin-orbitals.
+  \begin{align*}
+    \ip{\F_{ijk}^{abc}|F_\mr{c}\,C_3|\F}
+  =
+    \,\,?
+  &&
+  \begin{array}{r@{\ }l}
+    F_\mr{c}
+  &\equiv
+    f_p^q
+    \tl{a}^p_q
+  \\[5pt]
+    C_3
+  &\equiv
+    (\tfr{1}{3!})^2
+    c_{def}^{lmn}
+    \tl{a}^{def}_{lmn}
+  \end{array}
+  \end{align*}
+
+
+\newpage
+\item
+  \begin{enumerate}
+  \item
+    Explain how to get from the projected CCD Schr\"odinger equation
+    \begin{align}
+      E_\mr{c}\,t_{ab}^{ij}
+    =
+      \ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}
+    &&
+        H_\mr{c}
+      &=
+        F_\mr{c}
+      +
+        V_\mr{c}
+    &&
+      \begin{array}{r@{\ }l}
+        F_\mr{c}
+      &\equiv
+        f_p^q
+        \tl{a}^p_q
+      \\[5pt]
+        V_\mr{c}
+      &\equiv
+        \tfr{1}{4}
+        \ol{g}_{pq}^{rs}
+        \tl{a}^{pq}_{rs}
+      \end{array}
+    \end{align}
+    to the working equation for CCD amplitudes
+    \begin{align}
+    \label{eq:ccd-working-equation}
+      t_{ab}^{ij}
+    =
+      (\mc{E}_{ab}^{ij})^{-1}
+      \ip{\F_{ij}^{ab}|V_\mr{c}\,\mr{exp}(T_2)|\F}_\mr{L}
+    &&
+      \mc{E}_{ab}^{ij}
+    \equiv
+      \ev_i
+    +
+      \ev_j
+    -
+      \ev_a
+    -
+      \ev_b
+    \end{align}
+    assuming a canonical Hartree-Fock reference.\footnote{Hint: 
+    You only need to evaluate three diagrams to answer this question.}
+
+  \item
+    Write out an algorithm to numerically solve equation~\ref{eq:ccd-working-equation}.
+  \end{enumerate}
+
+
+\newpage
+\item[]
+  \textbf{Extra Credit}:
+  Derive the following interpretation rule in your own words:
+  \begin{enumerate}
+  \item[]
+    Each open cycle in a graph contributes $(-)^{h_i}a^p_q$ to the normal-ordered product of operators, where $p$ and $q$ label the free ends and $h_i$ is the number of hole contractions in the cycle.
+  A closed cycle (loop) contributes $(-)^{h_i+1}$.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

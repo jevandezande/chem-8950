@@ -1,0 +1,553 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 4, Part 2}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Expand the electronic Hamiltonian $H_e$ in terms of $\F$-normal-ordered operators using Wick's theorem for graphs, writing the core Hamiltonian and electron repulsion operators as 
+$
+\diagram{
+  \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[dot=white] (h1) {}; 
+  \draw[->-] (h1) to ++(0,+0.35);
+  \draw[-<-] (h1) to ++(0,-0.35);
+}
+\equiv
+  h_p^qa_q^p
+$
+and
+$
+\diagram{
+  \interaction{2}{g}{(0,0)}{dot=white}{sawtooth};
+  \draw[->-] (g1) to ++(0,+0.35);
+  \draw[-<-] (g1) to ++(0,-0.35);
+  \draw[->-] (g2) to ++(0,+0.35);
+  \draw[-<-] (g2) to ++(0,-0.35);
+}
+\equiv
+  \textstyle\frac{1}{4}\overline{g}_{pq}^{rs}a_{rs}^{pq}
+$.
+  \begin{align*}
+    H_e
+  =
+  \diagram{
+    \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[dot=white] (h1) {};
+    \draw[->-] (h1) to ++(0,+0.5);
+    \draw[-<-] (h1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{dot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }
+  =
+  \,\,?
+  \end{align*}
+\vspace{10pt}
+\textbf{Answer}:
+\begin{align*}
+\diagram{
+  \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[dot=white] (h1) {};
+  \draw[->-] (h1) to ++(0,+0.5);
+  \draw[-<-] (h1) to ++(0,-0.5);
+}
++
+\diagram{
+  \interaction{2}{g}{(0,0)}{dot=white}{sawtooth};
+  \draw[->-] (g1) to ++(0,+0.5);
+  \draw[->-] (g2) to ++(0,+0.5);
+  \draw[-<-] (g1) to ++(0,-0.5);
+   \draw[-<-] (g2) to ++(0,-0.5);
+}
+=&\
+\diagram{
+  \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[ddot=white] (h1) {};
+  \draw[->-] (h1) to ++(0,+0.5);
+  \draw[-<-] (h1) to ++(0,-0.5);
+}
++
+\diagram{
+  \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[ddot=white] (h1) {};
+  \draw[-<-] (h1) arc (0:360:-0.25);
+}
++
+\diagram{
+  \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+  \draw[->-] (g1) to ++(0,+0.5);
+  \draw[-<-] (g1) to ++(0,-0.5);
+  \draw[->-] (g2) to ++(0,+0.5);
+  \draw[-<-] (g2) to ++(0,-0.5);
+}
++
+\diagram{
+  \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+  \draw[->-] (g1) arc (0:360:+0.25);
+  \draw[->-] (g2) to ++(0,+0.5);
+  \draw[-<-] (g2) to ++(0,-0.5);
+}
++
+\diagram{
+  \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+  \draw[->-] (g1) arc (0:360:+0.25);
+  \draw[-<-] (g2) arc (0:360:-0.25);
+}
+\\=&\
+  h_p^q
+  \tl{a}^p_q
++
+  h_i^i
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \tl{a}^{pq}_{rs}
++
+  \ol{g}_{ip}^{iq}
+  \tl{a}^p_q
++
+  \tfr{1}{2}
+  \ol{g}_{ij}^{ij}
+\end{align*}
+The degeneracy factors were derived as follows:
+The third term has two pairs of equivalent linesI', yielding a degeneracy of $2^2=4$.
+The fifth term has just one pair of equivalent lines, yielding a degeneracy of $2$.
+
+\newpage
+\item
+  Evaluate the following using Wick's theorem for graphs.
+  Fully simplify your answer assuming the indices refer to a basis of canonical Hartree-Fock spin-orbitals.
+  \begin{align*}
+    \ip{\F_{ijk}^{abc}|F_\mr{c}\,C_3|\F}
+  =
+    \,\,?
+  &&
+  \begin{array}{r@{\ }l}
+    F_\mr{c}
+  &\equiv
+    f_p^q
+    \tl{a}^p_q
+  \\[5pt]
+    C_3
+  &\equiv
+    (\tfr{1}{3!})^2
+    c_{def}^{lmn}
+    \tl{a}^{def}_{lmn}
+  \end{array}
+  \end{align*}
+\vspace{10pt}
+\textbf{Answer}:
+\begin{align*}
+  \ip{\F_{ijk}^{abc}|F_\mr{c}\,C_3|\F}
+=
+\diagram[top,bottom]{
+%top
+  \interaction{3}{a}{(0,1)}{ddot}{densely dotted};
+  \draw[->-] (a1) to ++(-0.25,-0.5);
+  \draw[-<-] (a1) to ++(+0.25,-0.5);
+  \draw[->-] (a2) to ++(-0.25,-0.5);
+  \draw[-<-] (a2) to ++(+0.25,-0.5);
+  \draw[->-] (a3) to ++(-0.25,-0.5);
+  \draw[-<-] (a3) to ++(+0.25,-0.5);
+%midddle
+  \draw (0.5,0) node[circlex](f){} -- (1,0) node[ddot=white](f1){};
+  \draw[->-] (f1) to ++(0,+0.5);
+  \draw[-<-] (f1) to ++(0,-0.5);
+%bottom
+  \interaction{3}{c}{(0,-1)}{ddot}{overhang};
+  \draw[->-] (c1) to ++(-0.25,+0.5);
+  \draw[-<-] (c1) to ++(+0.25,+0.5);
+  \draw[->-] (c2) to ++(-0.25,+0.5);
+  \draw[-<-] (c2) to ++(+0.25,+0.5);
+  \draw[->-] (c3) to ++(-0.25,+0.5);
+  \draw[-<-] (c3) to ++(+0.25,+0.5);
+}
+=&\
+\diagram{
+  \interaction{3}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (c1)
+    to node[midway,ddot] (f1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw (f1) to ++(-0.5,0) node[circlex] (f) {};
+  \draw[-<-] (c1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (c2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (c3) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (c3) to ++(+0.25,1) node[smalldot] {};
+}
++
+\diagram{
+  \interaction{3}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-=0.25,-<-=0.75] (c1)
+    to node[midway,ddot] (f1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw (f1) to ++(-0.5,0) node[circlex] (f) {};
+  \draw[->-] (c1) to ++(+0.25,1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(-0.25,1) node[smalldot] {};
+  \draw[->-] (c2) to ++(+0.25,1) node[smalldot] {};
+  \draw[-<-] (c3) to ++(-0.25,1) node[smalldot] {};
+  \draw[->-] (c3) to ++(+0.25,1) node[smalldot] {};
+}
+\\=&\
+  \op{P}_{(a/bc)}
+  f_a^d
+  c_{dbc}^{ijk}
+-
+  \op{P}^{(i/jk)}
+  f_l^i
+  c_{abc}^{ljk}
+\end{align*}
+  These are the reduced antisymmetrizers, which means we have cancelled the degeneracy factors coming from equivalent coefficient lines (a set of three and a set of two in each graph).
+  For canonical orbitals, Brillouin's theorem holds and this can be further simplified.
+\begin{align*}
+  \ip{\F_{ijk}^{abc}|F_\mr{c}\,C_3|\F}
+=&\
+  \op{P}_{(a/bc)}
+  \ev_a
+  c_{abc}^{ijk}
+-
+  \op{P}^{(i/jk)}
+  \ev_i
+  c_{abc}^{ijk}
+\\=&\
+  \ev_a
+  c_{abc}^{ijk}
+-
+  \ev_b
+  c_{bac}^{ijk}
+-
+  \ev_c
+  c_{cba}^{ijk}
+-
+  \ev_i
+  c_{abc}^{ijk}
++
+  \ev_j
+  c_{abc}^{jik}
++
+  \ev_k
+  c_{abc}^{kji}
+\\=&\
+  (\ev_a + \ev_b + \ev_c - \ev_i - \ev_j - \ev_k)
+  c_{abc}^{ijk}
+\end{align*}
+  The last step follows from the fact that $c_{abc}^{ijk}$ is antisymmetric in its upper and lower indices.
+
+\newpage
+\item
+  \begin{enumerate}
+  \item
+    Explain how to get from the projected CCD Schr\"odinger equation
+    \begin{align}
+    \label{eq:projected-ccd-schrodinger-equation}
+      E_\mr{c}\,t_{ab}^{ij}
+    =
+      \ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}
+    &&
+        H_\mr{c}
+      &=
+        F_\mr{c}
+      +
+        V_\mr{c}
+    &&
+      \begin{array}{r@{\ }l}
+        F_\mr{c}
+      &\equiv
+        f_p^q
+        \tl{a}^p_q
+      \\[5pt]
+        V_\mr{c}
+      &\equiv
+        \tfr{1}{4}
+        \ol{g}_{pq}^{rs}
+        \tl{a}^{pq}_{rs}
+      \end{array}
+    \end{align}
+    to the working equation for CCD amplitudes
+    \begin{align}
+    \label{eq:ccd-working-equation}
+      t_{ab}^{ij}
+    =
+      (\mc{E}_{ab}^{ij})^{-1}
+      \ip{\F_{ij}^{ab}|V_\mr{c}\,\mr{exp}(T_2)|\F}_\mr{L}
+    &&
+      \mc{E}_{ab}^{ij}
+    \equiv
+      \ev_i
+    +
+      \ev_j
+    -
+      \ev_a
+    -
+      \ev_b
+    \end{align}
+    assuming a canonical Hartree-Fock reference.\footnote{Hint: 
+    You only need to evaluate three diagrams to answer this question.}\\[10pt]
+\textbf{Answer}:
+The only way to form a unlinked diagram from the operators in
+$\ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}$ is
+\begin{align*}
+  \ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}_{\mr{U}}
+=&\
+\diagram[top, bottom]{
+%top
+  \node at (0,+0.75) {
+  $
+  \diagram{
+    \interaction{2}{c}{(0,+0.25)}{ddot}{densely dotted};
+    \draw[->-] (c1) to ++(-0.25,-0.5);
+    \draw[-<-] (c1) to ++(+0.25,-0.5);
+    \draw[->-] (c2) to ++(-0.25,-0.5);
+    \draw[-<-] (c2) to ++(+0.25,-0.5);
+  }$
+  };
+%middle
+  \node at (0,0) {
+  $\left(
+  \diagram{
+    \draw (-0.5,0) node[circlex](f){} -- (0,0) node[ddot=white](f1){};
+    \draw[->-] (f1) to ++(0,+0.5);
+    \draw[-<-] (f1) to ++(0,-0.5);
+  }
+  +
+  \diagram{
+    \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+    \draw[->-] (g1) to ++(0,+0.5);
+    \draw[-<-] (g1) to ++(0,-0.5);
+    \draw[->-] (g2) to ++(0,+0.5);
+    \draw[-<-] (g2) to ++(0,-0.5);
+  }\right)$
+  };
+%bottom
+  \node at (0,-0.8) {
+  $
+  \mr{exp}\left(
+  \diagram{
+    \interaction{2}{c}{(0,-0.25)}{ddot}{overhang};
+    \draw[->-] (c1) to ++(-0.25,+0.5);
+    \draw[-<-] (c1) to ++(+0.25,+0.5);
+    \draw[->-] (c2) to ++(-0.25,+0.5);
+    \draw[-<-] (c2) to ++(+0.25,+0.5);
+  }
+  \right)
+  $
+  };
+}_{\mr{U}}
+=
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(0,+0.5)}{ddot}{sawtooth};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[->-,bend left]  (ta2) to (g2);
+  \draw[-<-,bend right] (ta2) to (g2);
+  \draw[->-] (tb1) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (tb1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[smalldot] {};
+}
+\end{align*}
+because we need at least two operators on bottom to form a disconnected part, and one of them must be fully contracted with either $V_{\mr{c}}$ or $\tl{a}_{ab}^{ij}$.
+The first factor on the right is the only diagram arising from
+$\ip{\F|H_{\mr{c}}\,\mr{exp}(T_2)|\F}=E_\mr{c}$.
+Therefore,
+\begin{align*}
+  0
+=
+  E_\mr{c}\,
+  t_{ab}^{ij}
+-
+  \ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}_{\mr{U}}
+=&\
+  \ip{\F_{ij}^{ab}|H_\mr{c}\,\mr{exp}(T_2)|\F}_{\mr{L}}
+\end{align*}
+which implies the following.
+\begin{align}
+\label{eq:1}
+-
+  \ip{\F_{ij}^{ab}|F_\mr{c}\,\mr{exp}(T_2)|\F}_{\mr{L}}
+=
+  \ip{\F_{ij}^{ab}|V_\mr{c}\,\mr{exp}(T_2)|\F}_{\mr{L}}
+\end{align}
+The term on the left evaluates as follows.
+\begin{align*}
+  \ip{\F_{ij}^{ab}|F_\mr{c}\,\mr{exp}(T_2)|\F}_{\mr{L}}
+=
+\diagram[top,bottom]{
+%top
+  \interaction{2}{a}{(0,1)}{ddot}{densely dotted};
+  \draw[->-] (a1) to ++(-0.25,-0.5);
+  \draw[-<-] (a1) to ++(+0.25,-0.5);
+  \draw[->-] (a2) to ++(-0.25,-0.5);
+  \draw[-<-] (a2) to ++(+0.25,-0.5);
+%midddle
+  \draw (0,0) node[circlex](f){} -- (0.5,0) node[ddot=white](f1){};
+  \draw[->-] (f1) to ++(0,+0.5);
+  \draw[-<-] (f1) to ++(0,-0.5);
+%bottom
+  \interaction{2}{c}{(0,-1)}{ddot}{overhang};
+  \draw[->-] (c1) to ++(-0.25,+0.5);
+  \draw[-<-] (c1) to ++(+0.25,+0.5);
+  \draw[->-] (c2) to ++(-0.25,+0.5);
+  \draw[-<-] (c2) to ++(+0.25,+0.5);
+}
+=&\
+\diagram{
+  \interaction{2}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (c1)
+    to node[midway,ddot] (f1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw (f1) to ++(-0.5,0) node[circlex] (f) {};
+  \draw[-<-] (c1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (c2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(+0.25,1) node[smalldot] {};
+}
++
+\diagram{
+  \interaction{2}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-=0.25,-<-=0.75] (c1)
+    to node[midway,ddot] (f1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw (f1) to ++(-0.5,0) node[circlex] (f) {};
+  \draw[->-] (c1) to ++(+0.25,1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(-0.25,1) node[smalldot] {};
+  \draw[->-] (c2) to ++(+0.25,1) node[smalldot] {};
+}
+\\=&\
+  \op{P}_{(a/b)}
+  f_a^c
+  t_{cb}^{ij}
+-
+  \op{P}^{(i/j)}
+  f_k^i
+  t_{ab}^{kj}
+\\=&\
+  \ev_a
+  t_{ab}^{ij}
+-
+  \ev_b
+  t_{ba}^{ij}
+-
+  \ev_i
+  t_{ab}^{ij}
++
+  \ev_j
+  t_{ab}^{ji}
+\\=&\
+-
+  \mc{E}_{ab}^{ij}
+  t_{ab}^{ij}
+\end{align*}
+Substituting this into equation \ref{eq:1} and dividing both sides by $\mc{E}_{ab}^{ij}$ leads to equation \ref{eq:ccd-working-equation}.
+
+  \item
+    Write out an algorithm to numerically solve equation~\ref{eq:ccd-working-equation}.\\[10pt]
+\textbf{Answer}:
+  Starting from ${}^{[0]}t_{ab}^{ij}=0$ and $n=1$, do the following.
+  \begin{enumerate}
+  \item\label{item:ccd-amplitude-update}
+    Update amplitudes as
+    $
+      {}^{[n]}
+      t_{ab}^{ij}
+    =
+      (\mc{E}_{ab}^{ij})^{-1}
+      \ip{\F_{ij}^{ab}|V_\mr{c}\,\mr{exp}({}^{[n-1]}T_2)|\F}_\mr{L}
+    $.
+  \item
+    If $|{}^{[n]}\bm{t}_2-{}^{[n-1]}\bm{t}_2|$ is less than the convergence threshold, increment $n$ and return to step i.
+  \end{enumerate}
+  \end{enumerate}
+
+
+\newpage
+\item[]
+  \textbf{Extra Credit}:
+  Derive the following interpretation rule in your own words:
+  \begin{enumerate}
+  \item[]
+    Each open cycle in a graph contributes $(-)^{h_i}a^p_q$ to the normal-ordered product of operators, where $p$ and $q$ label the free ends and $h_i$ is the number of hole contractions in the cycle.
+  A closed cycle (loop) contributes $(-)^{h_i+1}$.
+  \end{enumerate}
+\vspace{10pt}
+\textbf{Answer}:
+The single-excitation operators involved in a contraction can be brought together with no sign change, since they each contain two operators.
+The contracted operators can then be eliminated as follows.
+\begin{align*}
+  \gno{
+  \cd
+    a^r_{a^\ptcl}
+    a^{a^\ptcl}_s
+  \cd
+  }
+=&\
+-
+  \gno{
+  \cd
+    a^r_s
+    (-\h_a^a)
+  \cd
+  }
+=
++\,
+  \gno{
+  \cd
+    a^r_s
+  \cd
+  }
+\hspace{10pt}
+  \text{or}
+\\
+  \gno{
+  \cd
+    a^{i^\hole}_s
+    a^r_{i^\hole}
+  \cd
+  }
+=&\
+-
+  \gno{
+  \cd
+    a^r_s
+    (+\g_i^i\,)
+  \cd
+  }
+=
+-\,
+  \gno{
+  \cd
+    a^r_s
+  \cd
+  }
+\end{align*}
+Applying this result to each contraction line in an open cycle yields
+$(-)^{h_i}a^p_q$.
+Applying it to all but one particle line in a loop yields
+$
+  (-)^{h_i}a^{a^\ptcl}_{a^\ptcl}
+=
+  (-)^{h_i}(-\h^a_a)
+=
+  (-)^{h_i + 1}
+$.
+\end{enumerate}
+
+\end{document}

@@ -179,78 +179,59 @@ Internal contractions of single excitations (\textit{bubble contractions}) are i
 =
   a^{i^\hole}_{i^\hole}
 \end{align}
-Higher excitation operators are depicted by joining single-excitation operators with a solid line.
-Contracted operators are implicitly normal ordered together.
-Normal-ordered products of uncontracted operators are joined with a dotted line.
+Normal-ordered products of single excitation operators are joined with a dotted line, forming higher excitation operators.
 \begin{align*}
 \diagram{
-  \node[dot=white] (a1) at (1,0) {};
-  \node (dots) at (1.6,0) {$\cdots$};
-  \node[dot=white] (an) at (2.2,0) {};
-  \draw (a1)--(dots)--(an);
+  \node[dot=white] (a1) at (0,0) {};
+  \node[dot=white] (a2) at (1,0) {};
+  \node (dots) at (1.8,0) {$\cdots$};
+  \node[dot=white] (an) at (2.6,0) {};
+  \draw[densely dotted] (a1)--(a2)--(dots)--(an);
   \draw[->-] (a1) to ++(0,+0.5);
+  \draw[->-] (a2) to ++(0,+0.5);
   \draw[->-] (an) to ++(0,+0.5);
   \draw[-<-] (a1) to ++(0,-0.5) coordinate[below left=0.1cm and 0.1cm] (startbrace);
+  \draw[-<-] (a2) to ++(0,-0.5);
   \draw[-<-] (an) to ++(0,-0.5) coordinate[below right=0.1cm and 0.1cm] (endbrace);
   \draw[decorate,decoration={brace,mirror}] (startbrace) to node[midway,below=0.1cm] () {\scriptsize{$m$ times}} (endbrace);
 }
 \equiv
-  \no{a^{p_1}_{q_1}\cd a^{p_m}_{q_m}}
+  \no{a^{p_1}_{q_1}a^{p_2}_{q_2}\cd a^{p_m}_{q_m}}
 =
-  a^{p_1\cd p_m}_{q_1\cd q_m}
+  a^{p_1p_2\cd p_m}_{q_1q_2\cd q_m}
 &&
 \diagram{
 % first excitation operator
-  \node[dot=white] (a1) at (1,0.5) {};
-  \node (dots) at (1.6,0.5) {$\cdots$};
-  \node[dot=white] (an) at (2.2,0.5) {};
-  \draw (a1)--(dots)--(an);
+  \node[dot=white] (a1) at (0,0.5) {};
+  \node[dot=white] (a2) at (1,0.5) {};
+  \node (dots) at (1.8,0.5) {$\cdots$};
+  \node[dot=white] (an) at (2.6,0.5) {};
+  \draw[densely dotted] (a1)--(a2)--(dots)--(an);
   \draw[->-] (a1) to ++(0,+0.5) coordinate[above left=0.1cm and 0.1cm] (startbrace);
+  \draw[->-] (a2) to ++(0,+0.5);
   \draw[->-] (an) to ++(0,+0.5) coordinate[above right=0.1cm and 0.1cm] (endbrace);
   \draw[-<-] (a1) to ++(0,-0.5);
+  \draw[-<-] (a2) to ++(0,-0.5);
   \draw[decorate,decoration={brace}] (startbrace) to node[midway,above=0.1cm] () {\scriptsize{$m$ times}} (endbrace);
 % second excitation operator
-  \node[dot=white] (b1) at (2.2,-0.5) {};
-  \node (dots2) at (2.8,-0.5) {$\cdots$};
-  \node[dot=white] (bn) at (3.4,-0.5) {};
-  \draw (b1)--(dots2)--(bn);
+  \node[dot=white] (b1) at (2.6,-0.5) {};
+  \node[dot=white] (b2) at (3.6,-0.5) {};
+  \node (dots2) at (4.4,-0.5) {$\cdots$};
+  \node[dot=white] (bn) at (5.2,-0.5) {};
+  \draw[densely dotted] (b1)--(b2)--(dots2)--(bn);
+  \draw[->-] (b2) to ++(0,+0.5);
   \draw[->-] (bn) to ++(0,+0.5);
   \draw[-<-] (b1) to ++(0,-0.5) coordinate[below left=0.1cm and 0.1cm] (startbrace2);
+  \draw[-<-] (b2) to ++(0,-0.5);
   \draw[-<-] (bn) to ++(0,-0.5) coordinate[below right=0.1cm and 0.1cm] (endbrace2);
   \draw[decorate,decoration={brace,mirror}] (startbrace2) to node[midway,below=0.1cm] () {\scriptsize{$n$ times}} (endbrace2);
 % connecting line
   \draw[->-] (b1)--(an);
 }
 \equiv
-  \no{a^{p_1\cd p_m}_{q_1\cd q_m^\ptcl}a^{r_1^\ptcl\cd r_n}_{s_1\cd s_n}}
-&&
-\diagram{
-% first excitation operator
-  \node[dot=white] (a1) at (1,0) {};
-  \node (dots) at (1.6,0) {$\cdots$};
-  \node[dot=white] (an) at (2.2,0) {};
-  \draw (a1)--(dots)--(an);
-  \draw[->-] (a1) to ++(0,+0.5);
-  \draw[->-] (an) to ++(0,+0.5);
-  \draw[-<-] (a1) to ++(0,-0.5) coordinate[below left=0.1cm and 0.1cm] (startbrace);
-  \draw[-<-] (an) to ++(0,-0.5) coordinate[below right=0.1cm and 0.1cm] (endbrace);
-  \draw[decorate,decoration={brace,mirror}] (startbrace) to node[midway,below=0.1cm] () {\scriptsize{$m$ times}} (endbrace);
-% second excitation operator
-  \node[dot=white] (b1) at (3,0) {};
-  \node (dots2) at (3.6,0) {$\cdots$};
-  \node[dot=white] (bn) at (4.2,0) {};
-  \draw (b1)--(dots2)--(bn);
-  \draw[->-] (b1) to ++(0,+0.5);
-  \draw[->-] (bn) to ++(0,+0.5);
-  \draw[-<-] (b1) to ++(0,-0.5) coordinate[below left=0.1cm and 0.1cm] (startbrace2);
-  \draw[-<-] (bn) to ++(0,-0.5) coordinate[below right=0.1cm and 0.1cm] (endbrace2);
-  \draw[decorate,decoration={brace,mirror}] (startbrace2) to node[midway,below=0.1cm] () {\scriptsize{$n$ times}} (endbrace2);
-% connecting line
-  \draw[densely dotted] (an)--(b1);
-}
-\equiv
-  \no{a^{p_1\cd p_m}_{q_1\cd q_m}a^{r_1\cd r_n}_{s_1\cd s_n}}
+  \no{a^{p_1p_2\cd p_m}_{q_1q_2\cd q_m^\ptcl}a^{r_1^\ptcl r_2\cd r_n}_{s_1s_2\cd s_n}}
 \end{align*}
+Contracted operators are implicitly normal ordered together.
 $\F$-normal-ordering is indicated by the use of double-circle vertices, $\diagram{\node[ddot=white] {};}$ and $\diagram{\node[ddot] {};}$ instead of $\diagram{\node[dot=white] {};}$ and $\diagram{\node[dot] {};}$.
 These building blocks can be used to construct more complicated products.
 Products of diagrams are written from top to bottom, representing left-to-right ordering in the corresponding algebraic expression.
@@ -727,7 +708,7 @@ Using the identity
 this extends the results derived above to allow for bare excitation operators in addition to $m$-electron operators.
 The contraction with $\tl{a}^{p_1\cd p_m}_{q_1\cd q_m}$ is depicted by capping the lines connected to it,
 $\diagram{\draw[->-] (0,0) to ++(0.5,0) node[smalldot] {};}$,
-and labelling these creation and annihilation lines with $p_1,\ld,p_m$ and $q_1,\cd,q_m$, respectively.\footnote{If there are multiple bare excitation operators, this notation leads to ambiguities and is best avoided.}
+and labelling these creation and annihilation lines with $p_1,\ld,p_m$ and $q_1,\cd,q_m$, respectively.
 To simplify the algebraic interpretation of a coefficient graph (see \cref{rmk:algebraic-interpretation-of-coefficient-graph}), it becomes convenient to treat \textit{coefficient lines} as distinct from other internal lines.
 A closed graph with no coefficient lines is sometimes called an \textit{energy graph}.
 \end{dfn}
@@ -765,19 +746,24 @@ A few results from the preceding discussion are particularly useful for algebrai
 For easy reference, let's summarize them here.
 \begin{enumerate}
 \item
-  Each set of $k$ equivalent internal lines\footnote{If rule \ref{item:rule-for-coefficient-lines} is used, this excludes coefficient lines.  Otherwise, replace rule \ref{item:rule-for-coefficient-lines} with the full antisymmetrizer.} or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
+  Each set of $k$ equivalent internal lines or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.\\
+  (If rule~\ref{item:rule-for-coefficient-lines} is used, this excludes equivalent coefficient lines.  Otherwise, replace rule~\ref{item:rule-for-coefficient-lines} with the full antisymmetrizer.)
 \item
-  Each open cycle contributes $(-)^{h_i}a^p_q$ to the normal-ordered product, where and $p$ and $q$ label the free ends and $h_i$ is the number of hole contractions in the cycle.
+  Each open cycle contributes $(-)^{h_i}a^p_q$ to the normal-ordered product, where $p$ and $q$ label the free ends and $h_i$ is the number of hole contractions in the cycle.
   A closed cycle (loop) contributes $(-)^{h_i+1}$.
 \item
   The overall sign of a closed graph is $(-)^{h+l}$, where $h$ and $l$ denote the total number of hole lines and loops.
 \item\label{item:rule-for-coefficient-lines}
-  For each bare excitation operator in a coefficient graph, the coefficient lines contribute an antisymmetrizer
+  In a coefficient graph, antisymmetrize over inequivalent coefficient lines using the reduced\footnotemark\ antisymmetrizer
   $\op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}$
-  where the $P_i$'s and $Q_i$'s label subsets of equivalent creation and annihilation lines, respectively.
+  where the $P_i$'s and $Q_i$'s label subsets of equivalent coefficient lines.
 \end{enumerate}
 \end{rmk}
-
+\footnotetext{
+  The full antisymmetrizer would be $\op{P}^{(p_1/\cd/p_m)}_{(q_1/\cd/q_m)}$, where
+  $\{p_1,\ld,p_m\}=P_1\cup\cd\cup P_h$ and
+  $\{q_1,\ld,q_m\}=Q_1\cup\cd\cup Q_k$ are the upper and lower indices of the bare excitation operator.
+}
 
 \begin{ex}
 The one- and two-electron components of $H_e$ expand into occupied/virtual blocks as follows.
@@ -1080,51 +1066,29 @@ Note that in each case the correct scalar factor is built into the definition of
 The $\F$-normal Wick expansion of the one- and two-electron components of $H_e$ are as follows.
 \begin{align}
   h_p^qa^p_q
-=&\
-  h_p^q
-  \pr{
-    \tl{a}^p_q
-  +
-    \tl{a}^{p^\hole}_{q^\hole}
-  }
 =
   h_p^q
   \tl{a}^p_q
 +
-  h_p^q
-  \g^p_q
-\\
+  h_i^i
+&&
   \tfr{1}{4}
   \ol{g}_{pq}^{rs}
   a^{pq}_{rs}
-=&\
-  \tfr{1}{4}
-  \ol{g}_{pq}^{rs}
-  \pr{
-    \tl{a}^{pq}_{rs}
-  +
-    \op{P}^{(p/q)}_{(r/s)}
-    \tl{a}^{p^\hole q}_{r^\hole s}
-  +
-    \op{P}_{(r/s)}
-    \tl{a}^{p^\hole q^{\hole\hole}}_{r^\hole s^{\hole\hole}}
-  }
 =
   \tfr{1}{4}
   \ol{g}_{pq}^{rs}
   \tl{a}^{pq}_{rs}
 +
-  \ol{g}_{pq}^{rs}
-  \g^p_r
-  \tl{a}^q_s
+  \ol{g}_{ip}^{iq}
+  \tl{a}^p_q
 +
   \tfr{1}{2}
-  \ol{g}_{pq}^{rs}
-  \g^p_r
-  \g^q_s
+  \ol{g}_{ij}^{ij}
 \end{align}
 In terms of Goldstone diagrams and Hugenholtz diagrams, these equations are written as follows.
 \begin{align}
+\nonumber
 \diagram{
   \draw (-0.5,0) node[squarex] (h) {} -- (0,0) node[dot=white] (h1) {};
   \draw[->-] (h1) to ++(0,+0.5);
@@ -1175,6 +1139,7 @@ In terms of Goldstone diagrams and Hugenholtz diagrams, these equations are writ
 &
 \updownarrow\hspace{1pt}&
 \\
+\nonumber
 \diagram{
   \node[flexdot={2.5pt}{white}] (h) at (0,0) {};
   \draw[->-] (h) to ++(0,+0.5);
@@ -1304,7 +1269,7 @@ $
 =
   h_p^q\tl{a}^p_q
 +
-  \ol{g}_{pr}^{qs}\g^r_s\tl{a}^p_q
+  \ol{g}_{ip}^{iq}\tl{a}^p_q
 $.
 \end{ex}
 \end{samepage}
