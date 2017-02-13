@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 5, Suggested Problems 1: Diagrams}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\usepackage{multicol}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Prove the Hausdorff expansion.\footnote{For a slick alternative to the proof in the notes, look at the solution to exercise 3.1.6 in Helgaker's big purple book, but note that you should give a proper proof by induction.\footnotemark}
+\footnotetext{See \url{https://en.wikipedia.org/wiki/Mathematical_induction}.}
+\begin{align}
+  e^X Ye^{-X}
+=
+  Y
++
+  [X,Y]
++
+  \tfr{1}{2!}
+  [X,[X,Y]]
++
+  \tfr{1}{3!}
+  [X,[X,[X,Y]]]
++
+  \cd
+\end{align}
+
+\item
+Prove the following.
+\begin{align}
+\label{eq:h-t-commutators}
+  [H_\mr{c},T]
+=
+\gno{
+  \ctr[0.0]{}{H}{_\mr{c}}{T}
+  H_\mr{c}T
+}
+&&
+  [[H_\mr{c},T],T]
+=
+\gno{
+  \ctr[0.7]{}{H}{_\mr{c}T}{T}
+  \ctr[0.0]{}{H}{_\mr{c}}{T}
+  H_\mr{c}TT
+}
+&&
+  [[[H_\mr{c},T],T],T]
+=
+\gno{
+  \ctr[1.4]{}{H}{_\mr{c}TT}{T}
+  \ctr[0.7]{}{H}{_\mr{c}T}{T}
+  \ctr[0.0]{}{H}{_\mr{c}}{T}
+  H_\mr{c}TTT
+}
+&&
+  \cd
+\end{align}
+
+\item
+Using equation~\ref{eq:h-t-commutators}, explain the following.
+\begin{align}
+  [\,\cdot\,,T]^n(H_\mr{c})
+=
+\gno{
+  \ctr[2.1]{}{H}{_\mr{c}TTT}{T}
+  \ctr[1.4]{}{H}{_\mr{c}TT}{T}
+  \ctr[0.7]{}{H}{_\mr{c}T}{T}
+  \ctr[0.0]{}{H}{_\mr{c}}{T}
+  H_\mr{c}TTTT
+}
+\hspace{5pt}
+  \text{for $n\geq 4$}
+\end{align}
+
+\item
+Prove that the determinant basis consists of eigenfunctions of the diagonal Fock operator.
+\begin{align}
+\label{eq:diagonal-fock-eigenvalue-equation}
+  H_0\F_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  \mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+&&
+  H_0
+\equiv
+  f_p^p\tl{a}^p_p
+&&
+  \mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
+\equiv
+  \sum_{r=1}^k
+  f_{a_r}^{a_r}
+-
+  \sum_{r=1}^k
+  f_{i_r}^{i_r}
+\end{align}
+
+\item
+Use equations~\ref{eq:h-t-commutators} and~\ref{eq:diagonal-fock-eigenvalue-equation} to write the coupled-cluster amplitude equation $\ip{\F_{ij\cd}^{ab\cd}|\ol{H}_\mr{c}|\F}=0$ as follows.
+\begin{align}
+  t_{ab\cd}^{ij\cd}
+=
+  (\mc{E}_{ab\cd}^{ij\cd})^{-1}
+  \ip{\F_{ab\cd}^{ij\cd}|V_\mr{c}\,\mr{exp}(T)|\F}_\mr{C}
+&&
+  V_\mr{c}
+\equiv
+  H_\mr{c}
+-
+  H_0
+\end{align}
+
+
+\item
+Explain why the following terms vanish.\footnote{Hint: Use arguments about the excitation levels of their operators.}
+\begin{align*}
+  \tfr{1}{4!}
+  \ip{\F_i^a|V_\mr{c}T_1^4|\F}_\mr{C}
+&&
+  \ip{\F_{ijk}^{abc}|V_\mr{c}|\F}_\mr{C}
+&&
+  \ip{\F_{ijk}^{abc}|V_\mr{c}T_1|\F}_\mr{C}
+\end{align*}
+
+\end{enumerate}
+
+
+\end{document}
