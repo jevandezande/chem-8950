@@ -180,7 +180,8 @@ Internal contractions of single excitations (\textit{bubble contractions}) are i
   a^{i^\hole}_{i^\hole}
 \end{align}
 Normal-ordered products of single excitation operators are joined with a dotted line, forming higher excitation operators.
-\begin{align*}
+\begin{align}
+\label{eq:higher-excitation-operators}
 \diagram{
   \node[dot=white] (a1) at (0,0) {};
   \node[dot=white] (a2) at (1,0) {};
@@ -230,7 +231,7 @@ Normal-ordered products of single excitation operators are joined with a dotted 
 }
 \equiv
   \no{a^{p_1p_2\cd p_m}_{q_1q_2\cd q_m^\ptcl}a^{r_1^\ptcl r_2\cd r_n}_{s_1s_2\cd s_n}}
-\end{align*}
+\end{align}
 Contracted operators are implicitly normal ordered together.
 $\F$-normal-ordering is indicated by the use of double-circle vertices, $\diagram{\node[ddot=white] {};}$ and $\diagram{\node[ddot] {};}$ instead of $\diagram{\node[dot=white] {};}$ and $\diagram{\node[dot] {};}$.
 These building blocks can be used to construct more complicated products.
@@ -705,11 +706,11 @@ Using the identity
   \ol{\d}_{p_1'\cd p_m'}^{q_1'\cd q_m'}\,
   \tl{a}^{p_1'\cd p_m'}_{q_1'\cd q_m'}
 \end{align}
-this extends the results derived above to allow for bare excitation operators in addition to $m$-electron operators.
-The contraction with $\tl{a}^{p_1\cd p_m}_{q_1\cd q_m}$ is depicted by capping the lines connected to it,
+this extends the definition of a graph to include bare excitation operators.
+The contraction with $\tl{a}^{p_1\cd p_m}_{q_1\cd q_m}$ is here depicted by capping the lines connected to it,
 $\diagram{\draw[->-] (0,0) to ++(0.5,0) node[smalldot] {};}$,
-and labelling these creation and annihilation lines with $p_1,\ld,p_m$ and $q_1,\cd,q_m$, respectively.
-To simplify the algebraic interpretation of a coefficient graph (see \cref{rmk:algebraic-interpretation-of-coefficient-graph}), it becomes convenient to treat \textit{coefficient lines} as distinct from other internal lines.
+which are termed \textit{coefficient lines}.
+A common situation is to see up to one de-excitation operator, $\tl{a}^{i_1\cd i_m}_{a_1\cd a_m}$, at the top of a graph and/or one excitation operator, $\tl{a}^{a_1\cd a_m}_{i_1\cd i_m}$, at the bottom.\footnote{Note that $\tl{a}^{i_1}_{a_1}\cd\tl{a}^{i_m}_{a_m}=\tl{a}^{i_1\cd i_m}_{a_1\cd a_m}$ and $\tl{a}^{a_1}_{i_1}\cd\tl{a}^{a_m}_{i_m}=\tl{a}^{a_1\cd a_m}_{i_1\cd i_m}$, so products of these operators can be grouped together.  In principle such products could also be expressed in the graph as products of separate operators, but then they must be considered non-identical operators which increases the number of unique contractions in the Wick expansion.}
 A closed graph with no coefficient lines is sometimes called an \textit{energy graph}.
 \end{dfn}
 \end{samepage}
@@ -726,7 +727,7 @@ The algebraic interpretation of a coefficient graph with the operator in eq~\ref
 \end{align}
 where $T^{p_1'\cd p_m'}_{q_1'\cd q_m'}$ is the product of interaction tensors contracted with $\ol{\d}_{p_1'\cd p_m'}^{q_1'\cd q_m'}$, scaled by appropriate sign and degeneracy factors according to \cref{ax:rules-of-interpretation}.
 Suppose $\{p_1,\ld,p_m\}$ and $\{q_1,\cd,q_m\}$ can be partitioned as $P_1\cup\cd\cup P_h$ and $Q_1\cup\cd\cup Q_k$ where $P_i=\{p_{i,1},\ld,p_{i,|P_i|}\}$ and $Q_i=\{q_{i,1},\ld,q_{i,|Q_i|}\}$ label equivalent coefficient lines.
-Then eq~\ref{eq:coefficient-diagram-interpretation-1} simplifies as follows.
+Then eq~\ref{eq:coefficient-diagram-interpretation-1} simplifies as follows
 \begin{align}
   \op{P}^{(p_1/\cd /p_m)}_{(q_1/\cd /q_m)}
   T^{p_1\cd p_m}_{q_1\cd q_m}
@@ -735,8 +736,8 @@ Then eq~\ref{eq:coefficient-diagram-interpretation-1} simplifies as follows.
   \op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}\,
   T^{p_1\cd p_m}_{q_1\cd q_m}
 \end{align}
+since the indices on $T$ corresponding to equivalent coefficient lines are already antisymmetric.
 Notice that the factorials on the right exactly cancel the contribution of equivalent coefficient lines to the degeneracy factor.
-This equation defines a simplified rule for interpreting coefficient graphs.
 \end{rmk}
 
 
@@ -746,24 +747,20 @@ A few results from the preceding discussion are particularly useful for algebrai
 For easy reference, let's summarize them here.
 \begin{enumerate}
 \item
-  Each set of $k$ equivalent internal lines or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.\\
-  (If rule~\ref{item:rule-for-coefficient-lines} is used, this excludes equivalent coefficient lines.  Otherwise, replace rule~\ref{item:rule-for-coefficient-lines} with the full antisymmetrizer.)
+  Each set of $k$ equivalent lines or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
 \item
   Each open cycle contributes $(-)^{h_i}a^p_q$ to the normal-ordered product, where $p$ and $q$ label the free ends and $h_i$ is the number of hole contractions in the cycle.
   A closed cycle (loop) contributes $(-)^{h_i+1}$.
 \item
   The overall sign of a closed graph is $(-)^{h+l}$, where $h$ and $l$ denote the total number of hole lines and loops.
 \item\label{item:rule-for-coefficient-lines}
-  In a coefficient graph, antisymmetrize over inequivalent coefficient lines using the reduced\footnotemark\ antisymmetrizer
-  $\op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}$
-  where the $P_i$'s and $Q_i$'s label subsets of equivalent coefficient lines.
+  For bare excitation operators, cancel the degeneracy factors from their equivalent coefficient lines by replacing the full antisymmetrizer, $P^{(p_1/\cd/p_m)}_{(q_1/\cd/q_m)}$, with a reduced antisymmetrizer over inequivalent coefficient lines, $\op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}$.\footnote{
+  Here $\{p_1,\ld,p_m\}=P_1\cup\cd\cup P_h$ and $\{q_1,\ld,q_m\}=Q_1\cup\cd\cup Q_k$ are the upper and lower indices on the bare excitation operator $\tl{a}^{p_1\cd p_m}_{q_1\cd q_m}$, and the $P_i$'s and $Q_i$'s label subsets of equivalent coefficient lines.
+}~\footnote{
+  For equivalent lines connecting two bare excitation operators, this cancellation can only be performed once.
+}
 \end{enumerate}
 \end{rmk}
-\footnotetext{
-  The full antisymmetrizer would be $\op{P}^{(p_1/\cd/p_m)}_{(q_1/\cd/q_m)}$, where
-  $\{p_1,\ld,p_m\}=P_1\cup\cd\cup P_h$ and
-  $\{q_1,\ld,q_m\}=Q_1\cup\cd\cup Q_k$ are the upper and lower indices of the bare excitation operator.
-}
 
 \begin{ex}
 The one- and two-electron components of $H_e$ expand into occupied/virtual blocks as follows.

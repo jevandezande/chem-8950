@@ -1,0 +1,462 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 5, Suggested Problems 2: Diagrams}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\usepackage{multicol}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Interpret the following coefficient graph algebraically, denoting the bare excitation operator by $\tl{a}_{abc}^{ijk}$.
+\begin{align*}
+\diagram{
+  \interaction{3}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (c1)
+    to node[midway,ddot] (g1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c1) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-=0.25,->-=0.75] (c2)
+    to node[midway,ddot] (g2) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-] (c3) to ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c3) to ++(+0.25,+1) node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+\end{align*}
+
+
+\item
+  Interpret the following coefficient graph algebraically, denoting the top bare excitation operator by $\tl{a}^{ij}_{ab}$ and the bottom one by $\tl{a}^{cd}_{kl}$ and their interaction tensors by ${}^1\ol{\d}_{mn}^{ef}$ and ${}^2\ol{\d}_{ef}^{mn}$.
+\begin{align*}
+\diagram{
+  \draw (0,0) node[ddot] (f1) {} to ++(-0.5,0) node[circlex] {};
+  \draw[-<-] (f1)
+    to
+    ++(0,+0.5)
+      node[smalldot] {};
+  \draw[->-] (f1)
+    to
+    ++(0,-0.5)
+      node[smalldot] {};
+  \draw[->-]
+    (+0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[-<-]
+    (+1.0,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[->-]
+    (+1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+}
+\end{align*}
+
+
+\end{enumerate}
+
+
+\newpage\noindent
+\textbf{Solutions}:
+\begin{enumerate}
+\item
+Axiom 4.1 gives
+\begin{align*}
+\diagram{
+  \interaction{3}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (c1)
+    to node[midway,ddot] (g1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c1) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-=0.25,->-=0.75] (c2)
+    to node[midway,ddot] (g2) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-] (c3) to ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c3) to ++(+0.25,+1) node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \fr{1}{2!2!3!}
+  \sum_{\substack{defgh\\lmn}}
+\diagram{
+  \interaction{3}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (c1)
+    to
+      node[pos=0.25,left=0pt] {$g$}
+      node[midway,ddot] (g1) {}
+      node[pos=0.75,left=1pt] {$d$}
+    ++(-0.25,+1)
+      node[smalldot] {};
+  \draw[-<-] (c1)
+    to
+      node[pos=0.3,right=-1pt] {$l$}
+    ++(+0.25,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75] (c2)
+    to
+      node[pos=0.25,left=0pt] {$h$}
+      node[midway,ddot] (g2) {}
+      node[pos=0.75,left=0pt] {$e$}
+    ++(-0.25,+1)
+      node[smalldot] {};
+  \draw[-<-] (c2)
+    to
+      node[pos=0.3,right=-1pt] {$m$}
+    ++(+0.25,+1)
+      node[smalldot] {};
+  \draw[->-] (c3)
+    to
+      node[pos=0.75,left=0pt] {$f$}
+    ++(-0.25,+1)
+      node[smalldot] {};
+  \draw[-<-] (c3)
+    to
+      node[pos=0.3,right=-1pt] {$n$}
+    ++(+0.25,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \fr{1}{2!2!3!}
+  \sum_{\substack{defgh\\lmn}}
+  \ol{\d}_{lmn}^{def}
+  \ol{g}_{de}^{gh}\,
+  c_{ghf}^{lmn}
+  \gno{
+    a^{l^{\hole1}m^{\hole2}n^{\hole3}}_{d^{\ptcl1}e^{\ptcl2}f^{\ptcl3}}
+    a^{d^{\ptcl1}e^{\ptcl2}}_{g^{\ptcl4}h^{\ptcl5}}
+    a^{g^{\ptcl4}h^{\ptcl5}f^{\ptcl3}}_{l^{\hole1}m^{\hole2}n^{\hole3}}
+  }
+\end{align*}
+since there are two pairs of equivalent lines on the repulsion operator, and the CI triples operator has a set of three equivalent lines.
+The interaction tensor for the bare excitation operator is
+$
+  \ol{\d}_{lmn}^{def}
+=
+  \op{P}_{(a/b/c)}^{(i/j/k)}
+  \d^d_a\d^e_b\d^f_c
+  \d^i_l\d^m_j\d^n_k
+$, so this can be simplified as
+\begin{align*}
+  \sum_{\substack{def\\lmn}}
+  \ol{\d}_{lmn}^{def}
+  T_{def}^{lmn}
+=
+  P_{(a/b/c)}^{(i/j/k)}
+  T_{abc}^{ijk}
+&&
+\text{
+  where
+}\ 
+  T_{def}^{lmn}
+\equiv
+  \fr{1}{2!2!3!}
+  \sum_{gh}
+  \ol{g}_{de}^{gh}\,
+  c_{ghf}^{lmn}
+  \gno{
+    a^{l^{\hole1}m^{\hole2}n^{\hole3}}_{d^{\ptcl1}e^{\ptcl2}f^{\ptcl3}}
+    a^{d^{\ptcl1}e^{\ptcl2}}_{g^{\ptcl4}h^{\ptcl5}}
+    a^{g^{\ptcl4}h^{\ptcl5}f^{\ptcl3}}_{l^{\hole1}m^{\hole2}n^{\hole3}}
+  }\,.
+\end{align*}
+Using item 3 in Remark 4.3, the contracted operator string evaluates as follows
+\begin{align*}
+  \gno{
+    a^{l^{\hole1}m^{\hole2}n^{\hole3}}_{d^{\ptcl1}e^{\ptcl2}f^{\ptcl3}}
+    a^{d^{\ptcl1}e^{\ptcl2}}_{g^{\ptcl4}h^{\ptcl5}}
+    a^{g^{\ptcl4}h^{\ptcl5}f^{\ptcl3}}_{l^{\hole1}m^{\hole2}n^{\hole3}}
+  }
+=
+  (-1)^{3+3}
+=
+  +1
+\end{align*}
+since there are three hole lines and three loops in the graph.
+At this point, we have simplified our interpretation to the following
+\begin{align*}
+\diagram{
+  \interaction{3}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (c1)
+    to node[midway,ddot] (g1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c1) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-=0.25,->-=0.75] (c2)
+    to node[midway,ddot] (g2) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-] (c3) to ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c3) to ++(+0.25,+1) node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \fr{1}{2!2!3!}
+  \sum_{de}
+  \op{P}_{(a/b/c)}^{(i/j/k)}
+  \ol{g}_{ab}^{de}\,
+  c_{dec}^{ijk}
+\end{align*}
+where I have relabeled the summation indices $g\mapsto d$, $h\mapsto e$.
+Finally, using item 4 under Remark 4.3, we can cancel the degeneracy factors coming from inequivalent coefficient lines by replacing
+$
+  \op{P}^{(i/j/k)}_{(a/b/c)}
+$
+with
+$
+  2!3!
+  \op{P}_{(ab/c)}
+$.
+This works because the operand
+$
+  \ol{g}_{ab}^{de}
+  c_{dec}^{ijk}
+$
+is already antisymmetric with respect to $\{a,b\}$ and $\{i,j,k\}$.
+\begin{align*}
+\diagram{
+  \interaction{3}{c}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-=0.25,->-=0.75] (c1)
+    to node[midway,ddot] (g1) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c1) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-=0.25,->-=0.75] (c2)
+    to node[midway,ddot] (g2) {} ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c2) to ++(+0.25,+1) node[smalldot] {};
+  \draw[->-] (c3) to ++(-0.25,+1) node[smalldot] {};
+  \draw[-<-] (c3) to ++(+0.25,+1) node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \fr{1}{2!}
+  \sum_{de}
+  \op{P}_{(ab/c)}
+  \ol{g}_{ab}^{de}\,
+  c_{dec}^{ijk}
+\end{align*}
+
+
+\item
+Axiom 4.1 gives
+\begin{align*}
+\diagram{
+  \draw (0,0) node[ddot] (f1) {} to ++(-0.5,0) node[circlex] {};
+  \draw[-<-] (f1)
+    to
+    ++(0,+0.5)
+      node[smalldot] {};
+  \draw[->-] (f1)
+    to
+    ++(0,-0.5)
+      node[smalldot] {};
+  \draw[->-]
+    (+0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[-<-]
+    (+1.0,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[->-]
+    (+1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+}
+=
+  \fr{1}{2!}
+  \sum_{\substack{ef\\mno}}
+\diagram{
+  \draw (0,0) node[ddot] (f1) {} to ++(-0.5,0) node[circlex] {};
+  \draw[-<-] (f1)
+    to
+      node[pos=0.5,left=0pt] {$m$}
+    ++(0,+0.5)
+      node[smalldot] {};
+  \draw[->-] (f1)
+    to
+      node[pos=0.5,left=0pt] {$o$}
+    ++(0,-0.5)
+      node[smalldot] {};
+  \draw[->-]
+    (+0.5,-0.5)
+      node[smalldot] {}
+    to
+      node[pos=0.5,left=0pt] {$e$}
+    ++(0,1)
+      node[smalldot] {};
+  \draw[-<-]
+    (+1.0,-0.5)
+      node[smalldot] {}
+    to
+      node[pos=0.5,left=0pt] {$n$}
+    ++(0,1)
+      node[smalldot] {};
+  \draw[->-]
+    (+1.5,-0.5)
+      node[smalldot] {}
+    to
+      node[pos=0.5,left=0pt] {$f$}
+    ++(0,1)
+      node[smalldot] {};
+}
+=
+  \fr{1}{2!}
+  \sum_{\substack{ef\\mno}}
+  {}^1\ol{\d}_{mn}^{ef}
+  f_o^m\,
+  {}^2\ol{\d}_{ef}^{on}\,
+  \gno{
+    a^{m^{\hole1}n^{\hole2}}_{e^{\ptcl1}f^{\ptcl2}}
+    a^{o^{\hole3}}_{m^{\hole1}}
+    a^{e^{\ptcl1}f^{\ptcl2}}_{o^{\hole3}n^{\hole2}}
+  }
+\end{align*}
+since the two particle lines are equivalent.
+Using item 3 in Remark 4.3, the operator string evaluates to
+\begin{align*}
+  \gno{
+    a^{m^{\hole1}n^{\hole2}}_{e^{\ptcl1}f^{\ptcl2}}
+    a^{o^{\hole3}}_{m^{\hole1}}
+    a^{e^{\ptcl1}f^{\ptcl2}}_{o^{\hole3}n^{\hole2}}
+  }
+=
+  (-1)^{3+2}
+=
+  -1
+\end{align*}
+since there are three hole lines and two loops in the diagram.
+Substituting in the definitions of the interaction tensors, we can simplify the result as follows.
+\begin{align*}
+\diagram{
+  \draw (0,0) node[ddot] (f1) {} to ++(-0.5,0) node[circlex] {};
+  \draw[-<-] (f1)
+    to
+    ++(0,+0.5)
+      node[smalldot] {};
+  \draw[->-] (f1)
+    to
+    ++(0,-0.5)
+      node[smalldot] {};
+  \draw[->-]
+    (+0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[-<-]
+    (+1.0,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[->-]
+    (+1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+}
+=
+-
+  \fr{1}{2!}
+  \sum_{\substack{ef\\mno}}
+  {}^1\ol{\d}_{mn}^{ef}
+  f_o^m\,
+  {}^2\ol{\d}_{ef}^{on}
+=&\
+-
+  \fr{1}{2!}
+  \sum_{\substack{ef\\mno}}
+  \pr{
+    \op{P}_{(a/b)}^{(i/j)}
+    \d_a^e\d_b^f\d_m^i\d_n^j
+  }
+  f_o^m
+  \pr{
+    \op{P}_{(k/l)}^{(c/d)}
+    \d_k^o
+    \d_l^n
+    \d_e^c
+    \d_f^d
+  }
+\\=&\
+-
+  \fr{1}{2!}
+  \op{P}_{(a/b)}^{(i/j)}
+  \op{P}_{(k/l)}^{(c/d)}
+  f_k^i
+  \d_l^j
+  \d_a^c
+  \d_b^d
+\end{align*}
+Finally, using item 4 under Remark 4.3, we can cancel the degeneracy factor by replacing $\op{P}^{(i/j)}_{(a/b)}$ with $2!\op{P}^{(i/j)}$, canceling the degeneracy factor arising from the two particle lines.
+\begin{align*}
+\diagram{
+  \draw (0,0) node[ddot] (f1) {} to ++(-0.5,0) node[circlex] {};
+  \draw[-<-] (f1)
+    to
+    ++(0,+0.5)
+      node[smalldot] {};
+  \draw[->-] (f1)
+    to
+    ++(0,-0.5)
+      node[smalldot] {};
+  \draw[->-]
+    (+0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[-<-]
+    (+1.0,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+  \draw[->-]
+    (+1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,1)
+      node[smalldot] {};
+}
+=
+-
+  \op{P}_{(k/l)}^{(i/j|c/d)}
+  f_k^i
+  \d_l^j
+  \d_a^c
+  \d_b^d
+\end{align*}
+
+
+\end{enumerate}
+
+
+\end{document}
