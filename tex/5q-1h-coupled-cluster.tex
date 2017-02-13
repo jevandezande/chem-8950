@@ -38,7 +38,7 @@
 
 \begin{dfn}\label{dfn:cc-effective-hamiltonian}
 \thmtitle{Traditional coupled-cluster theory}
-A \textit{wave operator} maps a determinant into a correlated wavefunction, $\Y=\op{\W}\F$.
+A \textit{wave operator} maps a determinant into a correlated wavefunction, $\Y=\W\F$.
 The \textit{coupled-cluster Ansatz} is characterized by an exponential parametrization of the wave operator.
 \begin{align}
 \label{eq:cc-effective-hamiltonian}
@@ -120,7 +120,7 @@ $
 $
 with
 $
-  [\,\cdot\,,\,X]^0(Y)
+  [X,\,\cdot\,]^0(Y)
 \equiv
   Y
 $.
@@ -138,7 +138,7 @@ $\ds{
 }$
 }\vspace{5pt}
 \thmproof{
-This follows from a direct Taylor expansion of the exponentials, along with proposition~\ref{prop:nested-commutator}.
+This follows from a direct Taylor expansion of the exponentials, along with proposition~\ref{prop:nested-commutator}.\footnote{For a slick alternative to this proof, see Helgaker, J\o rgensen, and Olsen, \textit{Molecular Electronic-Structure Theory} (2000), p.~100.}
 \begin{align*}
   e^XYe^{-X}
 =
@@ -161,7 +161,12 @@ This follows from a direct Taylor expansion of the exponentials, along with prop
   \fr{1}{n!}
   [X,\,\cdot\,](Y)
 \end{align*}
-In the second step, we have rearranged the sum to run over $n=h+k$ and $k$.
+In the second step, we have rearranged the sum to run over $n=h+k$ and $k$ and inserted
+$
+  1
+=
+  n!/n!
+$.
 }
 \end{thm}
 
@@ -185,7 +190,9 @@ $.
 \thmproof{
 By Wick's theorem,
 $
-  [\gno{Q},\gno{Q'}]
+  \gno{Q}\gno{Q'}
+-
+  \gno{Q'}\gno{Q}
 =
   \gno{QQ'}
 +
@@ -423,14 +430,36 @@ $
   \draw[-<-] (g2) to ++(0,-0.35);
 }
 $
-is the full electronic Hamiltonian.
+is the full electronic Hamiltonian
+and
+$
+  V_\mr{c}
+=
+\diagram{
+  \draw (-0.5,0) node[circlep] (h) {} -- (0,0) node[ddot=white] (h1) {};
+  \draw[->-] (h1) to ++(0,+0.35);
+  \draw[-<-] (h1) to ++(0,-0.35);
+}
++
+\diagram{
+  \interaction{2}{g}{(0,0)}{ddot=white}{sawtooth};
+  \draw[->-] (g1) to ++(0,+0.35);
+  \draw[-<-] (g1) to ++(0,-0.35);
+  \draw[->-] (g2) to ++(0,+0.35);
+  \draw[-<-] (g2) to ++(0,-0.35);
+}
+$.
 \end{ntt}
 
 \begin{dfn}
 \thmtitle{Excitation level}
 The \textit{excitation level} of a graph equals the net number of particles or quasi-particles it creates, divided by two.
-For example, the excitation levels of the singles, doubles, and triples cluster operators are one, two, and three.
-The excitation levels of the particle and quasi-particle Hamiltonian diagrams are as follows.
+For example, the quasi-particle excitation levels of the $T_1$, $T_2$ and $T_3$ operators are one, two, and three, respectively, and that of $\tl{a}_{abcd}^{ijkl}$ is $-4$.
+A convenient rule for evaluating reference expectation values is that the total excitation level of a closed graph must balance out to zero.
+\end{dfn}
+
+\begin{ex}
+The excitation levels in the quasi-particle expansions of one- and two-particle operators are as follows.
 \begin{align*}
 \diagram{
   \draw (-0.5,0) node[circlep] (h) {} -- (0,0) node[ddot=white] (h1) {};
@@ -557,10 +586,7 @@ The excitation levels of the particle and quasi-particle Hamiltonian diagrams ar
   \node at (0.5,-0.8) {$(0)$};
 }\,\,.
 \end{align*}
-A convenient rule for evaluating expectation values is that the total excitation level of a closed graph must be zero.
-This can be used to identify which terms in the quasi-particle Hamiltonian are required to complete a contraction.
-\end{dfn}
-
+\end{ex}
 
 
 \begin{ex}
