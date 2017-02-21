@@ -1,0 +1,162 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 5}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Explain why each of the following terms vanishes.
+\begin{align*}
+  \text{(a)}\hspace{3pt}
+  \tfr{1}{5!}
+  \ip{\F_{ijklm}^{abcde}|V_\mr{c}T_1^5|\F}_\mr{C}
+&&
+  \text{(b)}\hspace{3pt}
+  \ip{\F_{ij}^{ab}|V_\mr{c}T_2T_3|\F}_\mr{C}
+&&
+  \text{(c)}\hspace{3pt}
+  \tfr{1}{2!}
+  \ip{\F_{ijkl}^{abcd}|V_\mr{c}T_1^2|\F}_\mr{C}
+&&
+  \text{(d)}\hspace{3pt}
+  \tfr{1}{2!}
+  \ip{\F_{ijk}^{abc}|V_\mr{c}T_1^2|\F}_\mr{C}
+\end{align*}
+
+\newpage
+\item
+Interpret the following graph and fully simplify your answer.
+\begin{align*}
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (ta2) to (g2);
+  \draw[->-] (tb1) to (g2);
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[smalldot] {};
+}
+\end{align*}
+
+\newpage
+\item
+Interpret the following graph and fully simplify it the ``long way.''  That is, you may use Rules 1-3 but you must start from Axiom 1 and show each step to get to your final answer.
+\begin{align*}
+\diagram{
+  \draw[->-=0.25,->-=0.75]
+    (0,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g1) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75]
+    (1,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g2) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+\end{align*}
+
+\end{enumerate}
+
+\newpage
+\noindent
+\textbf{Extra Credit.}
+Prove Rule~3 for a closed graph with a single bare excitation operator of the following form.
+\begin{align*}
+  \tl{a}^{i_1\cd i_m}_{a_1\cd a_m}
+=
+  (\tfr{1}{m!})^2\,
+  \ol{\d}_{j_1\cd j_m}^{b_1\cd b_m}\,
+  \tl{a}^{j_1\cd j_m}_{b_1\cd b_m}
+&&
+  \ol{\d}_{j_1\cd j_m}^{b_1\cd b_m}
+\equiv
+  \op{P}_{(a_1/\cd/a_m)}^{(i_1/\cd/i_m)}
+  \d_{j_1}^{i_1}
+  \cd
+  \d_{j_m}^{i_m}
+  \d_{a_1}^{b_1}
+  \cd
+  \d_{a_m}^{b_m}
+\end{align*}
+
+\vfill
+\noindent
+\hrulefill
+
+\noindent
+\textbf{Appendix.}
+\vspace{10pt}
+
+{\small
+
+\noindent
+\bmit{Axiom 1.}
+The algebraic of a graph $G$ is obtained from a corresponding summand graph $\Si(G)$ as follows.
+\begin{align*}
+  G
+=
+  \fr{1}{\mr{dg}(G)}
+  \sum_{\mr{labels}}\Si(G)
+\end{align*}
+\noindent
+\bmit{Rule~1.}
+  Each set of $k$ equivalent lines or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
+
+\noindent
+\bmit{Rule~2.}
+  The overall sign of a closed graph is $(-)^{h+l}$, where $h$ and $l$ denote the total number of hole lines and loops.
+
+\noindent
+\bmit{Rule~3.}
+  For bare excitation operators, cancel the degeneracy factors from their equivalent coefficient lines by replacing the full antisymmetrizer, $P^{(p_1/\cd/p_m)}_{(q_1/\cd/q_m)}$, with a reduced antisymmetrizer over inequivalent coefficient lines, $\op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}$.\footnote{
+  Here $\{p_1,\ld,p_m\}=P_1\cup\cd\cup P_h$ and $\{q_1,\ld,q_m\}=Q_1\cup\cd\cup Q_k$ are the upper and lower indices on the bare excitation operator $\tl{a}^{p_1\cd p_m}_{q_1\cd q_m}$, and the $P_i$'s and $Q_i$'s label subsets of equivalent coefficient lines.
+}~\footnote{
+  For equivalent lines connecting two bare excitation operators, this cancellation can only be performed once.
+}
+}
+
+
+
+\end{document}

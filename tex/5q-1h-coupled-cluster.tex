@@ -315,56 +315,6 @@ Note that the subscript C here means specifically that that the cluster operator
 Connection through the bare excitation operator $\tl{a}_{ab\cd}^{ij\cd}$ is excluded.
 \end{rmk}
 
-\begin{rmk}
-It can be shown that the determinant basis forms an eigenbasis for the diagonal part of the Fock operator.\footnotemark
-\begin{align}
-  H_0\F_{i_1\cd i_k}^{a_1\cd a_k}
-=
-  \mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
-  \F_{i_1\cd i_k}^{a_1\cd a_k}
-&&
-  H_0
-\equiv
-  f_p^p\tl{a}^p_p
-&&
-  \mc{E}_{q_1\cd q_k}^{p_1\cd p_k}
-\equiv
-  \sum_{r=1}^k
-  f_{p_r}^{p_r}
--
-  \sum_{r=1}^k
-  f_{q_r}^{q_r}
-\end{align}
-Noting that $H_0$ is Hermitian, this implies $\ip{\F_{ij\cd}^{ab\cd}|H_0\,\mr{exp}(T)|\F}=\mc{E}_{ij\cd}^{ab\cd}\ip{\F_{ij\cd}^{ab\cd}|\mr{exp}(T)|\F}=\mc{E}_{ij\cd}^{ab\cd}t_{ab\cd}^{ij\cd}$.
-This can be used to rearrange the amplitude equation in (\ref{eq:traditional-cc-equations-2}) as follows, which defines the working equations used to iteratively solve TCC.
-\begin{align}
-  t_{ab\cd}^{ij\cd}
-=
-  (\mc{E}_{ab\cd}^{ij\cd})^{-1}
-  \ip{\F_{ab\cd}^{ij\cd}|V_\mr{c}\,\mr{exp}(T)|\F}_\mr{C}
-&&
-  V_\mr{c}
-\equiv
-  H_\mr{c}
--
-  H_0
-=
-  f_p^q(1-\d_p^q)
-  \tl{a}^p_q
-+
-  \tfr{1}{4}
-  \ol{g}_{pq}^{rs}
-  \tl{a}^{pq}_{rs}
-\end{align}
-In M\o ller-Plesset perturbation theory, $H_0$ is known the \textit{zeroth order Hamiltonian} and $V_\mr{c}$ is the \textit{perturbation}.
-These operators are also known as the \textit{model Hamiltonian} and \textit{fluctuation potential}, respectively.
-\end{rmk}
-\footnotetext{
-The proof is as follows.
-First, note that $a^p_p\F_\mu = n_p^\mu \F_\mu$, where $n_p^\mu$ is the occupation of $\y_p$ in $\F_\mu$.
-By Wick's theorem, $a^p_p=\tl{a}^p_p+n_p^{\mr{ref}}$, where $n_p^{\mr{ref}}$ denotes the occupation of $\y_p$ in $\F$.
-Therefore, $\tl{a}^p_p\F_\mu = (n_p^\mu - n_p^{\mr{ref}})\F_\mu$ and $H_0\F_\mu = \pr{\sum_{p\in\F_\mu}f_p^p - \sum_{p\in\F}f_p^p}\F_\mu$.
-}
 
 \begin{ntt}
 The following is suggested notation for the diagonal and off-diagonal contributions to the Fock operator.
@@ -449,7 +399,86 @@ $
   \draw[-<-] (g2) to ++(0,-0.35);
 }
 $.
+Note that
+\begin{align*}
+\diagram{
+  \draw (-0.5,0) node[circlez] (h) {} -- (0,0) node[ddot] (h1) {};
+  \draw[->-] (h1) to ++(-0.25,+0.5);
+  \draw[-<-] (h1) to ++(+0.25,+0.5);
+}
+\implies
+\diagram{
+  \draw (-0.5,0) node[circlez] (h) {} -- (0,0) node[ddot=white] (h1) {};
+  \draw[->-] (h1) to ++(0,+0.5);
+  \draw[-<-] (h1) to ++(0,-0.5);
+}
+=
+\diagram{
+  \draw (-0.5,0) node[circlez] (h) {} -- (0,0) node[ddot] (h1) {};
+  \draw[->-] (h1) to ++(0,+0.5);
+  \draw[-<-] (h1) to ++(0,-0.5);
+}
++
+\diagram{
+  \draw (-0.5,0) node[circlez] (h) {} -- (0,0) node[ddot] (h1) {};
+  \draw[-<-] (h1) to ++(0,+0.5);
+  \draw[->-] (h1) to ++(0,-0.5);
+}
+\end{align*}
 \end{ntt}
+
+
+\begin{rmk}
+It can be shown that the determinant basis forms an eigenbasis for the diagonal part of the Fock operator.\footnotemark
+\begin{align}
+  H_0\F_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  \mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+&&
+  H_0
+\equiv
+  f_p^p\tl{a}^p_p
+&&
+  \mc{E}_{q_1\cd q_k}^{p_1\cd p_k}
+\equiv
+  \sum_{r=1}^k
+  f_{p_r}^{p_r}
+-
+  \sum_{r=1}^k
+  f_{q_r}^{q_r}
+\end{align}
+Noting that $H_0$ is Hermitian, this implies $\ip{\F_{ij\cd}^{ab\cd}|H_0\,\mr{exp}(T)|\F}=\mc{E}_{ij\cd}^{ab\cd}\ip{\F_{ij\cd}^{ab\cd}|\mr{exp}(T)|\F}=\mc{E}_{ij\cd}^{ab\cd}t_{ab\cd}^{ij\cd}$.
+This can be used to rearrange the amplitude equation in (\ref{eq:traditional-cc-equations-2}) as follows, which defines the working equations used to iteratively solve TCC.
+\begin{align}
+  t_{ab\cd}^{ij\cd}
+=
+  (\mc{E}_{ab\cd}^{ij\cd})^{-1}
+  \ip{\F_{ab\cd}^{ij\cd}|V_\mr{c}\,\mr{exp}(T)|\F}_\mr{C}
+&&
+  V_\mr{c}
+\equiv
+  H_\mr{c}
+-
+  H_0
+=
+  f_p^q(1-\d_p^q)
+  \tl{a}^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \tl{a}^{pq}_{rs}
+\end{align}
+In M\o ller-Plesset perturbation theory, $H_0$ is known the \textit{zeroth order Hamiltonian} and $V_\mr{c}$ is the \textit{perturbation}.
+These operators are also known as the \textit{model Hamiltonian} and \textit{fluctuation potential}, respectively.
+\end{rmk}
+\footnotetext{
+The proof is as follows.
+First, note that $a^p_p\F_\mu = n_p^\mu \F_\mu$, where $n_p^\mu$ is the occupation of $\y_p$ in $\F_\mu$.
+By Wick's theorem, $a^p_p=\tl{a}^p_p+n_p^{\mr{ref}}$, where $n_p^{\mr{ref}}$ denotes the occupation of $\y_p$ in $\F$.
+Therefore, $\tl{a}^p_p\F_\mu = (n_p^\mu - n_p^{\mr{ref}})\F_\mu$ and $H_0\F_\mu = \pr{\sum_{p\in\F_\mu}f_p^p - \sum_{p\in\F}f_p^p}\F_\mu$.
+}
+
 
 \begin{dfn}
 \thmtitle{Excitation level}

@@ -1,0 +1,599 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 5}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+  Explain why each of the following terms vanishes.
+\begin{align*}
+  \text{(a)}\hspace{3pt}
+  \tfr{1}{5!}
+  \ip{\F_{ijklm}^{abcde}|V_\mr{c}T_1^5|\F}_\mr{C}
+&&
+  \text{(b)}\hspace{3pt}
+  \ip{\F_{ij}^{ab}|V_\mr{c}T_2T_3|\F}_\mr{C}
+&&
+  \text{(c)}\hspace{3pt}
+  \tfr{1}{2!}
+  \ip{\F_{ijkl}^{abcd}|V_\mr{c}T_1^2|\F}_\mr{C}
+&&
+  \text{(d)}\hspace{3pt}
+  \tfr{1}{2!}
+  \ip{\F_{ijk}^{abc}|V_\mr{c}T_1^2|\F}_\mr{C}
+\end{align*}
+\vspace{10pt}
+\textbf{Answer}:
+\begin{enumerate}
+\item
+  Because $V_\mr{c}$ has at most four lines available for contraction and there are five $T$-operators, there is no way to satisfy the connectedness requirement.
+\item
+  Because the net excitation level of the $T$-operators and the bare excitation operator is $2+3-2=+3$, and $V_\mr{c}$ has no contribution with excitation level $-3$.
+\item
+  The net excitaton level of the $T$-operators and the bare excitation operator is $1+1-4=-2$, so we need the $+2$ component of $V_\mr{c}$ to balance the product.
+  This diagram has no quasiparticle annihilation lines and therefore cannot contract with the $T$ operators to satisfy the connectedness requirement.
+\begin{align*}
+\left(
+\diagram{
+  \interaction{2}{g}{(0,0.1)}{ddot}{sawtooth};
+  \draw[->-] (g1) to ++(-0.25,0.5);
+  \draw[-<-] (g1) to ++(+0.25,0.5);
+  \draw[->-] (g2) to ++(-0.25,0.5);
+  \draw[-<-] (g2) to ++(+0.25,0.5);
+  \interaction{1}{1t}{(0.1,-0.6)}{ddot}{overhang};
+  \interaction{1}{2t}{(0.9,-0.6)}{ddot}{overhang};
+  \draw[->-] (1t1) to ++(-0.25,0.5);
+  \draw[-<-] (1t1) to ++(+0.25,0.5);
+  \draw[->-] (2t1) to ++(-0.25,0.5);
+  \draw[-<-] (2t1) to ++(+0.25,0.5);
+}
+\right)_\mr{C}
+=
+  0
+\end{align*}
+\item
+  The net excitation level of the $T$-operators and the bare excitation operator is $1+1-3=-1$, so we need a $+1$ component from $V_\mr{c}$ to balance the product.
+  Of the three diagrams in $V_\mr{c}$ with excitation level $+1$, one of them has no quasiparticle annihilation lines and the other two have only one.
+  Therefore, only one of the $T$ operators can be connected to $V_\mr{c}$ and there is no way to satisfy the connectedness requirement for the other one.
+\begin{align*}
+\left(
+\diagram{
+  \draw
+    (0,0.2)
+      node[circlep] (f) {}
+    to
+    ++(0.5,0)
+      node[ddot] (f1) {};
+  \draw[->-] (f1) to ++(-0.25,0.5);
+  \draw[-<-] (f1) to ++(+0.25,0.5);
+  \interaction{1}{1t}{(0.1,-0.6)}{ddot}{overhang};
+  \interaction{1}{2t}{(0.9,-0.6)}{ddot}{overhang};
+  \draw[->-] (1t1) to ++(-0.25,0.5);
+  \draw[-<-] (1t1) to ++(+0.25,0.5);
+  \draw[->-] (2t1) to ++(-0.25,0.5);
+  \draw[-<-] (2t1) to ++(+0.25,0.5);
+}
+\right)_\mr{C}
+=
+  0
+&&
+\left(
+\diagram{
+  \interaction{2}{g}{(0,0.4)}{ddot}{sawtooth};
+  \draw[->-] (g1) to ++(-0.25,0.5);
+  \draw[-<-] (g1) to ++(+0.25,0.5);
+  \draw[->-] (g2) to ++(0,+0.5);
+  \draw[-<-] (g2) to ++(0,-0.5);
+  \interaction{1}{1t}{(0.1,-0.6)}{ddot}{overhang};
+  \interaction{1}{2t}{(0.9,-0.6)}{ddot}{overhang};
+  \draw[->-] (1t1) to ++(-0.25,0.5);
+  \draw[-<-] (1t1) to ++(+0.25,0.5);
+  \draw[->-] (2t1) to ++(-0.25,0.5);
+  \draw[-<-] (2t1) to ++(+0.25,0.5);
+}
+\right)_\mr{C}
+=
+  0
+&&
+\left(
+\diagram{
+  \interaction{2}{g}{(0,0.4)}{ddot}{sawtooth};
+  \draw[->-] (g1) to ++(-0.25,0.5);
+  \draw[-<-] (g1) to ++(+0.25,0.5);
+  \draw[-<-] (g2) to ++(0,+0.5);
+  \draw[->-] (g2) to ++(0,-0.5);
+  \interaction{1}{1t}{(0.1,-0.6)}{ddot}{overhang};
+  \interaction{1}{2t}{(0.9,-0.6)}{ddot}{overhang};
+  \draw[->-] (1t1) to ++(-0.25,0.5);
+  \draw[-<-] (1t1) to ++(+0.25,0.5);
+  \draw[->-] (2t1) to ++(-0.25,0.5);
+  \draw[-<-] (2t1) to ++(+0.25,0.5);
+}
+\right)_\mr{C}
+=
+  0
+\end{align*}
+\end{enumerate}
+
+\newpage
+\item
+Interpret the following graph and fully simplify your answer.
+\begin{align*}
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (ta2) to (g2);
+  \draw[->-] (tb1) to (g2);
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[smalldot] {};
+}
+\end{align*}
+\textbf{Answer}:
+Denote the bare excitation operator at the top by $\tl{a}_{ab}^{ij}$.
+\begin{align*}
+\diagram{
+  \interaction{2}{ta}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{tb}{(2,-0.5)}{ddot}{overhang};
+  \draw[sawtooth] (0,0) node[ddot] (g1) {} to (1.5,0) node[ddot] (g2) {};
+  \draw[->-,bend left]  (ta1) to (g1);
+  \draw[-<-,bend right] (ta1) to (g1);
+  \draw[->-=0.7] (ta2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (ta2) to (g2);
+  \draw[->-] (tb1) to (g2);
+  \draw[-<-=0.7] (tb1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (tb2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (tb2) to ++(+0.25,1) node[smalldot] {};
+}
+=
+  (-)^{4+3}\,
+  \tfr{1}{2!2!}\,
+  \op{P}_{(a/b)}^{(i/j)}\,
+  \ol{g}_{kl}^{cd}
+  t_{ca}^{kl}
+  t_{db}^{ij}
+=
+-
+  \tfr{1}{2!}\,
+  \op{P}_{(a/b)}
+  \ol{g}_{kl}^{cd}
+  t_{ca}^{kl}
+  t_{db}^{ij}
+\end{align*}
+(Implicit summation over $k,l,c,d$.)
+
+
+\newpage
+\item
+Interpret the following graph and fully simplify it the ``long way.''  That is, you may use Rules 1-3 but you must start from Axiom 1 and show each step to get to your final answer.
+\begin{align*}
+\diagram{
+  \draw[->-=0.25,->-=0.75]
+    (0,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g1) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75]
+    (1,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g2) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+\end{align*}
+\textbf{Answer}:
+Denote the top bare excitation operator by $\tl{a}_{ab}^{ij}$ and the bottom one by $\tl{a}_{kl}^{cd}$.
+Axiom 1 gives
+\begin{align*}
+\diagram{
+  \draw[->-=0.25,->-=0.75]
+    (0,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g1) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75]
+    (1,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g2) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+\fr{1}{2!2!2!}
+\sum_{\substack{efgh\\mn}}
+\diagram{
+  \draw[->-=0.25,->-=0.75]
+    (0,-0.5)
+      node[smalldot] {}
+    to
+      node[pos=0.25,left] {$g$}
+      node[midway,ddot] (g1) {}
+      node[pos=0.75,left] {$e$}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (0.5,-0.5)
+      node[smalldot] {}
+    to
+      node[pos=0.75,left=-2pt] {$m$}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75]
+    (1,-0.5)
+      node[smalldot] {}
+    to
+      node[pos=0.25,left] {$h$}
+      node[midway,ddot] (g2) {}
+      node[pos=0.75,left] {$f$}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (1.5,-0.5)
+      node[smalldot] {}
+    to
+      node[pos=0.75,left=-2pt] {$n$}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \fr{1}{2!2!2!}
+  \sum_{\substack{efgh\\mn}}
+  \op{P}_{(a/b)}^{(i/j)}
+  \d_m^i
+  \d_n^j
+  \d_a^e
+  \d_b^f
+  \,
+  \ol{g}_{ef}^{gh}
+  \,
+  \op{P}_{(k/l)}^{(c/d)}
+  \d_k^m
+  \d_l^n
+  \d_g^c
+  \d_h^d
+  \,
+  \gno{
+    \tl{a}^{m^{\hole1}n^{\hole2}}_{e^{\ptcl1}f^{\ptcl2}}
+    \tl{a}^{e^{\ptcl1}f^{\ptcl2}}_{g^{\ptcl3}h^{\ptcl4}}
+    \tl{a}^{g^{\ptcl3}h^{\ptcl4}}_{m^{\hole1}n^{\hole2}}
+  }
+\end{align*}
+where I have used Rule 1 to determine the degeneracy factor: three pairs of equivalent lines contribute $2!$ each, and there are no equivalent subgraphs.
+Using Rule 2, the operator string evaluates as follows
+\begin{align*}
+  \gno{
+    \tl{a}^{m^{\hole1}n^{\hole2}}_{e^{\ptcl1}f^{\ptcl2}}
+    \tl{a}^{e^{\ptcl1}f^{\ptcl2}}_{g^{\ptcl3}h^{\ptcl4}}
+    \tl{a}^{g^{\ptcl3}h^{\ptcl4}}_{m^{\hole1}n^{\hole2}}
+  }
+=
+  (-1)^{2+2}
+=
+  +1
+\end{align*}
+since there are two hole lines and two loops.
+Summing over the line labels gives the following.
+\begin{align*}
+\diagram{
+  \draw[->-=0.25,->-=0.75]
+    (0,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g1) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75]
+    (1,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g2) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \fr{1}{2!2!2!}
+  \sum_{\substack{efgh\\mn}}
+  \op{P}_{(a/b)}^{(i/j)}
+  \d_m^i
+  \d_n^j
+  \d_a^e
+  \d_b^f
+  \,
+  \ol{g}_{ef}^{gh}
+  \,
+  \op{P}_{(k/l)}^{(c/d)}
+  \d_k^m
+  \d_l^n
+  \d_g^c
+  \d_h^d
+=
+  \fr{1}{2!2!2!}
+  \op{P}_{(a/b)}^{(i/j)}
+  \op{P}_{(k/l)}^{(c/d)}
+  \ol{g}_{ab}^{cd}
+  \d_k^i
+  \d_l^j
+\end{align*}
+Using Rule 3, we can cancel the degeneracy factors for equivalent lines connected to the top bare excitation operator against $\op{P}_{(a/b)}^{(i/j)}$.
+\begin{align*}
+\diagram{
+  \draw[->-=0.25,->-=0.75]
+    (0,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g1) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75]
+    (1,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g2) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \fr{1}{\cancel{2!}\cancel{2!}2!}
+  \cancel{\op{P}_{(a/b)}^{(i/j)}}
+  \op{P}_{(k/l)}^{(c/d)}
+  \ol{g}_{ab}^{cd}
+  \d_k^i
+  \d_l^j
+=
+  \fr{1}{2!}
+  \op{P}_{(k/l)}^{(c/d)}
+  \ol{g}_{ab}^{cd}
+  \d_k^i
+  \d_l^j
+\end{align*}
+Applying Rule 3 to the lower operator, we can cancel the permutation over $c,d$ but not the one over $k,l$, since the degeneracy factor for the hole lines was already canceled in the previous step.
+\begin{align*}
+\diagram{
+  \draw[->-=0.25,->-=0.75]
+    (0,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g1) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (0.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[->-=0.25,->-=0.75]
+    (1,-0.5)
+      node[smalldot] {}
+    to
+      node[midway,ddot] (g2) {}
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[-<-=0.65]
+    (1.5,-0.5)
+      node[smalldot] {}
+    to
+    ++(0,+1)
+      node[smalldot] {};
+  \draw[sawtooth] (g1) to (g2);
+}
+=
+  \cancel{
+    \fr{1}{2!}
+  }
+  \op{P}_{(k/l)}^{\cancel{(c/d)}}
+  \ol{g}_{ab}^{cd}
+  \d_k^i
+  \d_l^j
+=
+  \op{P}_{(k/l)}
+  \ol{g}_{ab}^{cd}
+  \d_k^i
+  \d_l^j
+\end{align*}
+
+
+\end{enumerate}
+
+\newpage
+\noindent
+\textbf{Extra Credit.}
+Prove Rule~3 for a closed graph with a single bare excitation operator of the following form.
+\begin{align*}
+  \tl{a}^{i_1\cd i_m}_{a_1\cd a_m}
+=
+  (\tfr{1}{m!})^2\,
+  \ol{\d}_{j_1\cd j_m}^{b_1\cd b_m}\,
+  \tl{a}^{j_1\cd j_m}_{b_1\cd b_m}
+&&
+  \ol{\d}_{j_1\cd j_m}^{b_1\cd b_m}
+\equiv
+  \op{P}_{(a_1/\cd/a_m)}^{(i_1/\cd/i_m)}
+  \d_{j_1}^{i_1}
+  \cd
+  \d_{j_m}^{i_m}
+  \d_{a_1}^{b_1}
+  \cd
+  \d_{a_m}^{b_m}
+\end{align*}
+\textbf{Answer}:
+Using Axiom~1, a closed graph containing this bare excitation operator will have the form
+\begin{align*}
+  \fr{1}{
+    |I_1|!\cd|I_k|!
+    |A_1|!\cd|A_h|!
+  }
+  \sum_{\substack{b_1\cd b_m\\j_1\cd j_m}}
+  \ol{\d}_{j_1\cd j_m}^{b_1\cd b_m}\,
+  T_{b_1\cd b_m}^{j_1\cd j_m}
+=
+  \fr{1}{
+    |I_1|!\cd|I_k|!
+    |A_1|!\cd|A_h|!
+  }
+  \op{P}_{(a_1/\cd/a_m)}^{(i_1/\cd/i_m)}
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+\end{align*}
+where $I_1\cup\cd\cup I_k=\{i_1,\ld, i_m\}$ and $A_1\cup\cd\cup A_h=\{a_1,\ld,a_m\}$ partition the indices of the bare excitation operator into subsets that fall on equivalent coefficient lines.
+Any remaining degeneracy factors, interaction tensors, or contracted operators are contained in
+$
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+$.
+According to the definition of equivalent lines, then, the indices in a given subset $I_p$ or $A_q$ must occur on a single interaction tensor in $T_{a_1\cd a_m}^{i_1\cd i_m}$, which is therefore already antisymmetric with respect to these indices.
+Denoting the indices in $I_p$ by $\{i_{p,1},\ld,i_{p,|I_p|}\}$, this enables the following cancellation.
+\begin{align*}
+  \op{P}_{(a_1/\cd/a_m)}^{(i_1/\cd/i_m)}
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+=
+  \op{P}_{(a_1/\cd/a_m)}^{(i_1/\cd/I_p/\cd/i_m)}
+  \op{P}^{(i_{p,1},\ld,i_{p,|I_p|})}
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+=
+  |I_p|!
+  \op{P}_{(a_1/\cd/a_m)}^{(i_1/\cd/I_p/\cd/i_m)}
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+\end{align*}
+Repeating this procedure for the remaining subsets completes the proof.
+\begin{align*}
+  \fr{1}{
+    |I_1|!\cd|I_k|!
+    |A_1|!\cd|A_h|!
+  }
+  \op{P}_{(a_1/\cd/a_m)}^{(i_1/\cd/i_m)}
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+=
+  \fr{1}{
+    \cancel{|I_1|!}\cd\cancel{|I_k|!}
+    \cancel{|A_1|!}\cd\cancel{|A_h|!}
+  }
+  \op{P}_{(A_1/\cd/A_h)}^{(I_1/\cd/I_k)}
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+=
+  \op{P}_{(A_1/\cd/A_h)}^{(I_1/\cd/I_k)}
+  T_{a_1\cd a_m}^{i_1\cd i_m}
+\end{align*} 
+
+
+
+\vfill
+\noindent
+\hrulefill
+
+\noindent
+\textbf{Appendix.}
+\vspace{10pt}
+
+{\small
+
+\noindent
+\bmit{Axiom 1.}
+The algebraic of a graph $G$ is obtained from a corresponding summand graph $\Si(G)$ as follows.
+\begin{align*}
+  G
+=
+  \fr{1}{\mr{dg}(G)}
+  \sum_{\mr{labels}}\Si(G)
+\end{align*}
+\noindent
+\bmit{Rule~1.}
+  Each set of $k$ equivalent lines or equivalent subgraphs contributes a factor of $k!$ to the degeneracy.
+
+\noindent
+\bmit{Rule~2.}
+  The overall sign of a closed graph is $(-)^{h+l}$, where $h$ and $l$ denote the total number of hole lines and loops.
+
+\noindent
+\bmit{Rule~3.}
+  For bare excitation operators, cancel the degeneracy factors from their equivalent coefficient lines by replacing the full antisymmetrizer, $P^{(p_1/\cd/p_m)}_{(q_1/\cd/q_m)}$, with a reduced antisymmetrizer over inequivalent coefficient lines, $\op{P}^{(P_1/\cd /P_h)}_{(Q_1/\cd /Q_k)}$.\footnote{
+  Here $\{p_1,\ld,p_m\}=P_1\cup\cd\cup P_h$ and $\{q_1,\ld,q_m\}=Q_1\cup\cd\cup Q_k$ are the upper and lower indices on the bare excitation operator $\tl{a}^{p_1\cd p_m}_{q_1\cd q_m}$, and the $P_i$'s and $Q_i$'s label subsets of equivalent coefficient lines.
+}~\footnote{
+  For equivalent lines connecting two bare excitation operators, this cancellation can only be performed once.
+}
+}
+
+
+
+\end{document}

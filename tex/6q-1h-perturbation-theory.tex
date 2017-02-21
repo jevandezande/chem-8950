@@ -1,0 +1,1123 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section,skip=9pt plus 2pt minus 5pt]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 6, Handout 1: Perturbation Theory}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\makeatother
+\newcommand{\resolventline}[2][1]{
+  \tikz[overlay]{
+      \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
+  }
+}
+
+\begin{document}
+
+
+\setcounter{section}{5}
+\section{Perturbation theory}
+
+\begin{dfn}
+\thmtitle{Model Hamiltonian}
+The electronic Hamiltonian\footnote{For the sake of brevity I will here refer to $H_\mr{c}$ as ``the electronic Hamiltonian''.  We could also use $H_e=E_0+H_\mr{c}$, which will simply shift some of the equations by a constant.} can be expressed as the sum of a \textit{zeroth order} or \textit{``model''~Hamiltonian} $H_0$ and a \textit{perturbation} $V_\mr{c}$, known as the \textit{fluctuation potential}.
+For well-behaved electronic systems, a common choice for the model Hamiltonian is the diagonal part of the Fock operator.
+\begin{align}
+\label{eq:diagonal-fock-model-hamiltonian}
+  H_0
+\equiv
+  f_p^p
+  \tl{a}^p_p
+&&
+  V_\mr{c}
+\equiv
+  f_p^q
+  (
+    1
+  -
+    \d_p^q
+  )
+  \tl{a}^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \tl{a}^{pq}_{rs}
+\end{align}
+This choice of $H_0$ brings the advantage that its eigenbasis is the standard basis of determinants.
+\begin{align}
+\label{eq:model-problem}
+  H_0
+  \F
+=
+  0\,
+  \F
+&&
+  H_0
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  \mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+&&
+  \mc{E}_{q_1\cd q_k}^{p_1\cd p_k}
+\equiv
+  \sum_{r=1}^k
+  f_{p_r}^{p_r}
+-
+  \sum_{r=1}^k
+  f_{q_r}^{q_r}
+\end{align}
+In general the model Hamiltonian is chosen to make the matrix representation of $H_\mr{c}$ in the model eigenbasis diagonally dominant.\footnote{See \url{https://en.wikipedia.org/wiki/Diagonally_dominant_matrix}.}
+Our choice of $H_0$ is appropriate for \textit{weakly correlated systems}, where the reference determinant can be chosen to satisfy $\ip{\F|\Y}\gg \ip{\F_{i_1\cd i_k}^{a_1\cd a_k}|\Y}$ for all substituted determinants.
+In this context it is convenient to employ intermediate normalization for the wavefunction, which will be assumed from here on out.
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Perturbation theory}
+\textit{Perturbation theory} analyzes the polynomial order with which the wavefunction and its observables depend on the fluctuation potential.
+For this purpose, we define a continuous series of Hamiltonians
+$
+  H(\la)
+\equiv
+  H_0
++
+  \la
+  V_\mr{c}
+$
+parametrized by a \textit{strength parameter} $\la$ that smoothly toggles between the model Hamiltonian at $\la=0$ to the exact one at $\la=1$.
+The \textit{$m\eth$-order contribution} to a quantity $X$ is then defined as the $m\eth$ coefficient in its Taylor series about $\la=0$, which is denoted by $X\ord{m}$.
+In particular, $\Y$ and $E_\mr{c}$ can be expanded as follows.
+\begin{align}
+\label{eq:series-schrodinger-equation}
+  \Y
+=
+  \sum_{m=0}^\infty
+  \Y_\mr{c}\ord{m}
+&&
+  E_\mr{c}
+=
+  \sum_{n=0}^\infty
+  E_\mr{c}\ord{m}
+&&
+  \Y\ord{m}
+\equiv
+  \fr{1}{m!}
+  \left.
+    \pd{^m\Y(\la)}{\la^m}
+  \right|_{\la=0}
+&&
+  E_\mr{c}\ord{m}
+\equiv
+  \fr{1}{m!}
+  \left.
+    \pd{^mE(\la)}{\la^m}
+  \right|_{\la=0}
+&&
+  H(\la)
+  \Y(\la)
+=
+  E(\la)
+  \Y(\la)
+\end{align}
+The order(s) at which a term contributes to the wavefunction or energy provides one measure of its relative importance.
+\end{dfn}
+
+\begin{rmk}
+Projecting the Schr\"odinger equation by $\F$ and using eq~\ref{eq:model-problem}, along with intermediate normalization, implies
+\begin{align}
+  E_\mr{c}
+=
+  \ip{\F|V_\mr{c}|\Y}
+\hspace{20pt}
+\implies
+\hspace{20pt}
+  E_\mr{c}\ord{m+1}
+=
+  \ip{\F|V_\mr{c}|\Y\ord{m}}
+\end{align}
+where the equation on the right follows from generalizing the energy expression to
+$
+  E(\la)
+=
+  \ip{\F|\la V_\mr{c}|\Y(\la)}
+$.
+In words, this says that the $m\eth$-order wavefunction contribution determines the $(m+1)\eth$-order energy contribution.
+This immediately identifies the first-order energy as
+$
+  E_\mr{c}\ord{1}
+=
+  \ip{\F|V_\mr{c}|\F}
+=
+  0
+$,
+since $V_\mr{c}$ consists of $\F$-normal-ordered operators.
+\end{rmk}
+
+\begin{dfn}
+\thmtitle{Model space projection operator}
+The projection onto the reference determinant, $P=\kt{\F}\br{\F}$, is termed the \textit{model space projection operator}.
+Its complement is the \textit{orthogonal space projection operator}.
+\begin{align}
+\label{eq:orthogonal-space-projection-operator}
+  Q
+\equiv
+  1
+-
+  P
+=
+  \sum_k
+  \pr{
+    \tfr{1}{k!}
+  }^2
+  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+  \kt{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+  \br{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+\end{align}
+Note that $P$ and $Q$ satisfy the following relationships, which are characteristic of complementary projection operators.
+\begin{align}
+  P
++
+  Q
+=
+  1
+&&
+  P^2
+=
+  P
+&&
+  Q^2
+=
+  Q
+&&
+  PQ
+=
+  QP
+=
+  0
+\end{align}
+Due to intermediate normalization, the model space projection operator also satisfies
+$
+  P\Y
+=
+  \F
+$
+and
+$
+  Q\Y
+=
+  \Y
+-
+  \F
+$.
+\end{dfn}
+
+\begin{samepage}
+\begin{dfn}
+\thmtitle{Resolvent}
+The \textit{resolvent},
+$
+  R_0
+\equiv
+  (-H_0)^{-1}Q
+$, is the negative\footnote{The annoying sign factor is required for consistency with $R(\zeta)\equiv(\zeta-H_0)^{-1}Q$, which is a more general definition of the resolvent.} inverse of $H_0$ in the orthogonal space.
+Expanding the orthogonal space projection operator according to equation~\ref{eq:orthogonal-space-projection-operator} yields the spectral decomposition for $R_0$.\footnote{
+Note that
+$
+  (-H_0)^{-1}\F_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  (-\mc{E}_{i_1\cd i_k}^{a_1\cd a_k})^{-1}\F_{i_1\cd i_k}^{a_1\cd a_k}
+$
+and
+$
+  -\mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+$
+}
+\begin{align}
+\label{eq:resolvent-spectral-decomposition}
+  R_0
+=
+  \sum_k
+  \pr{\tfr{1}{k!}}^2
+  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+  \fr{
+    \kt{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+    \br{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+  }{
+    \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+  }
+\end{align}
+Note that the resolvent satisfies $R_0P=0$ and $R_0Q=R_0$.
+Restriction to the orthogonal space is necessary because $H_0$ is singular in the model space, which means that $H_0^{-1}$ does not exist there.
+\end{dfn}
+\end{samepage}
+
+\begin{samepage}
+\begin{rmk}
+\thmtitle{A recursive solution to the Schr\"odinger equation}
+Operating $R_0$ on the Schr\"odinger equation gives\footnote{This follows from $R_0H_\mr{c}\Y=R_0(H_0 + V_\mr{c})\Y=-Q\Y + R_0\Y$ along with $Q\Y=\Y-\F$.}
+\begin{align}
+\label{eq:recursive-series}
+  \Y
+=
+  \F
++
+  R_0
+  (
+    V_\mr{c}
+  -
+    E_\mr{c}
+  )
+  \Y
+\end{align}
+which provides a recursive equation for $\Y$.
+Applying the same manipulation to equation \ref{eq:series-schrodinger-equation} gives
+\begin{align}
+\label{eq:lambda-dependent-recursive-series}
+  \Y(\la)
+=
+  \F
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\end{align}
+which can be used solve for wavefunction contributions order by order.
+\end{rmk}
+\end{samepage}
+
+\begin{ex}
+The first two derivatives of equation~\ref{eq:lambda-dependent-recursive-series} are given by
+\begin{align*}
+  \pd{\Y(\la)}{\la}
+=&
+  R_0
+  \pr{
+    V_\mr{c}
+  -
+    \pd{E(\la)}{\la}
+  }
+  \Y(\la)
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \pd{\Y(\la)}{\la}
+\\
+  \pd{^2\Y(\la)}{\la^2}
+=&
+-
+  R_0
+  \pd{^2E(\la)}{\la^2}
+  \Y(\la)
++
+  R_0
+  \pr{
+    V_\mr{c}
+  -
+    \pd{E(\la)}{\la}
+  }
+  \pd{\Y(\la)}{\la}
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \pd{^2\Y(\la)}{\la^2}
+\end{align*}
+which can be used to determine first- and second-order components of the wavefunction.
+\begin{align*}
+  \Y\ord{1}
+=
+  \left.
+  \pd{\Y(\la)}{\la}
+  \right|_{\la=0}
+=
+  R_0
+  V_\mr{c}
+  \F
+&&
+  \Y\ord{2}
+=
+  \left.
+  \pd{^2\Y(\la)}{\la^2}
+  \right|_{\la=0}
+=
+  R_0
+  V_\mr{c}
+  \Y\ord{1}
+=
+  R_0
+  V_\mr{c}
+  R_0
+  V_\mr{c}
+  \F
+\end{align*}
+Here we have used $E_\mr{c}\ord{0}=E_\mr{c}\ord{1}=0$ and $R_0\F=0$ to simplify the result.
+\end{ex}
+
+\begin{ex}
+\label{ex:first-order-wavefunction-expansion-unsimplified}
+Expanding the resolvent according to \cref{eq:resolvent-spectral-decomposition} allows us to expand $\Y\ord{1}$ in the determinant basis.
+\begin{align}
+\label{eq:first-order-wavefunction-expansion-unsimplified}
+  \Y\ord{1}
+=
+  R_0
+  V_\mr{c}
+  \F
+=
+  \sum_{\substack{a\\i}}
+  \F_i^a
+  \fr{\ip{\F_i^a|V_\mr{c}|\F}}{\mc{E}_a^i}
++
+  (\tfr{1}{2!})^2
+  \sum_{\substack{ab\\ij}}
+  \F_{ij}^{ab}
+  \fr{\ip{\F_{ij}^{ab}|V_\mr{c}|\F}}{\mc{E}_{ab}^{ij}}
+\end{align}
+The expansion truncates at double excitations because the maximum excitation level of $V_\mr{c}$ is $+2$.
+\end{ex}
+
+\begin{ex}
+The numerators in example~\ref{ex:first-order-wavefunction-expansion-unsimplified} are easily evaluated using Slater's rules, which leads to the following.
+\begin{align*}
+\label{eq:first-order-wavefunction-expansion}
+  \Y\ord{1}
+=
+  \sum_{\substack{a\\i}}
+  \F_i^a
+  \fr{f_a^i}{\mc{E}_a^i}
++
+  (\tfr{1}{2!})^2
+  \sum_{\substack{ab\\ij}}
+  \F_{ij}^{ab}\,
+  \fr{\ol{g}_{ab}^{ij}}{\mc{E}_{ab}^{ij}}
+\hspace{20pt}
+\implies
+\hspace{20pt}
+  E_\mr{c}\ord{2}
+=
+  \ip{\F|V_\mr{c}|\Y\ord{1}}
+=
+  \sum_{\substack{a\\i}}
+  \fr{f_i^af_a^i}{\mc{E}_a^i}
++
+  (\tfr{1}{2!})^2
+  \sum_{\substack{ab\\ij}}
+  \fr{\ol{g}_{ij}^{ab}\,\ol{g}_{ab}^{ij}}{\mc{E}_{ab}^{ij}}
+\end{align*}
+Note that the singles contribution vanishes for canonical Hartree-Fock references, since $f_a^i=0$.
+These extra terms are required for non-canonical orbitals, such as those obtained from restricted open-shell Hartree-Fock (ROHF) theory.
+\end{ex}
+
+\begin{ex}
+Diagrammatically, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follows.
+\begin{align}
+  \Y\ord{1}
+=
+\diagram[bottom]{
+  \draw
+    (0,-0.5)
+      node[circlex] {}
+    to
+    ++(0.5,0)
+      node[ddot] (f1) {};
+  \draw[->-]
+    (f1)
+    to
+      ++(-0.25,1);
+  \draw[-<-]
+    (f1)
+    to
+      ++(+0.25,1);
+  \draw[thick,flexdotted] (0.2,+0.25) to ++(0.6,0);
+}
++
+\diagram[bottom]{
+  \interaction{2}{g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-]
+    (g1)
+    to
+      ++(-0.25,1);
+  \draw[-<-]
+    (g1)
+    to
+      ++(+0.25,1);
+  \draw[->-]
+    (g2)
+    to
+      ++(-0.25,1);
+  \draw[-<-]
+    (g2)
+    to
+      ++(+0.25,1);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+  \draw[thick,flexdotted] (-0.3,+0.25) to ++(1.6,0);
+}
+&&
+  E_\mr{c}\ord{2}
+=
+\diagram{
+  %top
+  \draw
+    (0,+0.5)
+      node[circlex] {}
+    to
+    ++(0.5,0)
+      node[ddot] (1f1) {};
+  %bottom
+  \draw
+    (0,-0.5)
+      node[circlex] {}
+    to
+    ++(0.5,0)
+      node[ddot] (2f1) {};
+  \draw[->-=0.4,bend left ] (2f1) to (1f1);
+  \draw[-<-=0.6,bend right] (2f1) to (1f1);
+  \draw[thick,flexdotted] (0.2,0) to ++(0.6,0);
+}
++
+\diagram{
+  %top
+  \interaction{2}{1g}{(0,+0.5)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  %lines
+  \draw[->-=0.4,bend left ] (2g1) to (1g1);
+  \draw[-<-=0.6,bend right] (2g1) to (1g1);
+  \draw[->-=0.4,bend left ] (2g2) to (1g2);
+  \draw[-<-=0.6,bend right] (2g2) to (1g2);
+  \draw[thick,flexdotted] (-0.3,0) to ++(1.6,0);
+}
+\end{align}
+\end{ex}
+
+\begin{rmk}
+Notice that a fully contracted operator of the form
+$
+  \sum_i
+  v_i\,
+  a_i
+  \kt{\F}
+  \br{\F}
+  a_i\dg
+$
+can be simplified as
+\begin{align*}
+  \ts{\sum_i}
+  v_i\,
+  \ctr[0.5]{}{a}{_p\dg}{a}
+  a_p\dg
+  a_i
+  \kt{\F}
+  \br{\F}
+  \ctr[0.5]{}{a}{_i\dg}{a}
+  a_i\dg
+  a_q
+=
+  v_p\,
+  \ctr[0.5]{}{a}{_p\dg}{a}
+  a_p\dg a_q
+  \kt{\F}\br{\F}
+\end{align*}
+where $v_p$ is required to have an occupied index by the hole contraction.
+A similar argument can be made for completely contracted operators of the form
+$
+  \sum_a
+  v_a\,
+  a_a\dg
+  \kt{\F}
+  \br{\F}
+  a_a
+$
+or in general
+$
+  \sum_{\substack{abc\cd\\ijk\cd}}
+  v_{abc\cd}^{ijk\cd}\,
+  a_{abc\cd}^{ijk\cd}
+  \kt{\F}
+  \br{\F}
+  a^{abc\cd}_{ijk\cd}
+$, which leads to\footnote{The dotted lines are resolvent lines.}
+\begin{align}
+  \ip{\F|
+    X
+    R_0
+    X_1
+    R_0
+    X_2
+    \cd
+    R_0
+    X_n
+  |\F}
+=
+\gno{\ol{\ol{
+  X
+  \hspace{2pt}\resolventline[0.85]{}\hspace{2pt}
+  X_1
+  \hspace{2pt}\resolventline[0.85]{}\hspace{2pt}
+  X_2
+  \cd
+  \hspace{2pt}\resolventline[0.85]{}\hspace{2pt}
+  X_n
+}}}
+\end{align}
+for a general series of excitation operators $X, X_1,\ld,X_n$.
+This makes a convenient corollary to Wick's theorem for operator products with resolvents.
+\end{rmk}
+
+\begin{ex}
+\label{ex:second-order-wavefunction-expansion-unsimplified}
+Expanding the resolvent in $\Y\ord{2}=R_0V_\mr{c}\Y\ord{1}$ gives an expansion that includes up to quadruples
+\begin{align*}
+  \Y\ord{2}
+{=}
+  \sum_{\substack{a\\i}}
+  \F_i^a
+  \fr{\ip{\F_i^a|V_\mr{c}|\Y\ord{1}}}{\mc{E}_a^i}
+{+}
+  (\tfr{1}{2!})^2
+  \sum_{\substack{ab\\ij}}
+  \F_{ij}^{ab}
+  \fr{\ip{\F_{ij}^{ab}|V_\mr{c}|\Y\ord{1}}}{\mc{E}_{ab}^{ij}}
+{+}
+  (\tfr{1}{3!})^2
+  \sum_{\substack{abc\\ijk}}
+  \F_{ijk}^{abc}
+  \fr{\ip{\F_{ijk}^{abc}|V_\mr{c}|\Y\ord{1}}}{\mc{E}_{abc}^{ijk}}
+{+}
+  (\tfr{1}{4!})^2
+  \sum_{\substack{abcd\\ijkl}}
+  \F_{ijkl}^{abcd}
+  \fr{\ip{\F_{ijkl}^{abcd}|V_\mr{c}|\Y\ord{1}}}{\mc{E}_{abcd}^{ijkl}}
+\end{align*}
+since the two-electron part of $\Y\ord{1}$ has an excitation level of $+2$ and the excitation level of $V_\mr{c}$ ranges from $-2$ to $+2$.
+\end{ex}
+
+\begin{ex}
+The expansion for $\Y\ord{2}$ can be evaluated graphically.
+Assuming Brillouin's theorem for simplicity,
+\begin{align}
+\nonumber
+  \Y\ord{2}
+=&\
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \node[ddot] (2g2) at (1,0) {};
+  \draw[-<-] (1g1) to ++(-0.25,+1);
+  \draw[->-=0.25,->-=0.75] (1g1) to node[midway,ddot] (2g1) {} ++(+0.25,+1);
+  \draw[sawtooth] (2g1) to (2g2);
+  \draw[->-,bend left =45] (1g2) to (2g2);
+  \draw[-<-,bend right=45] (1g2) to (2g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.35) to ++(1.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \node[ddot] (2g2) at (1,0) {};
+  \draw[->-] (1g1) to ++(-0.25,+1);
+  \draw[-<-=0.25,-<-=0.75] (1g1) to node[midway,ddot] (2g1) {} ++(+0.25,+1);
+  \draw[sawtooth] (2g1) to (2g2);
+  \draw[->-,bend left =45] (1g2) to (2g2);
+  \draw[-<-,bend right=45] (1g2) to (2g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.35) to ++(1.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-=0.25,->-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1);
+  \draw[-<-=0.7] (t1) to ++(+0.25,1);
+  \draw[->-=0.25,->-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1);
+  \draw[-<-=0.7] (t2) to ++(+0.25,1);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[-<-=0.25,-<-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1);
+  \draw[->-=0.7] (t1) to ++(+0.25,1);
+  \draw[-<-=0.25,-<-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1);
+  \draw[->-=0.7] (t2) to ++(+0.25,1);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{g}{(1,+0.0)}{ddot}{sawtooth};
+  \draw[->-] (t1) to ++(-0.25,1);
+  \draw[-<-] (t1) to ++(+0.25,1);
+  \draw[->-,bend left] (t2) to (g1);
+  \draw[-<-,bend right] (t2) to (g1);
+  \draw[->-] (g2) to ++(-0.25,0.5);
+  \draw[-<-] (g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(2.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+\\&\
+\label{eq:second-order-wavefunction-graphical}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(1.125,0)}{ddot}{sawtooth};
+  \draw[-<-] (1g1) to ++(-0.25,1);
+  \draw[->-] (1g1) to ++(+0.25,1);
+  \draw[-<-] (1g2) to ++(-0.25,1);
+  \draw[->-=0.25,->-=0.75] (1g2) to ++(+0.25,1);
+  \draw[-<-] (2g2) to ++(-0.25,0.5);
+  \draw[->-] (2g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.4,-0.27) to ++(2.9,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(2.9,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(1.125,0)}{ddot}{sawtooth};
+  \draw[->-] (1g1) to ++(-0.25,1);
+  \draw[-<-] (1g1) to ++(+0.25,1);
+  \draw[->-] (1g2) to ++(-0.25,1);
+  \draw[-<-=0.25,-<-=0.75] (1g2) to ++(+0.25,1);
+  \draw[->-] (2g2) to ++(-0.25,0.5);
+  \draw[-<-] (2g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.4,-0.27) to ++(2.9,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(2.9,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(2,0)}{ddot}{sawtooth};
+  \draw[-<-] (1g1) to ++(-0.25,1);
+  \draw[->-] (1g1) to ++(+0.25,1);
+  \draw[-<-] (1g2) to ++(-0.25,1);
+  \draw[->-] (1g2) to ++(+0.25,1);
+  \draw[-<-] (2g1) to ++(-0.25,0.5);
+  \draw[->-] (2g1) to ++(+0.25,0.5);
+  \draw[-<-] (2g2) to ++(-0.25,0.5);
+  \draw[->-] (2g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(3.9,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+\\=&\
+  \tfr{1}{2}
+  \sum_{\substack{abc\\ij}}
+  \F_i^a\,
+  \fr{
+    \ol{g}_{aj}^{bc}
+    \ol{g}_{bc}^{ij}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{bc}^{ij}
+  }
++
+  \tfr{1}{2}
+  \sum_{\substack{ab\\ijk}}
+  \F_i^a
+  \fr{
+    \ol{g}_{jk}^{ib}
+    \ol{g}_{ab}^{jk}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{ab}^{jk}
+  }
++
+  \tfr{1}{2^3}
+  \sum_{\substack{abcd\\ij}}
+  \F_{ij}^{ab}
+  \fr{
+    \ol{g}_{ab}^{cd}
+    \ol{g}_{cd}^{ij}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{ij}
+  }
++
+  \tfr{1}{2^3}
+  \sum_{\substack{ab\\ijkl}}
+  \F_{ij}^{ab}
+  \fr{
+    \ol{g}_{kl}^{ij}
+    \ol{g}_{ab}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ab}^{kl}
+  }
++
+  \sum_{\substack{abc\\ijk}}
+  \F_{ij}^{ab}
+  \fr{
+    \ol{g}_{ac}^{ik}
+    \ol{g}_{kb}^{cj}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ac}^{ik}
+  }
+\nonumber
+\\&\
++
+  \tfr{1}{2^2}
+  \sum_{\substack{abcd\\ijk}}
+  \F_{ijk}^{abc}
+  \fr{
+    \ol{g}_{ad}^{ij}
+    \ol{g}_{bc}^{dk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ad}^{ij}
+  }
+-
+  \tfr{1}{2^2}
+  \sum_{\substack{abc\\ijkl}}
+  \fr{
+    \ol{g}_{ab}^{il}
+    \ol{g}_{lc}^{jk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ab}^{il}
+  }
++
+  \tfr{1}{2^4}
+  \sum_{\substack{abcd\\ijkl}}
+  \F_{ijkl}^{abcd}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+  }
+\end{align}
+where the operators in the final diagram do not form an equivalent pair because they pass through different resolvent lines.
+This can be used to determine the third-order correlation energy
+\begin{align}
+  E_\mr{c}\ord{3}
+=
+  \ip{\F|V_\mr{c}|\Y\ord{2}}
+=
+\diagram{
+  %top
+  \interaction{2}{1g}{(0,+0.5)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-=0.25,->-=0.75, bend left]
+    (2g1)
+    to
+      node[midway,ddot] (g1) {}
+    (1g1);
+  \draw[-<-=0.65,bend right] (2g1) to (1g1);
+  \draw[->-=0.25,->-=0.75, bend left]
+    (2g2)
+    to
+      node[midway,ddot] (g2) {}
+    (1g2);
+  \draw[-<-=0.65,bend right] (2g2) to (1g2);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.3) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.3) to ++(1.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+{+}
+\diagram{
+  %top
+  \interaction{2}{1g}{(0,+0.5)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[-<-=0.25,-<-=0.75, bend left]
+    (2g1)
+    to
+      node[midway,ddot] (g1) {}
+    (1g1);
+  \draw[->-=0.65,bend right] (2g1) to (1g1);
+  \draw[-<-=0.25,-<-=0.75, bend left]
+    (2g2)
+    to
+      node[midway,ddot] (g2) {}
+    (1g2);
+  \draw[->-=0.65,bend right] (2g2) to (1g2);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.3) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.3) to ++(1.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+{+}
+\diagram{
+  %top
+  \draw[sawtooth]
+    (0,+0.5)
+      node[ddot] (1g1) {}
+    to
+    ++(2,0)
+      node[ddot] (1g2) {};
+  %middle
+  \interaction{2}{g}{(1,+0.0)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-,bend left ] (2g1) to (1g1);
+  \draw[-<-,bend right] (2g1) to (1g1);
+  \draw[->-,bend left ] (2g2) to (g1);
+  \draw[-<-,bend right] (2g2) to (g1);
+  \draw[->-,bend left ] (g2) to (1g2);
+  \draw[-<-,bend right] (g2) to (1g2);
+  \draw[thick,flexdotted] (-0.3,-0.3) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.3) to ++(2.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+=
+  \tfr{1}{2^3}
+  \sum_{\substack{abcd\\ij}}
+  \fr{
+    \ol{g}_{ij}^{ab}
+    \ol{g}_{ab}^{cd}
+    \ol{g}_{cd}^{ij}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{ij}
+  }
++
+  \tfr{1}{2^3}
+  \sum_{\substack{ab\\ijkl}}
+  \fr{
+    \ol{g}_{ij}^{ab}
+    \ol{g}_{kl}^{ij}
+    \ol{g}_{ab}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ab}^{kl}
+  }
++
+  \sum_{\substack{abc\\ijk}}
+  \fr{
+    \ol{g}_{ij}^{ab}
+    \ol{g}_{ac}^{ik}
+    \ol{g}_{kb}^{cj}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ac}^{ik}
+  }
+\end{align}
+which also equals $\ip{\Y\ord{1}|V_\mr{c}|\Y\ord{1}}$.
+This is an example of the \textit{Wigner $(2n+1)$ rule}, which says that
+$
+  E_\mr{c}\ord{2n+1}
+=
+  \ip{\Y\ord{n}|V_\mr{c}|\Y\ord{n}}
+$.
+Note that $E_\mr{c}\ord{m+1}$ always only depends on the doubles contribution to $\Y\ord{m}$, but that the doubles coefficients themselves may involve triples, quadruples and higher contributions from wavefunction components of order less than $m$.
+\end{ex}
+
+\begin{ex}
+Using
+${}\ord{m}c_{ab\cd}^{ij\cd}=\ip{\F_{ij\cd}^{ab\cd}|\Y\ord{m}}$, the second order CI coefficients can be determined from eq~\ref{eq:second-order-wavefunction-graphical} by contracting a bare excitation operator with the top of each diagram.
+Interpreting these graphs gives the following.
+\begin{align*}
+  {}\ord{2}c_a^i
+&=
+  \tfr{1}{2}
+  \sum_{\substack{bc\\j}}
+  \fr{
+    \ol{g}_{aj}^{bc}
+    \ol{g}_{bc}^{ij}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{bc}^{ij}
+  }
++
+  \tfr{1}{2}
+  \sum_{\substack{b\\jk}}
+  \fr{
+    \ol{g}_{jk}^{ib}
+    \ol{g}_{ab}^{jk}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{ab}^{jk}
+  }
+\\
+  {}\ord{2}c_{ab}^{ij}
+&=
+  \tfr{1}{2}
+  \sum_{\substack{cd}}
+  \fr{
+    \ol{g}_{ab}^{cd}
+    \ol{g}_{cd}^{ij}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{ij}
+  }
++
+  \tfr{1}{2}
+  \sum_{\substack{kl}}
+  \fr{
+    \ol{g}_{kl}^{ij}
+    \ol{g}_{ab}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ab}^{kl}
+  }
++
+  \op{P}_{(a/b)}^{(i/j)}
+  \sum_{\substack{c\\k}}
+  \fr{
+    \ol{g}_{ac}^{ik}
+    \ol{g}_{kb}^{cj}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ac}^{ik}
+  }
+\\
+  {}\ord{2}c_{abc}^{ijk}
+&=
+  \op{P}_{(a/bc)}^{(ij/k)}
+  \sum_{\substack{d}}
+  \F_{ijk}^{abc}
+  \fr{
+    \ol{g}_{ad}^{ij}
+    \ol{g}_{bc}^{dk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ad}^{ij}
+  }
+-
+  \op{P}_{(a/bc)}^{(i/jk)}
+  \sum_{\substack{l}}
+  \fr{
+    \ol{g}_{ab}^{il}
+    \ol{g}_{lc}^{jk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ab}^{il}
+  }
+\\
+  {}\ord{2}c_{abcd}^{ijkl}
+&=
+  \op{P}_{(ab/cd)}^{(ij/kl)}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+  }
+\end{align*}
+Note that the second order quadruples coefficient is disconnected.
+Prop.~\ref{prop:second-order-c4} shows that the second-order quadruples operator is actually a simple product of first-order doubles operators.
+This fact was an early motivation for coupled-pair many-electron theory,\footnote{This is the original name for coupled-cluster doubles.} since it justifies approximating
+$
+  \Y_\mr{CIDQ}
+=
+  (1+C_2+C_4)\F
+$
+by
+$
+  \Y_\mr{CPMET}
+=
+  (1 + C_2 + \tfr{1}{2}C_2^2)\F
+$.
+\end{ex}
+
+\begin{prop}
+\label{prop:second-order-c4}
+\thmstatement{
+$
+  {}\ord{2} C_4
+=
+  \tfr{1}{2}
+  {}\ord{1} C_2^2
+$
+}
+\thmproof{
+This follows from rearranging the resolvent denominator.
+\begin{align*}
+  \fr{1}{\mc{E}_{abcd}^{ijkl}\mc{E}_{ab}^{ij}}
++
+  \fr{1}{\mc{E}_{abcd}^{ijkl}\mc{E}_{cd}^{kl}}
+=
+  \fr{
+    \mc{E}_{cd}^{kl} + \mc{E}_{ab}^{ij}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{kl}
+  }
+=
+  \fr{
+    1
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{kl}
+  }
+\implies
+  {}\ord{2}C_4
+=
+  \pr{\tfr{1}{2}}^4
+  \sum_{\substack{abcd\\ijkl}}
+  \tl{a}^{ijkl}_{abcd}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+  }
+=
+  \tfr{1}{2}\cdot
+  \pr{\tfr{1}{2}}^4
+  \sum_{\substack{abcd\\ijkl}}
+  \tl{a}^{ijkl}_{abcd}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{kl}
+  }
+=
+  \tfr{1}{2}
+  {}\ord{1}C_2^2
+\end{align*}
+}
+\end{prop}
+
+\end{document}
