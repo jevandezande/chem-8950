@@ -101,8 +101,8 @@ $
   V_\mr{c}
 $
 parametrized by a \textit{strength parameter} $\la$ that smoothly toggles between the model Hamiltonian at $\la=0$ to the exact one at $\la=1$.
-The \textit{$m\eth$-order contribution} to a quantity $X$ is then defined as the $m\eth$ coefficient in its Taylor series about $\la=0$, which is denoted by $X\ord{m}$.
-In particular, $\Y$ and $E_\mr{c}$ can be expanded as follows.
+The \textit{$m\eth$-order contribution} to a quantity $X$ is then defined as the $m\eth$ coefficient in its Taylor series about $\la=0$, denoted $X\ord{m}$.
+In particular, the wavefunction and correlation energy can be expanded as follows.
 \begin{align}
 \label{eq:series-schrodinger-equation}
   \Y
@@ -211,7 +211,7 @@ Note that $P$ and $Q$ satisfy the following relationships, which are characteris
 =
   0
 \end{align}
-Due to intermediate normalization, the model space projection operator also satisfies
+Due to intermediate normalization, we also have that
 $
   P\Y
 =
@@ -236,22 +236,20 @@ $
 \equiv
   (-H_0)^{-1}Q
 $, is the negative\footnote{The annoying sign factor is required for consistency with $R(\zeta)\equiv(\zeta-H_0)^{-1}Q$, which is a more general definition of the resolvent.} inverse of $H_0$ in the orthogonal space.
-Expanding the orthogonal space projection operator according to equation~\ref{eq:orthogonal-space-projection-operator} yields the spectral decomposition for $R_0$.\footnote{
-Note that
-$
-  (-H_0)^{-1}\F_{i_1\cd i_k}^{a_1\cd a_k}
-=
-  (-\mc{E}_{i_1\cd i_k}^{a_1\cd a_k})^{-1}\F_{i_1\cd i_k}^{a_1\cd a_k}
-$
-and
-$
-  -\mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
-=
-  \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
-$
-}
 \begin{align}
 \label{eq:resolvent-spectral-decomposition}
+  R_0
+  \F
+=
+  0
+  \F
+&&
+  R_0
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  (\mc{E}_{a_1\cd a_k}^{i_1\cd i_k})^{-1}
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+&&
   R_0
 =
   \sum_k
@@ -264,7 +262,7 @@ $
     \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
   }
 \end{align}
-Note that the resolvent satisfies $R_0P=0$ and $R_0Q=R_0$.
+The equation on the right is the spectral decomposition of the resolvent.\footnote{This follows from the eigenvalue equations, but you can derive it explicitly by substituting equation~\ref{eq:orthogonal-space-projection-operator} into $R_0=(-H_0)^{-1}Q$.}
 Restriction to the orthogonal space is necessary because $H_0$ is singular in the model space, which means that $H_0^{-1}$ does not exist there.
 \end{dfn}
 \end{samepage}
@@ -272,23 +270,7 @@ Restriction to the orthogonal space is necessary because $H_0$ is singular in th
 \begin{samepage}
 \begin{rmk}
 \thmtitle{A recursive solution to the Schr\"odinger equation}
-Operating $R_0$ on the Schr\"odinger equation gives\footnote{This follows from $R_0H_\mr{c}\Y=R_0(H_0 + V_\mr{c})\Y=-Q\Y + R_0\Y$ along with $Q\Y=\Y-\F$.}
-\begin{align}
-\label{eq:recursive-series}
-  \Y
-=
-  \F
-+
-  R_0
-  (
-    V_\mr{c}
-  -
-    E_\mr{c}
-  )
-  \Y
-\end{align}
-which provides a recursive equation for $\Y$.
-Applying the same manipulation to equation \ref{eq:series-schrodinger-equation} gives
+Operating $R_0$ on $H(\la)\Y(\la)=E(\la)\Y(\la)$ gives\footnote{This follows from $R_0H_0\Y=-Q\Y=-\Y+\F$.}
 \begin{align}
 \label{eq:lambda-dependent-recursive-series}
   \Y(\la)
@@ -303,7 +285,7 @@ Applying the same manipulation to equation \ref{eq:series-schrodinger-equation} 
   )
   \Y(\la)
 \end{align}
-which can be used solve for wavefunction contributions order by order.
+which provides a recursive equation for $\Y(\la)$ that can be used solve for wavefunction contributions order by order.
 \end{rmk}
 \end{samepage}
 
@@ -335,6 +317,7 @@ The first two derivatives of equation~\ref{eq:lambda-dependent-recursive-series}
   \pd{^2E(\la)}{\la^2}
   \Y(\la)
 +
+  2
   R_0
   \pr{
     V_\mr{c}
@@ -351,7 +334,7 @@ The first two derivatives of equation~\ref{eq:lambda-dependent-recursive-series}
   )
   \pd{^2\Y(\la)}{\la^2}
 \end{align*}
-which can be used to determine first- and second-order components of the wavefunction.
+which can be used to determine the first- and second-order wavefunction contributions.
 \begin{align*}
   \Y\ord{1}
 =
@@ -366,6 +349,7 @@ which can be used to determine first- and second-order components of the wavefun
   \Y\ord{2}
 =
   \left.
+  \fr{1}{2}
   \pd{^2\Y(\la)}{\la^2}
   \right|_{\la=0}
 =
