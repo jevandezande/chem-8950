@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 6, Suggested Problems 1: Perturbation Theory}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\usepackage{multicol}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Derive the spectral resolution of the resolvent operator by expanding $Q$ in
+$
+  R_0
+=
+-
+  (H_0)^{-1}
+  Q
+$.
+
+
+\item\label{item:energy-equation}
+Show that
+$
+  E(\la)
+=
+  \ip{\F|\la V_\mr{c}|\Y(\la)}
+$.
+
+\item
+Derive the following by induction
+\begin{align}
+  \pd{^{m+1}}{\la^{m+1}}
+  \ip{\F|\la V_\mr{c}|\Y(\la)}
+=
+  (m+1)
+  \ip{\F|V_\mr{c}|\pd{^m}{\la^m}\Y(\la)}
++
+  \ip{\F|\la V_\mr{c}|\pd{^{m+1}}{\la^{m+1}}\Y(\la)}
+\end{align}
+and then use it to prove 
+$
+  E\ord{m+1}
+=
+  \ip{\F|V_\mr{c}|\Y\ord{m}}
+$.
+
+
+\item\label{item:recursive-wavefunction-equation}
+Derive the recursive equation for $\Y(\la)$.
+\begin{align}
+\label{eq:recursive-wavefunction-equation}
+  \Y(\la)
+=
+  \F
++
+  R_0
+  (
+    \la
+    V_\mr{c}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\end{align}
+
+
+\item
+Derive all wavefunction and energy contributions up to second and third order, respectively.
+
+
+\item
+Determine the first- and second-order components of the CI coefficients.
+
+\item
+Show that
+$
+  {}\ord{2}
+  C_4
+=
+  \tfr{1}{2}
+  {}\ord{1}
+  C_2^2
+$.
+
+\end{enumerate}
+
+
+\end{document}

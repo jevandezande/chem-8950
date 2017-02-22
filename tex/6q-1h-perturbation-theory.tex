@@ -172,7 +172,7 @@ since $V_\mr{c}$ consists of $\F$-normal-ordered operators.
 \begin{dfn}
 \thmtitle{Model space projection operator}
 The projection onto the reference determinant, $P=\kt{\F}\br{\F}$, is termed the \textit{model space projection operator}.
-Its complement is the \textit{orthogonal space projection operator}.
+Its complement is the \textit{orthogonal space projection operator}.\footnote{Note that these definitions are implicitly restricted to $\mc{F}_n$ rather than the full Fock space.}
 \begin{align}
 \label{eq:orthogonal-space-projection-operator}
   Q
@@ -368,7 +368,7 @@ Here we have used $E_\mr{c}\ord{0}=E_\mr{c}\ord{1}=0$ and $R_0\F=0$ to simplify 
 
 \begin{ex}
 \label{ex:first-order-wavefunction-expansion-unsimplified}
-Expanding the resolvent according to \cref{eq:resolvent-spectral-decomposition} allows us to expand $\Y\ord{1}$ in the determinant basis.
+Plugging in the spectral decomposition for $R_0$ allows us to expand $\Y\ord{1}$ in the determinant basis.
 \begin{align}
 \label{eq:first-order-wavefunction-expansion-unsimplified}
   \Y\ord{1}
@@ -421,8 +421,155 @@ Note that the singles contribution vanishes for canonical Hartree-Fock reference
 These extra terms are required for non-canonical orbitals, such as those obtained from restricted open-shell Hartree-Fock (ROHF) theory.
 \end{ex}
 
+
+\begin{dfn}\thmtitle{Resolvent line (extended definition)}
+Let $Y$ be a particle-number conserving operator string\footnote{That is, it contains a balanced number of creation and annihilation operators so that $Y\kt{\F}\in\mc{F}_n$.} and compare
+$R_0Y\kt{\F}$ with
+$Y\kt{\F}$
+by expanding this operator string using Wick's theorem.
+We can turn the second expansion into the first by setting each term to zero unless the contracted $Y$ has the form
+$
+  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
+  \times
+  \mr{const}
+$,\footnote{Since $R_0\gno{X}\kt{\F}=0$ unless $\gno{X}$ can fully contract one of the bras $\br{\F_{i_1\cd i_k}^{a_1\cd a_k}}$ in the resolvent.}
+in which case we scale it by
+$(\mc{E}_{b_1\cd b_m}^{j_1\cd j_m})^{-1}$.\footnote{
+  Since
+$
+  R_0
+  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
+  \kt{\F}
+=
+  (\mc{E}_{b_1\cd b_m}^{j_1\cd j_m})^{-1}
+  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
+  \kt{\F}
+$.
+}
+Multiplying these expansions by $Y'$ and applying Wick's theorem gives the following
+\begin{align*}
+  Y'Y
+  \kt{\F}
+=
+  \pr{
+    \gno{Y'Y}
+  +
+    \gno{\ol{Y'Y}}
+  }
+  \kt{\F}
+&&
+  Y'
+  R_0
+  Y
+  \kt{\F}
+=
+  \pr{
+  \gno{
+    Y'
+    \,\resolventline[0.7]{}\,\,
+    Y
+  }
+  +
+  \gno{\ol{
+    Y'
+    \,\resolventline[0.8]{}\,\,
+    Y
+  }}
+  }
+  \kt{\F}
+\end{align*}
+where the dotted lines indicate that wherever the internal contractions on $Y$ leave a remainder of the form
+$
+  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
+  \times
+  \mr{const}
+$
+we scale the term by $(\mc{E}_{b_1\cd b_m}^{j_1\cd j_m})^{-1}$.
+All other terms are omitted.
+This builds upon our earlier concept of a \textit{resolvent line}, which was limited to a particular case:
+$
+  \br{\F}
+  Y'
+  R_0
+  Y
+  \kt{\F}
+=
+  \gno{\ol{\ol{
+    Y'
+    \,\resolventline[0.8]{}\,\,
+    Y
+  }}}
+$
+with
+$
+  Y'
+=
+  \tl{a}_{a_1\cd a_k}^{i_1\cd i_k}
+$
+and
+$
+  Y
+=
+  \tl{a}_{j_1\cd j_k}^{b_1\cd b_k}
+$.
+The extended definition implies
+$
+  \,\resolventline[0.7]{}\,\,\,
+  \kt{\F^{a_1\cd a_k}_{i_1\cd i_k}}
+=
+  (\mc{E}_{a_1\cd a_k}^{i_1\cd i_k})^{-1}
+  \kt{\F^{a_1\cd a_k}_{i_1\cd i_k}}
+$
+and
+$
+  \,\resolventline[0.7]{}\,\,\,
+  \kt{\F}
+=
+  0
+$,
+which makes an uncontracted resolvent line interchangeable with~$R_0$.\footnote{The difference between resolvents and resolvent lines is that we haven't defined a ``contraction through $R_0$'' operation.}
+This definition of has a simple graphical interpretation:
+A graph with hole lines $i_1,\ld,i_h$ and particle lines $a_1,\ld,a_k$ passing through a resolvent line is scaled by $(\mc{E}_{a_1\cd a_k}^{i_1\cd i_k})^{-1}$ when $h=k$ and vanishes when $h\neq k$.
+A graph with no operators separating a resolvent line from the bra or ket of the reference state equals zero.
+\end{dfn}
+
+\begin{cor}
+\thmtitle{Wick's theorem for perturbation theory}
+\thmstatement{
+$
+  YR_0Y_1\cd R_0 Y_m
+  \kt{\F}
+=
+  \pr{
+    \gno{
+      Y
+      \,\resolventline[0.8]{}\,
+      Y_1
+      \cd
+      \,\resolventline[0.8]{}\,
+      Y_m
+    }
+  +
+    \gno{\ol{
+      Y
+      \,\resolventline[0.8]{}\,
+      Y_1
+      \cd
+      \,\resolventline[0.8]{}\,
+      Y_m
+    }}
+  }
+  \kt{\F}
+$%
+}%
+\vspace{5pt}
+\thmproof{
+  This follows directly from Wick's theorem and the definition of a resolvent line.
+}
+\end{cor}
+
 \begin{ex}
-Diagrammatically, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follows.
+In diagram notation, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follows.
 \begin{align}
   \Y\ord{1}
 =
@@ -503,83 +650,10 @@ Diagrammatically, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follows.
 \end{align}
 \end{ex}
 
-\begin{rmk}
-Notice that a fully contracted operator of the form
-$
-  \sum_i
-  v_i\,
-  a_i
-  \kt{\F}
-  \br{\F}
-  a_i\dg
-$
-can be simplified as
-\begin{align*}
-  \ts{\sum_i}
-  v_i\,
-  \ctr[0.5]{}{a}{_p\dg}{a}
-  a_p\dg
-  a_i
-  \kt{\F}
-  \br{\F}
-  \ctr[0.5]{}{a}{_i\dg}{a}
-  a_i\dg
-  a_q
-=
-  v_p\,
-  \ctr[0.5]{}{a}{_p\dg}{a}
-  a_p\dg a_q
-  \kt{\F}\br{\F}
-\end{align*}
-where $v_p$ is required to have an occupied index by the hole contraction.
-A similar argument can be made for completely contracted operators of the form
-$
-  \sum_a
-  v_a\,
-  a_a\dg
-  \kt{\F}
-  \br{\F}
-  a_a
-$
-or in general
-$
-  \sum_{\substack{abc\cd\\ijk\cd}}
-  v_{abc\cd}^{ijk\cd}\,
-  a_{abc\cd}^{ijk\cd}
-  \kt{\F}
-  \br{\F}
-  a^{abc\cd}_{ijk\cd}
-$, which leads to\footnote{The dotted lines are resolvent lines.}
-\begin{align}
-  \ip{\F|
-    X
-    R_0
-    X_1
-    R_0
-    X_2
-    \cd
-    R_0
-    X_n
-  |\F}
-=
-\gno{\ol{\ol{
-  X
-  \hspace{2pt}\resolventline[0.85]{}\hspace{2pt}
-  X_1
-  \hspace{2pt}\resolventline[0.85]{}\hspace{2pt}
-  X_2
-  \cd
-  \hspace{2pt}\resolventline[0.85]{}\hspace{2pt}
-  X_n
-}}}
-\end{align}
-for a general series of excitation operators $X, X_1,\ld,X_n$.
-This makes a convenient corollary to Wick's theorem for operator products with resolvents.
-\end{rmk}
 
 \begin{ex}
 \label{ex:second-order-wavefunction-expansion-unsimplified}
-Expanding the resolvent in $\Y\ord{2}=R_0V_\mr{c}\Y\ord{1}$ gives an expansion that includes up to quadruples
+Using the spectral decomposition of $R_0$ in $\Y\ord{2}=R_0V_\mr{c}\Y\ord{1}$ gives an expansion that truncates at quadruples
 \begin{align*}
   \Y\ord{2}
 {=}
@@ -621,7 +695,7 @@ Assuming Brillouin's theorem for simplicity,
   \draw[->-,bend left =45] (1g2) to (2g2);
   \draw[-<-,bend right=45] (1g2) to (2g2);
   \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
-  \draw[thick,flexdotted] (-0.3,+0.35) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.35) to ++(0.7,0);
   \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
 }
 +
@@ -634,7 +708,7 @@ Assuming Brillouin's theorem for simplicity,
   \draw[->-,bend left =45] (1g2) to (2g2);
   \draw[-<-,bend right=45] (1g2) to (2g2);
   \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
-  \draw[thick,flexdotted] (-0.3,+0.35) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.35) to ++(0.7,0);
   \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
 }
 +
