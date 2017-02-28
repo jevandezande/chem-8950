@@ -335,7 +335,8 @@ The first two derivatives of equation~\ref{eq:lambda-dependent-recursive-series}
   \pd{^2\Y(\la)}{\la^2}
 \end{align*}
 which can be used to determine the first- and second-order wavefunction contributions.
-\begin{align*}
+\begin{align}
+\label{eq:first-and-second-order-principal-terms}
   \Y\ord{1}
 =
   \left.
@@ -362,7 +363,7 @@ which can be used to determine the first- and second-order wavefunction contribu
   R_0
   V_\mr{c}
   \F
-\end{align*}
+\end{align}
 Here we have used $E_\mr{c}\ord{0}=E_\mr{c}\ord{1}=0$ and $R_0\F=0$ to simplify the result.
 \end{ex}
 
@@ -1177,5 +1178,430 @@ This follows from rearranging the resolvent denominator.
 \end{align*}
 }
 \end{prop}
+
+\begin{lem}\label{lem:energy-substitution}
+\thmtitle{The Energy Substitution Lemma}
+\thmstatement{
+  $\Y\ord{m}$ equals the sum of a ``principal term''
+  $(R_0V_\mr{c})^m\F$
+  plus all possible substitutions of adjacent factors $(R_0V_\mr{c})^{r_i}$ in the principal term by $R_0E_\mr{c}\ord{r_i}$.
+  Each term in the sum is weighted by a sign factor $(-)^k$, where $k$ is the number of substitutions.
+}
+\thmproof{
+  See \cref{app:linked-diagram-theorem}.
+}
+\end{lem}
+
+\begin{ex}
+Lemma~\ref{lem:energy-substitution} is consistent with equation~\ref{eq:first-and-second-order-principal-terms} because substitution of the rightmost factors in the principal term leaves a resolvent acting on the reference determinant and because the first-order energy contribution equals zero.
+The first non-trivial examples of the energy substitution lemma begin at third order.
+\begin{align}
+\label{eq:energy-substitution-psi-3}
+  \Y\ord{3}
+=&\
+  R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0E_\mr{c}\ord{2}R_0V_\mr{c}\F
+\\
+\label{eq:energy-substitution-psi-4}
+  \Y\ord{4}
+=&\
+  R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0E_\mr{c}\ord{2}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0V_\mr{c}R_0E_\mr{c}\ord{2}R_0V_\mr{c}\F
+-
+  R_0E_\mr{c}\ord{3}R_0V_\mr{c}\F
+\\
+\nonumber
+  \Y\ord{5}
+=&\
+  R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0E_\mr{c}\ord{2}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0V_\mr{c}R_0E_\mr{c}\ord{2}R_0V_\mr{c}R_0V_\mr{c}\F
+\\&\
+\nonumber
+-
+  R_0V_\mr{c}R_0V_\mr{c}R_0E_\mr{c}\ord{2}R_0V_\mr{c}\F
++
+  R_0E_\mr{c}\ord{2}R_0E_\mr{c}\ord{2}R_0V_\mr{c}\F
+-
+  R_0E_\mr{c}\ord{3}R_0V_\mr{c}R_0V_\mr{c}\F
+\\&\
+\label{eq:energy-substitution-psi-5}
+-
+  R_0V_\mr{c}R_0E_\mr{c}\ord{3}R_0V_\mr{c}\F
+-
+  R_0E_\mr{c}\ord{4}R_0V_\mr{c}\F
+\end{align}
+\end{ex}
+
+\begin{thm}\label{thm:bracketing-theorem}
+\thmtitle{The Bracketing Theorem}
+\thmstatement{
+  $\Y\ord{m}$ equals the principal term plus all possible insertions of nested brackets into the principal term.
+  Each term in the sum is weighted by $(-)^k$ where $k$ is the total number of brackets.
+}
+\thmproof{
+  See \cref{app:linked-diagram-theorem}.
+}
+\end{thm}
+
+
+\begin{ex}
+Equations \ref{eq:energy-substitution-psi-3} and \ref{eq:energy-substitution-psi-4} are trivially consistent with the Bracketing theorem
+\begin{align}
+  \Y\ord{3}
+=&\
+  R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
+\\
+  \Y\ord{4}
+=&\
+  R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0V_\mr{c}R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
+-
+  R_0\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
+\\
+\intertext{since $E_\mr{c}\ord{2}=\ip{V_\mr{c}R_0V_\mr{c}}$ and $E_\mr{c}\ord{3}=\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}$.
+The first non-vanishing terms with nested brackets appear at fifth-order.
+}
+\nonumber
+  \Y\ord{5}
+=&\
+  R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
+-
+  R_0V_\mr{c}R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}R_0V_\mr{c}\F
+\\&\
+\nonumber
+-
+  R_0V_\mr{c}R_0V_\mr{c}R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
++
+  R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
+-
+  R_0\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}R_0V_\mr{c}\F
+\\&\
+-
+  R_0V_\mr{c}R_0\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
+-
+  R_0\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
++
+  R_0\ip{V_\mr{c}R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}}R_0V_\mr{c}\F
+\end{align}
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Separate graph}
+The parts of a disconnected graph are termed \textit{separate} if they each have their own sets of resolvent lines.
+Otherwise, they form part of the same \textit{combined} graph.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Level}
+Each vertical position in a graph containing an interaction line or resolvent line defines a \textit{level}.
+In other words, two operators share the same level if their interactions lie on the same horizontal line.
+Levels are numbered from top to bottom, so that the \textit{first level} refers to the topmost operator or resolvent.
+If two separate parts are drawn so that none of their operators or resolvents occupy the same level, we define the \textit{corresponding combined graph} as the result of extending the resolvent lines across both parts.
+We can form different combined graphs corresponding to the same separated graph by changing the relative vertical ordering of its parts.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Insertion graph}
+A separate, unlinked part in a graph is termed an \textit{insertion}.
+The rest of the graph is termed the \textit{remainder}.
+In the context of perturbation theory, inserted graphs come from the expectation values in the bracketing expansion.
+The position of each left angle bracket in the bracketing expansion is referred to as the \textit{level of the insertion}.
+The \textit{corresponding set} of a graph with an insertion contains corresponding graphs for all relative vertical orderings, keeping the top of the inserted graph at the level of the insertion.
+\end{dfn}
+
+
+\begin{thm}
+\thmtitle{The Frantz-Mills Factorization Theorem}
+\thmstatement{
+A graph with an insertion equals the sum over all corresponding graphs in which the top of the inserted graph .
+}
+\end{thm}
+
+\begin{ex}
+$R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F$
+\end{ex}
+
+\begin{thm}
+\thmtitle{The Linked Diagram Theorem}
+\thmstatement{
+An in
+}
+\end{thm}
+
+\newpage
+\appendix
+\section{Proof of the Linked-Diagram Theorem}\label{app:linked-diagram-theorem}
+
+\begin{ntt}
+Let
+``$Y^m$ choose $Z^k$'', denoted ${}^mC_k(Y:Z)$,
+refer to a sum over the $m$ choose $k$ permutations of $Y^{m-k}Z^k$,\,\footnote{For example,
+$
+  {}^4C_2(Y:Z)
+=
+  Y^2Z^2
++
+  YZYZ
++
+  YZ^2Y
++
+  ZY^2Z
++
+  ZYZY
++
+  Z^2Y^2
+$.
+}
+where $Y$ and $Z$ are operators that may or may not commute.\,\footnote{
+  If they do commute, then ${}^mC_k(Y:Z)={n\choose k}Y^{m-k}Z^k$.
+}
+This defines a generalization of the binomial theorem.
+\begin{align}
+\label{eq:generalized-binomial-theorem}
+  (
+    Y
+  +
+    Z
+  )^m
+=
+  \sum_{k=0}^m
+  {}^mC_k(Y:Z)
+\end{align}
+Furthermore, let
+$
+  {}^mC(Y:Z_1,\ld,Z_k)
+$
+be a sum over permutations of
+$
+  Y^{m-k}
+  Z_1\cd Z_k
+$ that preserve the ordering of the $Z_i$'s.\,\footnote{
+  For example,
+$
+  {}^4C(Y:Z_1,Z_2)
+=
+  Y^2Z_1Z_2
++
+  YZ_1YZ_2
++
+  YZ_1Z_2Y
++
+  Z_1Y^2Z_2
++
+  Z_1YZ_2Y
++
+  Z_1Z_2Y^2
+$.
+}
+When all of the $Z_i$'s equal $Z$, we can write
+$
+  {}^mC(Y:Z_1,\ld,Z_k)
+=
+  {}^mC_k(Y:Z)
+$.
+\end{ntt}
+
+\begin{prop}
+\label{prop:wavefunction-infinite-recursion}
+\thmtitle{Infinite Recursion Formula for $\Y(\la)$}
+\thmstatement{
+$\ds{
+  \Y(\la)
+=
+  \sum_{m=0}^\infty
+  \pr{
+    R_0
+    (\la V_\mr{c} - E(\la))
+  }^m
+  \F
+}$
+}
+\thmproof{
+  This follows by infinite recursion of equation~\ref{eq:lambda-dependent-recursive-series} with the assumption
+  $\ds{
+  \lim_{m\rightarrow\infty}
+  \pr{
+    R_0
+    (\la V_\mr{c} - E(\la))
+  }^m
+  \Y(\la)
+  =
+    0
+  }$.
+}
+\end{prop}
+
+\begin{dfn}
+\thmtitle{Integer compositions}
+The \textit{compositions} of an integer $m$ are the ways of writing $m$ as a sum of positive integers.
+The full set of integer compositions of $m$ is given by
+$
+  \mc{C}(m)
+=
+  \mc{C}_1(m)
+  \cup
+  \mc{C}_2(m)
+  \cup
+  \cd
+  \cup
+  \mc{C}_m(m)
+$
+where 
+$
+  \mc{C}_k(m)
+=
+  \{
+    (r_1,\ld,r_k)\in\mb{N}_0^k
+  \,|\,
+    r_1+\cd+r_k
+  =
+    m
+  \}
+$
+are the integer compositions of $m$ into $k$ parts.
+\end{dfn}
+
+\begin{lem}
+\label{lem:energy-substitution-proof}
+\thmtitle{The Energy Substitution Lemma}
+\thmproof{
+Using equation~\ref{eq:generalized-binomial-theorem} and a double sum identity\footnote{
+  Reverse double-sum reduction:
+  $\ds{
+    \sum_{m=0}^\infty
+    \sum_{k=0}^m
+    t_{m-k,k}
+  =
+    \sum_{k'=0}^\infty
+    \sum_{k=0}^\infty
+    t_{k',k}
+  }$.
+  See
+  \url{http://functions.wolfram.com/GeneralIdentities/12/}.
+} in the infinite recursion formula for $\Y(\la)$ gives the following.
+{\footnotesize
+\begin{align*}
+  \Y(\la)
+=
+  \sum_{m=0}^\infty
+  (
+    R_0
+    (
+      \la V_\mr{c}
+    -
+      E(\la)
+    )
+  )^m
+  \F
+=
+  \sum_{m=0}^\infty
+  \sum_{k=0}^m
+  \la^{m-k}
+  (-)^k\,\,
+  {}^mC_k
+  (
+    R_0V_\mr{c}:
+    R_0E(\la)
+  )
+  \F
+=
+  \sum_{k'=0}^\infty
+  \sum_{k=0}^\infty
+  \la^{k'}
+  (-)^{k}\,\,
+  {}^{k'+k}\hspace{-1pt}C_k
+  (
+    R_0V_\mr{c}:
+    R_0E(\la)
+  )
+  \F
+\end{align*}}%
+The $k'=0$ term has no operators separating $\F$ from the resolvent and vanishes.
+Taylor expansion of the energies gives
+{\footnotesize
+\begin{align*}
+  \Y(\la)
+=&\
+  \sum_{k=0}^\infty
+  \sum_{k'=1}^\infty
+  {\sum_{p_1=1}^\infty}
+  \cd
+  {\sum_{p_k=1}^\infty}
+  \la^{k' + p_1 + \cd + p_k}
+  (-)^{k}\,\,
+  {}^{k'+k}\hspace{-1pt}C
+  (
+    R_0V_\mr{c}:
+    R_0E_\mr{c}\ord{p_1},\ld,
+    R_0E_\mr{c}\ord{p_k}
+  )
+  \F
+\\
+=&\
+  \sum_{m=1}^\infty
+  \sum_{k=0}^{m-1}
+  \sum_{(r_1,\ld,r_{k+1})}^{\mc{C}_{k+1}(m)}
+  \la^m
+  (-)^k\,\,
+  {}^{k+r_{k+1}}\hspace{-1pt}C
+  (
+    R_0V_\mr{c}:
+    R_0E_\mr{c}\ord{r_1},\ld,
+    R_0E_\mr{c}\ord{r_k}
+  )
+  \F
+\end{align*}}%
+where we have used a multi-sum reduction to group constant powers of $\la$.
+Writing the two inner sums as a single sum over $\mc{C}(m)$ and differentiating with respect to $\la$ completes the proof.
+\begin{align}
+  \Y\ord{m}
+=
+  \left.
+  \fr{1}{m!}
+  \pd{^m\Y(\la)}{\la^m}
+  \right|_{\la=0}
+=
+  \sum_{(r_1,\ld,r_{k+1})}^{\mc{C}(m)}
+  (-)^k\,\,
+  {}^{k+r_{k+1}}\hspace{-1pt}C
+  (
+    R_0V_\mr{c}:
+    R_0E_\mr{c}\ord{r_1},\ld,
+    R_0E_\mr{c}\ord{r_k}
+  )
+  \F
+\end{align}
+}
+\end{lem}
+
+\begin{thm}
+\thmtitle{The Bracketing Theorem}
+\thmproof{
+  The proposition holds for $m=1$ because 
+  $\Y\ord{1}=R_0V_\mr{c}\F$ and there are no possible bracketings.
+  Assume it holds for $m-1$.
+  Then by the energy substitution lemma it also holds for $m$ because $E_\mr{c}\ord{r_i}$
+  equals
+  $\ip{\F|V_\mr{c}|\Y\ord{r_i}}$
+  which, by our inductive assumption, equals
+  $\ip{V_\mr{c}(R_0V_\mr{c})^{r_i}}$
+  plus all nested bracketings.
+}
+\end{thm}
+
 
 \end{document}
