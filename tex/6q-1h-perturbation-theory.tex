@@ -1243,7 +1243,9 @@ The first non-trivial examples of the energy substitution lemma begin at third o
 \thmtitle{The Bracketing Theorem}
 \thmstatement{
   $\Y\ord{m}$ equals the principal term plus all possible insertions of nested brackets into the principal term.
-  Each term in the sum is weighted by $(-)^k$ where $k$ is the total number of brackets.
+  Each term in the sum is weighted by $(-)^k$ where $k$ is the total number of brackets.\footnote{
+  The ``brackets'' here are reference expectation values: $\ip{W}\equiv\ip{\F|W|\F}$.
+}
 }
 \thmproof{
   See \cref{app:linked-diagram-theorem}.
@@ -1252,8 +1254,9 @@ The first non-trivial examples of the energy substitution lemma begin at third o
 
 
 \begin{ex}
-Equations \ref{eq:energy-substitution-psi-3} and \ref{eq:energy-substitution-psi-4} are trivially consistent with the Bracketing theorem
+Equations \ref{eq:energy-substitution-psi-3} and \ref{eq:energy-substitution-psi-4} are clearly consistent with \cref{thm:bracketing-theorem}, since $E_\mr{c}\ord{2}{=}\,\ip{V_\mr{c}R_0V_\mr{c}}$ and $E_\mr{c}\ord{3}{=}\,\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}$.
 \begin{align}
+\label{eq:bracketing-psi-3}
   \Y\ord{3}
 =&\
   R_0V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}\F
@@ -1270,8 +1273,8 @@ Equations \ref{eq:energy-substitution-psi-3} and \ref{eq:energy-substitution-psi
 -
   R_0\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F
 \\
-\intertext{since $E_\mr{c}\ord{2}=\ip{V_\mr{c}R_0V_\mr{c}}$ and $E_\mr{c}\ord{3}=\ip{V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}}$.
-The first non-vanishing terms with nested brackets appear at fifth-order.
+\intertext{
+The first non-vanishing terms with nested brackets appear at fifth-order
 }
 \nonumber
   \Y\ord{5}
@@ -1297,50 +1300,81 @@ The first non-vanishing terms with nested brackets appear at fifth-order.
 +
   R_0\ip{V_\mr{c}R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}}R_0V_\mr{c}\F
 \end{align}
+which follows from substituting equation~\ref{eq:bracketing-psi-3} into $E\ord{4}=\ip{\F|V_\mr{c}|\Y\ord{3}}$ in the energy substitution expansion of $\Y\ord{5}$.
 \end{ex}
 
-\begin{dfn}
-\thmtitle{Separate graph}
-The parts of a disconnected graph are termed \textit{separate} if they each have their own sets of resolvent lines.
-Otherwise, they form part of the same \textit{combined} graph.
-\end{dfn}
-
-\begin{dfn}
-\thmtitle{Level}
-Each vertical position in a graph containing an interaction line or resolvent line defines a \textit{level}.
-In other words, two operators share the same level if their interactions lie on the same horizontal line.
-Levels are numbered from top to bottom, so that the \textit{first level} refers to the topmost operator or resolvent.
-If two separate parts are drawn so that none of their operators or resolvents occupy the same level, we define the \textit{corresponding combined graph} as the result of extending the resolvent lines across both parts.
-We can form different combined graphs corresponding to the same separated graph by changing the relative vertical ordering of its parts.
-\end{dfn}
 
 \begin{dfn}
 \thmtitle{Insertion graph}
-A separate, unlinked part in a graph is termed an \textit{insertion}.
-The rest of the graph is termed the \textit{remainder}.
-In the context of perturbation theory, inserted graphs come from the expectation values in the bracketing expansion.
-The position of each left angle bracket in the bracketing expansion is referred to as the \textit{level of the insertion}.
-The \textit{corresponding set} of a graph with an insertion contains corresponding graphs for all relative vertical orderings, keeping the top of the inserted graph at the level of the insertion.
+The graphs encountered in perturbation theory contain operators separated by resolvents.
+Two disconnected parts are termed \textit{separate} if no resolvent line crosses both.
+Vertical spaces between resolvent lines are termed \textit{levels}, which we number from top to bottom for each separate part.
+A pair of resolvents with no intervening operators encloses an \textit{empty level}.
+Inserted brackets in the bracketing expansion produce separate and unlinked \textit{insertion graphs}.
+The empty level in the \textit{remainder} created by the insertion is the \textit{level of the insertion}.
 \end{dfn}
 
-
-\begin{thm}
-\thmtitle{The Frantz-Mills Factorization Theorem}
-\thmstatement{
-A graph with an insertion equals the sum over all corresponding graphs in which the top of the inserted graph .
-}
-\end{thm}
-
 \begin{ex}
-$R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F$
+Assuming Brillouin's theorem, the simplest non-vanishing term with an inserted bracket appears in $\Y\ord{3}$.
+\begin{align*}
+  R_0
+  \ip{V_\mr{c}R_0V_\mr{c}}
+  R_0
+  V_\mr{c}
+  \F
+=
+\diagram{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-] (1g1) to ++(-0.25,1);
+  \draw[-<-] (1g1) to ++(+0.25,1);
+  \draw[->-] (1g2) to ++(-0.25,1);
+  \draw[-<-] (1g2) to ++(+0.25,1);
+  \interaction{2}{2g}{(2,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{3g}{(2,+0.5)}{ddot}{sawtooth};
+  \draw[->-=0.4,bend left ] (2g1) to (3g1);
+  \draw[-<-=0.6,bend right] (2g1) to (3g1);
+  \draw[->-=0.4,bend left ] (2g2) to (3g2);
+  \draw[-<-=0.6,bend right] (2g2) to (3g2);
+  \draw[thick,flexdotted] (-0.3,-0.25) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+  \draw[thick,flexdotted] (1.7,0) to ++(1.6,0);
+  \padborder{5pt};
+  \draw[double, thick] (current bounding box.south west)--(current bounding box.south east);
+  \node at (0.5,-1) {remainder};
+  \node at (2.5,-1) {insertion};
+  \node[inner sep=0pt] at (-1.5,0) {
+    \begin{tabular}{c}
+    level of the\\insertion
+    \end{tabular}
+  };
+  \draw[->] (-2.5,0) to (-0.3,0);
+  \node[inner sep=0pt] at (+4,+0.4) {$1\rst$\,level};
+  \node[inner sep=0pt] at (+4,-0.3) {$2\ond$\,level};
+}
+\end{align*}
 \end{ex}
 
-\begin{thm}
-\thmtitle{The Linked Diagram Theorem}
-\thmstatement{
-An in
-}
-\end{thm}
+%\begin{thm}
+%\thmtitle{The Frantz-Mills Factorization Theorem}
+%\thmstatement{
+%A graph with an insertion equals the sum over all corresponding graphs in which the top of the inserted graph .
+%}
+%\end{thm}
+
+%\begin{ex}
+%$R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F$
+%\end{ex}
+
+%\begin{thm}
+%\thmtitle{The Linked Diagram Theorem}
+%\thmstatement{
+%An in
+%}
+%\end{thm}
+
+
+
 
 \newpage
 \appendix
@@ -1417,7 +1451,6 @@ $.
 
 \begin{prop}
 \label{prop:wavefunction-infinite-recursion}
-\thmtitle{Infinite Recursion Formula for $\Y(\la)$}
 \thmstatement{
 $\ds{
   \Y(\la)
