@@ -108,11 +108,11 @@ In particular, the wavefunction and correlation energy can be expanded as follow
   \Y
 =
   \sum_{m=0}^\infty
-  \Y_\mr{c}\ord{m}
+  \Y\ord{m}
 &&
   E_\mr{c}
 =
-  \sum_{n=0}^\infty
+  \sum_{m=0}^\infty
   E_\mr{c}\ord{m}
 &&
   \Y\ord{m}
@@ -172,12 +172,12 @@ since $V_\mr{c}$ consists of $\F$-normal-ordered operators.
 \begin{dfn}
 \thmtitle{Model space projection operator}
 The projection onto the reference determinant, $P=\kt{\F}\br{\F}$, is termed the \textit{model space projection operator}.
-Its complement is the \textit{orthogonal space projection operator}.\footnote{Note that these definitions are implicitly restricted to $\mc{F}_n$ rather than the full Fock space.}
+Its complement is the \textit{orthogonal space projection operator}.\footnote{$1_n\equiv 1|_{\mc{F}_n}$ is the identity on $\mc{F}_n$, which is equivalent to a projection onto this subspace.  For our purposes, this is the identity.}
 \begin{align}
 \label{eq:orthogonal-space-projection-operator}
   Q
 \equiv
-  1
+  1_n
 -
   P
 =
@@ -195,7 +195,7 @@ Note that $P$ and $Q$ satisfy the following relationships, which are characteris
 +
   Q
 =
-  1
+  1_n
 &&
   P^2
 =
@@ -285,7 +285,7 @@ Operating $R_0$ on $H(\la)\Y(\la)=E(\la)\Y(\la)$ gives\footnote{This follows fro
   )
   \Y(\la)
 \end{align}
-which provides a recursive equation for $\Y(\la)$ that can be used solve for wavefunction contributions order by order.
+which provides a recursive equation for $\Y(\la)$ that can be used to solve for wavefunction contributions order by order.
 \end{rmk}
 \end{samepage}
 
@@ -422,119 +422,95 @@ Note that the singles contribution vanishes for canonical Hartree-Fock reference
 These extra terms are required for non-canonical orbitals, such as those obtained from restricted open-shell Hartree-Fock (ROHF) theory.
 \end{ex}
 
-
-\begin{dfn}\thmtitle{Resolvent line (extended definition)}
-Let $Y$ be a particle-number conserving operator string\footnote{That is, it contains a balanced number of creation and annihilation operators so that $Y\kt{\F}\in\mc{F}_n$.} and compare
-$R_0Y\kt{\F}$ with
-$Y\kt{\F}$
-by expanding this operator string using Wick's theorem.
-We can turn the second expansion into the first by setting each term to zero unless the contracted $Y$ has the form
-$
-  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
-  \times
-  \mr{const}
-$,\footnote{Since $R_0\gno{X}\kt{\F}=0$ unless $\gno{X}$ can fully contract one of the bras $\br{\F_{i_1\cd i_k}^{a_1\cd a_k}}$ in the resolvent.}
-in which case we scale it by
-$(\mc{E}_{b_1\cd b_m}^{j_1\cd j_m})^{-1}$.\footnote{
-  Since
-$
-  R_0
-  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
-  \kt{\F}
-=
-  (\mc{E}_{b_1\cd b_m}^{j_1\cd j_m})^{-1}
-  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
-  \kt{\F}
-$.
-}
-Multiplying these expansions by $Y'$ and applying Wick's theorem gives the following
-\begin{align*}
-  Y'Y
-  \kt{\F}
-=
-  \pr{
-    \gno{Y'Y}
-  +
-    \gno{\ol{Y'Y}}
-  }
-  \kt{\F}
+\begin{dfn}\label{dfn:resolvent-line}
+\thmtitle{Resolvent line}
+We can generalize our previous definition of the \textit{resolvent line} as follows
+\begin{align}
+  \,\resolventline[0.7]{}\,
+  Y
+\equiv
+  \sum_k
+  \pr{\tfr{1}{k!}}^2
+  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+  \fr{y_{a_1\cd a_k}^{i_1\cd i_k}}{\mc{E}_{a_1\cd a_k}^{i_1\cd i_k}}
+  \tl{a}^{a_1\cd a_k}_{i_1\cd i_k}
 &&
-  Y'
-  R_0
   Y
-  \kt{\F}
 =
+  Y_{n\rightarrow n}
++
+  Y_{n\not\rightarrow n}
+&&
+  Y_{n\rightarrow n}
+=
+  y_0
++
+  \sum_k
+  \pr{\tfr{1}{k!}}^2
+  \sum_{\substack{p_1\cd p_k\\q_1\cd q_k}}
+  y_{p_1\cd p_k}^{q_1\cd q_k}
+  \tl{a}^{p_1\cd p_k}_{q_1\cd q_k}
+\end{align}
+where $Y$ is an arbitrary operator.
+The last equation is the Wick expansion of $Y_{n\rightarrow n}$, which denotes the purely particle-number-conserving part\footnote{The component that maps $\mc{F}_n\rightarrow\mc{F}_n$ for all $n$, which can always be written as a linear combination of excitation operators.} of $Y$.
+This definition immediately implies
+$
+  \,\resolventline[0.7]{}\,\,
+  \kt{\Y}
+=
+  R_0
+  \kt{\Y}
+$
+for all $\Y$.\footnote{Since any $\kt{\Y}$ can be written as $Y\kt{\F}$, this follows from applying eq~\ref{eq:resolvent-spectral-decomposition} to each term in the Wick expansion of $Y$ in $R_0Y\kt{\F}$.}
+Other expressions are defined by giving resolvent lines priority in the order of operations, with maximum priority given to the rightmost resolvent.
+\begin{align}
+    Y_1
+  \,\resolventline[0.7]{}\,
+    Y_2
+  \cd
+  \,\resolventline[0.7]{}\,
+    Y_n
+\equiv
+    Y_1
   \pr{
-  \gno{
-    Y'
-    \,\resolventline[0.7]{}\,\,
-    Y
-  }
-  +
-  \gno{\ol{
-    Y'
-    \,\resolventline[0.8]{}\,\,
-    Y
-  }}
-  }
-  \kt{\F}
-\end{align*}
-where the dotted lines indicate that wherever the internal contractions on $Y$ leave a remainder of the form
-$
-  \tl{a}^{b_1\cd b_m}_{j_1\cd j_m}
-  \times
-  \mr{const}
-$
-we scale the term by $(\mc{E}_{b_1\cd b_m}^{j_1\cd j_m})^{-1}$.
-All other terms are omitted.
-This builds upon our earlier concept of a \textit{resolvent line}, which was limited to a particular case:
-$
-  \br{\F}
-  Y'
-  R_0
-  Y
-  \kt{\F}
-=
-  \gno{\ol{\ol{
-    Y'
-    \,\resolventline[0.8]{}\,\,
-    Y
+  \,\resolventline[0.7]{}\,
+    Y_2
+  \pr{
+  \cd
+  \pr{
+  \,\resolventline[0.7]{}\,
+    Y_n
+    \vphantom{Y_Y^Y}
   }}}
-$
-with
-$
-  Y'
-=
-  \tl{a}_{a_1\cd a_k}^{i_1\cd i_k}
-$
-and
-$
-  Y
-=
-  \tl{a}_{j_1\cd j_k}^{b_1\cd b_k}
-$.
-The extended definition implies
-$
-  \,\resolventline[0.7]{}\,\,\,
-  \kt{\F^{a_1\cd a_k}_{i_1\cd i_k}}
-=
-  (\mc{E}_{a_1\cd a_k}^{i_1\cd i_k})^{-1}
-  \kt{\F^{a_1\cd a_k}_{i_1\cd i_k}}
-$
-and
-$
-  \,\resolventline[0.7]{}\,\,\,
-  \kt{\F}
-=
-  0
-$,
-which makes an uncontracted resolvent line interchangeable with~$R_0$.\footnote{The difference between resolvents and resolvent lines is that we haven't defined a ``contraction through $R_0$'' operation.}
-This definition of has a simple graphical interpretation:
-A graph with hole lines $i_1,\ld,i_h$ and particle lines $a_1,\ld,a_k$ passing through a resolvent line is scaled by $(\mc{E}_{a_1\cd a_k}^{i_1\cd i_k})^{-1}$ when $h=k$ and vanishes when $h\neq k$.
-A graph with no operators separating a resolvent line from the bra or ket of the reference state equals zero.
+&&
+\gno{\ol{
+    Y_1
+  \,\resolventline[0.8]{}\,
+    Y_2
+  \cd
+  \,\resolventline[0.8]{}\,
+    Y_n
+}}
+\equiv
+\gno{\ol{
+  \,\,
+    Y_1
+  \pr{
+  \,\resolventline[0.7]{}\,
+    Y_2
+  \pr{
+  \cd
+  \pr{
+  \,\resolventline[0.7]{}\,
+    Y_n
+    \vphantom{Y_Y^Y}
+  }}}
+}}
+\end{align}
+This definition also specifies the interpretation rule for a graphs with resolvent lines, which are formally defined below.
 \end{dfn}
 
-\begin{cor}
+\begin{cor}\label{cor:wicks-theorem-for-pt}
 \thmtitle{Wick's theorem for perturbation theory}
 \thmstatement{
 $
@@ -565,9 +541,26 @@ $%
 }%
 \vspace{5pt}
 \thmproof{
-  This follows directly from Wick's theorem and the definition of a resolvent line.
+  This follows directly from Wick's theorem and definition~\ref{dfn:resolvent-line}.
 }
 \end{cor}
+
+\begin{dfn}
+\thmtitle{Resolvent graph}
+A \textit{resolvent graph} represents a normal-ordered product of operators and resolvents.
+Graphs with disconnected parts that don't share any resolvent lines are considered products of separate resolvent graphs.
+Vertical spaces between resolvent lines in a resolvent graph are termed \textit{levels}, which are numbered from top to bottom with zero indexing.
+Therefore, an operator lies in the $k\eth$ level if there are $k$ resolvent lines above it.
+Formally, then, an \textit{$m$-resolvent graph} $G(\rh,m)\equiv(G,\rh,m)$ associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\{0,1,\ld,m\}$ through the \textit{level map} $\rh$.
+Therefore, each line $l$ in $G$ crosses resolvents
+$
+  \mr{min}(\rh_{h(l)},\rh_{t(l)}) + 1
+$
+through
+$
+  \mr{max}(\rh_{h(l)},\rh_{t(l)})
+$.
+\end{dfn}
 
 \begin{ex}
 In diagram notation, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follows.
@@ -651,42 +644,20 @@ In diagram notation, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follo
 \end{align}
 \end{ex}
 
-
 \begin{ex}
-\label{ex:second-order-wavefunction-expansion-unsimplified}
-Using the spectral decomposition of $R_0$ in $\Y\ord{2}=R_0V_\mr{c}\Y\ord{1}$ gives an expansion that truncates at quadruples
-\begin{align*}
-  \Y\ord{2}
-{=}
-  \sum_{\substack{a\\i}}
-  \F_i^a
-  \fr{\ip{\F_i^a|V_\mr{c}|\Y\ord{1}}}{\mc{E}_a^i}
-{+}
-  (\tfr{1}{2!})^2
-  \sum_{\substack{ab\\ij}}
-  \F_{ij}^{ab}
-  \fr{\ip{\F_{ij}^{ab}|V_\mr{c}|\Y\ord{1}}}{\mc{E}_{ab}^{ij}}
-{+}
-  (\tfr{1}{3!})^2
-  \sum_{\substack{abc\\ijk}}
-  \F_{ijk}^{abc}
-  \fr{\ip{\F_{ijk}^{abc}|V_\mr{c}|\Y\ord{1}}}{\mc{E}_{abc}^{ijk}}
-{+}
-  (\tfr{1}{4!})^2
-  \sum_{\substack{abcd\\ijkl}}
-  \F_{ijkl}^{abcd}
-  \fr{\ip{\F_{ijkl}^{abcd}|V_\mr{c}|\Y\ord{1}}}{\mc{E}_{abcd}^{ijkl}}
-\end{align*}
-since the two-electron part of $\Y\ord{1}$ has an excitation level of $+2$ and the excitation level of $V_\mr{c}$ ranges from $-2$ to $+2$.
-\end{ex}
-
-\begin{ex}
-The expansion for $\Y\ord{2}$ can be evaluated graphically.
+The expansion for $\Y\ord{2}$ can be evaluated using \cref{cor:wicks-theorem-for-pt}.
 Assuming Brillouin's theorem for simplicity,
 \begin{align}
 \nonumber
   \Y\ord{2}
+=
+  R_0
+  V_\mr{c}
+  R_0
+  V_\mr{c}
+  \kt{\F}
 =&\
+\nonumber
 \diagram[bottom]{
   \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
   \node[ddot] (2g2) at (1,0) {};
@@ -800,7 +771,8 @@ Assuming Brillouin's theorem for simplicity,
   \draw[thick,flexdotted] (-0.4,+0.35) to ++(3.9,0);
   \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
 }
-\\=&\
+\\
+=&\
   \tfr{1}{2}
   \sum_{\substack{abc\\ij}}
   \F_i^a\,
@@ -844,6 +816,8 @@ Assuming Brillouin's theorem for simplicity,
     \mc{E}_{ab}^{ij}
     \mc{E}_{ab}^{kl}
   }
+\nonumber
+\\&\
 +
   \sum_{\substack{abc\\ijk}}
   \F_{ij}^{ab}
@@ -854,8 +828,6 @@ Assuming Brillouin's theorem for simplicity,
     \mc{E}_{ab}^{ij}
     \mc{E}_{ac}^{ik}
   }
-\nonumber
-\\&\
 +
   \tfr{1}{2^2}
   \sum_{\substack{abcd\\ijk}}
@@ -890,12 +862,10 @@ Assuming Brillouin's theorem for simplicity,
   }
 \end{align}
 where the operators in the final diagram do not form an equivalent pair because they pass through different resolvent lines.
-This can be used to determine the third-order correlation energy
+The third-order contribution to the correlation energy can be evaluated as the complete contractions of $V_\mr{c}R_0V_\mr{c}R_0V_\mr{c}$
 \begin{align}
   E_\mr{c}\ord{3}
-=
-  \ip{\F|V_\mr{c}|\Y\ord{2}}
-=
+\,{=}\,
 \diagram{
   %top
   \interaction{2}{1g}{(0,+0.5)}{ddot}{sawtooth};
@@ -964,7 +934,7 @@ This can be used to determine the third-order correlation energy
   \draw[thick,flexdotted] (-0.3,+0.3) to ++(2.6,0);
   \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
 }
-=
+{=}
   \tfr{1}{2^3}
   \sum_{\substack{abcd\\ij}}
   \fr{
@@ -975,7 +945,7 @@ This can be used to determine the third-order correlation energy
     \mc{E}_{ab}^{ij}
     \mc{E}_{cd}^{ij}
   }
-+
+{+}
   \tfr{1}{2^3}
   \sum_{\substack{ab\\ijkl}}
   \fr{
@@ -986,7 +956,7 @@ This can be used to determine the third-order correlation energy
     \mc{E}_{ab}^{ij}
     \mc{E}_{ab}^{kl}
   }
-+
+{+}
   \sum_{\substack{abc\\ijk}}
   \fr{
     \ol{g}_{ij}^{ab}
@@ -997,13 +967,7 @@ This can be used to determine the third-order correlation energy
     \mc{E}_{ac}^{ik}
   }
 \end{align}
-which also equals $\ip{\Y\ord{1}|V_\mr{c}|\Y\ord{1}}$.
-This is an example of the \textit{Wigner $(2n+1)$ rule}, which says that
-$
-  E_\mr{c}\ord{2n+1}
-=
-  \ip{\Y\ord{n}|V_\mr{c}|\Y\ord{n}}
-$.
+which is equivalent to contracting the doubles contributions to $\Y\ord{2}$ with $\tfr{1}{4}\ol{g}_{ij}^{ab}\tl{a}^{ij}_{ab}$.
 Note that $E_\mr{c}\ord{m+1}$ always only depends on the doubles contribution to $\Y\ord{m}$, but that the doubles coefficients themselves may involve triples, quadruples and higher contributions from wavefunction components of order less than $m$.
 \end{ex}
 
@@ -1303,16 +1267,19 @@ The first non-vanishing terms with nested brackets appear at fifth-order
 which follows from substituting equation~\ref{eq:bracketing-psi-3} into $E\ord{4}=\ip{\F|V_\mr{c}|\Y\ord{3}}$ in the energy substitution expansion of $\Y\ord{5}$.
 \end{ex}
 
-
 \begin{dfn}
 \thmtitle{Insertion graph}
-The graphs encountered in perturbation theory contain operators separated by resolvents.
-Two disconnected parts are termed \textit{separate} if no resolvent line crosses both.
-Vertical spaces between resolvent lines are termed \textit{levels}, which we number from top to bottom for each separate part.
-A pair of resolvents with no intervening operators encloses an \textit{empty level}.
-Inserted brackets in the bracketing expansion produce separate and unlinked \textit{insertion graphs}.
-The empty level in the \textit{remainder} created by the insertion is the \textit{level of the insertion}.
 \end{dfn}
+
+%\begin{dfn}
+%\thmtitle{Insertion graph}
+%The graphs encountered in perturbation theory contain operators separated by resolvents.
+%Two disconnected parts are termed \textit{separate} if no resolvent line crosses both.
+%Vertical spaces between resolvent lines are termed \textit{levels}, which we number from %top to bottom for each separate part.
+%A pair of resolvents with no intervening operators encloses an \textit{empty level}.
+%Inserted brackets in the bracketing expansion produce separate and unlinked \textit{insertion graphs}.
+%The empty level in the \textit{remainder} created by the insertion is the \textit{level of the insertion}.
+%\end{dfn}
 
 \begin{ex}
 Assuming Brillouin's theorem, the simplest non-vanishing term with an inserted bracket appears in $\Y\ord{3}$.
@@ -1349,8 +1316,8 @@ Assuming Brillouin's theorem, the simplest non-vanishing term with an inserted b
     \end{tabular}
   };
   \draw[->] (-2.5,0) to (-0.3,0);
-  \node[inner sep=0pt] at (+4,+0.4) {$1\rst$\,level};
-  \node[inner sep=0pt] at (+4,-0.3) {$2\ond$\,level};
+  \node[inner sep=0pt] at (+4,+0.4) {$0\eth$\,level};
+  \node[inner sep=0pt] at (+4,-0.3) {$1\rst$\,level};
 }
 \end{align*}
 \end{ex}
