@@ -842,6 +842,7 @@ Assuming Brillouin's theorem for simplicity,
 -
   \tfr{1}{2^2}
   \sum_{\substack{abc\\ijkl}}
+  \F_{ijk}^{abc}
   \fr{
     \ol{g}_{ab}^{il}
     \ol{g}_{lc}^{jk}
@@ -1268,6 +1269,47 @@ which follows from substituting equation~\ref{eq:bracketing-psi-3} into $E\ord{4
 \end{ex}
 
 \begin{dfn}
+
+$
+  GG'
+=
+  (
+    L\cup L',
+    O\cup O',
+    h\oplus h',
+    t\oplus t'
+  )
+$
+where
+$
+  (h\oplus h')(l)
+\equiv
+\left\{
+\begin{array}{ll}
+  h(l) & l\in L\\
+  h'(l) & l\in L'
+\end{array}
+\right.
+$\\
+\textit{combination graphs}\\
+The \textit{combination graphs} of $G(\rh,m)$ and $G'(\rh',m')$ have the form
+$GG'(\rh_\si,m+m')$\\
+\begin{align*}
+  \rh_\pi(o)
+=
+\left\{
+\begin{array}{ll}
+  \pi(\rh(o))      & o\in O\\
+  \pi(\rh'(o) + m) & o\in O'
+\end{array}
+\right.
+&&
+  \pi
+\in
+\end{align*}
+\end{dfn}
+
+\begin{dfn}
 \thmtitle{Insertion graph}
 \end{dfn}
 
@@ -1347,7 +1389,7 @@ Assuming Brillouin's theorem, the simplest non-vanishing term with an inserted b
 \appendix
 \section{Proof of the Linked-Diagram Theorem}\label{app:linked-diagram-theorem}
 
-\begin{ntt}
+\begin{ntt}\label{ntt:operator-combinations}
 Let
 ``$Y^m$ choose $Z^k$'', denoted ${}^mC_k(Y:Z)$,
 refer to a sum over the $m$ choose $k$ permutations of $Y^{m-k}Z^k$,\,\footnote{For example,
@@ -1445,7 +1487,7 @@ $\ds{
 }
 \end{prop}
 
-\begin{dfn}
+\begin{dfn}\label{dfn:integer-compositions}
 \thmtitle{Integer compositions}
 The \textit{compositions} of an integer $m$ are the ways of writing $m$ as a sum of positive integers.
 The full set of integer compositions of $m$ is given by
@@ -1478,6 +1520,12 @@ are the integer compositions of $m$ into $k$ parts.
 \begin{lem}
 \label{lem:energy-substitution-proof}
 \thmtitle{The Energy Substitution Lemma}
+\thmstatement{
+  $\Y\ord{m}$ equals the sum of a ``principal term''
+  $(R_0V_\mr{c})^m\F$
+  plus all possible substitutions of adjacent factors $(R_0V_\mr{c})^{r_i}$ in the principal term by $R_0E_\mr{c}\ord{r_i}$.
+  Each term in the sum is weighted by a sign factor $(-)^k$, where $k$ is the number of substitutions.
+}\vspace{5pt}
 \thmproof{
 Using equation~\ref{eq:generalized-binomial-theorem} and a double sum identity\footnote{
   Reverse double-sum reduction:
@@ -1557,16 +1605,16 @@ Taylor expansion of the energies gives
   \sum_{(r_1,\ld,r_{k+1})}^{\mc{C}_{k+1}(m)}
   \la^m
   (-)^k\,\,
-  {}^{k+r_{k+1}}\hspace{-1pt}C
+  {}^{k+r_1}\hspace{-1pt}C
   (
     R_0V_\mr{c}:
-    R_0E_\mr{c}\ord{r_1},\ld,
-    R_0E_\mr{c}\ord{r_k}
+    R_0E_\mr{c}\ord{r_2},\ld,
+    R_0E_\mr{c}\ord{r_{k+1}}
   )
   \F
 \end{align*}}%
-where we have used a multi-sum reduction to group constant powers of $\la$.
-Writing the two inner sums as a single sum over $\mc{C}(m)$ and differentiating with respect to $\la$ completes the proof.
+where we have grouped powers of $\la$ using a multi-sum reduction.
+Writing the inner sums as a sum over $\mc{C}(m)$ we find
 \begin{align}
   \Y\ord{m}
 =
@@ -1577,19 +1625,24 @@ Writing the two inner sums as a single sum over $\mc{C}(m)$ and differentiating 
 =
   \sum_{(r_1,\ld,r_{k+1})}^{\mc{C}(m)}
   (-)^k\,\,
-  {}^{k+r_{k+1}}\hspace{-1pt}C
+  {}^{k+r_1}\hspace{-1pt}C
   (
     R_0V_\mr{c}:
-    R_0E_\mr{c}\ord{r_1},\ld,
-    R_0E_\mr{c}\ord{r_k}
+    R_0E_\mr{c}\ord{r_2},\ld,
+    R_0E_\mr{c}\ord{r_{k+1}}
   )
   \F
 \end{align}
+which, given \cref{ntt:operator-combinations} and definition~\ref{dfn:integer-compositions}, is an algebraic statement of the proposition, completing the proof.
 }
 \end{lem}
 
 \begin{thm}
 \thmtitle{The Bracketing Theorem}
+\thmstatement{
+  $\Y\ord{m}$ equals the principal term plus all possible insertions of nested brackets into the principal term.
+  Each term in the sum is weighted by $(-)^k$ where $k$ is the total number of brackets.
+}\vspace{5pt}
 \thmproof{
   The proposition holds for $m=1$ because 
   $\Y\ord{1}=R_0V_\mr{c}\F$ and there are no possible bracketings.
@@ -1599,7 +1652,7 @@ Writing the two inner sums as a single sum over $\mc{C}(m)$ and differentiating 
   $\ip{\F|V_\mr{c}|\Y\ord{r_i}}$
   which, by our inductive assumption, equals
   $\ip{V_\mr{c}(R_0V_\mr{c})^{r_i}}$
-  plus all nested bracketings.
+  plus all nested bracketings weighted by appropriate sign factors.
 }
 \end{thm}
 
