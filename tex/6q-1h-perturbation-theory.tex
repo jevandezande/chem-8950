@@ -570,7 +570,7 @@ In diagram notation, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follo
 \diagram[bottom]{
   \draw
     (0,-0.5)
-      node[circlex] {}
+      node[circlep] {}
     to
     ++(0.5,0)
       node[ddot] (f1) {};
@@ -613,14 +613,14 @@ In diagram notation, $\Y\ord{1}$ and $E_\mr{c}\ord{2}$ can be expressed as follo
   %top
   \draw
     (0,+0.5)
-      node[circlex] {}
+      node[circlep] {}
     to
     ++(0.5,0)
       node[ddot] (1f1) {};
   %bottom
   \draw
     (0,-0.5)
-      node[circlex] {}
+      node[circlep] {}
     to
     ++(0.5,0)
       node[ddot] (2f1) {};
@@ -783,7 +783,7 @@ Assuming Brillouin's theorem for simplicity,
     \mc{E}_a^i
     \mc{E}_{bc}^{ij}
   }
-+
+-
   \tfr{1}{2}
   \sum_{\substack{ab\\ijk}}
   \F_i^a
@@ -988,7 +988,7 @@ Interpreting these graphs gives the following.
     \mc{E}_a^i
     \mc{E}_{bc}^{ij}
   }
-+
+-
   \tfr{1}{2}
   \sum_{\substack{b\\jk}}
   \fr{
@@ -1117,7 +1117,7 @@ This follows from rearranging the resolvent denominator.
 =
   \pr{\tfr{1}{2}}^4
   \sum_{\substack{abcd\\ijkl}}
-  \tl{a}^{ijkl}_{abcd}
+  \tl{a}^{abcd}_{ijkl}
   \fr{
     \ol{g}_{ab}^{ij}
     \ol{g}_{cd}^{kl}
@@ -1129,7 +1129,7 @@ This follows from rearranging the resolvent denominator.
   \tfr{1}{2}\cdot
   \pr{\tfr{1}{2}}^4
   \sum_{\substack{abcd\\ijkl}}
-  \tl{a}^{ijkl}_{abcd}
+  \tl{a}^{abcd}_{ijkl}
   \fr{
     \ol{g}_{ab}^{ij}
     \ol{g}_{cd}^{kl}
@@ -1293,7 +1293,7 @@ $
 $\\
 \textit{combination graphs}\\
 The \textit{combination graphs} of $G(\rh,m)$ and $G'(\rh',m')$ have the form
-$GG'(\rh_\si,m+m')$\\
+$GG'(\rh_\pi,m+m')$\\
 \begin{align*}
   \rh_\pi(o)
 =
@@ -1306,7 +1306,18 @@ $GG'(\rh_\si,m+m')$\\
 &&
   \pi
 \in
+  S_{(m+1,m'+1)}
+  (\mb{Z}_{m+m'+2})
+&&
+  \mb{Z}_{m+m'+2}
+=
+  \{
+    0,
+    \ld,
+    m+m'+2
+  \}
 \end{align*}
+where $S_{(p,q)}(\mb{S})$ denotes the set of $(p,q)$-shuffles (``riffle'' shuffles) of a set $\mb{S}$ with $p+q$ elements.\footnote{\url{https://en.wikipedia.org/wiki/Riffle_shuffle_permutation}}
 \end{dfn}
 
 \begin{dfn}
