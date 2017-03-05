@@ -545,13 +545,15 @@ $%
 }
 \end{cor}
 
-\begin{dfn}
+\begin{dfn}\label{dfn:resolvent-graph}
 \thmtitle{Resolvent graph}
 A \textit{resolvent graph} represents a normal-ordered product of operators and resolvents.
 Graphs with disconnected parts that don't share any resolvent lines are considered products of separate resolvent graphs.
-Vertical spaces between resolvent lines in a resolvent graph are termed \textit{levels}, which are numbered from top to bottom with zero indexing.
-Therefore, an operator lies in the $k\eth$ level if there are $k$ resolvent lines above it.
-Formally, then, an \textit{$m$-resolvent graph} $G(\rh,m)\equiv(G,\rh,m)$ associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\{0,1,\ld,m\}$ through the \textit{level map} $\rh$.
+Vertical spaces between resolvent lines in a resolvent graph are termed \textit{levels}, which are numbered from bottom with zero indexing.
+Therefore, an operator lies in the $k\eth$ level if there are $k$ resolvent lines below it.
+Formally, then, an \textit{$m$-level resolvent graph} $G(\rh,m)\equiv(G,\rh,m)$ associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\mb{Z}_m=\{0,1,\ld,m-1\}$ through the \textit{level map} $\rh$.\,\footnote{
+  Note that an $m$-level resolvent graph contains $m-1$ resolvents.
+}
 Therefore, each line $l$ in $G$ crosses resolvents
 $
   \mr{min}(\rh_{h(l)},\rh_{t(l)}) + 1
@@ -1268,56 +1270,104 @@ which follows from substituting equation~\ref{eq:bracketing-psi-3} into $E\ord{4
 \end{ex}
 
 \begin{dfn}
-
-$
+A product of graphs $G=(L,O,h,t)$ and $G'=(L',O',h',t')$ is itself a graph, which is formally given by
+\begin{align}
   GG'
 =
-  (
-    L\cup L',
-    O\cup O',
-    h\oplus h',
-    t\oplus t'
-  )
-$
+  (L\cup L', O\cup O', h\oplus h', t\oplus t')
+&&
+\begin{array}{r@{\ }lr@{\ }ll}
+  (h\oplus h')(l)\, \equiv& h(l)
+&
+  (t\oplus t')(l)\, \equiv& t(l)
+&
+  \text{for $l\in L$}
+\\
+  (h\oplus h')(l')  \equiv& h'(l')
+&
+  (t\oplus t')(l')  \equiv& t'(l')
+&
+  \text{for $l'\in L'$} \\
+\end{array}
+\end{align}
+in terms of the lines, operators, and head/tail functions of $G$ and $G'$.
+According to definition~\ref{dfn:resolvent-graph}, however, a product of resolvent graphs is not a resolvent graph.
+There are several \ld\\
+The \textit{combination graphs} of $G(\rh,m)$ and $G'(\rh',m')$ have the form
+$GG'(\rh_{\pi,\si}^{k,k'},m+m'-1)$\\
+\begin{align*}
+\begin{array}{r@{\ }l}
+  \rh_{\pi,\si}^{k,k'}(o)
+=&
+\left\{
+\begin{array}{ll}
+  \pi(\rh(o))      & \rh(o)<k \\
+  k + k'           & \rh(o)=k \\
+  \makebox[2.8cm][l]{$\si(\rh(o) + k')$} & \rh(o)>k \\
+\end{array}
+\right.
+\\[20pt]
+  \rh_{\pi,\si}^{k,k'}(o')
+=&
+\left\{
+\begin{array}{ll}
+  \pi(\rh'(o') + k)   & \rh(o')<k' \\
+  k + k'              & \rh(o')=k' \\
+  \makebox[2.8cm][l]{$\si(\rh'(o') + m-1)$} & \rh(o')>k' \\
+\end{array}
+\right.
+\end{array}
+\hspace{20pt}
+\begin{array}{r@{\ }l}
+  o\,
+\in&
+  O
+\\[5pt]
+  o'
+\in&
+  O'
+\\[5pt]
+  \pi\,
+\in&
+  \mr{L}_{k,k'}
+\\[5pt]
+  \si\,
+\in&
+  \mr{U}_{k,k'}^{m,m'}
+\end{array}
+\end{align*}
 where
 $
-  (h\oplus h')(l)
+  \mr{L}_{k,k'}
 \equiv
-\left\{
-\begin{array}{ll}
-  h(l) & l\in L\\
-  h'(l) & l\in L'
-\end{array}
-\right.
-$\\
-\textit{combination graphs}\\
-The \textit{combination graphs} of $G(\rh,m)$ and $G'(\rh',m')$ have the form
-$GG'(\rh_\pi,m+m')$\\
-\begin{align*}
-  \rh_\pi(o)
-=
-\left\{
-\begin{array}{ll}
-  \pi(\rh(o))      & o\in O\\
-  \pi(\rh'(o) + m) & o\in O'
-\end{array}
-\right.
-&&
-  \pi
-\in
-  S_{(m+1,m'+1)}
-  (\mb{Z}_{m+m'+2})
-&&
-  \mb{Z}_{m+m'+2}
-=
-  \{
-    0,
-    \ld,
-    m+m'+2
-  \}
-\end{align*}
-where $S_{(p,q)}(\mb{S})$ denotes the set of $(p,q)$-shuffles (``riffle'' shuffles) of a set $\mb{S}$ with $p+q$ elements.\footnote{\url{https://en.wikipedia.org/wiki/Riffle_shuffle_permutation}}
+  \mr{S}^{(k,k')}_{\mb{Z}_{k+k'}}
+$
+and
+$
+  \mr{U}_{k,k'}^{m,m'}
+\equiv
+  \mr{S}^{(m-k-1,m'-k'-1)}_{\mb{Z}_{m'+m'-k-k'-2} + k + k' + 1}
+$
+are interleavings of the levels below and above level $k$ and $k'$ in the respective graphs.
 \end{dfn}
+
+\begin{thm}
+\thmtitle{Frantz-Mills Factorization Theorem}
+\begin{align}
+  G(\rh,m)
+  G'(\rh',m')
+=
+  \sum_\pi^{\mr{L}_{k,k'}}
+  GG'(\rh_{\pi,\si}^{k,k'},m+m'-1)
+&&
+\begin{array}{r@{\ }l@{\,}l}
+  0\leq& k &<m \\[2pt]
+  0\leq& k'&<m'
+\end{array}
+\hspace{10pt}
+  \si\in\mr{U}_{k,k'}^{m,m'}
+\end{align}
+\end{thm}
 
 \begin{dfn}
 \thmtitle{Insertion graph}

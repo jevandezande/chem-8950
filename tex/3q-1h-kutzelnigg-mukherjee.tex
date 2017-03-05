@@ -149,7 +149,7 @@ Equivalently, $\op{v}$ can also be expressed as
 &
   \ol{v}_{p_1\cd p_m}^{q_1\cd q_m}
 \equiv
-  \sum_{\pi\in\mr{S}_m}
+  \sum_\pi^{\mr{S}_m}
   \e_\pi
   v_{p_1\hphantom{_{\pi()}}\cd p_m}^{q_{\pi(1)}\cd q_{\pi(m)}}
 \hspace{3cm}&
@@ -269,85 +269,83 @@ The signs are determined by pairing up contracted indices using \cref{eq:excitat
 \end{align*}
 \end{ex}
 
+\newpage
+\begin{dfn}\label{dfn:riffle-shuffles}
+\thmtitle{Riffle shuffle permutations}
+Let $\mr{S}_R$ be the \textit{symmetric group on $R\equiv(r_1,\ld,r_k)$}, comprising all $k!$ permutations of this tuple.
+For each integer composition\footnote{See \url{https://en.wikipedia.org/wiki/Composition_(combinatorics)}} $(k_1,\ld,k_m)$ of $k$, the \textit{$(k_1,\ld,k_m)$-shuffles~of~$R$} partition the tuple into blocks $R_1\cup\cd\cup R_m$ of the form $R_i\equiv(r_{h_i+1},\ld,r_{h_i+k_i})$ with $h_i\equiv\sum_{j=1}^{i-1}k_j$ and interleave them in all possible ways.
+The cardinality of this subset $\mr{S}_R^{(k_1,\ld,k_m)}\subseteq \mr{S}_R$ is given by the following multinomial coefficient
+\begin{align}
+  |\mr{S}_R^{(k_1,\ld,k_m)}|
+\equiv
+  \fr{k!}{k_1!\cd k_m!}
+\end{align}
+since for each shuffle there are $k_1!\cd k_m!$ permutations in $\mr{S}_R$ derived by permuting the elements within each block.
+These are termed \textit{riffle shuffle permutations},\footnote{See \url{https://en.wikipedia.org/wiki/Riffle_shuffle_permutation}} by analogy with the process of cutting and interleaving a deck of cards.
+\end{dfn}
+
 \begin{dfn}
 \thmtitle{Index antisymmetrizers}
-Let $\op{P}_{(p_1/\cd/p_m)}$ denote an \textit{index antisymmetrizer}, which antisymmetrizes a term with respect to $p_1,\ld,p_m$ by summing over all permutations with an appropriate sign factor.
-\begin{align*}
-  \op{P}_{(p_1/\cd/p_m)}
-  t_{p_1\cd p_m}
+Let $\op{P}_{(r_1/\cd/r_k)}$ be the \textit{full antisymmetrizer} for the indices in $R$.\footnote{Note that we are borrowing some definitions from \cref{dfn:riffle-shuffles}, such as $R$ and $R_i$.}\,\footnote{For example, we can express the position-space Slater determinant $\F_{(p_1\cd p_n)}(1,\ld,n)$ as $\fr{1}{\sqrt{n!}}\op{P}_{(p_1/\cd/p_n)}\y_{p_1}(1)\cd \y_{p_n}(n)$.}
+More generally, let $\op{P}_{(R_1/\cd/R_m)}$ be a \textit{reduced antisymmetrizer}, which antisymmetrizes a term in $R$ that it is already antisymmetric in each block, $R_i$.
+Reduced antisymmetrization is achieved by summing over riffle shuffles.
+\begin{align}
+  \op{P}_{(R_1/\cd/R_m)}
 \equiv
-  \sum_{\pi\in\mr{S}_m}
+  \sum_\pi^{\mr{S}_R^{(k_1,\ld,k_m)}}
   \e_\pi
-  t_{p_{\pi(1)}\cd p_{\pi(m)}}
-\end{align*}
-These operators can be expressed in terms of index transposition operators $\op{p}_{pq}$, defined by $\op{p}_{pq}t_{pq}\equiv t_{qp}$.
-For example,
-\begin{align*}
-  \op{P}_{(p/q)}
-\equiv
-  1
--
-  \op{p}_{pq}
+  \op{\pi}
 &&
-  \op{P}_{(p/q/r)}
+  \op{\pi}\,
+  t_{r_1\cd r_k}
 \equiv
-  1
--
-  \op{p}_{pq}
--
-  \op{p}_{pr}
--
-  \op{p}_{qr}
-+
-  \op{p}_{pq}\op{p}_{qr}
-+
-  \op{p}_{pr}\op{p}_{qr}
-\end{align*}
-are the antisymmetrizers for two and three indices.
-More generally, antisymmetrizers of the form $\op{P}_{(p_1\cd p_{m}/q_1\cd q_{n}/\cd)}$ serve to antisymmetrize a term for which groups of indices are already antisymmetric.
-For example,
-\begin{align*}
-  \op{P}_{(p/qr)}
-=
-  1
--
-  \op{p}_{pq}
--
-  \op{p}_{pr}
-\end{align*}
-antisymmetrizes a term which is already antisymmetric with respect to $q$ and $r$.
-These can be determined by generating permutations of $(p,q,r)$ while treating $q$ and $r$ as indistinguishable.\footnote{For example, $(p,q,r)$ and $(p,r,q)$ would be treated as equivalent permutations. Only one of these is used, and it doesn't matter which one.  Note however that, in determining the sign factor for a permutation, $q$ and $r$ are again treated as distinct.}
-In general, the antisymmetrizer $\op{P}_{(R_1/\cd/R_k)}$ involves a sum over
-$
-  \fr{
-    (|R_1|+\cd+|R_k|)!
-  }{
-    |R_1|!\cd|R_k|!
-  }
-$
-permutations, where each $R_i$ is a set of indices and $|R_i|$ is its cardinality.
+  t_{\pi(r_1)\cd \pi(r_k)}
+\end{align}
 To antisymmetrize multiple disjoint sets of indices, we use the compact notation
 $
   \op{P}^{(X_1|\cd|X_l)}_{(Y_1|\cd|Y_m)}
 \equiv
   \op{P}^{(X_1)}\cd \op{P}^{(X_l)}
   \op{P}_{(Y_1)}\cd \op{P}_{(Y_m)}
-$.
-For example,
-\begin{align}
-  \op{P}^{(p/q|r/st)}_{(u/v)}
-\equiv
-  \op{P}^{(p/q)}
-  \op{P}^{(r/st)}
-  \op{P}_{(u/v)}
-=
-  (1 - \op{p}^{pq})
-  (1 - \op{p}^{rs} - \op{p}^{rt})
-  (1 - \op{p}_{uv})
-\end{align}
-would antisymmetrize a term $t^{pqrst}_{uv}$ with respect to $(p,q)$, $(u,v)$, and $(r,s,t)$, assuming $s$ and $t$ are already antisymmetric.\footnote{For some more examples, see p.~324 of Shavitt and Bartlett, \textit{Many-Body Methods in Chemistry and Physics} (2009).}
+$,
+where each $X_i$ or $Y_i$ stands for a reduced antisymmetrizer argument $R_1/\cd/R_m$ for a different set of indices.
 \end{dfn}
 
+\begin{ex}
+Permutation operators $\op{\pi}$ can be written as products of transpositions $(pq)t_{pq}\equiv t_{qp}$.
+In this notation,
+\begin{align*}
+  \op{P}_{(p/q)}
+=
+  1
+-
+  (pq)
+&&
+  \op{P}_{(p/q/r)}
+=
+  1
+-
+  (pq)
+-
+  (pr)
+-
+  (qr)
++
+  (pq)(qr)
++
+  (pr)(qr)
+&&
+  \op{P}_{(p/qr)}
+=
+  1
+-
+  (pq)
++
+  (pr)(qr)
+\end{align*}
+are the unique antisymmetrizers for two and three indices.
+Note that $\op{P}_{(p/qr)}\op{P}_{(q/r)}=\op{P}_{(p/q/r)}$, which is an immediate consequence of the definition of the reduced antisymmetrizer.
+\end{ex}
 
 \begin{ex}
 Using index antisymmetrizers, the second Wick expansion in \cref{ex:km-notation-wick-expansions} can be expressed even more compactly.
@@ -372,8 +370,50 @@ Using index antisymmetrizers, the second Wick expansion in \cref{ex:km-notation-
   \g^p_r
   \g^q_s
 \end{align*}
+Note that permuting $p$ and $q$ in the second term, for example, is equivalent to ``moving the contraction dot'' from one to the other, since the excitation operators are antisymmetric in their upper and lower indices:
+$
+  (pq)
+  \tl{a}^{p^\hole q}_{r^\hole s}
+=
+-
+  \tl{a}^{q^\hole p}_{r^\hole s}
+=
+  \tl{a}^{p\,\, q^\hole}_{r^\hole s}
+$.
 In general, this allows us to reduce Wick expansions to a sum over unique contraction ``patterns'', with the remaining contractions generated from these by index antisymmetrizers.
 The next two examples show how this works in practice.
+\end{ex}
+
+\begin{ex}
+Reduced antisymmetrizers come into play in the Wick expansion of a triple excitation operator.
+\begin{align}
+  a^{pqr}_{stu}
+=
+  \tl{a}^{pqr}_{stu}
++
+  \op{P}^{(p/qr)}_{(s/tu)}
+  \tl{a}^{p^\hole qr}_{s^\hole tu}
++
+  \op{P}^{(p/q/r)}_{(st/u)}
+  \tl{a}^{p^\hole q^{\hole\hole} r}_{s^\hole t^{\hole\hole} u}
++
+  \op{P}^{(p/q/r)}
+  \tl{a}^{p^\hole q^{\hole\hole} r^{\hole\hole\hole}}
+        _{s^\hole t^{\hole\hole} u^{\hole\hole\hole}}
+\end{align}
+The permutation factors are chosen as follows.
+In the second term, permutations of $qr$ an $tu$ are omitted because they do not produce unique contractions.
+In the third term, we can include permutations of either $pq$ or $st$ but not both.
+Otherwise, we would double-count terms like
+$
+  \tl{a}^{p^\hole q^{\hole\hole} r}_{s^\hole t^{\hole\hole} u}
+$
+by also including
+$
+  \tl{a}^{p^{\hole\hole} q^\hole r}_{s^{\hole\hole} t^\hole u}
+$,
+which represents the same contraction.
+The same reasoning applies to the last term, where we can either antisymmetrize $pqr$ or $stu$.
 \end{ex}
 
 
@@ -442,6 +482,7 @@ Here, we have used the fact that $\tl{a}_i^a=a_i^a$ and $\tl{a}_a^i=a_a^i$.
 \end{ex}
 
 \begin{ex}
+\begin{samepage}
 \thmtitle{Derivation of CID equations in KM notation}
 Projecting the CI doubles Schr\"odinger equation, $H_\mr{c}\Y=E_\mr{c}\Y$ where $\Y=(1+\tfr{1}{4}c_{cd}^{kl}\tl{a}_{kl}^{cd})\F$, by $\F$ and $\F_{ij}^{ab}$
 gives a system of linear equations
@@ -594,8 +635,8 @@ $
   \ol{g}_{ak}^{ic}
   c_{bc}^{jk}
 \end{align*}
+\end{samepage}
 \end{ex}
-
 
 
 
