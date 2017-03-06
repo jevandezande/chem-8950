@@ -1,0 +1,381 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 7, Handout 1: Perturbative analysis}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\makeatother
+\newcommand{\resolventline}[2][1]{
+  \tikz[overlay]{
+      \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
+  }
+}
+
+\newcommand{\fwkt}[1]{\kt{\makebox[0.8em][c]{\ensuremath{#1}}}}
+\newcommand{\fwbr}[1]{\br{\makebox[0.8em][c]{\ensuremath{#1}}}}
+\newcommand{\bord}[1]{\ensuremath{^{\scriptscriptstyle[#1]}}}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+
+
+
+\setcounter{section}{6}
+\section{Perturbative analysis}
+
+Now, just to be confusing, redefine some shit.
+\begin{align}
+  \bo{1}_\mr{i}
+\equiv
+\pma[l]{
+  \bo{1} & \bo{0} \\
+  \bo{0} & \bo{0}
+}
+&&
+  \bo{1}_\mr{e}
+\equiv
+\pma[l]{
+  \bo{0} & \bo{0} \\
+  \bo{0} & \bo{1}
+}
+&&
+  \bo{H}_\mr{xy}
+\equiv
+  \bo{1}_\mr{x}\,
+  \bo{H}\,
+  \bo{1}_\mr{y}
+&&
+  \bo{c}_\mr{x}
+\equiv
+  \bo{1}_\mr{x}\,
+  \bo{c}
+\end{align}
+
+\begin{align}
+  \bo{H}
+=
+  \bo{H}_\mr{ii}
++
+  \bo{H}_\mr{ie}
++
+  \bo{H}_\mr{ei}
++
+  \bo{H}_\mr{ee}
+\end{align}
+
+\begin{align}
+  \bo{R}_\mr{ee}
+\equiv
+\left.
+  (
+    E
+  -
+    \bo{H}
+  )^{-1}
+\right|_\mr{e}
+&&
+  \bo{R}_\mr{ee}
+  (
+    E
+  -
+    \bo{H}
+  )
+  \bo{1}_\mr{e}
+=
+  \bo{1}_\mr{e}
+&&
+\begin{array}{r@{\ }l}
+  \bo{R}_\mr{ee}\,
+  (
+    E
+  -
+    \bo{H}
+  )
+&=
+-
+  \bo{R}_\mr{ee}\,
+  \bo{H}_\mr{ei}
++
+  \bo{1}_\mr{e}
+\\
+  (
+    E
+  -
+    \bo{H}
+  )\,
+  \bo{R}_\mr{ee}
+&=
+-
+  \bo{H}_\mr{ie}\,
+  \bo{R}_\mr{ee}
++
+  \bo{1}_\mr{e}
+\end{array}
+\end{align}
+Operating the upper equation on $\bo{c}$ gives zero due to the Schr\"odinger equation, which implies
+$
+  \bo{c}_\mr{e}
+=
+  \bo{R}_\mr{ee}
+  \bo{H}_\mr{ei}
+  \bo{c}_\mr{i}
+$.
+Projecting the Schr\"odinger equation by $\bo{1}_\mr{i}$ and substituting in this result leads to the following.
+\begin{align}
+  (
+    \bo{H}_\mr{ii}
+  +
+    \bo{V}_\mr{ii}
+  )
+  \bo{c}_\mr{i}
+=
+  E
+  \bo{c}_\mr{i}
+&&
+  \bo{V}_\mr{ii}
+\equiv
+  \bo{H}_\mr{ie}
+  \bo{R}_\mr{ee}
+  \bo{H}_\mr{ei}
+\end{align}
+
+\begin{align}
+  E
+=
+  \fr{
+    \bo{c}_\mr{i}\dg
+    (
+      \bo{H}_\mr{ii}
+    +
+      \bo{V}_\mr{ii}
+    )
+    \bo{c}_\mr{i}
+  }{
+    \bo{c}_\mr{i}\cdot
+    \bo{c}_\mr{i}
+  }
+\end{align}
+
+
+\begin{align*}
+  E
+=
+  \ip{\F|
+  (
+    1
+  +
+    \La
+  )
+  \ol{H}
+  |\F}
++
+  \ip{\F|\La\ol{H}|\bo{e}}
+  \ip{\bo{e}|E - \ol{H}|\bo{e}}^{-1}
+  \ip{\bo{e}|\ol{H}|\F}
+\end{align*}
+
+\begin{align*}
+  \d E
+=
+  \ip{\F|\La\ol{H}|\bo{e}}
+  \ip{\bo{e}|E - \ol{H}|\bo{e}}^{-1}
+  \ip{\bo{e}|\ol{H}|\F}
+\approx
+  \ip{\F|\La\ol{H}\ord{1}|\bo{e}}
+  \ip{\bo{e}|E\ord{0} - \ol{H}\ord{0}|\bo{e}}^{-1}
+  \ip{\bo{e}|\ol{H}\ord{m}|\F}
+\end{align*}
+
+
+\begin{align}
+  \ol{H}
+=
+  E_\mr{ref}
++
+  H_0
++
+  (
+    H_0
+    T
+  +
+    V_\mr{c}\,
+    \mr{exp}(T)
+  )_\mr{C}
+\end{align}
+
+\begin{align}
+  \ol{H}\ord{0}
+=
+  E_\mr{ref}
++
+  H_0
+&&
+  \ol{H}\ord{1}
+=
+  (H_0T\ord{1})_\mr{C}
++
+  V_\mr{c}
+&&
+  \ol{H}\ord{2}
+=
+  (
+    H_0
+    T\ord{2}
+  +
+    V_\mr{c}\,
+    T\ord{1}
+  )_\mr{C}
+\end{align}
+
+\begin{align}
+\end{align}
+
+\newpage
+\begin{align}
+  \ol{H}
+  \mc{R}_k
+  \kt{\F}
+=
+  E_k
+  \mc{R}_k
+  \kt{\F}
+&&
+  \br{\F}
+  \mc{L}_k
+  \ol{H}
+=
+  \br{\F}
+  \mc{L}_k
+  \w_k
+&&
+  \fwbr{\F}
+    \mc{L}_k
+    \mc{R}_l
+  {\F}
+=
+  \d_{kl}
+&&
+  \ol{H}
+=
+  \mr{exp}(-T)
+  H\,
+  \mr{exp}(T)
+=
+  E_\mr{ref}
++
+  \ol{H}_\mr{c}
+\end{align}
+\textbf{Note to self:}
+Go back and change $E_0$ to $E_\mr{ref}$ throughout to avoid problems like this ($E_0$ should refer to the ground state energy).\\
+\textbf{Note to self:}
+Go back and change $H_e$ to $H$ for simplicity.
+\begin{align}
+  \mc{R}_0
+=
+  1
+&&
+  \mc{L}_0
+=
+  1
++
+  \La
+&&
+  \La
+=
+  \sum_{h=1}^n
+  \La_h
+&&
+  \La_h
+\equiv
+  (\tfr{1}{h!})^2\,
+  \la_{i_1\cd i_h}^{a_1\cd a_h}
+  \tl{a}^{i_1\cd i_h}_{a_1\cd a_h}
+\end{align}
+\textbf{Note to self:}
+Go back and change $k$ to $h$ for summations over excitation levels.
+\begin{align*}
+  E_\mr{c}
+\equiv
+  \fwbr{\F}\mc{L}_0\ol{H}\mc{R}_0{\F}
+-
+  E_\mr{ref}
+=
+  \fwbr{\F}(1+\La)\ol{H}_\mr{c}\fwkt{\F}
+\end{align*}
+Structure of matrix
+\begin{align*}
+  \ol{\bo{H}}_\mr{c}
+=
+\pma{
+  E_\mr{c} & \fwbr{\F}\ol{H}_\mr{c}\fwkt{\bo{i}} & \fwbr{\F}\ol{H}_\mr{c}\fwkt{\bo{e}} \\
+  \bo{0} & \fwbr{\bo{i}}\ol{H}_\mr{c}\fwkt{\bo{i}} & \fwbr{\bo{i}}\ol{H}_\mr{c}\fwkt{\bo{e}} \\
+  \fwbr{\bo{e}}\ol{H}_\mr{c}\fwkt{\F} & \fwbr{\bo{e}}\ol{H}_\mr{c}\fwkt{\bo{i}} & \fwbr{\bo{e}}\ol{H}_\mr{c}\fwkt{\bo{e}} \\
+}
+&&
+  \bo{i}
+\equiv
+\pma{
+  \bo{s}_1 & \cd & \bo{s}_m
+}
+&&
+  \bo{e}
+\equiv
+\pma{
+  \bo{s}_{m-1} & \cd & \bo{s}_n
+}
+&&
+  \bo{s}_h
+\equiv
+\pma{
+  \cd
+\
+  \F_{i_1\cd i_h}^{a_1\hspace{-1pt}\cd a_h}
+\
+  \cd
+}
+\end{align*}
+
+
+\begin{thm}
+\thmtitle{Faà di Bruno's formula}
+\begin{align}
+  \pd{^n}{x_1\cd \pt x_n}
+  f(g(\bm{x}))
+=
+  \sum_{k=1}^n
+  \sum_{(\bm{x}_1,\ld,\bm{x}_k)}^{\mc{P}_k(\bm{x})}
+  f\ord{k}(g(\bm{x}))
+  \prod_{i=1}^k
+  \pd{
+    ^{|\bm{x}_i|}
+    g(\bm{x})
+  }{
+    x_{i,1}
+  \cd
+    \pt
+    x_{i,|\bm{x}_i|}
+  }
+\end{align}
+\end{thm}
+
+
+\end{document}
