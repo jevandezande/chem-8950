@@ -358,7 +358,7 @@ so that
 $
   H_e
 =
-  E_0
+  E_\mr{ref}
 +
 \diagram{
   \draw (-0.5,0) node[circlez] (h) {} -- (0,0) node[ddot=white] (h1) {};
@@ -379,7 +379,7 @@ $
   \draw[->-] (g2) to ++(0,+0.35);
   \draw[-<-] (g2) to ++(0,-0.35);
 }
-$
+$\
 is the full electronic Hamiltonian
 and
 $
@@ -474,9 +474,9 @@ These operators are also known as the \textit{model Hamiltonian} and \textit{flu
 \end{rmk}
 \footnotetext{
 The proof is as follows.
-First, note that $a^p_p\F_\mu = n_p^\mu \F_\mu$, where $n_p^\mu$ is the occupation of $\y_p$ in $\F_\mu$.
+First, note that $a^p_p\F_\si = n_p^\si \F_\si$, where $n_p^\si$ is the occupation of $\y_p$ in $\F_\si$.
 By Wick's theorem, $a^p_p=\tl{a}^p_p+n_p^{\mr{ref}}$, where $n_p^{\mr{ref}}$ denotes the occupation of $\y_p$ in $\F$.
-Therefore, $\tl{a}^p_p\F_\mu = (n_p^\mu - n_p^{\mr{ref}})\F_\mu$ and $H_0\F_\mu = \pr{\sum_{p\in\F_\mu}f_p^p - \sum_{p\in\F}f_p^p}\F_\mu$.
+Therefore, $\tl{a}^p_p\F_\si = (n_p^\si - n_p^{\mr{ref}})\F_\si$ and $H_0\F_\si = \pr{\sum_{p\in\F_\si}f_p^p - \sum_{p\in\F}f_p^p}\F_\si$.
 }
 
 

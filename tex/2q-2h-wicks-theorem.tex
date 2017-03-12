@@ -409,7 +409,7 @@ Substituting these into the electronic Hamiltonian leads to an expression for $H
 &&
   H_e
 =
-  E_0
+  E_\mr{ref}
 +
   \sum_{pq}^\infty
   f_{pq}
@@ -421,7 +421,7 @@ Substituting these into the electronic Hamiltonian leads to an expression for $H
   \gno{a_p\dg a_q\dg a_sa_r}
 &&
 \begin{array}{r@{\ }l}
-  E_0
+  E_\mr{ref}
 \equiv&
 \ds{
   \sum_{pq}^\infty
@@ -442,7 +442,7 @@ Substituting these into the electronic Hamiltonian leads to an expression for $H
   \g_{rs}
 \end{array}
 \end{align}
-Note that $E_0$ is another expression for the Hartree-Fock energy, $E_0=\ip{\F|\op{H}_e|\F}$, and $f_{pq}$ is the matrix representation of the Fock operator in the spin-orbital basis, $\bm{f}=[f_{pq}]$ where $f_{pq}=\ip{\y_p|\op{f}\y_q}$.
+Note that $E_\mr{ref}$ is another expression for the Hartree-Fock energy, $E_\mr{ref}=\ip{\F|\op{H}_e|\F}$, and $f_{pq}$ is the matrix representation of the Fock operator in the spin-orbital basis, $\bm{f}=[f_{pq}]$ where $f_{pq}=\ip{\y_p|\op{f}|\y_q}$.
 The second and third terms in this expression together make up the \textit{correlation component} of the electronic Hamiltonian, $H_\mr{c}\equiv H_e - \ip{\F|H_e|\F}$.
 \end{dfn}
 
@@ -451,13 +451,13 @@ The second and third terms in this expression together make up the \textit{corre
 The configuration interaction singles (CIS) equations take the form
 \begin{align}
   \sum_{jb}
-  \ip{\F_i^a|H_e - E_0|\F_j^b}\,
+  \ip{\F_i^a|H_e - E_\mr{ref}|\F_j^b}\,
   (\bo{c}_k)_b^j
 =
   \w_k\, 
   (\bo{c}_k)_a^i
 \end{align}
-where $\w_k$ approximates the excitation energy of the $k\eth$ state, $\w_k=E_k-E_0$.
+where $\w_k$ approximates the excitation energy of the $k\eth$ state, $\w_k=E_k-E_\mr{ref}$.
 In order to solve the CIS eigenvalue problem, we need to have an expression for the matrix elements
 $\ip{\F_i^a|H_\mr{c}|\F_j^b}$ in terms of our known quantities, the one- and two-electron integrals.
 To do this, we can evaluate

@@ -42,6 +42,513 @@
 \setcounter{section}{6}
 \section{Perturbative analysis}
 
+\begin{rmk}
+\thmtitle{Perturbative analysis of the configuration interaction (CI) equations}
+The CI eigenvalue equation can be expressed as
+$
+  \bo{H}_\mr{c}\,
+  \bo{c}
+=
+  E_\mr{c}\,
+  \bo{c}
+$
+in terms of the reference-shifted Hamiltonian matrix
+$
+  (\bo{H}_\mr{c})_{\si\ta}
+\equiv
+  \ip{\F_\si|H_\mr{c}|\F_\ta}
+$.\footnote{By ``reference-shifted Hamiltonian matrix'' we mean that 
+$
+  \bo{H}_\mr{c}
+$
+equals
+$
+  \bo{H}_e - E_\mr{ref}\bo{1}
+$,
+which has elements
+$
+  \ip{\F_\si|H_e|\F_\ta}
+-
+  E_\mr{ref}
+  \d_{\si\ta}
+$.
+}
+Separating this matrix into model-Hamiltonian and fluctuation-potential contributions gives an equivalent matrix equation
+\begin{align}
+  (
+  -
+    \bo{H}_0
+  +
+    E_\mr{c}
+    \bo{1}
+  )\,
+  \bo{c}
+=
+  \bo{V}_\mr{c}\,
+  \bo{c}
+&&
+\begin{array}{l@{\ }l}
+  (\bo{H}_0)_{\si\ta}
+&\equiv
+  \ip{\F_\si|H_0|\F_\ta}
+\\
+  (\bo{V}_\mr{c})_{\si\ta}
+&\equiv
+  \ip{\F_\si|V_\mr{c}|\F_\ta}
+\end{array}
+\end{align}
+which provides a good starting point for a perturbative analysis of CI and for comparison to the coupled-cluster equations.
+The matrix elements of the model Hamiltonian are given by
+$
+  \mc{E}_\si
+  \d_{\si\ta}
+$,
+so the matrix on the left is diagonal with eigenvalues of the form
+$
+  \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
++
+  E_\mr{c}
+$.
+The first five rows of this equation can be written in terms of CI operators as follows\footnote{The $C_0$ operator simply is simply $c_0$ times the identity.  Under intermediate normalization $C_0=1$.}
+\begin{align}
+\label{eq:ci-reference-equation}
+  \underset{(0^+)}{\vphantom{(}
+  c_0
+  }
+  \underset{(2^+)}{\vphantom{(}
+    E_\mr{c}
+  }
+=&\
+  \ip{\F|
+  \underset{(1)}{\vphantom{(}
+    V_\mr{c}
+  }
+    (
+    \underset{(1^+)}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    )
+  |\F}
+\\
+\label{eq:ci-singles-equation}
+  \underset{(1^+)}{\vphantom{(}
+  c_a^i
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_a^i
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_\mr{c}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_i^a|
+  \underset{(1)}{\vphantom{(}
+    V_\mr{c}
+  }
+    (
+    \underset{(0^+)}{\vphantom{(}
+      C_0
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    )
+  |\F}
+\\
+\label{eq:ci-doubles-equation}
+  \underset{(1^+)}{\vphantom{(}
+  c_{ab}^{ij}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{ab}^{ij}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_\mr{c}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_{ij}^{ab}|
+  \underset{(1)}{\vphantom{(}
+    V_\mr{c}
+  }
+    (
+    \underset{(0^+)}{\vphantom{(}
+      C_0
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    +
+    \underset{(3^+)}{\vphantom{(}
+      C_4
+    }
+    )
+  |\F}
+\\
+  \underset{(2^+)}{\vphantom{(}
+  c_{abc}^{ijk}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{abc}^{ijk}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_\mr{c}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_{ijk}^{abc}|
+  \underset{(1)}{\vphantom{(}
+    V_\mr{c}
+  }
+    (
+    \underset{(1^+)}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_4
+    }
+    +
+    \underset{(3^+)}{\vphantom{(}
+      C_5
+    }
+    )
+  |\F}
+\\
+  \underset{(2^+)}{\vphantom{(}
+  c_{abcd}^{ijkl}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{abcd}^{ijkl}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_\mr{c}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_{ijkl}^{abcd}|
+  \underset{(1)}{\vphantom{(}
+    V_\mr{c}
+  }
+    (
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_4
+    }
+    +
+    \underset{(3^+)}{\vphantom{(}
+      C_5
+    }
+    +
+    \underset{(3^+)}{\vphantom{(}
+      C_6
+    }
+    )
+  |\F}
+\end{align}
+where the numbers in parentheses denote orders in perturbation theory.
+The notation
+$
+  (p^+)
+$
+denotes that a term involves contributions of order $p$ and higher.
+The orders of the CI operators follow from the fact that each order in perturbation theory increases the maximum excitation level of the wavefunction by $+2$, starting from $\Y\ord{1}$ which contains up to doubles, which implies that the lowest-order contributions to $C_k$ appear at order $\ceil{\frac{k}{2}}$.
+If Brillouin's theorem holds, the $C_0$ term in equation~\ref{eq:ci-singles-equation} vanishes and the order of $C_1$ is $2^+$.
+In general, the coefficient equation for doubles look as follows.
+\begin{align}
+  \underset{(\ceil{k/2}^+)}{\vphantom{(}
+  c_{a_1\cd a_k}^{i_1\cd i_k}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_\mr{c}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_{i_1\cd i_k}^{a_1\cd a_k}|
+  \underset{(1)}{\vphantom{(}
+    V_\mr{c}
+  }
+    (
+    \underset{(\ceil{k/2}^+-1)}{\vphantom{(}
+      C_{k-2}
+    }
+    +
+    \underset{(\ceil{k/2-1/2}^+)}{\vphantom{(}
+      C_{k-1}
+    }
+    +
+    \underset{(\ceil{k/2}^+-1)}{\vphantom{(}
+      C_k
+    }
+    +
+    \underset{(\ceil{k/2+1/2}^+)}{\vphantom{(}
+      C_{k+1}
+    }
+    +
+    \underset{(\ceil{k/2}^++\,1)}{\vphantom{(}
+      C_{k+2}
+    }
+    )
+  |\F}
+&&
+  k
+\geq
+  2
+\end{align}
+\end{rmk}
+
+\begin{dfn}
+\thmtitle{Complete orders in perturbation theory}
+We say that approximations to a quantity $X$ are \textit{complete to $p\eth$-order in perturbation theory} when they contain all contributions to $X\ord{1},\ld,X\ord{p}$.
+The quantity may also contain higher-order contributions in perturbation theory, but the  polynomial dependence of its error is $\mc{O}(V_\mr{c}^{p+1})$ or better.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{The Davidson correction}
+Truncating the CI wave operator at doubles yields
+\begin{align}
+  c_0
+    E_\mr{c}
+=
+  \ip{\F|
+    V_\mr{c}
+    (
+      C_1
+    +
+      C_2
+    )
+  |\F}
+&&
+  c_a^i
+  (
+    \mc{E}_a^i
+  +
+    E_\mr{c}
+  )
+=
+  \ip{\F_i^a|
+    V_\mr{c}
+    (
+      C_1
+    +
+      C_2
+    )
+  |\F}
+&&
+  c_{ab}^{ij}
+  (
+    \mc{E}_{ab}^{ij}
+  +
+    E_\mr{c}
+  )
+=
+  \ip{\F_{ij}^{ab}|
+    V_\mr{c}
+    (
+      C_0
+    +
+      C_1
+    +
+      C_2
+    )
+  |\F}
+\end{align}
+which are
+the \textit{CI singles and doubles (CISD) equations}.
+Comparison to equations~\ref{eq:ci-reference-equation}--\ref{eq:ci-doubles-equation} the CISD singles and doubles are complete to second order in perturbation theory and the CISD correlation energy is complete to third order.
+
+\end{dfn}
+
+
+
+\begin{align}
+-
+  \bo{H}_0\,
+  \bo{t}
+=
+  \ip{\bm{\F}|
+    V_\mr{c}\,
+    \mr{exp}(T(\bo{t}))
+  |\F}_\mr{C}
+&&
+  \bm{\F}
+=
+  \pma[l]{
+    \F
+  \\[-3pt]
+    \bo{s}_1
+  \\
+    \bo{s}_2
+  \\
+    \vd
+  \\
+    \bo{s}_n
+  }
+\end{align}
+
+\begin{rmk}
+From PT, we know that the lowest order contributions to $T_1$, $T_2$, and $T_3$ (or $C_1$ and $C_2$) occur at first and second order in perturbation theory.
+\begin{align}
+  t_a^i
+  \mc{E}_a^i
+=&\
+  \ip{\F_i^a|
+  \underset{(1)}{\vphantom{(}
+    V_\mr{c}
+  }
+    (
+    \underset{(0)}{\vphantom{(}
+      1
+    }
+    +
+    \underset{(1^{+})}{\vphantom{(}
+      T_2
+    }
+    +
+    \underset{(2^{+})}{\vphantom{(}
+      T_1
+    }
+    +
+      T_1T_2
+    +
+      \tfr{1}{2}
+      T_1^2
+    +
+      \tfr{1}{3!}
+      T_1^3
+    +
+      T_3
+    )
+  |\F}_\mr{C}
+\\
+  t_{ab}^{ij}
+  \mc{E}_{ab}^{ij}
+=&\
+  \ip{\F_{ij}^{ab}|
+    V_\mr{c}
+    (
+      1
+    +
+      T_2
+    +
+      \tfr{1}{2}
+      T_2^2
+    +
+      T_1
+    +
+      T_1T_2
+    +
+      \tfr{1}{2}
+      T_1^2
+    +
+      \tfr{1}{2}
+      T_1^2T_2
+    +
+      \tfr{1}{3!}
+      T_1^3
+    +
+      \tfr{1}{4!}
+      T_1^4
+    +
+      T_3
+    +
+      T_1T_3
+    +
+      T_4
+    )
+  |\F}_\mr{C}
+\\
+  t_{abc}^{ijk}
+  \mc{E}_{abc}^{ijk}
+=&\
+  \ip{\F_{ijk}^{abc}|
+    V_\mr{c}
+    (
+      T_2
+    +
+      T_3
+    +
+      \tfr{1}{2}
+      T_2^2
+    +
+      T_1T_2
+    +
+      T_2T_3
+    +
+      T_1T_3
+    +
+      \tfr{1}{2}
+      T_1^2T_2
+    +
+      \tfr{1}{2}
+      T_1T_2^2
+    +
+      \tfr{1}{2}
+      T_1^2T_3
+    +
+      \tfr{1}{3!}
+      T_1^3T_2
+    )
+  |\F}_\mr{C}
+\end{align}
+\end{rmk}
+
 Now, just to be confusing, redefine some shit.
 \begin{align}
   \bo{1}_\mr{i}
