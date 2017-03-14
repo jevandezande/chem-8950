@@ -1,0 +1,76 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 6}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Derive the recursive equation for the wavefunction, starting from the $\la$-dependent Schr\"odinger equation.
+\begin{align}
+\label{eq:recursive-wavefunction-equation}
+  \Y(\la)
+=
+  \F
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\end{align}
+Assume intermediate normalization and note that $R_0H_0=-Q$ follows** from the definition of $R_0$.\\[10pt]
+**\textbf{Extra Credit}: Define ``resolvent'' and explain why this follows from your definition.
+
+
+\newpage
+\item
+Determine the first- and second-order components of $\Y$ by differentiating equation~\ref{eq:recursive-wavefunction-equation}.
+You do \ul{not} need to fully evaluate and simplify your answer,\footnote{That is, your final answer may contain $R_0$'s and $V_\mr{c}$'s.} but you should eliminate all terms that vanish and explain why each one evaluates to zero.\footnote{You may take $E_\mr{c}\ord{m+1}=\ip{\F|V_\mr{c}|\Y\ord{m}}$ as given.}
+
+
+\newpage
+\item
+Evaluate the following contributions to the CI doubles and quadruples coefficients.
+\begin{align}
+  {}\ord{1}
+  c_{ab}^{ij}
+=
+  \ip{\F_{ij}^{ab}|
+    R_0V_\mr{c}
+  |\F}
+&&
+  {}\ord{2}
+  c_{abcd}^{ijkl}
+=
+  \ip{\F_{ijkl}^{abcd}|
+    R_0V_\mr{c}R_0V_\mr{c}
+  |\F}
+\end{align}
+Use your answer to show that ${}\ord{2}C_4=\tfr{1}{2}{}\ord{1}C_2^2$.
+
+
+\end{enumerate}
+
+\end{document}

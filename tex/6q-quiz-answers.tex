@@ -1,0 +1,475 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\textbf{Quiz 6}}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Derive the recursive equation for the wavefunction, starting from the $\la$-dependent Schr\"odinger equation.
+\begin{align}
+\label{eq:recursive-wavefunction-equation}
+  \Y(\la)
+=
+  \F
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\end{align}
+Assume intermediate normalization and note that $R_0H_0=-Q$ follows** from the definition of $R_0$.\\[10pt]
+**\textbf{Extra Credit}: Define ``resolvent'' and explain why this follows from your definition.\\[10pt]
+\textbf{Answer}:
+The resolvent is the negative inverse of $H_0$ in the orthogonal space,
+$
+  R_0
+=
+-
+\left.
+  H_0
+\right|_\mr{o}
+$,
+which implies that
+$
+  R_0H_0
+=
+-
+\left.
+  1
+\right|_\mr{o}
+$.
+Resolution of the identity in the orthogonal space gives
+\begin{align*}
+\left.
+  1
+\right|_\mr{o}
+=
+  \sum_{k=1}^n
+  (\tfr{1}{k!})^2
+  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+  \kt{\F^{a_1\cd a_k}_{i_1\cd i_k}}
+  \br{\F^{a_1\cd a_k}_{i_1\cd i_k}}
+=
+  Q\,\,.
+\end{align*}
+Operating $R_0$ on both sides of $0=\pr{H_0 + \la V_\mr{c}-E(\la)}\Y(\la)$ gives
+\begin{align*}
+  0
+=&\
+  R_0
+  H_0
+  \Y(\la)
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\\=&\
+-
+  Q
+  \Y(\la)
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\\=&\
+-
+  \Y(\la)
++
+  \F
++
+  R_0
+  (
+    \la V_\mr{c}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\end{align*}
+where the last step follows from
+$
+  Q
+\,{=}\,
+  1_n
+\,{-}\,
+  P
+$
+and intermediate normalization:
+$
+  \ip{\F|\Y(\la)}
+\,{=}\,
+  1
+{\implies}
+  P\Y(\la)
+\,{=}\,
+  \F
+$.
+Adding $\Y(\la)$ to both sides gives equation~\ref{eq:recursive-wavefunction-equation}.
+
+\newpage
+\item
+Determine the first- and second-order components of $\Y$ by differentiating equation~\ref{eq:recursive-wavefunction-equation}.
+You do \ul{not} need to fully evaluate and simplify your answer,\footnote{That is, your final answer may contain $R_0$'s and $V_\mr{c}$'s.} but you should eliminate all terms that vanish and explain why each one evaluates to zero.\footnote{You may take $E_\mr{c}\ord{m+1}=\ip{\F|V_\mr{c}|\Y\ord{m}}$ as given.}\\[10pt]
+\textbf{Answer}:
+The $\la$-dependent first and second derivatives are as follows.
+\begin{align*}
+  \pd{\Y(\la)}{\la}
+=&\
+  R_0
+  \pr{
+    V_\mr{c}
+  -
+    \pd{E(\la)}{\la}
+  }
+  \Y(\la)
++
+  R_0
+  (
+    \la
+    V_\mr{c}
+  -
+    E(\la)
+  )
+  \pd{\Y(\la)}{\la}
+\\
+  \pd{^2\Y(\la)}{\la^2}
+=&\
+-
+  R_0
+  \pd{^2E(\la)}{\la^2}
+  \Y(\la)
++
+  2
+  R_0
+  \pr{
+    V_\mr{c}
+  -
+    \pd{E(\la)}{\la}
+  }
+  \pd{\Y(\la)}{\la}
++
+  R_0
+  (
+    \la
+    V_\mr{c}
+  -
+    E(\la)
+  )
+  \pd{^2\Y(\la)}{\la^2}
+\end{align*}
+Evaluating these equations at $\la=0$ after dividing the second equation by 2 gives the following
+\begin{align*}
+  \Y\ord{1}
+=&\
+  R_0
+  V_\mr{c}
+  \F
+-
+  E\ord{1}
+  R_0 
+  \F
+-
+  R_0
+  E\ord{0}
+  \Y\ord{1}
+\\
+  \Y\ord{2}
+=&\
+-
+  E_\mr{c}\ord{2}
+  R_0
+  \F
++
+  R_0
+  V_\mr{c}
+  \Y\ord{1}
+-
+  E_\mr{c}\ord{1}
+  R_0
+  \Y\ord{1}
+-
+  R_0
+  E_\mr{c}\ord{0}
+  \Y\ord{2}
+\end{align*}
+since $\Y\ord{0}$ is the ground-state eigenvector of $H_0$, which equals $\F$.
+It follows that
+$
+  E_\mr{c}\ord{0}
+=
+  \ip{\F|H_0|\F}
+=
+  0
+$.
+Furthermore, using the relation in the footnote we have that
+$
+  E_\mr{c}\ord{1}
+=
+  \ip{\F|V_\mr{c}|\F}
+=
+  0
+$.
+Since $R_0$ is only acts on the orthogonal space we have $R_0=R_0Q$, which implies
+$
+  R_0
+  \F
+=
+  R_0
+  Q
+  \F
+=
+  0
+$.
+Therefore,
+\begin{align*}
+  \Y\ord{1}
+=&\
+  R_0
+  V_\mr{c}
+  \F
+\\
+  \Y\ord{2}
+=&\
+  R_0
+  V_\mr{c}
+  \Y\ord{1}
+\end{align*}
+are the non-vanishing contributions to $\Y\ord{1}$ and $\Y\ord{2}$.
+
+\newpage
+\item
+Evaluate the following contributions to the CI doubles and quadruples coefficients.
+\begin{align}
+  {}\ord{1}
+  c_{ab}^{ij}
+=
+  \ip{\F_{ij}^{ab}|
+    R_0V_\mr{c}
+  |\F}
+&&
+  {}\ord{2}
+  c_{abcd}^{ijkl}
+=
+  \ip{\F_{ijkl}^{abcd}|
+    R_0V_\mr{c}R_0V_\mr{c}
+  |\F}
+\end{align}
+Use your answer to show that ${}\ord{2}C_4=\tfr{1}{2}{}\ord{1}C_2^2$.\\[10pt]
+\textbf{Answer}:
+Note that only the $+2$ fluctuation potential contributions can fully contract the products.
+\begin{align*}
+  {}\ord{1}
+  c_{ab}^{ij}
+=&\
+\diagram[top,bottom]{
+  \interaction{2}{a}{(0,+0.6)}{ddot}{dotted};
+  \interaction{2}{g}{(0,-0.6)}{ddot=white}{sawtooth};
+  \draw[-<-] (a1) to ++(-0.25,-0.5);
+  \draw[->-] (a1) to ++(+0.25,-0.5);
+  \draw[-<-] (a2) to ++(-0.25,-0.5);
+  \draw[->-] (a2) to ++(+0.25,-0.5);
+  \draw[->-] (g1) to ++(0,+0.5);
+  \draw[-<-] (g1) to ++(0,-0.5);
+  \draw[->-] (g2) to ++(0,+0.5);
+  \draw[-<-] (g2) to ++(0,-0.5);
+  \draw[densely dotted] (-0.3,0) to ++(1.6,0);
+}
+=
+\diagram{
+  \interaction{2}{g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-] (g1) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (g1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (g2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (g2) to ++(+0.25,1) node[smalldot] {};
+  \draw[densely dotted] (-0.3,+0.2) to ++(1.6,0);
+}
+=
+  \fr{\ol{g}_{ab}^{ij}}{\mc{E}_{ab}^{ij}}
+\\[10pt]
+  {}\ord{2}
+  c_{abcd}^{ijkl}
+=&\
+\diagram[top,bottom]{
+  \interaction{4}{a}{(0,+1.2)}{ddot}{dotted};
+  \interaction{2}{1g}{(1,0)}{ddot=white}{sawtooth};
+  \interaction{2}{2g}{(1,-1.2)}{ddot=white}{sawtooth};
+  \draw[-<-] (a1) to ++(-0.25,-0.5);
+  \draw[->-] (a1) to ++(+0.25,-0.5);
+  \draw[-<-] (a2) to ++(-0.25,-0.5);
+  \draw[->-] (a2) to ++(+0.25,-0.5);
+  \draw[-<-] (a3) to ++(-0.25,-0.5);
+  \draw[->-] (a3) to ++(+0.25,-0.5);
+  \draw[-<-] (a4) to ++(-0.25,-0.5);
+  \draw[->-] (a4) to ++(+0.25,-0.5);
+  \draw[->-] (1g1) to ++(0,+0.5);
+  \draw[-<-] (1g1) to ++(0,-0.5);
+  \draw[->-] (1g2) to ++(0,+0.5);
+  \draw[-<-] (1g2) to ++(0,-0.5);
+  \draw[->-] (2g1) to ++(0,+0.5);
+  \draw[-<-] (2g1) to ++(0,-0.5);
+  \draw[->-] (2g2) to ++(0,+0.5);
+  \draw[-<-] (2g2) to ++(0,-0.5);
+  \draw[densely dotted] (-0.3,+0.6) to ++(3.6,0);
+  \draw[densely dotted] (-0.3,-0.6) to ++(3.6,0);
+}
+=
+\diagram{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(2,+0.0)}{ddot}{sawtooth};
+  \draw[->-] (1g1) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (1g1) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (1g2) to ++(-0.25,1) node[smalldot] {};
+  \draw[-<-] (1g2) to ++(+0.25,1) node[smalldot] {};
+  \draw[->-] (2g1) to ++(-0.25,0.5) node[smalldot] {};
+  \draw[-<-] (2g1) to ++(+0.25,0.5) node[smalldot] {};
+  \draw[->-] (2g2) to ++(-0.25,0.5) node[smalldot] {};
+  \draw[-<-] (2g2) to ++(+0.25,0.5) node[smalldot] {};
+  \draw[densely dotted] (-0.4,+0.4) to ++(3.8,0);
+  \draw[densely dotted] (-0.3,-0.2) to ++(1.6,0);
+}
+=
+  P_{(ab/cd)}^{(ij/kl)}
+  \fr{\ol{g}_{ab}^{ij}\,\ol{g}_{cd}^{kl}}{\mc{E}_{abcd}^{ijkl}\mc{E}_{ab}^{ij}}
+\end{align*}
+The corresponding operators are as follows are
+\begin{align*}
+  {}\ord{1}C_2
+=&\
+\diagram{
+  \interaction{2}{g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-] (g1) to ++(-0.25,1);
+  \draw[-<-] (g1) to ++(+0.25,1);
+  \draw[->-] (g2) to ++(-0.25,1);
+  \draw[-<-] (g2) to ++(+0.25,1);
+  \draw[densely dotted] (-0.3,+0.2) to ++(1.6,0);
+}
+=
+  \fr{1}{2^2}
+  \sum_{\substack{ab\\ij}}
+  \fr{\ol{g}_{ab}^{ij}}{\mc{E}_{ab}^{ij}}
+  \tl{a}^{ab}_{ij}
+\\[10pt]
+  {}\ord{2}
+  C_4
+=&\
+=
+\diagram{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(2,+0.0)}{ddot}{sawtooth};
+  \draw[->-] (1g1) to ++(-0.25,1);
+  \draw[-<-] (1g1) to ++(+0.25,1);
+  \draw[->-] (1g2) to ++(-0.25,1);
+  \draw[-<-] (1g2) to ++(+0.25,1);
+  \draw[->-] (2g1) to ++(-0.25,0.5);
+  \draw[-<-] (2g1) to ++(+0.25,0.5);
+  \draw[->-] (2g2) to ++(-0.25,0.5);
+  \draw[-<-] (2g2) to ++(+0.25,0.5);
+  \draw[densely dotted] (-0.4,+0.4) to ++(3.8,0);
+  \draw[densely dotted] (-0.3,-0.2) to ++(1.6,0);
+}
+=
+  \fr{1}{2^4}
+  \sum_{\substack{abcd\\ijkl}}
+  \fr{\ol{g}_{ab}^{ij}\,\ol{g}_{cd}^{kl}}{\mc{E}_{abcd}^{ijkl}\mc{E}_{ab}^{ij}}
+  \tl{a}^{abcd}_{ijkl}
+\end{align*}
+and by duplicating and reindexing the quadruples operator we get the following.
+\begin{align*}
+  {}\ord{2}
+  C_4
+=
+  \fr{1}{2^4}
+  \sum_{\substack{abcd\\ijkl}}
+  \fr{\ol{g}_{ab}^{ij}\,\ol{g}_{cd}^{kl}}{\mc{E}_{abcd}^{ijkl}\mc{E}_{ab}^{ij}}
+  \tl{a}^{abcd}_{ijkl}
+=&\
+\fr{1}{2}
+\pr{
+  \fr{1}{2^4}
+  \sum_{\substack{abcd\\ijkl}}
+  \fr{\ol{g}_{ab}^{ij}\,\ol{g}_{cd}^{kl}}{\mc{E}_{abcd}^{ijkl}\mc{E}_{ab}^{ij}}
+  \tl{a}^{abcd}_{ijkl}
++
+  \fr{1}{2^4}
+  \sum_{\substack{cdab\\klij}}
+  \fr{\ol{g}_{cd}^{kl}\,\ol{g}_{ab}^{ij}}{\mc{E}_{cdab}^{klij}\mc{E}_{cd}^{kl}}
+  \tl{a}^{cdab}_{klij}
+}
+\\=&\
+  \fr{1}{2}
+  \cdot
+  \fr{1}{2^4}
+  \sum_{\substack{abcd\\ijkl}}
+  \fr{
+    \ol{g}_{ab}^{ij}\,
+    \ol{g}_{cd}^{kl}
+    (\cancel{
+      \mc{E}_{cd}^{kl}
+    +
+      \mc{E}_{ab}^{ij}
+    })
+  }{
+    \cancel{\mc{E}_{abcd}^{ijkl}}
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{kl}
+  }
+  \tl{a}^{abcd}_{ijkl}
+\\=&\
+\fr{1}{2}
+\pr{
+  \fr{1}{2^4}
+  \sum_{\substack{ab\\ij}}
+  \fr{
+    \ol{g}_{ab}^{ij}
+  }{
+    \mc{E}_{ab}^{ij}
+  }
+  \tl{a}^{ab}_{ij}
+}
+\pr{
+  \fr{1}{2^4}
+  \sum_{\substack{cd\\kl}}
+  \fr{
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{cd}^{kl}
+  }
+  \tl{a}^{cd}_{kl}
+}\\=&\
+  \fr{1}{2}
+  \,{}\ord{1}C_2^2
+\end{align*}
+
+\end{enumerate}
+
+\end{document}
