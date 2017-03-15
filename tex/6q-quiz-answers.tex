@@ -41,41 +41,8 @@ Derive the recursive equation for the wavefunction, starting from the $\la$-depe
   \Y(\la)
 \end{align}
 Assume intermediate normalization and note that $R_0H_0=-Q$ follows** from the definition of $R_0$.\\[10pt]
-**\textbf{Extra Credit}: Define ``resolvent'' and explain why this follows from your definition.\\[10pt]
-\textbf{Answer}:
-The resolvent is the negative inverse of $H_0$ in the orthogonal space,
-$
-  R_0
-=
--
-\left.
-  H_0
-\right|_\mr{o}
-$,
-which implies that
-$
-  R_0H_0
-=
--
-\left.
-  1
-\right|_\mr{o}
-$.
-Resolution of the identity in the orthogonal space gives
-\begin{align*}
-\left.
-  1
-\right|_\mr{o}
-=
-  \sum_{k=1}^n
-  (\tfr{1}{k!})^2
-  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
-  \kt{\F^{a_1\cd a_k}_{i_1\cd i_k}}
-  \br{\F^{a_1\cd a_k}_{i_1\cd i_k}}
-=
-  Q\,\,.
-\end{align*}
-Operating $R_0$ on both sides of $0=\pr{H_0 + \la V_\mr{c}-E(\la)}\Y(\la)$ gives
+\textbf{Answer:}
+Operating $R_0$ on both sides of $0=\pr{H(\la)-E(\la)}\Y(\la)=\pr{H_0 + \la V_\mr{c}-E(\la)}\Y(\la)$ gives
 \begin{align*}
   0
 =&\
@@ -134,14 +101,48 @@ $
 \,{=}\,
   \F
 $.
-Adding $\Y(\la)$ to both sides gives equation~\ref{eq:recursive-wavefunction-equation}.
+Adding $\Y(\la)$ to both sides gives equation~\ref{eq:recursive-wavefunction-equation}.\\[10pt]
+**\textbf{Extra Credit}: Define ``resolvent'' and explain why this follows from your definition.\\[10pt]
+\textbf{Answer}:
+The resolvent is the negative inverse of $H_0$ in the orthogonal space,
+$
+  R_0
+=
+-
+\left.
+  H_0^{-1}
+\right|_\mr{o}
+$,
+which implies that
+$
+  R_0H_0
+=
+-
+\left.
+  1
+\right|_\mr{o}
+$.
+Resolution of the identity in the orthogonal space gives $Q$.
+\begin{align*}
+\left.
+  1
+\right|_\mr{o}
+=
+  \sum_{k=1}^n
+  (\tfr{1}{k!})^2
+  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+  \kt{\F^{a_1\cd a_k}_{i_1\cd i_k}}
+  \br{\F^{a_1\cd a_k}_{i_1\cd i_k}}
+=
+  Q
+\end{align*}
 
 \newpage
 \item
 Determine the first- and second-order components of $\Y$ by differentiating equation~\ref{eq:recursive-wavefunction-equation}.
-You do \ul{not} need to fully evaluate and simplify your answer,\footnote{That is, your final answer may contain $R_0$'s and $V_\mr{c}$'s.} but you should eliminate all terms that vanish and explain why each one evaluates to zero.\footnote{You may take $E_\mr{c}\ord{m+1}=\ip{\F|V_\mr{c}|\Y\ord{m}}$ as given.}\\[10pt]
+You do \ul{not} need to fully evaluate and simplify your answer,\footnote{That is, your final answer may contain $R_0$'s and $V_\mr{c}$'s.} but you should eliminate all terms that vanish and explain why each one evaluates to zero.\footnote{\label{fn:pt-energy}You may take $E_\mr{c}\ord{m+1}=\ip{\F|V_\mr{c}|\Y\ord{m}}$ as given.}\\[10pt]
 \textbf{Answer}:
-The $\la$-dependent first and second derivatives are as follows.
+The $\la$-dependent first and second derivatives are as follows
 \begin{align*}
   \pd{\Y(\la)}{\la}
 =&\
@@ -187,7 +188,9 @@ The $\la$-dependent first and second derivatives are as follows.
   )
   \pd{^2\Y(\la)}{\la^2}
 \end{align*}
-Evaluating these equations at $\la=0$ after dividing the second equation by 2 gives the following
+where we have used the product rule:
+if $f=gh$, then $f'=g'h+ gh'$ and $f''=g''h + 2g'h' + gh''$.
+Evaluating these derivatives at $\la=0$ after dividing the second equation by 2 gives the following
 \begin{align*}
   \Y\ord{1}
 =&\
@@ -222,7 +225,7 @@ Evaluating these equations at $\la=0$ after dividing the second equation by 2 gi
   E_\mr{c}\ord{0}
   \Y\ord{2}
 \end{align*}
-since $\Y\ord{0}$ is the ground-state eigenvector of $H_0$, which equals $\F$.
+since $\Y\ord{0}$ is the ground-state eigenvector of $H_0$, which is $\F$.
 It follows that
 $
   E_\mr{c}\ord{0}
@@ -231,7 +234,7 @@ $
 =
   0
 $.
-Furthermore, using the relation in the footnote we have that
+Furthermore, using the relation in \cref{fn:pt-energy} we have that
 $
   E_\mr{c}\ord{1}
 =
@@ -286,7 +289,8 @@ Evaluate the following contributions to the CI doubles and quadruples coefficien
 \end{align}
 Use your answer to show that ${}\ord{2}C_4=\tfr{1}{2}{}\ord{1}C_2^2$.\\[10pt]
 \textbf{Answer}:
-Note that only the $+2$ fluctuation potential contributions can fully contract the products.
+Only the $+2$ fluctuation potential contributions can fully contract the products, so there is only one unique graph contraction for each one.
+Note that the off-diagonal Fock operator has no excitation level $+2$ component, so the results are the same whether or not we assume Brillouin's theorem.
 \begin{align*}
   {}\ord{1}
   c_{ab}^{ij}
@@ -361,7 +365,7 @@ Note that only the $+2$ fluctuation potential contributions can fully contract t
   P_{(ab/cd)}^{(ij/kl)}
   \fr{\ol{g}_{ab}^{ij}\,\ol{g}_{cd}^{kl}}{\mc{E}_{abcd}^{ijkl}\mc{E}_{ab}^{ij}}
 \end{align*}
-The corresponding operators are as follows are
+The corresponding operators are
 \begin{align*}
   {}\ord{1}C_2
 =&\

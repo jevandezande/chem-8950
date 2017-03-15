@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 7, Suggested Problems 1: Perturbative analysis}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\usepackage{multicol}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Explain why the maximum excitation level of the wavefunction increases by $+2$ with each order in perturbation theory.
+
+\item
+Prove that the leading contribution to the $k$-tuples CI operator has order $\ceil{k/2}$ in perturbation theory.
+
+\item
+Write down the CI energy and singles and doubles equations in terms of $C_k$ operators.  Identify the leading order of each term in perturbation theory with and without Brillouin's theorem.
+
+\item
+Prove that $\mr{CIS}{\cd}m$ is correct to order $\floor{m/2}$ in the wavefunction and $2\floor{m/2} + 1$ in the energy.
+
+\item
+Write down the CC energy and singles and doubles equations in terms of $T_k$ operators.  Identify the leading order of each term in perturbation theory with and without Brillouin's theorem.
+
+\item
+Explain why the leading contribution to the $k$-tuples cluster operator has order $k-1$.
+
+\item
+Prove that $\mr{CCS}{\cd}m$ is correct to order $m-1$ in the wavefunction and $m + \floor{m/2}$ in the energy.
+
+\item
+``Derive'' the [T] correction and evaluate it, showing both the diagrams and their algebraic interpretation.\footnote{``Derive'' here means ``give detailed motivation for''.}\,\footnote{The operator $Q_3$ here simply projects onto the space of triply substituted determinants.}
+You may write your answer in terms of ${}\bord{2}t_{abc}^{ijk}$ amplitudes and evaluate those separately.
+\begin{align}
+  E_{[\mr{T}]}
+=
+  \ip{\F|T_2\dg V_\mr{c} T_3\bord{2}|\F}
+&&
+  T_3\bord{2}
+=
+  (\tfr{1}{3!})^2
+  \sum_{\substack{abc\\ijk}}
+  \tl{a}_{ijk}^{abc}
+  \ip{\F_{ijk}^{abc}|
+    R_0
+    V_\mr{c}
+    T_2
+  |\F}
+\end{align}
+
+\item
+Prove that the left and right EOM-CC wave operators are given by
+\begin{align}
+  {}^kR
+=
+  \mr{exp}(-T)
+  (
+    {}^kC_0
+  +
+    \,{}^kC
+  )
+&&
+  {}^kL
+=
+  (
+    {}^kC_0
+  +
+    {}^kC
+  )\dg\,
+  \mr{exp}(T)
+\end{align}
+where $\,{}^kC_0+\,{}^kC$ is the CI wave operator for the $k\eth$ state.
+Use this to show that we can determine excited state expectation values and transition matrix elements for an observable $W$ as
+$
+  \ip{\Y_k|W|\Y_k}
+=
+  \ip{\F|L_k\ol{W}R_k|\F}
+$
+and
+$
+  \ip{\Y_k|W|\Y_l}
+=
+  \ip{\F|L_k\ol{W}R_l|\F}
+$
+where
+$
+  \ol{W}
+\equiv
+  \mr{exp}(-T)
+  W
+  \mr{exp}(T)
+$.
+
+\item
+Derive the CCD lambda equations.
+
+\item
+Prove the Hellmann-Feynman and generalized Hellmann-Feynman theorems.
+
+\item
+Derive the L\"owdin functional.
+
+\item
+Derive the $(m+1)_\La$ correction from the coupled-cluster L\"owdin functional.
+
+\item
+``Derive'' the (T) correction as an approximation to (T)$_\La$ correction and evaluate it.
+\begin{align}
+  E_{(\mr{T})}
+=
+  E_{[\mr{T}]}
++
+  \br{\F}
+    T_1\dg
+    V_\mr{c}
+    T_3\bord{2}
+  \kt{\F}
+\end{align}
+
+
+\end{enumerate}
+
+
+\end{document}

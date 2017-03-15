@@ -28,8 +28,6 @@
   }
 }
 
-\newcommand{\bord}[1]{\ensuremath{^{[#1]}}}
-
 \begin{document}
 
 \setlength{\abovedisplayskip}{3pt}
@@ -988,34 +986,48 @@ $
 $
 are also valid energy contributions in perturbation theory.
 There is no risk of double counting since all of these contributions involve connected triples, which are absent in CCSD.
-With converged CCD or CCSD $T_2$-amplitudes, this defines the \textit{``brackets $\mr{T}$'' correction}
+With converged CCD or CCSD $T_2$-amplitudes, this defines the \textit{$[\mr{T}]$ correction}.
 \begin{align}
   E_{[\mr{T}]}
+\equiv
+  \ip{\F|T_2\dg V_\mr{c} T_3\bord{2}|\F}
 =
 \diagram{
-  \interaction{3}{t*}{(0,+0.5)}{ddot}{overhang};
-  \interaction{3}{t}{(0,-0.5)}{ddot}{overhang};
-  \draw[->-=0.4,bend left ] (t1) to (t*1);
-  \draw[-<-=0.6,bend right] (t1) to (t*1);
-  \draw[->-=0.4,bend left ] (t2) to (t*2);
-  \draw[-<-=0.6,bend right] (t2) to (t*2);
-  \draw[->-=0.4,bend left ] (t3) to (t*3);
-  \draw[-<-=0.6,bend right] (t3) to (t*3);
-  \draw[thick,dash dot dot] (-0.3,0) to ++(2.6,0);
-  \node[right=2pt of t3 ] {[2]};
-  \node[right=2pt of t*3] {[2]};
-}\hspace{-10pt}
-=
-  (
-  \tfr{1}{3!}
-  )^2
-  \sum_{\substack{abc\\ijk}}
-  {}\bord{2}
-  t_{abc}^{ijk}{}^*
-  \,\mc{E}_{abc}^{ijk}\,\,
-  {}\bord{2}
-  t_{abc}^{ijk}
-&&
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
+}\hspace{-8pt}
++
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
+}
+&&&&
 \diagram{
   \interaction{3}{t}{(0,-0.5)}{ddot}{overhang};
   \draw[->-] (t1) to ++(-0.25,1);
@@ -1042,7 +1054,7 @@ With converged CCD or CCSD $T_2$-amplitudes, this defines the \textit{``brackets
   \draw[-<-=0.65] (g2) to ++(+0.25,0.5);
   \draw[thick,flexdotted] (-0.3,0.25) to ++(2.7,0);
 }
-+
+\,{+}\,
 \diagram{
   \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
   \draw[-<-] (t1) to ++(-0.25,1);
@@ -1059,22 +1071,6 @@ With converged CCD or CCSD $T_2$-amplitudes, this defines the \textit{``brackets
   \draw[thick,flexdotted] (-0.3,0.25) to ++(2.7,0);
 }
 \end{align}
-corresponding to
-$
-  \ip{\F|
-    T_2\dg
-    V_\mr{c}
-    T_3\bord{2}
-  |\F}
-=
--
-  \ip{\F|
-    T_3\bord{2}{}\dg
-    H_0
-    T_3\bord{2}
-  |\F}
-$.
-The dash-dotted line denotes an inverse resolvent line.
 \end{ex}
 \end{samepage}
 
@@ -1112,48 +1108,63 @@ is non-Hermitian.
 These can also be written as
 \begin{align}
   \ol{H}_e
-  \mc{R}_k
+  \,{}^kR
   \kt{\F}
 =
   E_k
-  \mc{R}_k
+  \,{}^kR
   \kt{\F}
 &&
   \br{\F}
   \ol{H}_e
-  \mc{L}_k
+  \,{}^kL
 =
   \br{\F}
-  \mc{L}_k
+  \,{}^kL
   E_k
 &&
-\begin{array}{r@{\ }l}
-  \mc{R}_k
-  \kt{\F}
-&=
-  \kt{\bo{\F}}\cdot\bo{r}_k
-\\
-  \br{\F}
-  \mc{L}_k
-&=
-  \bo{l}_k^*\cdot \br{\bo{\F}}
-\end{array}
+  R
+=
+  R_0
++
+  R_1
++
+  \cd
++
+  R_n
+&&
+  L
+=
+  L_0
++
+  L_1
++
+  \cd
++
+  L_n
 \end{align}
-in terms of abstract states.
+where $R$ and $L$ are linear excitation and de-excitation operators analogous to $(C_0 + C)$ and $(C_0 + C)\dg$, respectively.
+These are the \textit{equation-of-motion coupled-cluster (EOM-CC) equations}.
 $E_k$ is the $k\eth$ excited state energy, which matches the corresponding CI eigenvalue unless we truncate the basis.
 In general, the expectation value of an observable can be determined as
 $
   \ip{\Y_k|W|\Y_k}
 =
-  \ip{\F|\mc{L}_k\ol{W}\mc{R}_k|\F}
-$.
+  \ip{\F|\,{}^kL\ol{W}\,{}^kR|\F}
+$
+and its transition matrix element is given by
+$
+  \ip{\Y_k|W|\Y_l}
+=
+  \ip{\F|\,{}^kL\ol{W}\,{}^lR|\F}
+$.\footnote{$\ol{W}\equiv\mr{exp}(-T)W\mr{exp}(T)$}
 \end{rmk}
 
 \begin{dfn}
 \thmtitle{The CC Lagrangian}
 Assuming we have solved equation~\ref{eq:cc-matrix-equation}, the right eigenvector of the ground state is simply a unit vector
 $
-  \bo{r}_e
+  \bo{r}_0
 =
   \ip{\bo{\F}|\F}
 $.
@@ -1161,11 +1172,11 @@ The left ground-state eigenvector is unknown, but the biorthonormality condition
 Therefore, the left and right ground-state wave operators have the form
 \begin{align}
 \label{eq:cc-ground-state-wave-operators}
-  \mc{R}_e
+  {}^0R
 =
   1
 &&
-  \mc{L}_e
+  {}^0L
 =
   1
 +
@@ -1178,12 +1189,6 @@ Therefore, the left and right ground-state wave operators have the form
   \cd
 +
   \La_n
-&&
-  \La_k
-\equiv
-  (\tfr{1}{k!})^2\,
-  \la_{i_1\cd i_k}^{a_1\cd a_k}
-  \tl{a}^{i_1\cd i_k}_{a_1\cd a_k}
 \end{align}
 where $\La$ is a linear de-excitation operator analogous to $C\dg$.
 The ground-state expectation value is therefore
@@ -1200,6 +1205,8 @@ The ground-state expectation value is therefore
     )
     \ol{H}_e
   |\F}
+=
+  \mc{L}(\bo{t},\bm{\la})
 \end{align}
 which is the \textit{coupled-cluster Lagrangian}.
 To see why this constitutes a Lagrangian, note that setting its $\bm{\la}$-gradient equal to zero yields the CC amplitude equations: $\ip{\bo{\F}|\ol{H}_e|\F}=0$.
@@ -1210,7 +1217,7 @@ $
   \ip{\F|\ol{H}_e|\F}
 $
 gives the CC energy.
-Therefore, we can view the $\bm{\la}$ coefficients as Lagrange multipliers enforcing equation~\ref{eq:cc-matrix-equation}.
+Therefore, we can view the $\bm{\la}$ coefficients as Lagrange multipliers enforcing equation~\ref{eq:cc-matrix-equation} as a constraint.
 \end{dfn}
 
 
@@ -1270,7 +1277,7 @@ Assuming Brillouin's theorem holds, the CCD lambda equations are as follows.
   +
     \La_2 V_\mr{c}T_2
   |\F_{ij}^{ab}}_\mr{C}
-\\[5pt]=&\
+\\=&\
 \diagram{
   \interaction{2}{g}{(0,0.5)}{ddot}{sawtooth};
   \draw[->-] (g1) to ++(-0.25,-1) node[smalldot] {};
@@ -1355,7 +1362,7 @@ Assuming Brillouin's theorem holds, the CCD lambda equations are as follows.
   \draw[->-,bend left=40 ] (t2) to (g2);
   \draw[-<-,bend right=40] (t2) to (g2);
 }
-\\[3pt]&\
+\\&\
 +
 \diagram{
   \interaction{2}{l}{(0,0.5)}{ddot}{overhang};
@@ -1398,7 +1405,7 @@ Assuming Brillouin's theorem holds, the CCD lambda equations are as follows.
   \draw[->-=0.3] (l2) to (t2);
   \draw[-<-=0.7] (l2) to ++(+0.4,-1) node[smalldot] {};
 }
-\\[3pt]&\
+\\&\
 +
 \diagram{
   \interaction{2}{g}{(0,0.5)}{ddot}{sawtooth};
@@ -1427,7 +1434,7 @@ Assuming Brillouin's theorem holds, the CCD lambda equations are as follows.
   \draw[->-,bend left=40 ] (t2) to (l2);
   \draw[-<-,bend right=40] (t2) to (l2);
 }
-\\[5pt]=&\
+\\=&\
   \ol{g}_{ij}^{ab}
 +
   \tfr{1}{2}
@@ -1755,13 +1762,13 @@ The L\"owdin functional generalizes to the CC effective Hamiltonian as
 }
 =
   \ip{\F|
-  \mc{L}
+  L
   \ol{H}
-  \mc{R}
+  R
   |\F}
 +
   \ip{\F|
-    \mc{L}
+    L
     \ol{H}
   |\bo{\F}_\mr{e}}
   \ip{\bo{\F}_\mr{e}|
@@ -1771,7 +1778,7 @@ The L\"owdin functional generalizes to the CC effective Hamiltonian as
   |\bo{\F}_\mr{e}}^{-1}
   \ip{\bo{\F}_\mr{e}|
     \ol{H}
-    \mc{R}
+    R
   |\F}
 \end{align}
 which leads to the following correction to the ground-state correlation energy.
@@ -1865,19 +1872,9 @@ etc.
 \end{rmk}
 
 \begin{ex}
-\thmtitle{The $(\mr{T})$ and $(\mr{Q})$ corrections}
-Since the leading contributions to $\La_1$, $\La_2$, and $\La_3$ are given by
+\thmtitle{The $(\mr{T})$ correction}
+Since the leading contributions to $\La_1$ and $\La_2$ are given by
 \begin{align}
-  {}\ord{2}\la_i^a
-=
-  \br{\F}
-  \La_2\ord{1}
-  V_\mr{c}
-  R_0
-  \kt{\F_i^a}
-=
-  {}\ord{2}t_a^{i*}
-&&
   {}\ord{1}\la_{ij}^{ab}
 =
   \br{\F}
@@ -1887,90 +1884,85 @@ Since the leading contributions to $\La_1$, $\La_2$, and $\La_3$ are given by
 =
   {}\ord{1}t_{ab}^{ij*}
 &&
-  {}\ord{2}\la_{ijk}^{abc}
+  {}\ord{2}\la_i^a
 =
   \br{\F}
   \La_2\ord{1}
   V_\mr{c}
   R_0
-  \kt{\F_{ijk}^{abc}}
+  \kt{\F_i^a}
 =
-  {}\ord{2}t_{abc}^{ijk*}
+  {}\ord{2}t_a^{i*}\,\,,
 \end{align}
-the approximation $\La_k\approx T_k\dg$ will capture the leading contributions to equation~\ref{eq:parentheses-lambda} as well as many higher-order ones.
-The resulting \textit{``parentheses $\mr{T}$''} and \textit{``parentheses $\mr{Q}$''} corrections have the advantage of being non-iterative
-\begin{align}
-  E_{(T)}
-=
+the approximation $\La_1\approx T_1\dg, \La_2\approx T_2\dg$ will capture the leading terms in the (T)$_\La$ correction plus many higher-order ones.
+The resulting \textit{$(\mr{T})$ correction} augments the [T] correction with an order $5^+$ contribution, 
+$
   \br{\F}
     T_1\dg
     V_\mr{c}
     T_3\bord{2}
   \kt{\F}
-+
-  E_{[T]}
-&&
-  E_{(Q)}
-=
-  \br{\F}
-    (
-      T_2\dg
-    +
-      T_3\dg
-    )
-    V_\mr{c}
-    T_4\bord{3}
-  \kt{\F}
-\end{align}
-unlike (T)$_{\La}$ and (Q)$_{\La}$, which require us to solve the $\La$ equations.
-The new triples contribution evaluates as follows.
+$.
+Though less rigorous than the (T)$_\La$ correction, (T) is computationally advantageous in that it avoids solution of the $\La$ equations. 
 \begin{align}
   E_{(\mr{T})}
 =
-  E_{[T]}
+  E_{[\mr{T}]}
++
+  \br{\F}
+    T_1\dg
+    V_\mr{c}
+    T_3\bord{2}
+  \kt{\F}
+=
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
+}\hspace{-8pt}
 +
 \diagram{
-  \interaction{3}{t*}{(0,+0.5)}{ddot}{overhang};
-  \interaction{3}{t}{(0,-0.5)}{ddot}{overhang};
-  \draw[->-=0.4,bend left ] (t1) to (t*1);
-  \draw[-<-=0.6,bend right] (t1) to (t*1);
-  \draw[->-=0.4,bend left ] (t2) to (t*2);
-  \draw[-<-=0.6,bend right] (t2) to (t*2);
-  \draw[->-=0.4,bend left ] (t3) to (t*3);
-  \draw[-<-=0.6,bend right] (t3) to (t*3);
-  \draw[thick,dash dot dot] (-0.3,0) to ++(2.6,0);
-  \node[right=2pt of t3 ] {$[2]$};
-  \node[right=2pt of t*3] {$[3]_\mr{st}$};
-}
-&&
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
+}\hspace{-8pt}
++
 \diagram{
-  \interaction{3}{t}{(0,-0.5)}{ddot}{overhang};
-  \draw[->-] (t1) to ++(-0.25,1);
-  \draw[-<-] (t1) to ++(+0.25,1);
-  \draw[->-] (t2) to ++(-0.25,1);
-  \draw[-<-] (t2) to ++(+0.25,1);
-  \draw[->-] (t3) to ++(-0.25,1);
-  \draw[-<-] (t3) to ++(+0.25,1);
-  \node[right=2pt of t3 ] {$[3]_\mr{st}$};
-}\hspace{-10pt}
-\equiv
-\diagram{
-  \interaction{1}{t}{(0,-0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(1,-0.5)}{ddot}{sawtooth};
-  \draw[->-=0.6] (t1) to ++(-0.25,1);
-  \draw[-<-=0.6] (t1) to ++(+0.25,1);
-  \draw[->-=0.6] (g1) to ++(-0.25,1);
-  \draw[-<-=0.6] (g1) to ++(+0.25,1);
-  \draw[->-=0.6] (g2) to ++(-0.25,1);
-  \draw[-<-=0.6] (g2) to ++(+0.25,1);
-  \draw[thick,flexdotted] (-0.3,0) to ++(2.6,0);
+  \interaction{1}{1t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,+0.5)}{ddot}{sawtooth};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (1t1);
+  \draw[-<-,bend right] (3t1) to (1t1);
+  \draw[->-,bend left ] (3t2) to (g1);
+  \draw[-<-,bend right] (3t2) to (g1);
+  \draw[->-,bend left ] (3t3) to (g2);
+  \draw[-<-,bend right] (3t3) to (g2);
 }
-=
-  \tfr{1}{2^2}
-  \sum_{\substack{abc\\ijk}}
-  t_a^i
-  \ol{g}_{bc}^{jk}
-  \tl{a}^{abc}_{ijk}
 \end{align}
 The CCSD(T) method was originally justified on different grounds, but its truly remarkable performance is difficult to understand using ordinary perturbation theory.
 Several other fifth-order terms could just as easily be included, and there is no strong \emph{a priori} reason to expect this one to be as magical as it is.
