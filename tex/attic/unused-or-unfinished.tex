@@ -1,0 +1,284 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section,skip=9pt plus 2pt minus 7pt]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 7, Handout 1: Perturbative analysis}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\makeatother
+\newcommand{\resolventline}[2][1]{
+  \tikz[overlay]{
+      \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
+  }
+}
+
+\begin{document}
+
+
+\appendix
+\section{Fa\`a di Bruno's formula}
+
+\begin{thm}
+\thmtitle{Fa\`a di Bruno's formula}
+\begin{align}
+  \pd{^n}{x_1\cd \pt x_n}
+  f(g(\bm{x}))
+=
+  \sum_{k=1}^n
+  \sum_{(\bm{x}_1,\ld,\bm{x}_k)}^{\mc{P}_k(\bm{x})}
+  f\ord{k}(g(\bm{x}))
+  \prod_{i=1}^k
+  \pd{
+    ^{|\bm{x}_i|}
+    g(\bm{x})
+  }{
+    x_{i,1}
+  \cd
+    \pt
+    x_{i,|\bm{x}_i|}
+  }
+\end{align}
+\end{thm}
+
+
+
+\section{Frantz-Mills factorization theorem}
+
+\begin{dfn}
+\label{dfn:resolvent-graph}
+\thmtitle{Resolvent graph}
+A \textit{resolvent graph} represents a product of operators and resolvents.
+Formally, we will restrict this term to graphs in which each resolvent line spans the width of the diagram.
+Such diagrams can be broken into \textit{levels}, which are the vertical spaces between resolvent lines, numbered from bottom to top with zero indexing.
+Consequently, an operator lies in the $k\eth$ level if there are $k$ resolvent lines below it.
+Formally, then, an \textit{$m$-level resolvent graph} $G(\rh,m)\equiv(G,\rh,m)$ associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\mb{Z}_m=\{0,1,\ld,m-1\}$ through the \textit{level map} $\rh$.\,\footnote{
+  Note that an $m$-level resolvent graph contains $m-1$ resolvents.
+}
+Each line $l$ in $G$ crosses resolvents
+$
+  \mr{min}(\rh_{h(l)},\rh_{t(l)}) + 1
+$
+through
+$
+  \mr{max}(\rh_{h(l)},\rh_{t(l)})
+$.
+\end{dfn}
+
+\begin{rmk}
+Many graphs containing resolvent lines will not meet our formal definition in \cref{dfn:resolvent-graph}, but note that we can always collapse the subgraphs that do into intermediate operators.
+In this way, an arbitrary graph with resolvent lines can be recursively defined as a \textit{resolvent graph of resolvent graphs}.
+\end{rmk}
+
+\begin{rmk}
+A product of graphs $G=(L,O,h,t)$ and $G'=(L',O',h',t')$ is itself a graph, which is formally given by
+\begin{align}
+  GG'
+=
+  (L\cup L', O\cup O', h\oplus h', t\oplus t')
+\end{align}
+where $h\oplus h'$ acts as $h$ on lines from $L$ and as $h'$ on lines from $L'$.
+The combined tail function is defined similarly.
+\end{rmk}
+
+\begin{ntt}
+Given
+$
+  G(\rh,m)
+$,
+let
+$
+  G_k(\rh_k,k+1)
+$
+denote that we have collapsed the subgraph formed from $k$ and up into an intermediate operator
+$
+  G[O_{\geq k}](\rh-k,m-k)
+$
+into an intermediate operator
+$
+  o_{\geq k}
+$
+in level
+$
+  \rh_k(o_{\geq k})
+=
+  k
+$
+and with
+$
+  \rh_k(o)
+=
+  \rh(o)
+$
+for all
+$
+  o
+\in
+  O
+  \setminus
+  O_{\geq k}
+$.
+\end{ntt}
+
+\begin{dfn}
+\label{dfn:resolvent-graph}
+\thmtitle{Zipper graph}
+A \textit{$(k,k')$-joined zipper graph} of $G(\rh,m)$ and $G'(\rh',m')$ 
+\begin{align}
+  G_k
+  G_{k'}'
+  (
+    \rh_\pi^{k,k'},\
+    k+k'
+  )
+&&
+  \rh
+=
+\left\{
+\begin{array}{r@{\ }l}
+\end{array}
+\right.
+&&
+  \pi
+\in
+  \mr{S}_{\mb{Z}_{k+k'}}^{(k,k')}
+\end{align}
+\end{dfn}
+
+\begin{dfn}
+\label{dfn:insertion-graph}
+\thmtitle{Insertion graph}
+\end{dfn}
+
+\begin{dfn}\label{dfn:resolvent-graph}
+\thmtitle{Resolvent graph}
+A \textit{resolvent graph} represents a normal-ordered product of operators and resolvents.
+Graphs with disconnected parts that don't share any resolvent lines are considered products of separate resolvent graphs.
+Vertical spaces between resolvent lines in a resolvent graph are termed \textit{levels}, which are numbered from bottom with zero indexing.
+Therefore, an operator lies in the $k\eth$ level if there are $k$ resolvent lines below it.
+Formally, then, an \textit{$m$-level resolvent graph} $G(\rh,m)\equiv(G,\rh,m)$ associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\mb{Z}_m=\{0,1,\ld,m-1\}$ through the \textit{level map} $\rh$.\,\footnote{
+  Note that an $m$-level resolvent graph contains $m-1$ resolvents.
+}
+Therefore, each line $l$ in $G$ crosses resolvents
+$
+  \mr{min}(\rh_{h(l)},\rh_{t(l)}) + 1
+$
+through
+$
+  \mr{max}(\rh_{h(l)},\rh_{t(l)})
+$.
+\end{dfn}
+
+
+
+\begin{dfn}
+According to definition~\ref{dfn:resolvent-graph}, however, a product of resolvent graphs is not a resolvent graph.
+There are several \ld\\
+The \textit{combination graphs} of $G(\rh,m)$ and $G'(\rh',m')$ have the form
+$GG'(\rh_{\pi,\si}^{k,k'},m+m'-1)$\\
+\begin{align*}
+\begin{array}{r@{\ }l}
+  \rh_{\pi,\si}^{k,k'}(o)
+=&
+\left\{
+\begin{array}{ll}
+  \pi(\rh(o))      & \rh(o)<k \\
+  k + k'           & \rh(o)=k \\
+  \makebox[2.8cm][l]{$\si(\rh(o) + k')$} & \rh(o)>k \\
+\end{array}
+\right.
+\\[20pt]
+  \rh_{\pi,\si}^{k,k'}(o')
+=&
+\left\{
+\begin{array}{ll}
+  \pi(\rh'(o') + k)   & \rh(o')<k' \\
+  k + k'              & \rh(o')=k' \\
+  \makebox[2.8cm][l]{$\si(\rh'(o') + m-1)$} & \rh(o')>k' \\
+\end{array}
+\right.
+\end{array}
+\hspace{20pt}
+\begin{array}{r@{\ }l}
+  o\,
+\in&
+  O
+\\[5pt]
+  o'
+\in&
+  O'
+\\[5pt]
+  \pi\,
+\in&
+  \mr{L}_{k,k'}
+\\[5pt]
+  \si\,
+\in&
+  \mr{U}_{k,k'}^{m,m'}
+\end{array}
+\end{align*}
+where
+$
+  \mr{L}_{k,k'}
+\equiv
+  \mr{S}^{(k,k')}_{\mb{Z}_{k+k'}}
+$
+and
+$
+  \mr{U}_{k,k'}^{m,m'}
+\equiv
+  \mr{S}^{(m-k-1,m'-k'-1)}_{\mb{Z}_{m'+m'-k-k'-2} + k + k' + 1}
+$
+are interleavings of the levels below and above level $k$ and $k'$ in the respective graphs.
+\end{dfn}
+
+\begin{thm}
+\thmtitle{Frantz-Mills Factorization Theorem}
+\begin{align}
+  G(\rh,m)
+  G'(\rh',m')
+=
+  \sum_\pi^{\mr{L}_{k,k'}}
+  GG'(\rh_{\pi,\si}^{k,k'},m+m'-1)
+&&
+\begin{array}{r@{\ }l@{\,}l}
+  0\leq& k &<m \\[2pt]
+  0\leq& k'&<m'
+\end{array}
+\hspace{10pt}
+  \si\in\mr{U}_{k,k'}^{m,m'}
+\end{align}
+\end{thm}
+
+\begin{dfn}
+\thmtitle{Insertion graph}
+\end{dfn}
+
+%\begin{dfn}
+%\thmtitle{Insertion graph}
+%The graphs encountered in perturbation theory contain operators separated by resolvents.
+%Two disconnected parts are termed \textit{separate} if no resolvent line crosses both.
+%Vertical spaces between resolvent lines are termed \textit{levels}, which we number from %top to bottom for each separate part.
+%A pair of resolvents with no intervening operators encloses an \textit{empty level}.
+%Inserted brackets in the bracketing expansion produce separate and unlinked \textit{insertion graphs}.
+%The empty level in the \textit{remainder} created by the insertion is the \textit{level of the insertion}.
+%\end{dfn}
+
+
+
+\end{document}

@@ -1269,119 +1269,6 @@ The first non-vanishing terms with nested brackets appear at fifth-order
 which follows from substituting equation~\ref{eq:bracketing-psi-3} into $E\ord{4}=\ip{\F|V_\mr{c}|\Y\ord{3}}$ in the energy substitution expansion of $\Y\ord{5}$.
 \end{ex}
 
-\begin{dfn}
-A product of graphs $G=(L,O,h,t)$ and $G'=(L',O',h',t')$ is itself a graph, which is formally given by
-\begin{align}
-  GG'
-=
-  (L\cup L', O\cup O', h\oplus h', t\oplus t')
-&&
-\begin{array}{r@{\ }lr@{\ }ll}
-  (h\oplus h')(l)\, \equiv& h(l)
-&
-  (t\oplus t')(l)\, \equiv& t(l)
-&
-  \text{for $l\in L$}
-\\
-  (h\oplus h')(l')  \equiv& h'(l')
-&
-  (t\oplus t')(l')  \equiv& t'(l')
-&
-  \text{for $l'\in L'$} \\
-\end{array}
-\end{align}
-in terms of the lines, operators, and head/tail functions of $G$ and $G'$.
-According to definition~\ref{dfn:resolvent-graph}, however, a product of resolvent graphs is not a resolvent graph.
-There are several \ld\\
-The \textit{combination graphs} of $G(\rh,m)$ and $G'(\rh',m')$ have the form
-$GG'(\rh_{\pi,\si}^{k,k'},m+m'-1)$\\
-\begin{align*}
-\begin{array}{r@{\ }l}
-  \rh_{\pi,\si}^{k,k'}(o)
-=&
-\left\{
-\begin{array}{ll}
-  \pi(\rh(o))      & \rh(o)<k \\
-  k + k'           & \rh(o)=k \\
-  \makebox[2.8cm][l]{$\si(\rh(o) + k')$} & \rh(o)>k \\
-\end{array}
-\right.
-\\[20pt]
-  \rh_{\pi,\si}^{k,k'}(o')
-=&
-\left\{
-\begin{array}{ll}
-  \pi(\rh'(o') + k)   & \rh(o')<k' \\
-  k + k'              & \rh(o')=k' \\
-  \makebox[2.8cm][l]{$\si(\rh'(o') + m-1)$} & \rh(o')>k' \\
-\end{array}
-\right.
-\end{array}
-\hspace{20pt}
-\begin{array}{r@{\ }l}
-  o\,
-\in&
-  O
-\\[5pt]
-  o'
-\in&
-  O'
-\\[5pt]
-  \pi\,
-\in&
-  \mr{L}_{k,k'}
-\\[5pt]
-  \si\,
-\in&
-  \mr{U}_{k,k'}^{m,m'}
-\end{array}
-\end{align*}
-where
-$
-  \mr{L}_{k,k'}
-\equiv
-  \mr{S}^{(k,k')}_{\mb{Z}_{k+k'}}
-$
-and
-$
-  \mr{U}_{k,k'}^{m,m'}
-\equiv
-  \mr{S}^{(m-k-1,m'-k'-1)}_{\mb{Z}_{m'+m'-k-k'-2} + k + k' + 1}
-$
-are interleavings of the levels below and above level $k$ and $k'$ in the respective graphs.
-\end{dfn}
-
-\begin{thm}
-\thmtitle{Frantz-Mills Factorization Theorem}
-\begin{align}
-  G(\rh,m)
-  G'(\rh',m')
-=
-  \sum_\pi^{\mr{L}_{k,k'}}
-  GG'(\rh_{\pi,\si}^{k,k'},m+m'-1)
-&&
-\begin{array}{r@{\ }l@{\,}l}
-  0\leq& k &<m \\[2pt]
-  0\leq& k'&<m'
-\end{array}
-\hspace{10pt}
-  \si\in\mr{U}_{k,k'}^{m,m'}
-\end{align}
-\end{thm}
-
-\begin{dfn}
-\thmtitle{Insertion graph}
-\end{dfn}
-
-%\begin{dfn}
-%\thmtitle{Insertion graph}
-%The graphs encountered in perturbation theory contain operators separated by resolvents.
-%Two disconnected parts are termed \textit{separate} if no resolvent line crosses both.
-%Vertical spaces between resolvent lines are termed \textit{levels}, which we number from %top to bottom for each separate part.
-%A pair of resolvents with no intervening operators encloses an \textit{empty level}.
-%Inserted brackets in the bracketing expansion produce separate and unlinked \textit{insertion graphs}.
-%The empty level in the \textit{remainder} created by the insertion is the \textit{level of the insertion}.
-%\end{dfn}
 
 \begin{ex}
 Assuming Brillouin's theorem, the simplest non-vanishing term with an inserted bracket appears in $\Y\ord{3}$.
@@ -1418,29 +1305,11 @@ Assuming Brillouin's theorem, the simplest non-vanishing term with an inserted b
     \end{tabular}
   };
   \draw[->] (-2.5,0) to (-0.3,0);
-  \node[inner sep=0pt] at (+4,+0.4) {$0\eth$\,level};
-  \node[inner sep=0pt] at (+4,-0.3) {$1\rst$\,level};
+  \node[inner sep=0pt] at (+4,+0.4) {$1\rst$\,level};
+  \node[inner sep=0pt] at (+4,-0.3) {$0\eth$\,level};
 }
 \end{align*}
 \end{ex}
-
-%\begin{thm}
-%\thmtitle{The Frantz-Mills Factorization Theorem}
-%\thmstatement{
-%A graph with an insertion equals the sum over all corresponding graphs in which the top of the inserted graph .
-%}
-%\end{thm}
-
-%\begin{ex}
-%$R_0\ip{V_\mr{c}R_0V_\mr{c}}R_0V_\mr{c}\F$
-%\end{ex}
-
-%\begin{thm}
-%\thmtitle{The Linked Diagram Theorem}
-%\thmstatement{
-%An in
-%}
-%\end{thm}
 
 \begin{prop}
 \thmtitle{Wigner's (2n+1) rule}
