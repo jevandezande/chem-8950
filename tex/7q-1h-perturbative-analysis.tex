@@ -1800,13 +1800,14 @@ which leads to the following correction to the ground-state correlation energy.
     \ol{V}_\mr{c}
   |\F}
 \end{align}
-The leftmost factor on the right requires $\ol{H}_\mr{c}$ to have an excitation level of at least $-1$ in order to form complete contraction with $\La_m$ and $\bo{\F}_{m+1}$, so its lowest-order contribution is
+We can identify the leading term in this correction as follows.
+The leftmost factor requires $\ol{H}_\mr{c}$ to have an excitation level of $-1$ or less to fully contract $\La_m$ and $\bo{\F}_{\mr{e}}$, so its leading contribution is
 $
   \ol{H}_\mr{c}\ord{1}
 =
   V_\mr{c}
 $.
-The lowest-order contribution to the middle factor enters in zeroth order, which evaluates to
+The leading contribution to the middle factor enters in zeroth order, yielding
 $
 -
   \kt{\bo{\F}_\mr{e}}
@@ -1815,12 +1816,11 @@ $
   |\bo{\F}_\mr{e}}^{-1}
   \br{\bo{\F}_\mr{e}}
 =
-  \kt{\bo{\F}_\mr{e}}
-  \br{\bo{\F}_\mr{e}}
+\left.
   R_0
+\right|_{\mr{e}}
 $.
-Finally, the rightmost factor requires $\ol{H}_\mr{c}$ to have an excitation level of $m+1$ in order to fully contract $\bo{\F}_{m+1}$ on the left.
-For $m\geq 2$  the leading contribution of this excitation level will always be
+The rightmost factor requires $\ol{V}_\mr{c}$ to have an excitation level of $m+1$ in order to fully contract the bra, which first occurs at order
 $
   \ol{V}_\mr{c}\bord{m}
 =
@@ -1828,8 +1828,8 @@ $
   V_\mr{c}\,
   T_m
 )_\mr{C}
-$.
-Combining these results leads to
+$.\,\footnote{Note that we are assuming $m\geq 2$.}
+This gives
 \begin{align}
 \label{eq:parentheses-lambda}
   E_{(m+1)_{\La}}
@@ -1846,7 +1846,7 @@ Combining these results leads to
 &&
   \bo{t}_{m+1}\bord{m}
 =
-  \ip{\bo{\F}|R_0V_\mr{c}T_m|\F}_\mr{C}
+  \ip{\bo{\F}_{m+1}|R_0V_\mr{c}T_m|\F}_\mr{C}
 \end{align}
 where we have made use of the relation
 $

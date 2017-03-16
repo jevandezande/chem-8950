@@ -64,26 +64,66 @@
 \label{dfn:resolvent-graph}
 \thmtitle{Resolvent graph}
 A \textit{resolvent graph} represents a product of operators and resolvents.
-Formally, we will restrict this term to graphs in which each resolvent line spans the width of the diagram.
-Such diagrams can be broken into \textit{levels}, which are the vertical spaces between resolvent lines, numbered from bottom to top with zero indexing.
-Consequently, an operator lies in the $k\eth$ level if there are $k$ resolvent lines below it.
-Formally, then, an \textit{$m$-level resolvent graph} $G(\rh,m)\equiv(G,\rh,m)$ associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\mb{Z}_m=\{0,1,\ld,m-1\}$ through the \textit{level map} $\rh$.\,\footnote{
+Here we restrict this term to graphs where each resolvent line spans the width of the diagram, partitioning its operators into distinct \textit{levels}.
+Levels are numbered starting from the bottom with zero indexing, so an operator lies in the $k\eth$ level if there are $k$ resolvent lines below it.
+Formally, an \textit{$m$-level resolvent graph} is denoted by $G(\rh,m)\equiv(G,\rh,m)$ and associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\mb{Z}_m=\{0,1,\ld,m-1\}$ through the \textit{level map} $\rh$.\,\footnote{
   Note that an $m$-level resolvent graph contains $m-1$ resolvents.
 }
-Each line $l$ in $G$ crosses resolvents
+This identifies each line $l$ in $G$ as crossing the resolvents
 $
-  \mr{min}(\rh_{h(l)},\rh_{t(l)}) + 1
+  r
+\in
+  \{1,\ld,m-1\}
 $
-through
+satisfying
 $
+  \mr{min}(\rh_{h(l)},\rh_{t(l)})
+<
+  r
+\leq
   \mr{max}(\rh_{h(l)},\rh_{t(l)})
 $.
 \end{dfn}
 
+
+\begin{dfn}
+\thmtitle{Substitution}
+Let $G[H/o\,]$ be the graph formed by \textit{substituting} the $m$-electron operator $o$ in $G$ with a connected graph $H$ containing $m$ open cycles.
+This operation is well-defined as long as there is only one way to embed $H$ in $G$.
+Denoting this substituted graph by $K$ we can also perform the inverse operation, $K[o/H]$, to arrive back at $G$.
+\end{dfn}
+
+\begin{dfn}
+
+\end{dfn}
+
 \begin{rmk}
-Many graphs containing resolvent lines will not meet our formal definition in \cref{dfn:resolvent-graph}, but note that we can always collapse the subgraphs that do into intermediate operators.
-In this way, an arbitrary graph with resolvent lines can be recursively defined as a \textit{resolvent graph of resolvent graphs}.
+A general graph containing resolvent lines can be recursively defined as a resolvent graph composed of resolvent graph modules \cref{dfn:resolvent-graph} 
+
+collapsing the subgraphs that do qualify as resolvent graphs into intermediate operators.
 \end{rmk}
+
+\begin{dfn}
+\thmtitle{Module}
+A \textit{module} of a graph is a subgraph $G[M]$ such that for each pair $m,m'\in M$, every $o\in M\setminus O$ is either adjacent to both or adjacent to neither.\footnote{See \url{https://en.wikipedia.org/wiki/Modular_decomposition}}
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Module}
+The \textit{subtitution} 
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Substitution}
+If $o$ is an $m$-electron operator in $G$ and $H$ is a connected subgraph containing $m$ open cycles, let $G[H/o\,]$ be the \textit{substitution} of $o$ with $H$.
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Composition of modules}
+A \textit{module} of a graph is a connected subgraph.
+
+\end{dfn}
 
 \begin{rmk}
 A product of graphs $G=(L,O,h,t)$ and $G'=(L',O',h',t')$ is itself a graph, which is formally given by
