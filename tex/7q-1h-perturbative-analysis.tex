@@ -455,19 +455,6 @@ $.
 The CC equations can be written as a non-linear matrix equation.
 \begin{align}
 \label{eq:cc-matrix-equation}
-  E_\mr{c}
-  \ip{\bm{\F}|\F}
--
-  \bo{H}_0\hspace{0.8pt}
-  \bo{t}
-=
-  \ip{\bm{\F}|
-    V_\mr{c}\,
-    \mr{exp}(T(\bo{t}))
-  |\F}_\mr{C}
-\end{align}
-To make the comparison with equation~\ref{eq:ci-matrix-equation} more transparent, this can be written as
-$
 (
 -
   \bo{H}_0
@@ -477,6 +464,13 @@ $
 )
   \bo{t}
 =
+  \ip{\bm{\F}|
+    V_\mr{c}\,
+    \mr{exp}(T(\bo{t}))
+  |\F}_\mr{C}
+\end{align}
+To make the comparison with equation~\ref{eq:ci-matrix-equation} more transparent, note that the right-hand side equals
+$
   (
     \bo{V}_\mr{c}\hspace{0.8pt}
     \bo{t}
