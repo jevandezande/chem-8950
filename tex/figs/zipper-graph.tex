@@ -1,0 +1,49 @@
+\documentclass[11pt]{standalone}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+
+\begin{document}
+
+\newcommand{\vanchor}{0}
+\newcommand{\pad}{0.44}
+\begin{tikzpicture}[baseline=-2.5pt,scale=0.85,every node/.style={scale=0.8,font=\small}]
+  \node[anchor=south west] (ot) at (-0.3,\vanchor+5*\pad) {$o^{\phantom{0}}_{m-1}$};
+  \node[anchor=south west] (pt) at (+1.0,\vanchor+5*\pad) {$o'_{m'-1}$};
+  \node[anchor=south west] at (-0.3,\vanchor+4*\pad+0.08) {\,${\scriptstyle\vd}$};
+  \node[anchor=south west] at (+1.0,\vanchor+4*\pad+0.08) {\,${\scriptstyle\vd}$};
+  \node[anchor=south west] (ok) at (-0.3,\vanchor+3*\pad+0.04) {$o^{\phantom{0}}_{k+1}$};
+  \node[anchor=south west] (pk) at (+1.0,\vanchor+3*\pad+0.04) {$o'_{k'+1}$};
+  \node[anchor=south west] at (0.0,\vanchor+2*\pad) {$o^{\phantom{0}}_k$};
+  \node[anchor=south west] at (0.8,\vanchor+2*\pad) {$o'_{k'}$};
+  \node[anchor=south west] (bt) at (0.8,\vanchor+1*\pad) {$o'_{k'-1}$};
+  \node[anchor=south west] at (0.8,\vanchor+0*\pad+0.08) {\,${\scriptstyle\vd}$};
+  \node[anchor=south west] at (0.8,\vanchor-1*\pad) {$o'_{0}$};
+  \node[anchor=south west] at (0.0,\vanchor-2*\pad) {$o^{\phantom{0}}_{k-1}$};
+  \node[anchor=south west] at (0.0,\vanchor-3*\pad+0.08) {\,${\scriptstyle\vd}$};
+  \node[anchor=south west] (bb) at (0.0,\vanchor-4*\pad+0.08) {$o^{\phantom{0}}_{0}$};
+  \draw[densely dotted] (-0.2,\vanchor+5*\pad+0.08) to ++(0.8,0);
+  \draw[densely dotted] (+1.1,\vanchor+5*\pad+0.08) to ++(0.9,0);
+  \draw[densely dotted] (-0.2,\vanchor+4*\pad+0.12) to ++(0.8,0);
+  \draw[densely dotted] (+1.1,\vanchor+4*\pad+0.12) to ++(0.9,0);
+  \draw[densely dotted] (-0.1,\vanchor+3*\pad+0.08) to ++(2.0,0);
+  \draw[densely dotted] (0.0,\vanchor+2*\pad+0.08) to ++(1.7,0);
+  \draw[densely dotted] (0.0,\vanchor+1*\pad+0.08) to ++(1.7,0);
+  \draw[densely dotted] (0.0,\vanchor+0*\pad+0.08) to ++(1.7,0);
+  \draw[densely dotted] (0.0,\vanchor-1*\pad+0.08) to ++(1.7,0);
+  \draw[densely dotted] (0.0,\vanchor-2*\pad+0.08) to ++(1.7,0);
+  \draw[densely dotted] (0.0,\vanchor-3*\pad+0.08) to ++(1.7,0);
+  \draw[decorate,decoration={brace,amplitude=3pt}]
+      (-0.15,\vanchor-4*\pad+0.2)
+    to
+      node[midway] (label) {}
+    ++(0,6*\pad-0.2);
+  \node[left=5pt of label,rotate=90,anchor=center,inner sep=0pt] {shuffled};
+\end{tikzpicture}
+
+\end{document}
