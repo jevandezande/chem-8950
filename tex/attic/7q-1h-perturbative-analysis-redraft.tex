@@ -1069,37 +1069,10 @@ With converged CCD or CCSD $T_2$-amplitudes, this defines the \textit{$[\mr{T}]$
 \end{samepage}
 
 
-\begin{rmk}
-\thmtitle{CC excited states via equation-of-motion theory}
-Similarity transformations preserve operator eigenvalues, so $\ol{H}_e$ has the same spectrum as the original Hamiltonian, $H_e$.
-The corresponding eigenvalue equations
-\begin{align}
-\label{eq:eom-matrix-equations}
-  \ol{\bo{H}}_e
-  \bo{r}_k
-=
-  E_k
-  \bo{r}_k
-&&
-  \bo{l}_k\dg
-  \ol{\bo{H}}_e
-=
-  \bo{l}_k\dg
-  E_k
-&&
-  \bo{l}_k^*\cdot
-  \bo{r}_l
-=
-  \d_{kl}
-\end{align}
-involve both right- and left-eigenvectors since 
-$
-  \ol{\bo{H}}_e
-=
-  \ip{\bo{\F}|(H_e\,\mr{exp}(T))_\mr{C}|\bo{\F}}
-$
-is non-Hermitian.
-These can also be written as
+\begin{dfn}
+\thmtitle{Equation-of-motion (EOM) CC theory}
+Since similarity transformations preserve eigenvalues, $H_e$ and $\ol{H}_e$ share a spectrum.
+The eigenvalue equations for the effective Hamiltonian are the \textit{EOM-CC equations}.
 \begin{align}
   \ol{H}_e
   \,{}^kR
@@ -1137,9 +1110,8 @@ These can also be written as
 +
   L_n
 \end{align}
-where $R$ and $L$ are linear excitation and de-excitation operators analogous to $(C_0 + C)$ and $(C_0 + C)\dg$, respectively.
-These are the \textit{equation-of-motion coupled-cluster (EOM-CC) equations}.
-$E_k$ is the $k\eth$ excited state energy, which matches the corresponding CI eigenvalue unless we truncate the basis.
+Here, $R$ and $L$ are linear excitation and de-excitation operators analogous to $C$ and $C\dg$.
+The $k\eth$ right and left eigenfunctions are distinct because the effective Hamiltonian is not Hermitian.\footnote{They relate to the }
 In general, the expectation value of an observable can be determined as
 $
   \ip{\Y_k|W|\Y_k}
@@ -1152,6 +1124,28 @@ $
 =
   \ip{\F|\,{}^kL\ol{W}\,{}^lR|\F}
 $.\footnote{$\ol{W}\equiv\mr{exp}(-T)W\mr{exp}(T)$}
+\end{dfn}
+
+\begin{rmk}
+\begin{align}
+\label{eq:eom-matrix-equations}
+  \ol{\bo{H}}_e
+  \bo{r}_k
+=
+  E_k
+  \bo{r}_k
+&&
+  \bo{l}_k\dg
+  \ol{\bo{H}}_e
+=
+  \bo{l}_k\dg
+  E_k
+&&
+  \bo{l}_k^*\cdot
+  \bo{r}_l
+=
+  \d_{kl}
+\end{align}
 \end{rmk}
 
 \begin{dfn}
@@ -1563,7 +1557,7 @@ $\mc{L}$ is stationary in the amplitudes $\bo{t}$ and their corresponding Lagran
 
 \begin{rmk}
 \label{rmk:lowdin-partitioning}
-\thmtitle{L\"owdin partitioning}
+\thmtitle{The L\"owdin partitioning method}
 For a given truncation level $m$, let us refer to the span of
 $\bm{\F}_\mr{i}=\pma{\F\ \bm{\F}_1\,\cd\,\bm{\F}_m}$
 as the
@@ -1694,7 +1688,7 @@ $
   \bo{H}_\mr{ei}
   \bo{c}_\mr{i}
 $.
-Projecting the Schr\"odinger equation by $\bo{1}_\mr{i}$ and substituting in this expression for $\bo{c}_\mr{e}$ then leads to
+Projecting the Schr\"odinger equation by $\bo{1}_\mr{i}$ and substituting in this expression for $\bo{c}_\mr{e}$ then leads to the following.
 \begin{align}
   (
     \bo{H}_\mr{ii}
@@ -1712,48 +1706,88 @@ Projecting the Schr\"odinger equation by $\bo{1}_\mr{i}$ and substituting in thi
   \bo{R}_\mr{ee}
   \bo{H}_\mr{ei}
 \end{align}
-which reduces the Schr\"odinger equation on $\mc{F}_n$ to an effective Schr\"odinger equation in the internal space.
-This gives
+Dotting by $\bo{c}_i^*$ and normalizing gives an expression for the exact energy in terms of internal-space coefficients
 \begin{align}
 \label{eq:lowdin-functional}
   E
 =
+  \ip{\Y_\mr{i}|H_e|\Y_{\mr{i}}}
++
+  \ip{\Y_\mr{i}|H_e|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E - H_e|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|H_e|\Y_\mr{i}}
+&&
+  \Y_\mr{i}
+\equiv
+  \bm{\F}_\mr{i}
+  \cdot
+  \bo{c}_\mr{i}
+&&
+  \bo{c}_\mr{i}^*
+  \cdot
+  \bo{c}_\mr{i}
+\overset{!}{=}
+  1
+\end{align}
+which can be used to correct truncation errors.
+This approach is known as the \textit{L\"owdin partitioning method}.
+\end{rmk}
+
+\begin{rmk}
+$
+  \Y_\mr{i}\bord{\ceil{m/2}}
+=
+  \Y_{\mr{CIS}{\cd}m}
+$
+and
+$
+(
+  E
+-
+  H_e
+)\ord{0}
+=
+-
+  H_0
+$
+\begin{align}
+  E
+-
+  E_{\mr{CIS}{\cd}m}
+\approx
+  \ip{\Y_{\mr{CIS}{\cd}m}|V_\mr{c}|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E_\mr{c} - H_\mr{c}|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|V_\mr{c}|\Y_{\mr{CIS}{\cd}m}}
+\end{align}
+\begin{align}
+  E
+-
+  E_{\mr{CIS}{\cd}m}
+=
+  (\tfr{1}{(m+1)!})^2
+  \sum_{\substack{a_1\cd a_{m+1}\\i_1\cd i_{m+1}}}
   \fr{
-    \bo{c}_\mr{i}\dg
-    (
-      \bo{H}_\mr{ii}
-    +
-      \bo{V}_\mr{ii}
-    )
-    \bo{c}_\mr{i}
+    |\ip{\F_{i_1\cd i_{m+1}}^{a_1\cd a_{m+1}}|V_\mr{c}\,(C_{m-1} + C_m)|\F}|^2
   }{
-    \bo{c}_\mr{i}^*\cdot
-    \bo{c}_\mr{i}
+    \mc{E}_{a_1\cd a_{m+1}}^{i_1\cd i_{m+1}}
+  }
++
+  (\tfr{1}{(m+2)!})^2
+  \sum_{\substack{a_1\cd a_{m+2}\\i_1\cd i_{m+2}}}
+  \fr{
+    |\ip{\F_{i_1\cd i_{m+2}}^{a_1\cd a_{m+2}}|V_\mr{c}\,C_m|\F}|^2
+  }{
+    \mc{E}_{a_1\cd a_{m+2}}^{i_1\cd i_{m+2}}
   }
 \end{align}
-which expresses the exact energy in terms of internal-space coefficients.
-Let us refer to this energy expression as the \textit{L\"owdin functional}.
-The L\"owdin functional is the central equation in the \textit{L\"owdin partitioning} method, which can be used to eliminate the leading error incurred by truncating at a given excitation level $m<n$.
 \end{rmk}
+
 
 \begin{rmk}
 \thmtitle{L\"owdin partitioning for CC}
 The L\"owdin functional generalizes to the CC effective Hamiltonian as
 \begin{align}
   E
-=
-\fr{
-  \bo{l}_\mr{i}\dg
-  (
-    \ol{\bo{H}}_\mr{ii}
-  +
-    \ol{\bo{V}}_\mr{ii}
-  )
-  \bo{r}_\mr{i}
-}{
-  \bo{l}_\mr{i}^*\cdot
-  \bo{r}_\mr{i}
-}
 =
   \ip{\F|
   L
