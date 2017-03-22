@@ -59,6 +59,413 @@
 
 
 
+\section{Direct proof of the Hausdorff expansion}
+
+\begin{prop}\label{prop:nested-commutator}
+\thmtitle{Nested commutator relation}
+\thmstatement{
+$\ds{
+  [X,\,\cdot\,]^n(Y)
+=
+  \sum_{k=0}^n
+  (-)^k
+  {n\choose k}
+  X^{n-k}YX^k
+}$.
+}
+\thmproof{
+We proceed by induction on $n$.
+For $n=1$ this follows from the definition of the commutator,
+$
+  [X,Y]
+=
+  XY
+-
+  YX
+$.
+Assuming the proposition holds for $n-1$ nested commutators, we can express the $n$-fold nested commutator as
+\begin{align*}
+  [X,\,\cdot\,]^n(Y)
+=
+  X[X,\,\cdot\,]^{n-1}(Y)
+-
+  [X,\,\cdot\,]^{n-1}(Y)\,X
+=
+  X^kY
++
+  \sum_{k=1}^{n-1}
+  (-)^k
+  \pr{
+    {n-1\choose k}
+  +
+    {n-1\choose k-1}
+  }
+  X^{n-k}YX^k
++
+  (-)^nYX^n
+\end{align*}
+by expanding $[X,\,\cdot\,]^{n-1}(Y)$ twice and substituting $k$ for $k-1$ in the second summation.
+Combining factorials as follows
+\begin{align*}
+  {n-1\choose k}
++
+  {n-1\choose k-1}
+=
+  \fr{n-k}{n-k}\cdot
+  \fr{(n-1)!}{k!(n-1-k)!}
++
+  \fr{k}{k}\cdot
+  \fr{(n-1)!}{(k-1)!(n-k)!}
+=
+  {n\choose k}
+\end{align*}
+shows that the proposition also holds for $n$, completing the proof by induction. 
+}
+\end{prop}
+
+\begin{thm}\label{thm:hausdorff}
+\thmtitle{The Hausdorff Expansion}
+\thmstatement{
+$\ds{
+  e^{X}Ye^{-X}
+=
+  \sum_{n=0}^\infty
+  \fr{1}{n!}
+  [X,\,\cdot\,]^n(Y)
+}$
+}\vspace{5pt}
+\thmproof{
+This follows from a direct Taylor expansion of the exponentials, along with proposition~\ref{prop:nested-commutator}.\footnote{For a slick alternative to this proof, see Helgaker, J\o rgensen, and Olsen, \textit{Molecular Electronic-Structure Theory} (2000), p.~100.}
+\begin{align*}
+  e^XYe^{-X}
+=
+  \sum_{h=0}^\infty
+  \sum_{k=0}^\infty
+  \fr{1}{h!\,k!}
+  (-)^k
+  X^hYX^k
+=
+  \sum_{n=0}^\infty
+  \fr{1}{n!}
+  \sum_{k=0}^n
+  \fr{n!}{(n-k)!\,k!}
+  (-)^k
+  X^{n-k}
+  Y
+  X^k
+=
+  \sum_{n=0}^\infty
+  \fr{1}{n!}
+  [X,\,\cdot\,](Y)
+\end{align*}
+In the second step, we have rearranged the sum to run over $n=h+k$ and $k$ and inserted
+$
+  1
+=
+  n!/n!
+$.
+}
+\end{thm}
+
+
+
+\section{L\"owdin partitioning matrix derivation}
+
+
+\begin{rmk}
+\label{rmk:lowdin-partitioning}
+\thmtitle{L\"owdin partitioning}
+For a given truncation level $m$, let us refer to the span of
+$\bm{\F}_\mr{i}=\pma{\F\ \bm{\F}_1\,\cd\,\bm{\F}_m}$
+as the
+\textit{internal space}
+and that of
+$\bm{\F}_\mr{e}=\pma{\bm{\F}_{m+1}\,\cd\,\bm{\F}_n}$
+as the
+\textit{external space}, so that
+$
+  \kt{\bo{\F}_\mr{i}}
+  \br{\bo{\F}_\mr{i}}
++
+  \kt{\bo{\F}_\mr{e}}
+  \br{\bo{\F}_\mr{e}}
+=
+  1_n
+$.
+In the coordinate space over $\bo{\F}$ this reads
+$
+  \bo{1}_\mr{i}
++
+  \bo{1}_\mr{e}
+=
+  \bo{1}
+$,
+in terms of the following projection matrices.
+\begin{align}
+  \bo{1}_\mr{i}
+\equiv
+  \ip{\bo{\F}|\bo{\F}_\mr{i}}
+  \ip{\bo{\F}_\mr{i}|\bo{\F}}
+=
+\pma[l]{
+  \bo{1} & \bo{0} \\
+  \bo{0} & \bo{0}
+}
+&&
+  \bo{1}_\mr{e}
+\equiv
+  \ip{\bo{\F}|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|\bo{\F}}
+=
+\pma[l]{
+  \bo{0} & \bo{0} \\
+  \bo{0} & \bo{1}
+}
+\end{align}
+This allows us to write vector decompositions as
+$
+  \bo{c}
+=
+  \bo{c}_\mr{i}
++
+  \bo{c}_\mr{e}
+$
+and matrix decompositions as
+$
+  \bo{H}
+=
+  \bo{H}_\mr{ii}
++
+  \bo{H}_\mr{ie}
++
+  \bo{H}_\mr{ei}
++
+  \bo{H}_\mr{ee}
+$
+in terms of
+$
+  \bo{c}_\mr{x}
+\equiv
+  \bo{1}_\mr{x}\,
+  \bo{c}
+$
+and
+$
+  \bo{H}_\mr{xy}
+\equiv
+  \bo{1}_\mr{x}\,
+  \bo{H}\,
+  \bo{1}_\mr{y}
+$.\footnote{Note that I am dropping the subscript $e$ on the Hamiltonian and energy here to avoid confusion with $\mr{e}$.}
+Finally, note that the \textit{external space resolvent}
+$
+  \bo{R}_\mr{ee}
+\equiv
+\left.
+  (
+    E
+  -
+    \bo{H}
+  )^{-1}
+\right|_\mr{e}
+$
+satisfies
+\begin{align}
+  \bo{R}_\mr{ee}\,
+  (
+    E
+  -
+    \bo{H}
+  )
+=
+-
+  \bo{R}_\mr{ee}\,
+  \bo{H}_\mr{ei}
++
+  \bo{1}_\mr{e}
+&&
+  (
+    E
+  -
+    \bo{H}
+  )\,
+  \bo{R}_\mr{ee}
+=
+-
+  \bo{H}_\mr{ie}\,
+  \bo{R}_\mr{ee}
++
+  \bo{1}_\mr{e}
+\end{align}
+and operating the left equation on $\bo{c}$ gives zero due to the Schr\"odinger equation, implying that
+$
+  \bo{c}_\mr{e}
+=
+  \bo{R}_\mr{ee}
+  \bo{H}_\mr{ei}
+  \bo{c}_\mr{i}
+$.
+Projecting the Schr\"odinger equation by $\bo{1}_\mr{i}$ and substituting in this expression for $\bo{c}_\mr{e}$ then leads to
+\begin{align}
+  (
+    \bo{H}_\mr{ii}
+  +
+    \bo{V}_\mr{ii}
+  )
+  \bo{c}_\mr{i}
+=
+  E
+  \bo{c}_\mr{i}
+&&
+  \bo{V}_\mr{ii}
+\equiv
+  \bo{H}_\mr{ie}
+  \bo{R}_\mr{ee}
+  \bo{H}_\mr{ei}
+\end{align}
+which reduces the Schr\"odinger equation on $\mc{F}_n$ to an effective Schr\"odinger equation in the internal space.
+This gives
+\begin{align}
+\label{eq:lowdin-functional}
+  E
+=
+  \fr{
+    \bo{c}_\mr{i}\dg
+    (
+      \bo{H}_\mr{ii}
+    +
+      \bo{V}_\mr{ii}
+    )
+    \bo{c}_\mr{i}
+  }{
+    \bo{c}_\mr{i}^*\cdot
+    \bo{c}_\mr{i}
+  }
+\end{align}
+which expresses the exact energy in terms of internal-space coefficients.
+Let us refer to this energy expression as the \textit{L\"owdin functional}.
+The L\"owdin functional is the central equation in the \textit{L\"owdin partitioning} method, which can be used to eliminate the leading error incurred by truncating at a given excitation level $m<n$.
+\end{rmk}
+
+
+\section{L\"owdin partitioning for CI}
+
+
+\begin{rmk}
+$
+  \Y_\mr{i}\bord{\ceil{m/2}}
+=
+  \Y_{\mr{CIS}{\cd}m}
+$
+and
+$
+(
+  E
+-
+  H_e
+)\ord{0}
+=
+-
+  H_0
+$
+\begin{align}
+  E
+-
+  E_{\mr{CIS}{\cd}m}
+\approx
+  \ip{\Y_{\mr{CIS}{\cd}m}|V_\mr{c}|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E_\mr{c} - H_\mr{c}|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|V_\mr{c}|\Y_{\mr{CIS}{\cd}m}}
+\end{align}
+\begin{align}
+  E
+-
+  E_{\mr{CIS}{\cd}m}
+=
+  (\tfr{1}{(m+1)!})^2
+  \sum_{\substack{a_1\cd a_{m+1}\\i_1\cd i_{m+1}}}
+  \fr{
+    |\ip{\F_{i_1\cd i_{m+1}}^{a_1\cd a_{m+1}}|V_\mr{c}\,(C_{m-1} + C_m)|\F}|^2
+  }{
+    \mc{E}_{a_1\cd a_{m+1}}^{i_1\cd i_{m+1}}
+  }
++
+  (\tfr{1}{(m+2)!})^2
+  \sum_{\substack{a_1\cd a_{m+2}\\i_1\cd i_{m+2}}}
+  \fr{
+    |\ip{\F_{i_1\cd i_{m+2}}^{a_1\cd a_{m+2}}|V_\mr{c}\,C_m|\F}|^2
+  }{
+    \mc{E}_{a_1\cd a_{m+2}}^{i_1\cd i_{m+2}}
+  }
+\end{align}
+\end{rmk}
+
+
+
+\section{EOM-CC matrix equations}
+
+
+\begin{rmk}
+Note that the EOM-CC equations can be expressed in matrix notation as
+\begin{align}
+\label{eq:eom-matrix-equations}
+  \ol{\bo{H}}_e
+  \bo{r}_k
+=
+  E_k
+  \bo{r}_k
+&&
+  \bo{l}_k\dg
+  \ol{\bo{H}}_e
+=
+  \bo{l}_k\dg
+  E_k
+&&
+  \bo{l}_k^*\cdot
+  \bo{r}_l
+=
+  \d_{kl}
+&&
+  \ol{\bo{H}}_e
+=
+\pma{
+  E_e
+&
+  \ip{\F|\ol{H}_e|\bo{\F}_1}
+&
+  \ip{\F|\ol{H}_e|\bo{\F}_2}
+&
+  \cd
+\\
+  0
+&
+  \ip{\bm{\F}_1|\ol{H}_e|\bo{\F}_1}
+&
+  \ip{\bm{\F}_1|\ol{H}_e|\bo{\F}_2}
+&
+  \cd
+\\
+  0
+&
+  \ip{\bm{\F}_2|\ol{H}_e|\bo{\F}_1}
+&
+  \ip{\bm{\F}_2|\ol{H}_e|\bo{\F}_2}
+&
+  \cd
+\\
+  \vd
+&
+  \vd
+&
+  \vd
+&
+  \dd
+}
+\end{align}
+where we can identify the ground-state right eigenvector by inspection as $\bo{r}_0=\ip{\bo{\F}|\F}$ with eigenvalue $E_e$.
+\end{rmk}
+
+
 \section{Frantz-Mills factorization theorem}
 
 \begin{dfn}
