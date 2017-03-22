@@ -728,7 +728,7 @@ Non-vanishing contributions to the rows of this matrix equation can be expressed
       T_6
     }
     +
-    \underset{(2^{+})}{\vphantom{(}
+    \underset{(3^{+})}{\vphantom{(}
       T_1T_3
     }
     +
@@ -799,6 +799,7 @@ Non-vanishing contributions to the rows of this matrix equation can be expressed
   \kt{\F}_\mr{C}
 }}
 \\[3pt]
+\label{eq:cc-k-tuples-equation}
   \underset{((k-1)^+)}{\vphantom{(}
   t_{a_1\cd a_k}^{i_1\cd i_k}
   }
@@ -980,7 +981,7 @@ $
 $
 are also valid energy contributions in perturbation theory.
 There is no risk of double counting since all of these contributions involve connected triples, which are absent in CCSD.
-With converged CCD or CCSD $T_2$-amplitudes, this defines the \textit{$[\mr{T}]$ correction}.
+With converged CCD or CCSD $T_2$-amplitudes, this defines the $[\mr{T}]$ correction.
 \begin{align}
   E_{[\mr{T}]}
 \equiv
@@ -1069,801 +1070,337 @@ With converged CCD or CCSD $T_2$-amplitudes, this defines the \textit{$[\mr{T}]$
 \end{samepage}
 
 
-\begin{rmk}
-\thmtitle{CC excited states via equation-of-motion theory}
-Similarity transformations preserve operator eigenvalues, so $\ol{H}_e$ has the same spectrum as the original Hamiltonian, $H_e$.
-The corresponding eigenvalue equations
-\begin{align}
-\label{eq:eom-matrix-equations}
-  \ol{\bo{H}}_e
-  \bo{r}_k
-=
-  E_k
-  \bo{r}_k
-&&
-  \bo{l}_k\dg
-  \ol{\bo{H}}_e
-=
-  \bo{l}_k\dg
-  E_k
-&&
-  \bo{l}_k^*\cdot
-  \bo{r}_l
-=
-  \d_{kl}
-\end{align}
-involve both right- and left-eigenvectors since 
-$
-  \ol{\bo{H}}_e
-=
-  \ip{\bo{\F}|(H_e\,\mr{exp}(T))_\mr{C}|\bo{\F}}
-$
-is non-Hermitian.
-These can also be written as
-\begin{align}
-  \ol{H}_e
-  \,{}^kR
-  \kt{\F}
-=
-  E_k
-  \,{}^kR
-  \kt{\F}
-&&
-  \br{\F}
-  \ol{H}_e
-  \,{}^kL
-=
-  \br{\F}
-  \,{}^kL
-  E_k
-&&
-  R
-=
-  R_0
-+
-  R_1
-+
-  \cd
-+
-  R_n
-&&
-  L
-=
-  L_0
-+
-  L_1
-+
-  \cd
-+
-  L_n
-\end{align}
-where $R$ and $L$ are linear excitation and de-excitation operators analogous to $(C_0 + C)$ and $(C_0 + C)\dg$, respectively.
-These are the \textit{equation-of-motion coupled-cluster (EOM-CC) equations}.
-$E_k$ is the $k\eth$ excited state energy, which matches the corresponding CI eigenvalue unless we truncate the basis.
-In general, the expectation value of an observable can be determined as
-$
-  \ip{\Y_k|W|\Y_k}
-=
-  \ip{\F|\,{}^kL\ol{W}\,{}^kR|\F}
-$
-and its transition matrix element is given by
-$
-  \ip{\Y_k|W|\Y_l}
-=
-  \ip{\F|\,{}^kL\ol{W}\,{}^lR|\F}
-$.\footnote{$\ol{W}\equiv\mr{exp}(-T)W\mr{exp}(T)$}
-\end{rmk}
-
-\begin{dfn}
-\thmtitle{The CC Lagrangian}
-Assuming we have solved equation~\ref{eq:cc-matrix-equation}, the right eigenvector of the ground state is simply a unit vector
-$
-  \bo{r}_0
-=
-  \ip{\bo{\F}|\F}
-$.
-The left ground-state eigenvector is unknown, but the biorthonormality condition in equation~\ref{eq:eom-matrix-equations} tells us that its first entry equals 1.
-Therefore, the left and right ground-state wave operators have the form
-\begin{align}
-\label{eq:cc-ground-state-wave-operators}
-  {}^0R
-=
-  1
-&&
-  {}^0L
-=
-  1
-+
-  \La
-&&
-  \La
-=
-  \La_1
-+
-  \cd
-+
-  \La_n
-\end{align}
-where $\La$ is a linear de-excitation operator analogous to $C\dg$.
-The ground-state expectation value is therefore
-\begin{align}
-  E_e
-=
-  \ip{\Y_e|H_e|\Y_e}
-=
-  \ip{\F|
-    (
-      1
-    +
-      \La
-    )
-    \ol{H}_e
-  |\F}
-=
-  \mc{L}(\bo{t},\bm{\la})
-\end{align}
-which is the \textit{coupled-cluster Lagrangian}.
-To see why this constitutes a Lagrangian, note that setting its $\bm{\la}$-gradient equal to zero yields the CC amplitude equations: $\ip{\bo{\F}|\ol{H}_e|\F}=0$.
-If these are satisfied, then
-$
-  E_e
-=
-  \ip{\F|\ol{H}_e|\F}
-$
-gives the CC energy.
-Therefore, we can view the $\bm{\la}$ coefficients as Lagrange multipliers enforcing equation~\ref{eq:cc-matrix-equation} as a constraint.
-\end{dfn}
-
-
-\begin{dfn}
-\thmtitle{The CC Lambda equations}
-Setting the $\bo{t}$-gradient of the CC Lagrangian equal to zero gives
-\begin{align}
-  \br{\F}
-  (
-    1
-  +
-    \La
-  )
-  H_\mr{c}\,
-  \mr{exp}(T)
-  \kt{\F_{i_1\cd i_k}^{a_1\cd a_k}}_\mr{C}
-\overset{!}{=}
-  0
-\end{align}
-which are the CC Lambda equations.\footnote{
-The subscript $\mr{C}$ here denotes that $H_\mr{c}$ is connected both to the ket and to the $T$ operators.
-}
-Rearranging this equation gives an alternative, more convenient form
-\begin{align}
-  \la_{i_1\cd i_k}^{a_1\cd a_k}
-  \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
-=
-  \br{\F}
-  \La
-  H_0
-  T
-  +
-  (
-    1
-  +
-    \La
-  )
-  V_\mr{c}\,
-  \mr{exp}(T)
-  \kt{\F_{i_1\cd i_k}^{a_1\cd a_k}}_\mr{C}
-\end{align}
-which sets up the iterative procedure for determining $\la_{i_1\cd i_k}^{a_1\cd a_k}$ from a given set of amplitudes.
-\end{dfn}
-
-
-\begin{ex}
-Assuming Brillouin's theorem holds, the CCD lambda equations are as follows.
-\begin{align*}
-  \la_{ij}^{ab}
-  \mc{E}_{ab}^{ij}
-=&\
-  \ip{\F|
-    V_\mr{c}
-  +
-    \La_2
-    V_\mr{c}
-  +
-    \La_2 V_\mr{c}T_2
-  |\F_{ij}^{ab}}_\mr{C}
-\\=&\
-\diagram{
-  \interaction{2}{g}{(0,0.5)}{ddot}{sawtooth};
-  \draw[->-] (g1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-] (g1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[->-] (g2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-] (g2) to ++(+0.25,-1) node[smalldot] {};
-}
-+
-\diagram{
-  \interaction{2}{t}{(0,0.5)}{ddot}{overhang};
-  \draw[->-=0.65] (t1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-=0.25,-<-=0.75]
-      (t1)
-    to
-      node[ddot,midway] (g1) {}
-    ++(+0.25,-1)
-      node[smalldot] {};
-  \draw[->-=0.65] (t2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-=0.25,-<-=0.75]
-      (t2)
-    to
-      node[ddot,midway] (g2) {}
-    ++(+0.25,-1)
-      node[smalldot] {};
-   \draw[sawtooth] (g1) to (g2);
-}
-+
-\diagram{
-  \interaction{2}{t}{(0,0.5)}{ddot}{overhang};
-  \draw[-<-=0.65] (t1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-=0.25,->-=0.75]
-      (t1)
-    to
-      node[ddot,midway] (g1) {}
-    ++(+0.25,-1)
-      node[smalldot] {};
-  \draw[-<-=0.65] (t2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-=0.25,->-=0.75]
-      (t2)
-    to
-      node[ddot,midway] (g2) {}
-    ++(+0.25,-1)
-      node[smalldot] {};
-   \draw[sawtooth] (g1) to (g2);
-}
-+
-\diagram{
-  \interaction{2}{t}{(0,0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(1,0.)}{ddot}{sawtooth};
-  \draw[-<-] (t1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-] (t1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[->-,bend left=40 ] (g1) to (t2);
-  \draw[-<-,bend right=40] (g1) to (t2);
-  \draw[-<-] (g2) to ++(-0.25,-0.5) node[smalldot] {};
-  \draw[->-] (g2) to ++(+0.25,-0.5) node[smalldot] {};
-}
-+
-\diagram{
-  \interaction{2}{l}{(0,0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(2,0.5)}{ddot}{sawtooth};
-  \draw[overhang] (1.5,0) node[ddot] (t1) {} to ++(1.5,0) node[ddot] (t2) {};
-  \draw[-<-=0.65] (l1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-=0.65] (l1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[-<-=0.65] (l2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-] (t1) to (l2);
-  \draw[->-] (t1) to (g1);
-  \draw[->-=0.65] (g1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[-<-,bend left=40 ] (t2) to (g2);
-  \draw[->-,bend right=40] (t2) to (g2);
-}
-+
-\diagram{
-  \interaction{2}{l}{(0,0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(2,0.5)}{ddot}{sawtooth};
-  \draw[overhang] (1.5,0) node[ddot] (t1) {} to ++(1.5,0) node[ddot] (t2) {};
-  \draw[->-=0.65] (l1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-=0.65] (l1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[->-=0.65] (l2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-] (t1) to (l2);
-  \draw[-<-] (t1) to (g1);
-  \draw[-<-=0.65] (g1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[->-,bend left=40 ] (t2) to (g2);
-  \draw[-<-,bend right=40] (t2) to (g2);
-}
-\\&\
-+
-\diagram{
-  \interaction{2}{l}{(0,0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(2.2,0.5)}{ddot}{sawtooth};
-  \interaction{2}{t}{(1.1,0.0)}{ddot}{overhang};
-  \draw[->-=0.7] (l1) to ++(-0.4,-1) node[smalldot] {};
-  \draw[-<-=0.3] (l1) to (t1);
-  \draw[->-=0.7] (l2) to ++(-0.4,-1) node[smalldot] {};
-  \draw[-<-=0.3] (l2) to (t2);
-  \draw[->-=0.3] (g1) to (t1);
-  \draw[-<-=0.7] (g1) to ++(+0.4,-1) node[smalldot] {};
-  \draw[->-=0.3] (g2) to (t2);
-  \draw[-<-=0.7] (g2) to ++(+0.4,-1) node[smalldot] {};
-}
-+
-\diagram{
-  \interaction{2}{l}{(0,0.5)}{ddot}{overhang};
-  \interaction{2}{g}{(2,0.5)}{ddot}{sawtooth};
-  \interaction{2}{t}{(1,0.0)}{ddot}{overhang};
-  \draw[-<-=0.65] (l1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-=0.65] (l1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[->-,bend left=40 ] (t1) to (l2);
-  \draw[-<-,bend right=40] (t1) to (l2);
-  \draw[->-,bend left=40 ] (t2) to (g1);
-  \draw[-<-,bend right=40] (t2) to (g1);
-  \draw[-<-=0.65] (g2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-=0.65] (g2) to ++(+0.25,-1) node[smalldot] {};
-}
-+
-\diagram{
-  \interaction{2}{g}{(0,0.5)}{ddot}{sawtooth};
-  \interaction{2}{l}{(2.2,0.5)}{ddot}{overhang};
-  \interaction{2}{t}{(1.1,0.0)}{ddot}{overhang};
-  \draw[->-=0.7] (g1) to ++(-0.4,-1) node[smalldot] {};
-  \draw[-<-=0.3] (g1) to (t1);
-  \draw[->-=0.7] (g2) to ++(-0.4,-1) node[smalldot] {};
-  \draw[-<-=0.3] (g2) to (t2);
-  \draw[->-=0.3] (l1) to (t1);
-  \draw[-<-=0.7] (l1) to ++(+0.4,-1) node[smalldot] {};
-  \draw[->-=0.3] (l2) to (t2);
-  \draw[-<-=0.7] (l2) to ++(+0.4,-1) node[smalldot] {};
-}
-\\&\
-+
-\diagram{
-  \interaction{2}{g}{(0,0.5)}{ddot}{sawtooth};
-  \interaction{2}{l}{(2,0.5)}{ddot}{overhang};
-  \draw[overhang] (1.5,0) node[ddot] (t1) {} to ++(1.5,0) node[ddot] (t2) {};
-  \draw[-<-=0.65] (g1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-=0.65] (g1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[-<-=0.65] (g2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-] (t1) to (g2);
-  \draw[->-] (t1) to (l1);
-  \draw[->-=0.65] (l1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[-<-,bend left=40 ] (t2) to (l2);
-  \draw[->-,bend right=40] (t2) to (l2);
-}
-+
-\diagram{
-  \interaction{2}{g}{(0,0.5)}{ddot}{sawtooth};
-  \interaction{2}{l}{(2,0.5)}{ddot}{overhang};
-  \draw[overhang] (1.5,0) node[ddot] (t1) {} to ++(1.5,0) node[ddot] (t2) {};
-  \draw[->-=0.65] (g1) to ++(-0.25,-1) node[smalldot] {};
-  \draw[-<-=0.65] (g1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[->-=0.65] (g2) to ++(-0.25,-1) node[smalldot] {};
-  \draw[->-] (t1) to (g2);
-  \draw[-<-] (t1) to (l1);
-  \draw[-<-=0.65] (l1) to ++(+0.25,-1) node[smalldot] {};
-  \draw[->-,bend left=40 ] (t2) to (l2);
-  \draw[-<-,bend right=40] (t2) to (l2);
-}
-\\=&\
-  \ol{g}_{ij}^{ab}
-+
-  \tfr{1}{2}
-  \la_{ij}^{cd}
-  \ol{g}_{cd}^{ab}
-+
-  \tfr{1}{2}
-  \la_{kl}^{ab}
-  \ol{g}_{ij}^{kl}
-+
-  P_{(i/j)}^{(a/b)}
-  \la_{ik}^{ac}
-  \ol{g}_{cj}^{kb}
--
-  \tfr{1}{2}
-  P_{(i/j)}
-  \la_{ik}^{ab}
-  t_{cd}^{kl}
-  \ol{g}_{jl}^{cd}
--
-  \tfr{1}{2}
-  P^{(a/b)}
-  \la_{ij}^{ac}
-  t_{cd}^{kl}
-  \ol{g}_{kl}^{bd}
-\\&\
-+
-  \tfr{1}{2^2}
-  \la_{ij}^{cd}
-  t_{cd}^{kl}
-  \ol{g}_{kl}^{ab}
-+
-  P_{(i/j)}^{(a/b)}
-  \la_{ik}^{ac}
-  t_{cd}^{kl}
-  \ol{g}_{lj}^{db}
-+
-  \tfr{1}{2^2}
-  \ol{g}_{ij}^{cd}
-  t_{cd}^{kl}
-  \la_{kl}^{ab}
--
-  \tfr{1}{2}
-  P_{(i/j)}
-  \ol{g}_{ik}^{ab}
-  t_{cd}^{kl}
-  \la_{jl}^{cd}
--
-  \tfr{1}{2}
-  P^{(a/b)}
-  \ol{g}_{ij}^{ac}
-  t_{cd}^{kl}
-  \la_{kl}^{bd}
-\end{align*}
-\end{ex}
-
-\begin{samepage}
-\begin{rmk}
-\thmtitle{The Hellmann-Feynman theorem}
-Variational methods satisfy the \textit{Hellmann-Feynman theorem}, which says that the derivative of the energy with respect to a perturbation parameter $\xi$ is independent of the first-order wavefunction response.\footnote{By ``first-order wavefunction response'', we mean $\Y\ord{1}=\left.\fd{\Y(\xi)}{\xi}\right|_0=\left.\pd{\Y}{\bo{c}}\cdot\fd{\bo{c}(\xi)}{\xi}\right|_0$.  Note that this $\Y\ord{1}$ is generally not the first-order correction to the M\o ller-Plesset model Hamiltonian.
-Instead, we are usually interested in the energy derivative with respect to a deviation from the full Born-Oppenheimer electronic Hamiltonian, $H(\xi)=H_e+\sum_{m=1}^{\infty} \xi^m H\ord{m}$, controlled by a strength parameter $\xi$.  For example, $\xi$ might be a geometric parameter or a strength parameter for an electromagnetic field strength.}
-This follows from the fact that the parameter gradient vanishes by the stationarity condition.
-\begin{align}
-  \left.
-  \fd{E_e(\xi)}{\xi}
-  \right|_0
-=
-  \left.
-  \pd{E_e(\xi)}{\xi}
-  \right|_0
-+
-  \left.
-  \cancel{
-  \pd{E_e}{\bo{c}}
-  }
-  \cdot
-  \fd{\bo{c}(\xi)}{\xi}
-  \right|_0
-=
-  \ip{\Y|
-  H\ord{1}
-  |\Y}
-&&
-  H\ord{1}
-\equiv
-  \left.
-  \pd{H(\xi)}{\xi}
-  \right|_0
-\end{align}
-This is not the case for non-variational methods, but the CC Lagrangian satisfies a
-\textit{generalized Hellmann-Feynman theorem}
-\begin{align}
-  \left.
-  \fd{\mc{L}(\xi)}{\xi}
-  \right|_0
-=
-  \left.
-  \pd{\mc{L}(\xi)}{\xi}
-  \right|_0
-+
-  \left.
-  \cancel{
-  \pd{\mc{L}}{\bo{t}}
-  }
-  \cdot
-  \fd{\bo{t}(\xi)}{\xi}
-  \right|_0
-+
-  \left.
-  \cancel{
-  \pd{\mc{L}}{\bm{\la}}
-  }
-  \cdot
-  \fd{\bm{\la}(\xi)}{\xi}
-  \right|_0
-=
-  \ip{\F|
-    (
-      1
-    +
-      \La
-    )
-    H\ord{1}
-    \mr{exp}(T)
-  |\F}_\mr{C}
-\end{align}
-which follows from the fact that
-$\mc{L}$ is stationary in the amplitudes $\bo{t}$ and their corresponding Lagrange multipliers, $\bm{\la}$.
-\end{rmk}
-\end{samepage}
-
 
 \begin{rmk}
 \label{rmk:lowdin-partitioning}
-\thmtitle{L\"owdin partitioning}
-For a given truncation level $m$, let us refer to the span of
-$\bm{\F}_\mr{i}=\pma{\F\ \bm{\F}_1\,\cd\,\bm{\F}_m}$
-as the
-\textit{internal space}
-and that of
-$\bm{\F}_\mr{e}=\pma{\bm{\F}_{m+1}\,\cd\,\bm{\F}_n}$
-as the
-\textit{external space}, so that
+\thmtitle{The L\"owdin partitioning method}
+Partitioning the determinant basis as
 $
+  \bo{\F}
+=
+\pma{\bo{\F}_\mr{i}\ \bo{\F}_\mr{e}}
+$
+where $\mr{i}$ denotes the \textit{internal space} and $\mr{e}$ denotes the \textit{external space}, we can express the identity on $\mc{F}_n$ as follows.
+\begin{align}
+  1_n
+=
+  1_\mr{i}
++
+  1_\mr{e}
+&&
+\begin{array}{c@{\ }c@{\ }c@{\ }c@{\ }c}
+  1_\mr{i}
+&
+\equiv
+&
+  1|_\mr{i}
+&
+=
+&
   \kt{\bo{\F}_\mr{i}}
   \br{\bo{\F}_\mr{i}}
-+
+\\[5pt]
+  1_\mr{e}
+&
+\equiv
+&
+  1|_\mr{e}
+&
+=
+&
   \kt{\bo{\F}_\mr{e}}
   \br{\bo{\F}_\mr{e}}
-=
-  1_n
-$.
-In the coordinate space over $\bo{\F}$ this reads
-$
-  \bo{1}_\mr{i}
-+
-  \bo{1}_\mr{e}
-=
-  \bo{1}
-$,
-in terms of the following projection matrices.
-\begin{align}
-  \bo{1}_\mr{i}
-\equiv
-  \ip{\bo{\F}|\bo{\F}_\mr{i}}
-  \ip{\bo{\F}_\mr{i}|\bo{\F}}
-=
-\pma[l]{
-  \bo{1} & \bo{0} \\
-  \bo{0} & \bo{0}
-}
-&&
-  \bo{1}_\mr{e}
-\equiv
-  \ip{\bo{\F}|\bo{\F}_\mr{e}}
-  \ip{\bo{\F}_\mr{e}|\bo{\F}}
-=
-\pma[l]{
-  \bo{0} & \bo{0} \\
-  \bo{0} & \bo{1}
-}
+\end{array}
 \end{align}
-This allows us to write vector decompositions as
+This allows us to decompose the wavefunction as
 $
-  \bo{c}
+  \Y
 =
-  \bo{c}_\mr{i}
+  \Y_\mr{i}
 +
-  \bo{c}_\mr{e}
+  \Y_\mr{e}
 $
-and matrix decompositions as
+and the Hamiltonian as
 $
-  \bo{H}
+  H
 =
-  \bo{H}_\mr{ii}
+  H_\mr{ii}
 +
-  \bo{H}_\mr{ie}
+  H_\mr{ie}
 +
-  \bo{H}_\mr{ei}
+  H_\mr{ei}
 +
-  \bo{H}_\mr{ee}
+  H_\mr{ee}
+$,\,\footnote{We are temporarily dropping the subscript $e$ for clarity.}
+with
 $
-in terms of
-$
-  \bo{c}_\mr{x}
+  \Y_\mr{x}
 \equiv
-  \bo{1}_\mr{x}\,
-  \bo{c}
+  1_\mr{x}
+  \Y
 $
 and
 $
-  \bo{H}_\mr{xy}
+  H_\mr{xy}
 \equiv
-  \bo{1}_\mr{x}\,
-  \bo{H}\,
-  \bo{1}_\mr{y}
-$.\footnote{Note that I am dropping the subscript $e$ on the Hamiltonian and energy here to avoid confusion with $\mr{e}$.}
-Finally, note that the \textit{external space resolvent}
+  1_\mr{x}
+  H
+  1_\mr{y}
+$.\,\footnote{To see this, insert the identity in front of $\Y$ and on either side of $H$.}
+This allows us to define the
+\textit{L\"owdin resolvent}
 $
-  \bo{R}_\mr{ee}
+  R_\mr{ee}
 \equiv
-\left.
+  \left.
   (
     E
   -
-    \bo{H}
+    H
   )^{-1}
-\right|_\mr{e}
-$
-satisfies
+  \right|_\mr{e}
+$,
+which satisfies
 \begin{align}
-  \bo{R}_\mr{ee}\,
+\label{eq:external-wavefunction-resolvent-expansion}
+  R_\mr{ee}
   (
     E
   -
-    \bo{H}
+    H
   )
 =
 -
-  \bo{R}_\mr{ee}\,
-  \bo{H}_\mr{ei}
+  R_\mr{ee}
+  H_\mr{ei}
 +
-  \bo{1}_\mr{e}
+  1_\mr{e}
 &&
+  \implies
+&&
+  \Y_\mr{e}
+=
+  R_\mr{ee}
+  H_\mr{ei}
+  \Y_\mr{i}
+\end{align}
+where the first equation follows from inserting the identity and the second follows from substituting this result into $R_\mr{ee}$ times the Schr\"odinger equation,
+$
   (
     E
   -
-    \bo{H}
-  )\,
-  \bo{R}_\mr{ee}
+    H
+  )
+  \Y
 =
--
-  \bo{H}_\mr{ie}\,
-  \bo{R}_\mr{ee}
-+
-  \bo{1}_\mr{e}
-\end{align}
-and operating the left equation on $\bo{c}$ gives zero due to the Schr\"odinger equation, implying that
-$
-  \bo{c}_\mr{e}
-=
-  \bo{R}_\mr{ee}
-  \bo{H}_\mr{ei}
-  \bo{c}_\mr{i}
+  0
 $.
-Projecting the Schr\"odinger equation by $\bo{1}_\mr{i}$ and substituting in this expression for $\bo{c}_\mr{e}$ then leads to
+Projecting the Schr\"odinger equation by $1_\mr{i}$ and rearranging then yields
 \begin{align}
   (
-    \bo{H}_\mr{ii}
+    H_\mr{ii}
   +
-    \bo{V}_\mr{ii}
+    V_\mr{ii}
   )
-  \bo{c}_\mr{i}
+  \Y_\mr{i}
 =
   E
-  \bo{c}_\mr{i}
+  \Y_\mr{i}
 &&
-  \bo{V}_\mr{ii}
-\equiv
-  \bo{H}_\mr{ie}
-  \bo{R}_\mr{ee}
-  \bo{H}_\mr{ei}
+  V_\mr{ii}
+=
+  H_\mr{ie}
+  R_\mr{ee}
+  H_\mr{ei}
 \end{align}
-which reduces the Schr\"odinger equation on $\mc{F}_n$ to an effective Schr\"odinger equation in the internal space.
-This gives
+where we have made use of equation~\ref{eq:external-wavefunction-resolvent-expansion}.
+This sets up an effective Schr\"odinger equation for the exact energy in the internal space.
+If $V_\mr{ii}$ is treated as a perturbation, then the zeroth order states are eigenfunctions of the Hamiltonian in the basis of internal-space determinants.
+Normalizing $\Y_\mr{i}$ to one, the exact energy is given by the 
+\textit{L\"owdin functional}
 \begin{align}
-\label{eq:lowdin-functional}
   E
 =
-  \fr{
-    \bo{c}_\mr{i}\dg
-    (
-      \bo{H}_\mr{ii}
-    +
-      \bo{V}_\mr{ii}
-    )
-    \bo{c}_\mr{i}
-  }{
-    \bo{c}_\mr{i}^*\cdot
-    \bo{c}_\mr{i}
-  }
+  \ip{\Y_\mr{i}|H|\Y_\mr{i}}
++
+  \ip{\Y_\mr{i}|H|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E - H|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|H|\Y_\mr{i}}
 \end{align}
-which expresses the exact energy in terms of internal-space coefficients.
-Let us refer to this energy expression as the \textit{L\"owdin functional}.
-The L\"owdin functional is the central equation in the \textit{L\"owdin partitioning} method, which can be used to eliminate the leading error incurred by truncating at a given excitation level $m<n$.
+where we have expanded the resolvent in the basis of external-space determinants.
+To first order, the energy correction is
+\begin{align}
+  E
+-
+  E^{\{0\}}
+=
+\underset{E^{\{1\}}}{\underbrace{
+  \ip{\Y_\mr{i}^{\{0\}}|V_\mr{ii}|\Y_\mr{i}^{\{0\}}}
+}}
++
+  \mc{O}(V_\mr{ii}^2)
+&&
+  E^{\{1\}}
+=
+  \ip{\Y_\mr{i}^{\{0\}}|H|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E - H|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|H|\Y_\mr{i}^{\{0\}}}
+\end{align}
+where curly braces denote orders in $V_{\mr{ii}}$.
+This gives the leading correction for truncating the wavefunction ansatz.
 \end{rmk}
 
-\begin{rmk}
-\thmtitle{L\"owdin partitioning for CC}
-The L\"owdin functional generalizes to the CC effective Hamiltonian as
+\begin{ex}
+If we include all determinants up to $m$-fold substitutions in our internal space, then $H_\mr{ii}$ is the $\mr{CIS}{\cd}m$ Hamiltonian matrix and $\Y_{\mr{CIS}{\cd}m}$ is the zeroth order approximation to $\Y_\mr{i}$.
+The L\"owdin partitioning method gives
 \begin{align}
-  E
+  E_e^{\{1\}}
 =
-\fr{
-  \bo{l}_\mr{i}\dg
-  (
-    \ol{\bo{H}}_\mr{ii}
-  +
-    \ol{\bo{V}}_\mr{ii}
-  )
-  \bo{r}_\mr{i}
-}{
-  \bo{l}_\mr{i}^*\cdot
-  \bo{r}_\mr{i}
-}
-=
-  \ip{\F|
-  L
-  \ol{H}
-  R
-  |\F}
-+
-  \ip{\F|
-    L
-    \ol{H}
-  |\bo{\F}_\mr{e}}
-  \ip{\bo{\F}_\mr{e}|
-    E
-  -
-    \ol{H}
-  |\bo{\F}_\mr{e}}^{-1}
-  \ip{\bo{\F}_\mr{e}|
-    \ol{H}
-    R
-  |\F}
+  \ip{\F|(C_{m-1} + C_m)H|\bo{\F}_{m+1}\ \bo{\F}_{m+2}}
+  \ip{\bo{\F}_{m+1}\ \bo{\F}_{m+2}|E_e - H_e|\bo{\F}_{m+1}\ \bo{\F}_{m+2}}^{-1}
+  \ip{\bo{\F}_{m+1}\ \bo{\F}_{m+2}|H(C_{m-1} + C_m)|\F}
 \end{align}
-which leads to the following correction to the ground-state correlation energy.
-\begin{align}
+where we have used Slater's rules to eliminate matrix elements of $H_e$ where the determinants differ by more than two orbitals.
+Noting that to zeroth order in the fluctuation potential
+$
+  E_e
+-
+  H_e
+=
   E_\mr{c}
 -
-  E_\mr{c}^{\mr{CCS}{\cd}m}
-=
-  \ip{\F|
-    \La
-    \ol{H}_\mr{c}
-  |\bo{\F}_\mr{e}}
-  \ip{\bo{\F}_\mr{e}|
-    E_\mr{c}
-  -
-    \ol{H}_\mr{c}
-  |\bo{\F}_\mr{e}}^{-1}
-  \ip{\bo{\F}_\mr{e}|
-    \ol{V}_\mr{c}
-  |\F}
-\end{align}
-We can identify the leading term in this correction as follows.
-The leftmost factor requires $\ol{H}_\mr{c}$ to have an excitation level of $-1$ or less to fully contract $\La_m$ and $\bo{\F}_{\mr{e}}$, so its leading contribution is
-$
-  \ol{H}_\mr{c}\ord{1}
-=
-  V_\mr{c}
-$.
-The leading contribution to the middle factor enters in zeroth order, yielding
-$
+  H_\mr{c}
+\approx
 -
-  \kt{\bo{\F}_\mr{e}}
-  \ip{\bo{\F}_\mr{e}|
-  \ol{H}_\mr{c}\ord{0}
-  |\bo{\F}_\mr{e}}^{-1}
-  \br{\bo{\F}_\mr{e}}
-=
-\left.
-  R_0
-\right|_{\mr{e}}
-$.
-The rightmost factor requires $\ol{V}_\mr{c}$ to have an excitation level of $m+1$ in order to fully contract the bra, which first occurs at order
-$
-  \ol{V}_\mr{c}\bord{m}
-=
-(
-  V_\mr{c}\,
-  T_m
-)_\mr{C}
-$.\,\footnote{Note that we are assuming $m\geq 2$.}
-This gives
+  H_0
+$, we can approximate the L\"owdin resolvent by $R_0$.
+This leads to the following correction to the $\mr{CIS}{\cd}m$ energy
 \begin{align}
-\label{eq:parentheses-lambda}
-  E_{(m+1)_{\La}}
+  E_e^{\{1\}}
+\approx
+  (\tfr{1}{(m+1)!})^2
+  \sum_{\substack{a_1\cd a_{m+1}\\i_1\cd i_{m+1}}}
+  \fr{
+    |\ip{\F_{i_1\cd i_{m+1}}^{a_1\cd a_{m+1}}|V_\mr{c}\,(C_{m-1} + C_m)|\F}|^2
+  }{
+    \mc{E}_{a_1\cd a_{m+1}}^{i_1\cd i_{m+1}}
+  }
++
+  (\tfr{1}{(m+2)!})^2
+  \sum_{\substack{a_1\cd a_{m+2}\\i_1\cd i_{m+2}}}
+  \fr{
+    |\ip{\F_{i_1\cd i_{m+2}}^{a_1\cd a_{m+2}}|V_\mr{c}\,C_m|\F}|^2
+  }{
+    \mc{E}_{a_1\cd a_{m+2}}^{i_1\cd i_{m+2}}
+  }
+\end{align}
+which can be viewed as a perturbative correction for $(m+1)$- and $(m+2)$-tuple substitutions.
+\end{ex}
+
+\begin{rmk}
+Under the TCC similarity transformation, the L\"owdin partitioning correction has the following form.
+\begin{align}
+  E_e^{\{1\}}
 =
-  \br{\F}
-    (
-      \La_{m-1}
-    +
-      \La_m
-    )
-    V_\mr{c}
-    T_{m+1}\bord{m}
-  \kt{\F}
+  \ip{\ol{\Y}_\mr{i}^{\{0\}}|\ol{H}_e|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E_e - \ol{H}_e|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|\ol{H}_e|\ol{\Y}_\mr{i}^{\{0\}}}
 &&
+\begin{array}{r@{\ }l}
+  \kt{\ol{\Y}_\mr{i}^{\{0\}}}
+&=
+  \mr{exp}(-T)\,\kt{\Y_\mr{i}^{\{0\}}}
+\\
+  \br{\ol{\Y}_\mr{i}^{\{0\}}}
+&=
+  \br{\Y_\mr{i}^{\{0\}}}\,
+  \mr{exp}(T)
+\end{array}
+\end{align}
+Using
+$
+  1_\mr{i}(E_e + \ol{H}_0) 1_\mr{e}
+=
+  0
+$
+and
+$
+  1_\mr{e}(E_e + \ol{H}_0)\kt{\F}
+=
+  0
+$
+and substituting in the EOM-CCS${\cd}m$ states gives the following.
+\begin{align}
+  E_e^{\{1\}}
+=
+  \ip{\F|(L_{m-1} + L_m)\,(V_\mr{c}\,\mr{exp}(T))_\mr{C}|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E_e - \ol{H}_e|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|(V_\mr{c}\,\mr{exp}(T))_\mr{C} R|\F}
+\end{align}
+where we have used the fact that the excitation level of $\bm{\F}_\mr{e}$ is at least $m+1$ and that of $\ol{V}_\mr{c}$ is $-2$ or higher to eliminate the contributions to $L$ that cannot form complete contractions.
+This gives the first-order L\"owdin partitioning correction for ground and excited state energies obtained with a truncated TCC Ansatz.
+\end{rmk}
+
+
+
+
+
+\begin{ex}
+\thmtitle{The $(m+1)_\La$ correction}
+Approximating the L\"owdin resolvent by the model resolvent gives
+\begin{align}
+  E_e^{\{1\}}
+\approx
+  \ip{\F|(\La_{m-1} + \La_m)V_\mr{c}\,\mr{exp}(T)|\bo{\F}_\mr{e}}_\mr{C}
+  \ip{\bo{\F}_\mr{e}|R_0 V_\mr{c}\,\mr{exp}(T)|\F}_\mr{C}
+\end{align}
+for the ground state, which effectively ``dots'' the lambda equations against the amplitude equations for excitation level $m+1$ and higher with $\La$ and $T$ truncated at $m$-fold excitations.
+From \cref{rmk:cc-perturbative-analysis}, the leading contribution to the $(m+1)$-tuples amplitude equations  has order $m$.
+The vector of order-$m$-truncated $(m+1)$-tuples amplitudes is given by\footnote{$\bm{k}\not\ni 1$ here means that integer compositions containing 1 are excluded.}
+\begin{align}
   \bo{t}_{m+1}\bord{m}
 =
-  \ip{\bo{\F}_{m+1}|R_0V_\mr{c}T_m|\F}_\mr{C}
+  \br{\bo{\F}_{m+1}}R_0
+    V_\mr{c}
+    (
+      T_m
+    +
+      \sum_{p=2}^4
+      \fr{1}{p!}
+      \sum_{\bm{k}\not\ni 1}^{\mc{C}_p(m+p-1)}
+      T_{k_1}
+      \cd
+      T_{k_p}
+    )
+  \kt{\F}_\mr{C}\,
 \end{align}
-where we have made use of the relation
-$
-  \bo{\F}_k\cdot
-  \bo{t}_k
-=
-  T_k
-  \F
-$.
-This defines the
+using equation~\ref{eq:cc-k-tuples-equation}.
+The leading contribution to the $(m+1)$-tuples lambda equations comes from $\mr{exp}(T)\bord{0}= 1$.
+This approximation to $E_e^{\{1\}}$ defines the
 $
   (m+1)_\La
 $
-correction to
+correction
+which,
+using 
 $
-  \mr{CCS}\cd m
-$,
-generating a hierarchy of perturbatively-corrected CC methods:
+  \kt{\bo{\F}_\mr{m+1}}\cdot
+  \bo{t}_{m+1}\bord{m}
+=
+  T_{m+1}\bord{m}
+$, can be written as following
+\begin{align}
+  E_{(m+1)_\La}
+=
+  \ip{\F|(\La_{m-1} + \La_m) V_\mr{c} T_{m+1}\bord{m}|\F}\,\,,
+\end{align}
+forming a well-defined hierarchy of perturbatively-corrected CC methods:
 CCSD(T)$_\La$,
 CCSDT(Q)$_\La$,
 CCSDTQ(P)$_\La$,
 etc.
-\end{rmk}
+\end{ex}
+
 
 \begin{ex}
 \thmtitle{The $(\mr{T})$ correction}
@@ -1889,7 +1426,7 @@ Since the leading contributions to $\La_1$ and $\La_2$ are given by
   {}\ord{2}t_a^{i*}\,\,,
 \end{align}
 the approximation $\La_1\approx T_1\dg, \La_2\approx T_2\dg$ will capture the leading terms in the (T)$_\La$ correction plus many higher-order ones.
-The resulting \textit{$(\mr{T})$ correction} augments the [T] correction with an order $5^+$ contribution, 
+The resulting $(\mr{T})$ correction augments the [T] correction with an order $5^+$ contribution, 
 $
   \br{\F}
     T_1\dg
@@ -1901,50 +1438,16 @@ Though less rigorous than the (T)$_\La$ correction, (T) is computationally advan
 \begin{align}
   E_{(\mr{T})}
 =
-  E_{[\mr{T}]}
-+
   \br{\F}
-    T_1\dg
+    (
+      T_1\dg
+    +
+      T_2\dg
+    )
     V_\mr{c}
     T_3\bord{2}
   \kt{\F}
 =
-\diagram{
-  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
-  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
-  \node[right=2pt of 3t3 ] {[2]};
-  \draw[->-,bend left ] (3t1) to (2t1);
-  \draw[-<-,bend right] (3t1) to (2t1);
-  \draw[->-,bend left ] (3t2) to (2t2);
-  \draw[-<-=0.25,-<-=0.75, bend right]
-    (3t2)
-    to
-      node[ddot,midway] (g1) {}
-    (2t2);
-  \draw (2,0) node[ddot] (g2) {};
-  \draw[sawtooth] (g1) to (g2);
-  \draw[->-,bend left=40 ] (3t3) to (g2);
-  \draw[-<-,bend right=40] (3t3) to (g2);
-}\hspace{-8pt}
-+
-\diagram{
-  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
-  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
-  \node[right=2pt of 3t3 ] {[2]};
-  \draw[->-,bend left ] (3t1) to (2t1);
-  \draw[-<-,bend right] (3t1) to (2t1);
-  \draw[->-,bend left ] (3t2) to (2t2);
-  \draw[-<-=0.25,-<-=0.75, bend right]
-    (3t2)
-    to
-      node[ddot,midway] (g1) {}
-    (2t2);
-  \draw (2,0) node[ddot] (g2) {};
-  \draw[sawtooth] (g1) to (g2);
-  \draw[->-,bend left=40 ] (3t3) to (g2);
-  \draw[-<-,bend right=40] (3t3) to (g2);
-}\hspace{-8pt}
-+
 \diagram{
   \interaction{1}{1t}{(0,+0.5)}{ddot}{overhang};
   \interaction{2}{g}{(1,+0.5)}{ddot}{sawtooth};
@@ -1956,7 +1459,45 @@ Though less rigorous than the (T)$_\La$ correction, (T) is computationally advan
   \draw[-<-,bend right] (3t2) to (g1);
   \draw[->-,bend left ] (3t3) to (g2);
   \draw[-<-,bend right] (3t3) to (g2);
+}\hspace{-8pt}
++
+\underset{\displaystyle E_{[\mr{T}]}}{\underbrace{
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
+}\hspace{-8pt}
++
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
 }
+}}
 \end{align}
 The CCSD(T) method was originally justified on different grounds, but its truly remarkable performance is difficult to understand using ordinary perturbation theory.
 Several other fifth-order terms could just as easily be included, and there is no strong \emph{a priori} reason to expect this one to be as magical as it is.
