@@ -83,8 +83,7 @@ As a result, truncated CC actually contains much higher excitations than CI.
 \begin{ntt}
 Let
 $\bm{\F}_k$
-be a row vector containing all unique $k$-fold substitutions of $\F$,\footnote{That is, $\bm{\F}_k=[\F_{i_1\cd i_k}^{a_1\cd a_k}]$.
-Uniqueness can be enforced by requiring $i_1<\cd<i_k$ and $a_1<\cd<a_k$.}
+be a row vector containing all unique $k$-fold substitutions of $\F$,
 so that $\bm{\F}=\pma{\F\ \bm{\F}_1\,\cd\,\bm{\F}_n}$ spans $\mc{F}_n$.
 Using $\bo{c}$ and $\bo{t}$ to denote column vectors of CI coefficients and CC amplitudes leads to the following relationships.
 \begin{align}
@@ -400,8 +399,8 @@ $2\floor{m/2}+1$
 in the energy.  
 }
 \thmproof{
-The leading terms omitted from $\Y$ and from $E_\mr{c}=\ip{\Y|H_\mr{c}|\Y}/\ip{\Y|\Y}$ when we truncate at $m$-tuples are
-\begin{align}
+The terms omitted from $\Y$ and from $E_\mr{c}=\ip{\Y|H_\mr{c}|\Y}/\ip{\Y|\Y}$ when we truncate at $m$-tuples are
+\begin{align*}
   \Y
 =
   (
@@ -411,11 +410,11 @@ The leading terms omitted from $\Y$ and from $E_\mr{c}=\ip{\Y|H_\mr{c}|\Y}/\ip{\
   +
     \cd
   +
-    C_m
-  +
     \cancel{C_{m+1}}
   +
     \cd
+  +
+    \cancel{C_n}
   )
   \F
 &&
@@ -424,12 +423,32 @@ The leading terms omitted from $\Y$ and from $E_\mr{c}=\ip{\Y|H_\mr{c}|\Y}/\ip{\
   \fr{
     \ip{\F|H_\mr{c}\,C_1|\F}
   +
-    \ip{\F|C_1\dg H_\mr{c}|\F}
+    \cd
+  +
+    \ip{\F|\cancel{
+        C_{m+1}\dg H_\mr{c}\,C_{m+1}
+    }|\F}
+  +
+    \cd
+  +
+    \ip{\F|\cancel{
+      C_n\dg H_\mr{c}C_n
+    }|\F}
   }{
-    \ip{\Y|\Y}
+    \ip{\F|\F}
+  +
+    \cd
+  +
+    \ip{\F|\cancel{C_{m+1}\dg C_{m+1}}|\F}
+  +
+    \cd
+  +
+    \ip{\F|\cancel{C_n\dg C_n}|\F}
   }
-\end{align}
-yielding errors of $\ceil{(m+1)/2}$ in the wavefunction and $2\ceil{(m+1)/2}$ in the energy.
+\end{align*}
+yielding errors of $\ceil{(m+1)/2}$ in the wavefunction and $2\ceil{(m+1)/2}$ in the energy.\footnote{
+  There are also higher-order errors due to the indirect effect of truncation on $C_1$ through $C_m$, but these are always smaller than the direct error 
+}
 Therefore, the wavefunction is correct to order
 $
   \ceil{(m+1)/2} - 1
