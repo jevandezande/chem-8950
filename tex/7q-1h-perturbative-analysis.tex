@@ -391,6 +391,7 @@ In order to gain an order in perturbation theory we have to increase the truncat
 CISDTQ is correct to second order in the wavefunction and fifth order in the energy.
 \end{ex}
 
+
 \begin{prop}
 \label{prop:ci-orders}
 \thmstatement{
@@ -402,52 +403,58 @@ $2\floor{m/2}+1$
 in the energy.  
 }
 \thmproof{
-According to \cref{rmk:ci-perturbative-analysis}, the leading term in $C_{m+1}$ has order $\ceil{(m+1)/2}$.
-This implies that the wavefunction is correct to
+The leading terms omitted from $\Y$ and from $E_\mr{c}=\ip{\Y|H_\mr{c}|\Y}$ when we truncate at $m$-tuples are
+\begin{align}
+  \Y
+=
+  (
+    C_0
+  +
+    C_1
+  +
+    \cd
+  +
+    C_m
+  +
+    \cancel{C_{m+1}}
+  +
+    \cd
+  )
+  \F
+&&
+  E_\mr{c}
+=
+  \sum_{k=0}^m
+  \sum_{k'=0}^m
+  \ip{\F|C_k\dg\,H_\mr{c}\,C_{k'}|\F}
++
+  \ip{\F|
+    \cancel{
+    C_{m+1}\dg
+    H_\mr{c}
+    C_{m+1}
+    }
+  |\F}
++
+  \cd
+\end{align}
+yielding errors of $\ceil{(m+1)/2}$ in the wavefunction and $2\ceil{(m+1)/2}$ in the energy.
+Therefore, the wavefunction is correct to order
 $
-  \ceil{(m+1)/2}
--
-  1
+  \ceil{(m+1)/2} - 1
 =
   \floor{m/2}
 $
-and that
- $C_m$ and $C_{m-1}$ are correct to
+and the energy is correct to order
 $
-  \ceil{(m+1)/2}
+  2\ceil{(m+1)/2} - 1
 =
-  \floor{m/2}
-+
-  1
-$.
-Propagating these truncation errors down to
-$C_{m-2h}$
-and
-$C_{m-1-2h}$
-leaves the latter correct to
-$
-  \floor{m/2}
-+
-  1
-+
-  h
-$.
-One of these operators equals $C_2$ when
-$
-  h
-=
-  \floor{m/2}
--
-  1
-$.
-Since $C_2$ limits the error in equation~\ref{eq:ci-reference-equation},\,\footnote{The error propagation ensures that errors decrease monotonically with excitation level.} the energy is correct to
-$
-  2\floor{m/2}
-+
-  1
+  2\floor{m/2} + 1
 $.
 }
 \end{prop}
+
+
 
 \begin{rmk}
 \label{rmk:cc-perturbative-analysis}
@@ -801,7 +808,7 @@ Non-vanishing contributions to the rows of this matrix equation can be expressed
 }}
 \\[3pt]
 \label{eq:cc-k-tuples-equation}
-  \underset{((k-1)^+)}{\vphantom{(}
+  \underset{({k^+}{-}\,1)}{\vphantom{(}
   t_{a_1\cd a_k}^{i_1\cd i_k}
   }
   \underset{(0)}{\vphantom{(}
@@ -813,21 +820,21 @@ Non-vanishing contributions to the rows of this matrix equation can be expressed
     V_\mr{c}
   }
     (
-    \underset{((k-2)^{+})}{\vphantom{(}
+    \underset{({k^+}{-}\,2)}{\vphantom{(}
       T_{k-1}
     }
     +
-    \underset{((k-1)^{+})}{\vphantom{(}
+    \underset{({k^+}{-}\,1)}{\vphantom{(}
       T_k
     }
     +
     \hspace{2pt}
-    \underset{(k^{+})}{\vphantom{(}
+    \underset{(k^+)}{\vphantom{(}
       T_{k+1}
     }
     \hspace{1pt}
     +
-    \underset{((k+1)^{+})}{\vphantom{(}
+    \underset{({k^+}{+}\,1)}{\vphantom{(}
       T_{k+2}
     }
     +
@@ -835,7 +842,7 @@ Non-vanishing contributions to the rows of this matrix equation can be expressed
       \fr{1}{p!}
       \sum_{h=p-2}^{2}
       \sum_{\bm{k}}^{\mc{C}_p(k+h)}
-    \underset{((k+h-p+\f_{\bm{k}})^+)}{\vphantom{(}
+    \underset{({k^+}{+}\,h-p+\f_{\bm{k}})}{\vphantom{(}
       T_{k_1}
       \cd
       T_{k_p}
@@ -858,7 +865,7 @@ $
 )_\mr{C}
 $,
 which means that each $T_k$ contributes at one order above $T_{k-1}$, starting from $k=2$.
-If Brillouin's theorem holds, $T_1$ has order $2^+$ and the orders of the disconnected products become $(k+h-p+2\,\f_{\bm{k}})^+$.
+If Brillouin's theorem holds, $T_1$ has order $2^+$ and the orders of the disconnected products become ${k^+}{+}\,h-p+2\,\f_{\bm{k}}$.
 \end{rmk}
 
 \begin{prop}
@@ -1389,7 +1396,7 @@ $
   \bo{t}_{m+1}\bord{m}
 =
   T_{m+1}\bord{m}
-$, can be written as following
+$, can be written as follows
 \begin{align}
   E_{(m+1)_\La}
 =
