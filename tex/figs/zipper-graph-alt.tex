@@ -1,0 +1,81 @@
+\documentclass[11pt]{standalone}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+
+\begin{document}
+%
+\begin{tikzpicture}
+  \draw[thick,flexdotted]
+      (-0.3,1)
+    to
+      node[midway,anchor=south,inner sep=1pt] {$v_{k+1}$}
+      ++(-1,0);
+  \draw[thick,flexdotted]
+      (+0.3,1)
+    to
+      node[midway,anchor=south,inner sep=1pt] {$v'_{k'+1}$}
+      ++(+1,0);
+  \draw[thick,flexdotted]
+      (-0.3,0.5)
+    to
+      node[midway,anchor=south,inner sep=2pt] {$\vdots$}
+      ++(-1,0);
+  \draw[thick,flexdotted]
+      (+0.3,0.5)
+    to
+      node[midway,anchor=south,inner sep=2pt] {$\vdots$}
+      ++(+1,0);
+  \draw[draw=none]
+      (-0.25,0)
+    to
+      node[midway,anchor=south,inner sep=1pt] {$v_k$}
+      ++(-1,0);
+  \draw[draw=none]
+      (+0.25,0)
+    to
+      node[midway,anchor=south,inner sep=1pt] {$v'_{k'}$}
+      ++(+1,0);
+   \draw[thick,flexdotted]
+      (-1.1,0)
+    to
+      node[midway,anchor=north,inner sep=0pt] {%
+      $\left(
+        \begin{tikzpicture}[baseline=-1.1cm,inner sep=0pt]
+          \draw[thick,flexdotted]
+            (-1.0,0)
+          to
+            node[pos=0.75,anchor=south,inner sep=0.3pt] {$v'_{k'-1}$}
+            ++(+2.0,0);
+          \draw[thick,flexdotted]
+            (-1.0,-0.5)
+          to
+            node[pos=0.75,anchor=south,inner sep=1pt] {$\vdots$}
+            ++(+2.0,0);
+          \draw[thick,flexdotted]
+            (-1.0,-1)
+          to
+            node[pos=0.75,anchor=south,inner sep=1pt] {$v'_0$}
+            ++(+2.0,0);
+          \draw[thick,flexdotted]
+            (-1.0,-1.5)
+          to
+            node[pos=0.25,anchor=south,inner sep=1pt] {$v_{k-1}$}
+            ++(+2.0,0);
+          \draw[thick,flexdotted]
+            (-1.0,-2.0)
+          to
+            node[pos=0.25,anchor=south,inner sep=1pt] {$\vdots$}
+            ++(+2.0,0);
+          \draw[draw=none]
+            (-1.0,-2.5)
+          to
+            node[pos=0.25,anchor=south,inner sep=1pt] {$v_0$}
+            ++(+2.0,0);
+        \end{tikzpicture}
+      \right)$%
+      }
+      ++(+2.2,0);
+  \node at (1.3,-2.9) {{\scriptsize$\pi$}};
+\end{tikzpicture}
+%
+\end{document}
