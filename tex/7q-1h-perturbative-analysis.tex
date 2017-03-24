@@ -1027,18 +1027,18 @@ With converged CCD or CCSD $T_2$-amplitudes, this defines the $[\mr{T}]$ correct
   \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
   \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
   \node[right=2pt of 3t3 ] {[2]};
-  \draw[->-,bend left ] (3t1) to (2t1);
-  \draw[-<-,bend right] (3t1) to (2t1);
-  \draw[->-,bend left ] (3t2) to (2t2);
-  \draw[-<-=0.25,-<-=0.75, bend right]
+  \draw[-<-,bend left ] (3t1) to (2t1);
+  \draw[->-,bend right] (3t1) to (2t1);
+  \draw[-<-,bend left ] (3t2) to (2t2);
+  \draw[->-=0.25,->-=0.75, bend right]
     (3t2)
     to
       node[ddot,midway] (g1) {}
     (2t2);
   \draw (2,0) node[ddot] (g2) {};
   \draw[sawtooth] (g1) to (g2);
-  \draw[->-,bend left=40 ] (3t3) to (g2);
-  \draw[-<-,bend right=40] (3t3) to (g2);
+  \draw[-<-,bend left=40 ] (3t3) to (g2);
+  \draw[->-,bend right=40] (3t3) to (g2);
 }
 &&&&
 \diagram{
@@ -1502,18 +1502,18 @@ Though less rigorous than the (T)$_\La$ correction, (T) is computationally advan
   \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
   \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
   \node[right=2pt of 3t3 ] {[2]};
-  \draw[->-,bend left ] (3t1) to (2t1);
-  \draw[-<-,bend right] (3t1) to (2t1);
-  \draw[->-,bend left ] (3t2) to (2t2);
-  \draw[-<-=0.25,-<-=0.75, bend right]
+  \draw[-<-,bend left ] (3t1) to (2t1);
+  \draw[->-,bend right] (3t1) to (2t1);
+  \draw[-<-,bend left ] (3t2) to (2t2);
+  \draw[->-=0.25,->-=0.75, bend right]
     (3t2)
     to
       node[ddot,midway] (g1) {}
     (2t2);
   \draw (2,0) node[ddot] (g2) {};
   \draw[sawtooth] (g1) to (g2);
-  \draw[->-,bend left=40 ] (3t3) to (g2);
-  \draw[-<-,bend right=40] (3t3) to (g2);
+  \draw[-<-,bend left=40 ] (3t3) to (g2);
+  \draw[->-,bend right=40] (3t3) to (g2);
 }
 }}
 \end{align}
