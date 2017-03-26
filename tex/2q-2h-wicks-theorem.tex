@@ -378,7 +378,7 @@ The next proposition proves a convenient rule for evaluating completely contract
 
 
 \begin{dfn}
-\thmtitle{Correlation component of $H_e$}
+\thmtitle{Correlation component of the Hamiltonian}
 Using Wick's theorem, we can expand $\vac$-normal one- and two-particle excitations as linear combinations of $\F$-normal-ordered ones.
 \begin{align}
 &
@@ -404,10 +404,10 @@ Using Wick's theorem, we can expand $\vac$-normal one- and two-particle excitati
 -
   \g_{ps}\g_{qr}
 \end{align}
-Substituting these into the electronic Hamiltonian leads to an expression for $H_e$ in terms of $\F$-normal operators.
+Substituting these into the electronic Hamiltonian leads to an expression for $H$ in terms of $\F$-normal operators.
 \begin{align}
 &&
-  H_e
+  H
 =
   E_\mr{ref}
 +
@@ -442,8 +442,8 @@ Substituting these into the electronic Hamiltonian leads to an expression for $H
   \g_{rs}
 \end{array}
 \end{align}
-Note that $E_\mr{ref}$ is another expression for the Hartree-Fock energy, $E_\mr{ref}=\ip{\F|\op{H}_e|\F}$, and $f_{pq}$ is the matrix representation of the Fock operator in the spin-orbital basis, $\bm{f}=[f_{pq}]$ where $f_{pq}=\ip{\y_p|\op{f}|\y_q}$.
-The second and third terms in this expression together make up the \textit{correlation component} of the electronic Hamiltonian, $H_\mr{c}\equiv H_e - \ip{\F|H_e|\F}$.
+Note that $E_\mr{ref}$ is another expression for the Hartree-Fock energy, $E_\mr{ref}=\ip{\F|\op{H}|\F}$, and $f_{pq}$ is the matrix representation of the Fock operator in the spin-orbital basis, $\bm{f}=[f_{pq}]$ where $f_{pq}=\ip{\y_p|\op{f}|\y_q}$.
+The second and third terms in this expression together make up the \textit{correlation component} of the electronic Hamiltonian, $H_\mr{c}\equiv H - \ip{\F|H|\F}$.
 \end{dfn}
 
 \begin{ex}
@@ -451,7 +451,7 @@ The second and third terms in this expression together make up the \textit{corre
 The configuration interaction singles (CIS) equations take the form
 \begin{align}
   \sum_{jb}
-  \ip{\F_i^a|H_e - E_\mr{ref}|\F_j^b}\,
+  \ip{\F_i^a|H - E_\mr{ref}|\F_j^b}\,
   (\bo{c}_k)_b^j
 =
   \w_k\, 

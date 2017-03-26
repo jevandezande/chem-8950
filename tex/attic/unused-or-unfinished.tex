@@ -362,7 +362,7 @@ $
 (
   E
 -
-  H_e
+  H
 )\ord{0}
 =
 -
@@ -409,14 +409,14 @@ $
 Note that the EOM-CC equations can be expressed in matrix notation as
 \begin{align}
 \label{eq:eom-matrix-equations}
-  \ol{\bo{H}}_e
+  \ol{\bo{H}}
   \bo{r}_k
 =
   E_k
   \bo{r}_k
 &&
   \bo{l}_k\dg
-  \ol{\bo{H}}_e
+  \ol{\bo{H}}
 =
   \bo{l}_k\dg
   E_k
@@ -426,30 +426,30 @@ Note that the EOM-CC equations can be expressed in matrix notation as
 =
   \d_{kl}
 &&
-  \ol{\bo{H}}_e
+  \ol{\bo{H}}
 =
 \pma{
-  E_e
+  E
 &
-  \ip{\F|\ol{H}_e|\bo{\F}_1}
+  \ip{\F|\ol{H}|\bo{\F}_1}
 &
-  \ip{\F|\ol{H}_e|\bo{\F}_2}
-&
-  \cd
-\\
-  0
-&
-  \ip{\bm{\F}_1|\ol{H}_e|\bo{\F}_1}
-&
-  \ip{\bm{\F}_1|\ol{H}_e|\bo{\F}_2}
+  \ip{\F|\ol{H}|\bo{\F}_2}
 &
   \cd
 \\
   0
 &
-  \ip{\bm{\F}_2|\ol{H}_e|\bo{\F}_1}
+  \ip{\bm{\F}_1|\ol{H}|\bo{\F}_1}
 &
-  \ip{\bm{\F}_2|\ol{H}_e|\bo{\F}_2}
+  \ip{\bm{\F}_1|\ol{H}|\bo{\F}_2}
+&
+  \cd
+\\
+  0
+&
+  \ip{\bm{\F}_2|\ol{H}|\bo{\F}_1}
+&
+  \ip{\bm{\F}_2|\ol{H}|\bo{\F}_2}
 &
   \cd
 \\
@@ -462,7 +462,7 @@ Note that the EOM-CC equations can be expressed in matrix notation as
   \dd
 }
 \end{align}
-where we can identify the ground-state right eigenvector by inspection as $\bo{r}_0=\ip{\bo{\F}|\F}$ with eigenvalue $E_e$.
+where we can identify the ground-state right eigenvector by inspection as $\bo{r}_0=\ip{\bo{\F}|\F}$ with eigenvalue $E$.
 \end{rmk}
 
 

@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section,skip=9pt plus 2pt minus 7pt]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 8, Handout 1: Singles}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\makeatother
+\newcommand{\resolventline}[2][1]{
+  \tikz[overlay]{
+      \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
+  }
+}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+
+
+\setcounter{section}{7}
+\section{Singles}
+
+\begin{align}
+  H
+=
+  h_p^q
+  a^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  a^{pq}_{rs}
+\end{align}
+
+\begin{align}
+  E
+=
+  h_p^q
+  \g^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \g^{pq}_{rs}
+\end{align}
+
+\begin{align}
+  \mc{L}
+=
+  \mr{Re}
+  (
+    h_p^q
+    \ol{\g}^p_q
+  +
+    \tfr{1}{4}
+    \ol{g}_{pq}^{rs}
+    \ol{\g}^{pq}_{rs}
+  )
+&&
+\begin{array}{r@{\ }l}
+  \ol{\g}^p_q
+&\equiv
+  \ip{\F|(1+\La)\,a^p_q\,\mr{exp}(T)|\F}_\mr{C}
+\\[4pt]
+  \ol{\g}^{pq}_{rs}
+&\equiv
+  \ip{\F|(1+\La)\,a^{pq}_{rs}\,\mr{exp}(T)|\F}_\mr{C}
+\end{array}
+\end{align}
+
+Since $\mc{L}$ is real, 
+\begin{align}
+  h_p^q
+  \ol{\g}^p_q
+=
+  \tfr{1}{2}
+  (
+    h_p^q
+    \ol{\g}^p_q
+  +
+    (
+    h_q^p
+    \ol{\g}^q_p
+    )^*
+  )
+=
+  h_p^q
+  \g^p_q
+&&
+  \g^p_q
+\equiv
+  \tfr{1}{2}
+  (
+    \ol{\g}^p_q
+  +
+    \ol{\g}^{q*}_p
+  )
+\end{align}
+
+\begin{align}
+&&
+  \g^{pq}_{rs}
+\equiv
+  \tfr{1}{2}
+  (
+    \ol{\g}^{pq}_{rs}
+  +
+    \ol{\g}^{rs*}_{pq}
+  )
+\end{align}
+
+\begin{align}
+\end{align}
+
+\end{document}

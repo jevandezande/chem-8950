@@ -967,9 +967,9 @@ Assuming Brillouin's theorem, we can complete the energy to fourth order using
 \end{align}
 where the resulting energy correction is
 $
-  E_e
+  E
 -
-  E_e^{\mr{CCSD}}
+  E^{\mr{CCSD}}
 =
   \ip{\F|
     V_\mr{c}
@@ -1149,7 +1149,7 @@ $
   H_\mr{ei}
 +
   H_\mr{ee}
-$,\,\footnote{We are temporarily dropping the subscript $e$ for clarity.}
+$,
 with
 $
   \Y_\mr{x}
@@ -1272,18 +1272,18 @@ This gives the leading correction for truncating the wavefunction ansatz.
 If we include all determinants up to $m$-fold substitutions in our internal space, then $H_\mr{ii}$ is the $\mr{CIS}{\cd}m$ Hamiltonian matrix and $\Y_{\mr{CIS}{\cd}m}$ is the zeroth order approximation to $\Y_\mr{i}$.
 The L\"owdin partitioning method gives
 \begin{align}
-  E_e^{\{1\}}
+  E^{\{1\}}
 =
   \ip{\F|(C_{m-1} + C_m)H|\bo{\F}_{m+1}\ \bo{\F}_{m+2}}
-  \ip{\bo{\F}_{m+1}\ \bo{\F}_{m+2}|E_e - H_e|\bo{\F}_{m+1}\ \bo{\F}_{m+2}}^{-1}
+  \ip{\bo{\F}_{m+1}\ \bo{\F}_{m+2}|E - H|\bo{\F}_{m+1}\ \bo{\F}_{m+2}}^{-1}
   \ip{\bo{\F}_{m+1}\ \bo{\F}_{m+2}|H(C_{m-1} + C_m)|\F}
 \end{align}
-where we have used Slater's rules to eliminate matrix elements of $H_e$ where the determinants differ by more than two orbitals.
+where we have used Slater's rules to eliminate matrix elements of $H$ where the determinants differ by more than two orbitals.
 Noting that to zeroth order in the fluctuation potential
 $
-  E_e
+  E
 -
-  H_e
+  H
 =
   E_\mr{c}
 -
@@ -1294,7 +1294,7 @@ $
 $, we can approximate the L\"owdin resolvent by $R_0$.
 This leads to the following correction to the $\mr{CIS}{\cd}m$ energy
 \begin{align}
-  E_e^{\{1\}}
+  E^{\{1\}}
 \approx
   (\tfr{1}{(m+1)!})^2
   \sum_{\substack{a_1\cd a_{m+1}\\i_1\cd i_{m+1}}}
@@ -1318,11 +1318,11 @@ which can be viewed as a perturbative correction for $(m+1)$- and $(m+2)$-tuple 
 \begin{rmk}
 Under the TCC similarity transformation, the L\"owdin partitioning correction has the following form.
 \begin{align}
-  E_e^{\{1\}}
+  E^{\{1\}}
 =
-  \ip{\ol{\Y}_\mr{i}^{\{0\}}|\ol{H}_e|\bo{\F}_\mr{e}}
-  \ip{\bo{\F}_\mr{e}|E_e - \ol{H}_e|\bo{\F}_\mr{e}}^{-1}
-  \ip{\bo{\F}_\mr{e}|\ol{H}_e|\ol{\Y}_\mr{i}^{\{0\}}}
+  \ip{\ol{\Y}_\mr{i}^{\{0\}}|\ol{H}|\bo{\F}_\mr{e}}
+  \ip{\bo{\F}_\mr{e}|E - \ol{H}|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|\ol{H}|\ol{\Y}_\mr{i}^{\{0\}}}
 &&
 \begin{array}{r@{\ }l}
   \kt{\ol{\Y}_\mr{i}^{\{0\}}}
@@ -1337,22 +1337,22 @@ Under the TCC similarity transformation, the L\"owdin partitioning correction ha
 \end{align}
 Using
 $
-  1_\mr{i}(E_e + \ol{H}_0) 1_\mr{e}
+  1_\mr{i}(E + \ol{H}_0) 1_\mr{e}
 =
   0
 $
 and
 $
-  1_\mr{e}(E_e + \ol{H}_0)\kt{\F}
+  1_\mr{e}(E + \ol{H}_0)\kt{\F}
 =
   0
 $
 and substituting in the EOM-CCS${\cd}m$ states gives the following.
 \begin{align}
-  E_e^{\{1\}}
+  E^{\{1\}}
 =
   \ip{\F|(L_{m-1} + L_m)\,(V_\mr{c}\,\mr{exp}(T))_\mr{C}|\bo{\F}_\mr{e}}
-  \ip{\bo{\F}_\mr{e}|E_e - \ol{H}_e|\bo{\F}_\mr{e}}^{-1}
+  \ip{\bo{\F}_\mr{e}|E - \ol{H}|\bo{\F}_\mr{e}}^{-1}
   \ip{\bo{\F}_\mr{e}|(V_\mr{c}\,\mr{exp}(T))_\mr{C} R|\F}
 \end{align}
 where we have used the fact that the excitation level of $\bm{\F}_\mr{e}$ is at least $m+1$ and that of $\ol{V}_\mr{c}$ is $-2$ or higher to eliminate the contributions to $L$ that cannot form complete contractions.
@@ -1367,7 +1367,7 @@ This gives the first-order L\"owdin partitioning correction for ground and excit
 \thmtitle{The $(m+1)_\La$ correction}
 Approximating the L\"owdin resolvent by the model resolvent gives
 \begin{align}
-  E_e^{\{1\}}
+  E^{\{1\}}
 \approx
   \ip{\F|(\La_{m-1} + \La_m)V_\mr{c}\,\mr{exp}(T)|\bo{\F}_\mr{e}}_\mr{C}
   \ip{\bo{\F}_\mr{e}|R_0 V_\mr{c}\,\mr{exp}(T)|\F}_\mr{C}
@@ -1394,7 +1394,7 @@ The vector of order-$m$-truncated $(m+1)$-tuples amplitudes is given by\footnote
 \end{align}
 using equation~\ref{eq:cc-k-tuples-equation}.
 The leading contribution to the $(m+1)$-tuples lambda equations comes from $\mr{exp}(T)\bord{0}= 1$.
-This approximation to $E_e^{\{1\}}$ defines the
+This approximation to $E^{\{1\}}$ defines the
 $
   (m+1)_\La
 $

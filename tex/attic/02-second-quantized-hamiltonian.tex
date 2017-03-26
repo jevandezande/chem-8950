@@ -1,0 +1,158 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{The second quantized Hamiltonian}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{8pt}
+\setlength{\belowdisplayskip}{8pt}
+
+\setcounter{section}{1}
+\section{The second quantized Hamiltonian}
+
+The space of $n$-electron Slater determinants, $\mc{F}_n$, spans all $n$-particle wavefunctions that obey Fermion exchange symmetry.
+Consider an operator $\op{a}_p$, which maps $\mc{F}_n$ into $\mc{F}_{n-1}$ through the following weighted integral.\footnote{Implicitly, this is a definite integral over all values of $(1')\equiv(\bo{r}_{1'},s_{1'})$.}
+\begin{align}
+  (\op{a}_p\Y)(2,\cd,n)
+\equiv
+  \sqrt{n}\int d(1')\, \y_p^*(1')\Y(1',2,\cd,n)
+\end{align}
+Using the properties of determinants, one can show that $\op{a}_p$ deletes $\y_p$ from any $\F_{(p_1\cd p_n)}$ with $p_k=p$
+\begin{align}
+  (\op{a}_p\F_{(p_1\cd p_n)})(2,\cd,n)
+=
+\tfr{1}{\sqrt{(n-1)!}}
+\left|\ar{
+  0 & \cd & 1 & \cd & 0\\
+  \y_{p_1}(2) & \cd &\y_{p_k}(2)&\cd&\y_{p_n}(2)\\
+  \vd  & \dd    &\vd    &\dd&\vd    \\
+  \y_{p_1}(n) & \cd &\y_{p_k}(n)&\cd&\y_{p_n}(n)}\right|
+=
+  (-)^{k-1}\F_{(p_1\cd \cancel{p_k}\cd p_n)}(2,\ld,n)
+\end{align}
+and kills determinants not containing $\y_p$.
+This is known as an \textit{annihilation operator}.
+The following identity\,\footnote{%
+\label{fn:swap-integration-variables}%
+  This follows from swapping integration variables $1'\leftrightarrow2'$ and using
+  $
+    \Y(1',2',\cd)
+  =
+  -
+    \Y(2',1',\cd)
+  $.
+}
+\begin{align}
+\label{eq:spinorb-integrals-anticommute}
+  \int d(1')d(2')\y_p^*(1')\y_q^*(2')\Y(1',2',\cd)
+=
+-
+  \int d(1')d(2')\y_q^*(1')\y_p^*(2')\Y(1',2',\cd)
+&&
+  \Y\in\mc{F}_n
+\end{align}
+implies that annihilation operators for different spin-orbitals anticommute.
+\begin{align}
+  \op{a}_p
+  \op{a}_q
+=
+-
+  \op{a}_q
+  \op{a}_p
+\end{align}
+By resolution of the identity along a single electronic coordinate, the annihilation operators can be used to generate the following decomposition of an antisymmetric function.
+\begin{align}
+\label{eq:annihilation-operator-resolution-of-the-identity}
+  \Y(1,\cd,n)
+=
+  \sum_{p=1}^\infty
+  \y_p(1)
+  \int
+  d(1')
+  \y_p^*(1')
+  \Y(1',\cd,n)
+=
+  \tfr{1}{\sqrt{n}}
+  \sum_p^\infty\y_p(1)\pr{\op{a}_p\Y}(2,\cd,n)
+\end{align}
+The next paragraph shows that the electronic Hamiltonian itself can be expressed in terms of these operators.
+
+Matrix elements of the Hamiltonian with respect to antisymmetric functions can be expressed as
+\begin{align}
+  \ip{\Y|\op{H}|\Y'}
+=
+  \sum_{i=1}^n\ip{\Y|\op{h}(i)|\Y'}
++
+  \sum_{i<j}^n\ip{\Y|\op{g}(i,j)|\Y'}
+=
+  n\ip{\Y|\op{h}(1)|\Y'}
++
+  \tfr{n(n-1)}{2}
+  \ip{\Y|\op{g}(1,2)|\Y'}
+\end{align}
+by the algebraic maneuver of \cref{fn:swap-integration-variables}.
+Repeated use of equation~\ref{eq:annihilation-operator-resolution-of-the-identity} leads to
+\begin{align*}
+  \ip{\Y|\op{H}|\Y'}
+=
+  \sum_{pq}^\infty
+  \ip{\y_p|\op{h}|\y_q}\,\ip{\op{a}_p\Y|\op{a}_q\Y'}
++
+  \tfr{1}{2}
+  \sum_{pqrs}^\infty
+  \ip{\y_p\y_q|\y_r\y_s}\,\ip{\op{a}_q\op{a}_p\Y|\op{a}_s\op{a}_r\Y'}
+\end{align*}
+and since $\Y$ and $\Y'$ are arbitrary, this allows us to back out a new expression for $\op{H}$ acting on $\mc{F}_n$.
+\begin{align}\label{eq:second-quantized-hamiltonian}
+  \left.
+  \op{H}
+  \right|_{\mc{F}_n}
+=
+  \sum_{pq}^\infty
+  \ip{\y_p|\op{h}|\y_q}\,
+  \op{a}_p\dg \op{a}_q
++
+  \tfr{1}{2}
+  \sum_{pqrs}^\infty
+  \ip{\y_p\y_q|\y_r\y_s}\,
+  \op{a}_p\dg\op{a}_q\dg\op{a}_s\op{a}_r
+\end{align}
+This is the \textit{second quantized} form of the Hamiltonian, as opposed to the \textit{first quantized} form which is not restricted to $\mc{F}_n$.
+A defining feature of the second quantized formalism is that $\op{H}$ has the same form for any number of electrons, $n$, allowing us to extend its domain to include states with different numbers of particles,
+$
+  \mc{F}_0
+\cup
+  \mc{F}_1
+\cup
+  \mc{F}_2
+\cup
+  \cd
+\cup
+  \mc{F}_\infty
+$,
+which is not possible for the first-quantized form of the Hamiltonian.
+
+
+
+
+\end{document}

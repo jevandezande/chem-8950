@@ -394,7 +394,7 @@ The following is suggested notation for the diagonal and off-diagonal contributi
 \end{align}
 so that
 $
-  H_e
+  H
 =
   E_\mr{ref}
 +
@@ -879,23 +879,23 @@ Since exponential operators are automatically invertible, the TCC wave operator 
 The image of the Schr\"odinger equation under this transformation is as follows
 \begin{align}
 \label{eq:similarity-transformed-schrodinger-equation}
-  \ol{H}_e
+  \ol{H}
   \kt{\ol{\Y}_k}
 =
   E_k
   \kt{\ol{\Y}_k}
 &&
   \br{\ol{\Y}_k}
-  \ol{H}_e
+  \ol{H}
 =
   \br{\ol{\Y}_k}
   E_k
 &&
 \begin{array}{c@{\ }l}
-  \ol{H}_e
+  \ol{H}
 &=
   \mr{exp}(-T)
-  H_e\,
+  H\,
   \mr{exp}(T)
 \\
   \kt{\ol{\Y}_k}
@@ -910,7 +910,7 @@ The image of the Schr\"odinger equation under this transformation is as follows
 \end{array}
 \end{align}
 where the $k\eth$ left and right eigenstates are not adjoints because $\mr{exp}(T)$ is inherently non-unitary.
-In TCC, $T$ is determined by the requirement that the ground-state right eigenvector of $\ol{H}_e$ be the reference determinant,
+In TCC, $T$ is determined by the requirement that the ground-state right eigenvector of $\ol{H}$ be the reference determinant,
 $
   \kt{\ol{\Y}_0}
 \overset{!}{=}
@@ -921,10 +921,10 @@ $.
 
 \begin{dfn}
 \thmtitle{Equation-of-motion coupled-cluster theory}
-Expanding the left and right eigenstates of $\ol{H}_e$ in the determinant basis leads to the \textit{equation-of-motion (EOM) coupled-cluster equations}
+Expanding the left and right eigenstates of $\ol{H}$ in the determinant basis leads to the \textit{equation-of-motion (EOM) coupled-cluster equations}
 \begin{align}
 \begin{array}{r@{\ }lr@{\ }l}
-  \ol{H}_e
+  \ol{H}
   \,{}^kR
   \kt{\F}
 &
@@ -945,7 +945,7 @@ Expanding the left and right eigenstates of $\ol{H}_e$ in the determinant basis 
 \\[7pt]
   \br{\F}
   \,{}^kL\,
-  \ol{H}_e
+  \ol{H}
 &=
   \br{\F}
   \,{}^kL\,
@@ -1014,7 +1014,7 @@ Therefore, the ground-state left eigenvector has the form
 \end{align}
 and the ground-state energy can be written as follows, in an expression known as the \textit{coupled-cluster Lagrangian}.
 \begin{align}
-  \ip{\Y_0|H_e|\Y_0}
+  \ip{\Y_0|H|\Y_0}
 =
   \ip{\F|
     (
@@ -1022,7 +1022,7 @@ and the ground-state energy can be written as follows, in an expression known as
     +
       \La
     )
-    \ol{H}_e
+    \ol{H}
   |\F}
 \equiv
   \mc{L}(\bo{t},\bm{\la})
@@ -1030,9 +1030,9 @@ and the ground-state energy can be written as follows, in an expression known as
 To see why this constitutes a Lagrangian, note that setting its gradient with respect to $\la_{i_1\cd i_k}^{a_1\cd a_k}$ equal to zero yields the TCC amplitude equations of eq~\ref{eq:traditional-cc-equations}.
 If these are satisfied, the $\la$-dependent part of the equation vanishes and the Lagrangian returns the coupled-cluster energy:
 $
-  \ip{\F|\ol{H}_e|\F}
+  \ip{\F|\ol{H}|\F}
 =
-  E_e
+  E
 $.
 Therefore, the $\la$ coefficients can be viewed as Lagrange multipliers enforcing the TCC amplitude equations as a constraint.
 \end{dfn}
@@ -1385,31 +1385,31 @@ Assuming Brillouin's theorem holds, the CCD lambda equations are as follows.
 If the Hamiltonian depends on a parameter $\xi$, such as a nuclear coordinate or an electric field strength, we can express the Schr\"odinger equation as a function of that parameter
 \begin{align}
 \label{eq:xi-dependent-schrodinger-equation}
-  H_e(\xi)
+  H(\xi)
   \Y(\xi)
 =
-  E_e(\xi)
+  E(\xi)
   \Y(\xi)
 &&
   \ip{\Y(\xi)|\Y(\xi)}
 \overset{!}{=}
   1
 \end{align}
-Then the total derivative of the energy $E_e(\xi)=\ip{\Y(\xi)|H(\xi)|\Y(\xi)}$ with respect to $\xi$ is given by the following.
+Then the total derivative of the energy $E(\xi)=\ip{\Y(\xi)|H(\xi)|\Y(\xi)}$ with respect to $\xi$ is given by the following.
 \begin{align}
-  \fd{E_e(\xi)}{\xi}
+  \fd{E(\xi)}{\xi}
 =
   \ip{\Y(\xi)|
-  \pd{H_e(\xi)}{\xi}
+  \pd{H(\xi)}{\xi}
   |\Y(\xi)}
 +
 \cancel{
   \ip{\pd{\Y(\xi)}{\xi}|
-  H_e(\xi)
+  H(\xi)
   |\Y(\xi)}
 +
   \ip{\Y(\xi)|
-  H_e(\xi)
+  H(\xi)
   |\pd{\Y(\xi)}{\xi}}
 }
 \end{align}
@@ -1418,24 +1418,24 @@ In words, it says that the first derivative of the energy does not depend on the
 More generally, for approximate methods, the wavefunction may be parametrized by a set of coefficients $\bo{c}$ which are \textit{stationary} in the sense that their energy gradient equals zero.
 Denoting the remaining non-stationary coordinates by $\bo{p}$, we have
 \begin{align}
-  \fd{E_e(\xi)}{\xi}
+  \fd{E(\xi)}{\xi}
 =
-  \pd{E_e(\xi)}{\xi}
+  \pd{E(\xi)}{\xi}
 +
   \cancel{
-  \pd{E_e}{\bo{c}}
+  \pd{E}{\bo{c}}
   }
   \cdot
   \fd{\bo{c}}{\xi}
 +
-  \pd{E_e}{\bo{p}}
+  \pd{E}{\bo{p}}
   \cdot
   \fd{\bo{p}}{\xi}
 &&
-  \pd{E_e}{\xi}
+  \pd{E}{\xi}
 =
   \ip{\Y(\bo{c},\bo{p})|
-  \pd{H_e(\xi)}{\xi}
+  \pd{H(\xi)}{\xi}
   |\Y(\bo{c},\bo{p})}
 \end{align}
 which applies to configuration interaction and other variational methods.

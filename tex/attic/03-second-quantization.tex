@@ -18,7 +18,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{Quiz 1, Handout 2: Second Quantization}
+\fancyhead[LE,RO]{Second quantization}
 \fancyfoot[CE,CO]{\thepage}
 \usepackage{url}
 
@@ -27,105 +27,8 @@
 \setlength{\abovedisplayskip}{3pt}
 \setlength{\belowdisplayskip}{3pt}
 
+\setcounter{section}{2}
 \section{Second Quantization}
-
-
-\begin{dfn}\label{dfn:slater-determinant}
-\thmtitle{Slater determinant}
-A \textit{Slater determinant} is a normalized antisymmetric product of spin-orbitals
-\begin{align}\label{eq:slater-determinant-position-representation}
-  \F_{(p_1\cd p_n)}(1,\ld,n)
-=
-  \tfr{1}{\sqrt{n!}}
-  \sum_{\pi}^{\mr{S}_n}
-  \e_{\pi}
-  \y_{p_{\pi(1)}}(1)\cd\y_{p_{\pi(n)}}(n)
-\end{align}
-where $\pi\in\mr{S}_n$ is a permutation of $(1,\cd, n)$ with signature $\e_{\pi}$.\footnote{The signature of a permutation is $(-)^{\text{\# transpositions}}$.  See \url{https://en.wikipedia.org/wiki/Symmetric_group} for more on $\mr{S}_n$.}
-\end{dfn}
-
-\subsection{Deriving the second-quantized Hamiltonian from first quantization}\label{ssec:direct-derivation-of-second-quantization}
-
-
-Let $\mc{F}_n$ denote the span of $n$-electron determinants and consider the integral operator $\op{a}_p:\mc{F}_n\rightarrow \mc{F}_{n-1}$ given by
-\begin{align}
-  (\op{a}_p\Y)(2,\cd,n)
-\equiv
-  \sqrt{n}\int d(1) \y_p^*(1)\Y(1,2,\cd,n)\,.
-\end{align}
-This operator acts on Slater determinants as follows.
-\begin{align}
-  (\op{a}_p\F_{(p_1\cd p_n)})(2,\cd,n)
-=
-\left\{
-\ar{
-  (-)^{k-1}\F_{(p_1\cd \cancel{p_k}\cd p_n)}(2,\ld,n) & p=p_k\in(p_1\cd p_n)\\[5pt]
-  0 & \text{otherwise}
-}
-\right.
-\end{align}
-In words, it deletes $\y_p$ from $\F_{(p_1\cd p_n)}$ if present, otherwise killing the determinant.
-The restriction to an antisymmetric space makes these operators anticommute, $\op{a}_p\op{a}_q=-\op{a}_q\op{a}_p$, since it can be shown that for $\Y\in\mc{F}_n$
-\begin{align*}
-  \int d(1)d(2)\y_p^*(1)\y_q^*(2)\Y(1,2,\cd,n)
-=&\
--
-  \int d(1)d(2)\y_q^*(1)\y_p^*(2)\Y(1,2,\cd,n)
-\end{align*}
-by swapping integration variables.
-These operators can be used to generate the following decompositions.\footnote{These follow from substituting in the definition of $\op{a}_p$ and applying resolution of the identity to each argument.}
-\begin{align}
-  \Y(1,\cd,n)
-=&\
-  \tfr{1}{\sqrt{n}}
-  \sum_p^\infty\y_p(1)\pr{\op{a}_p\Y}(2,\cd,n)
-\\=&\
-  \tfr{1}{\sqrt{n(n-1)}}
-  \sum_{pq}^\infty
-  \y_p(1)\y_q(2)(\op{a}_q\op{a}_p\Y)(3,\cd,n)
-\end{align}
-Therefore, matrix elements of the electronic Hamiltonian with respect to $\Y,\Y'\in \mc{F}_n$ can be expressed as
-\begin{align*}
-  \ip{\Y|\op{H}\Y'}
-=
-  \sum_{i=1}^n\ip{\Y|\op{h}(i)\Y'}
-+
-  \sum_{i<j}^n\ip{\Y|\op{g}(i,j)\Y'}
-=&\
-  n\ip{\Y|\op{h}(1)\Y'}
-+
-  \tfr{n(n-1)}{2}
-  \ip{\Y|\op{g}(1,2)\Y'}
-\\=&\
-  \sum_{pq}^\infty
-  h_{pq}\ip{\op{a}_p\Y|\op{a}_q\Y'}
-+
-  \tfr{1}{2}
-  \sum_{pqrs}^\infty
-  \ip{pq|rs}\ip{\op{a}_q\op{a}_p\Y|\op{a}_s\op{a}_r\Y'}
-\end{align*}
-in terms of the usual one- and two-electron integrals.
-Since $\Y$ and $\Y'$ are arbitrary elements of $\mc{F}_n$, this implies
-\begin{align}\label{eq:second-quantized-hamiltonian}
-  \left.
-  \op{H}
-  \right|_{\mc{F}_n}
-=
-  \sum_{pq}^\infty
-  h_{pq}
-  \op{a}_p\dg \op{a}_q
-+
-  \tfr{1}{2}
-  \sum_{pqrs}^\infty
-  \ip{pq|rs}
-  \op{a}_p\dg\op{a}_q\dg\op{a}_s\op{a}_r
-\end{align}
-which is the \textit{second quantized} form of the Hamiltonian, as opposed to the \textit{first quantized} form which is not restricted to antisymmetric functions.
-A defining feature of the second quantization formalism is that $\op{H}$ is independent of the number of electrons, because \cref{eq:second-quantized-hamiltonian} holds for all $n$.
-
-
-
-\subsection{Formal treatment of second quantization}
 
 \begin{dfn}\label{dfn:direct-sum-and-direct-product}
 \thmtitle{Direct sums and products}
@@ -208,10 +111,6 @@ $
   \sum_{\pi\in\mr{S}_n}
   \y_{p_{\pi(1)}}\otimes\cd\otimes
   \y_{p_{\pi(n)}}
-$.
-Equation \ref{eq:slater-determinant-position-representation} corresponds to
-$
-  \ip{1\otimes\cd\otimes n|\F_{(p_1\cd p_n)}}= \F_{(p_1\cd p_n)}(1,\ld,n)
 $.
 }
 the antisymmetric subspace of $\mc{H}^{\otimes n}$.
@@ -330,7 +229,7 @@ The actions of $a_p$ and $a_p\dg$ on $\F_{(p_1\cd p_n)}$ are given by
 which follows directly from \Cref{eq:occ-num-annihilation-operator-action,eq:occ-num-creation-operator-action} when $p_1<\cd<p_n$.
 Other cases follow from the fact that any sign factors for permuting $(p_1\cd p_n)$ cancel on both sides of the equation, including the position of insertion or deletion, $p_k$, whose phase is tracked by $(-)^{k-1}$ on the right.
 That is, both sides of the equation are antisymmetric to permutations of $(1\cd n)$.
-Note that \Cref{eq:abstract-annihilation-operator-action} was also derived in \Cref{ssec:direct-derivation-of-second-quantization} using the position-space representation of $a_p$.
+Note that equation~\ref{eq:abstract-annihilation-operator-action} was also derived previously using the position-space representation of $a_p$.
 One advantage of the determinant basis is that, unlike occupation vectors, determinants translate directly into strings of creations operators
 \begin{align}
   \kt{\F_{(p_1\cd p_n)}}
@@ -494,19 +393,20 @@ In second quantization, any operator string can be expanded as a linear combinat
 The expectation value of a string is always equal to the constant term in this expansion.
 For example:
 \begin{align*}
+\begin{array}{r@{\,}l@{\ }c@{\ }r@{\,}l}
   a_p a_q\dg
-=
+&=
 -
   a_q\dg a_p
 +
   \d_{pq}
-&\implies
+&\implies&
   \ip{\vac|a_p a_q\dg|\vac}
-=
+&=
   \d_{pq}
 \\
   a_p a_q a_s\dg a_r\dg
-=
+&=
   a_r\dg a_s\dg a_q a_p
 +
   \d_{ps}
@@ -524,12 +424,13 @@ For example:
   \d_{ps}\d_{qr}
 +
   \d_{pr}\d_{qs}
-&\implies
+&\implies&
   \ip{\vac|a_p a_q a_s\dg a_r\dg|\vac}
-=
+&=
   \d_{pr}\d_{qs}
 -
   \d_{ps}\d_{qr}
+\end{array}
 \end{align*}
 where we have made repeated use of \Cref{prop:particle-hole-operator-anticommutator} to arrive at these expansions.
 This strategy becomes unwieldy for expectation values of a reference determinant $\F$, in which case it is more convenient to use particle-hole isomorphism.
