@@ -30,12 +30,290 @@
 
 \begin{document}
 
-\setlength{\abovedisplayskip}{3pt}
-\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
 
 
 \setcounter{section}{7}
 \section{Singles}
+
+\begin{rmk}
+\thmtitle{Orbital relaxation}
+According to the Thouless theorem (\cref{appendix:thouless}), the effect of the singles CC operator is to transform the orbitals of the reference determinant into a new set $\{\tilde{\y}_i\}$ by ``mixing in'' some of the virtual orbitals.
+\begin{align}
+  \Y_\mr{CC}
+=
+  \mr{exp}(T_2 + T_3 + \cd)
+  \widetilde{\F}
+&&
+  \widetilde{\F}
+\equiv
+  \mr{exp}(T_1)
+  \F
+=
+  \tfr{1}{\sqrt{n!}}\,
+  \mr{det}(\tilde{\y}_1\cd \tilde{\y}_n)
+&&
+  \tilde{\y}_i
+=
+  \y_i
++
+  \sum_a
+  \y_a
+  t_a^i
+\end{align}
+This can be thought of as ``relaxing'' the orbitals in the presence of electron correlation.
+The size of this \textit{orbital relaxation effect} can be monitored as the root mean square difference from the reference orbitals, which is known as the \textit{$\mc{T}_1$ diagnostic}.
+\begin{align}
+  \mc{T}_1
+\equiv
+  \sqrt{
+  \fr{1}{n}
+  \sum_{i=1}^n
+  \|\tilde{\y}_i - \y_i\|^2
+  }
+=
+  \fr{\|\bo{t}_1\|}{\sqrt{n}}
+\end{align}
+A significant orbital relaxation effect generally indicates that the reference determinant forms a poor approximation to the wavefunction, suggesting the convergence of the CC hierarchy\footnote{CCSD, CCSDT, CCSDTQ, etc.} to the FCI limit may be slow.
+\end{rmk}
+
+
+
+\begin{ntt}
+\label{ntt:orbital-transformation}
+Let $\bm{\y}$ be a row vector of orthonormal spin-orbitals, $(\bm{\y})_p=\y_p$, which can be split into occupied and virtual blocks as $\bm{\y}=[\bm{\y}_\mr{o}\ \bm{\y}_\mr{v}]$.
+Other sets of spin-orbitals are related to this one by a transformation
+$
+  \kt{\bm{\y}'}
+=
+  \kt{\bm{\y}}\,
+  \bo{U}
+$
+which is unitary if the primed orbitals are also orthonormal.
+If $\bm{\y}$ is constructed from a basis set $\bm{\x}=[\x_\mu]$ as $\bm{\y}=\bm{\x}\,\bo{C}$ where $\bo{C}$, then the coefficients of $\bm{\y}'$ are given by $\bo{C}'=\bo{C}\bo{U}$.
+The transformed reference determinant $\F'$ is constructed from the first $n$ primed orbitals, which are considered occupied in the transformed space.
+\end{ntt}
+
+\begin{rmk}
+\label{rmk:spectral-theorem}
+\thmtitle{Some consequences of the spectral theorem}
+A matrix $\bo{M}$ is termed \textit{normal} if it satisfies $\bo{M}\dg\bo{M}=\bo{M}\bo{M}\dg$.
+This includes \textit{Hermitian}, \textit{anti-Hermitian}, and \textit{unitary matrices}, which satisfy $\bo{H}\dg=\bo{H}$, $\bo{A}\dg=-\bo{A}$, and $\bo{U}\dg=\bo{U}^{-1}$, respectively.
+Hermitian matrices and anti-Hermitian can always be written as $\bo{H}=\bo{X}+\bo{X}\dg$ and $\bo{A}=\bo{X}-\bo{X}\dg$ for some matrix $\bo{X}$.
+The Spectral Theorem\footnote{See \url{https://en.wikipedia.org/wiki/Spectral_theorem}} says that a normal matrix is diagonalizable by a unitary transformation.
+A corollary of the Spectral Theorem is that Hermitian, anti-Hermitian, and unitary eigenvalues can be written as follows
+\begin{align}
+  h^*
+=
+  h
+\implies
+  h
+=
+  \f
+&&
+  a^*
+=
+-
+  a
+\implies
+  a
+=
+  i\f
+&&
+  u^*
+=
+  u^{-1}
+\implies
+  u
+=
+  e^{i\f}
+\end{align}
+where $\f$ is a real number.
+In words, Hermitian eigenvalues are real, anti-Hermitian eigenvalues are pure imaginary, and unitary eigenvalues lie on the unit circle.
+The form of its eigenvalues implies that a unitary matrix $\bo{U}$ can be written as $\mr{exp}(\bo{A})$, where $\bo{A}$ is anti-Hermitian.
+As a result, unitary matrices are often written in exponential form as
+$
+  \bo{U}
+=
+  \mr{exp}(\bo{X} - \bo{X}\dg)
+$.
+\end{rmk}
+
+\begin{prop}
+\label{prop:creation-operator-similarity-transform}
+\thmstatement{
+The identity\ \
+$\ds{
+  \mr{exp}(G)\,a_p\dg\,\mr{exp}(-G)
+=
+  \sum_q
+  a_q\dg\,
+  (\mr{exp}(\bo{G}))_{qp}
+}$\ 
+holds for any
+$
+  G
+=
+  \sum_{pq}
+  (\bo{G})_{pq}\,
+  a_p\dg a_q
+$.
+}\vspace{3pt}
+\thmproof{
+  This follows from
+  $
+    [G,\cdot\,]^m(a_p\dg)
+  =
+    \sum_q
+    a_q\dg
+    (\bo{G}^m)_{qp}
+  $,
+  which we will prove by induction.
+  For $m=0$ the statement is trivially true.
+  If we assume it holds for $m$, then the following shows that it also holds for $m+1$,\footnote{
+  The second equality here follows from expanding $G$ and using
+$
+  [a_r\dg a_s, a_q\dg]
+=
+  \no{
+    a_r\dg
+    \ctr{}{a}{_s}{}
+    a_s a_q\dg
+  }
+=
+  a_r\dg\,
+  \d_{sq}
+$.
+}
+\begin{align*}
+\ts{
+  [G,\cdot\,]^{m+1}(a_p\dg)
+=
+  \sum_q
+  [G, a_q\dg]\,
+  (\bo{G}^m)_{qp}
+=
+  \sum_{qr}
+  a_r\dg
+  (\bo{G})_{rq}
+  (\bo{G}^m)_{qp}
+=
+  \sum_r
+  a_r\dg
+  (\bo{G}^{m+1})_{rp}
+}
+\end{align*}
+  which completes the induction.
+  Substituting this result into the Hausdorff expansion of
+$
+  \mr{exp}(G)\,a_p\dg\,\mr{exp}(-G)
+$
+  recognizing the Taylor expansion of $\mr{exp}(\bo{G})$ completes the proof.
+}
+\end{prop}
+
+\begin{rmk}
+\thmtitle{Orbital rotations}
+Unitary transformations of the spin-orbital basis are termed \textit{orbital rotations}.
+According to \cref{rmk:spectral-theorem}, orbital rotations can be written as
+$
+  \bm{\y'}
+=
+  \bm{\y}\,
+  \mr{exp}(\bm{\Th})
+$
+where
+$
+  \bm{\Th}
+\equiv
+  \bo{X}
+-
+  \bo{X}\dg
+$.
+The transformed creation operators are
+$
+  a_p^{\prime\,\dagger}
+=
+  \sum_q
+  a_q\dg
+  (\mr{exp}(\bm{\Th}))_{qp}
+$\,\footnote{Since $a_p\dg\kt{\vac}=\kt{\y_p}$, the creation operators always transform like orbitals.}
+which, using \cref{prop:creation-operator-similarity-transform}, leads to the following.
+\begin{align}
+\begin{array}{r@{\ }l}
+  a_p^{\prime\,\dagger}
+&=
+  \mr{exp}(\Th)
+  a_p\dg\,
+  \mr{exp}(\Th)\dg
+\\[5pt]
+  a_p^{\prime}
+&=
+  \mr{exp}(\Th)
+  a_p\,
+  \mr{exp}(\Th)\dg
+\end{array}
+&&
+  \Th
+\equiv
+  X
+-
+  X\dg
+&&
+  X
+\equiv
+  \sum_{pq}
+  x_p^q\,
+  a^p_q
+&&
+  x_p^q
+\equiv
+  (\bo{X})_{pq}
+\end{align}
+Substituting this into 
+$
+  \kt{\F'}
+=
+  a_1^{\prime\,\dagger}
+  \cd
+  a_n^{\prime\,\dagger}
+  \kt{\vac}
+$
+gives a convenient expression for the transformed reference determinant\,\footnote{This follows from 
+$
+  \mr{exp}(\Th)\dg
+  \mr{exp}(\Th)
+=
+  1
+$
+and
+$
+  \mr{exp}(\Th)\dg
+  \kt{\vac}
+=
+  0
+$.
+}
+\begin{align}
+  \kt{\F'}
+=
+  \mr{exp}(\Th)
+  \kt{\F}
+\end{align}
+which generalizes to 
+$
+  \kt{\F'_{(p_1\cd p_n)}}
+=
+  \mr{exp}(\Th)
+  \kt{\F_{(p_1\cd p_n)}}
+$
+for other determinants.
+\end{rmk}
+
+\begin{rmk}
+\thmtitle{Orbital stationarity condition}
+\end{rmk}
 
 \begin{align}
   H
@@ -83,48 +361,280 @@
 \end{array}
 \end{align}
 
-Since $\mc{L}$ is real, 
 \begin{align}
-  h_p^q
-  \ol{\g}^p_q
-=
-  \tfr{1}{2}
-  (
-    h_p^q
-    \ol{\g}^p_q
-  +
-    (
-    h_q^p
-    \ol{\g}^q_p
-    )^*
-  )
+  \mc{L}
 =
   h_p^q
   \g^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \g^{pq}_{rs}
 &&
+\begin{array}{r@{\ }l}
   \g^p_q
-\equiv
+&\equiv
   \tfr{1}{2}
   (
     \ol{\g}^p_q
   +
     \ol{\g}^{q*}_p
   )
-\end{align}
-
-\begin{align}
-&&
+\\[4pt]
   \g^{pq}_{rs}
-\equiv
+&\equiv
   \tfr{1}{2}
   (
     \ol{\g}^{pq}_{rs}
   +
     \ol{\g}^{rs*}_{pq}
   )
+\end{array}
+\end{align}
+
+
+
+
+
+
+\newpage
+
+
+Brueckner ``best-overlap'' condition
+\begin{align}
+  |\ip{\F|\Y}|
+\end{align}
+
+
+BCCD
+\begin{align}
+  0
+&=
+  \ip{\F_i^a|
+    R_0
+    V_\mr{c}\,
+    \mr{exp}(T)
+  |\F}_\mr{C}
+\\
+  t_{ab}^{ij}
+&=
+  \ip{\F_{ij}^{ab}|
+    R_0
+    V_\mr{c}\,
+    \mr{exp}(T)
+  |\F}_\mr{C}
 \end{align}
 
 \begin{align}
+  \ip{\F|\ol{H}|\F}
++
+  \sum_{ia}
+  \la_i^a
+  \ip{\F_i^a|\ol{V}_\mr{c}|\F}
++
+  \tfr{1}{4}
+  \sum_{ijab}
+  \la_{ij}^{ab}
+  \ip{\F_{ij}^{ab}|\ol{H}_\mr{c}|\F}
 \end{align}
+
+
+
+
+
+
+\newpage
+\appendix
+\section{The Thouless theorem}
+\label{appendix:thouless}
+
+\begin{thm}
+\label{thm:thouless}
+\thmtitle{The Thouless theorem}
+\begin{enumerate}
+\item
+\label{item:thouless-part-1}
+\thmstatement{
+  The function
+  $e^{T_1}\F$
+  is an intermediately normalized determinant
+  $
+    \tfr{1}{\sqrt{n!}}
+    \mr{det}(\tilde{\y}_1\cd\tilde{\y}_n)
+  $
+  with orbitals
+  $
+    \tilde{\y}_i
+  =
+    \y_i
+  +
+    \sum_a
+    \y_a
+    t_a^i
+  $.
+}
+\thmproof{
+  Intermediate normalization follows from
+  $
+    \ip{\F|e^{T_1}\F}
+  =
+    1
+  $.
+  This function has the form of a determinant
+\begin{align*}
+  e^{T_1}
+  \kt{\F}
+=
+  e^{\sum_{a}t_a^1 a_1^a + \cd + \sum_a t_a^n a_n^a}
+  a_1\dg
+  \cd
+  a_n\dg
+  \kt{\vac}
+=
+  \tilde{a}_1\dg
+  \cd
+  \tilde{a}_n\dg
+  \kt{\vac}
+=
+  \kt{\widetilde{\F}}
+&&
+  \tl{a}_i\dg
+\equiv
+  \mr{exp}(\ts{\sum_{a}t_a^i a_i^a})\,
+  a_i\dg
+\end{align*}
+  since $\sum_a t_a^ia_i^a$ commutes with all creation operators except $a_i\dg$.
+  The corresponding orbitals are given by
+\begin{align*}
+  \kt{\tilde{\y}_i}
+=
+  \tl{a}_i\dg
+  \kt{\vac}
+=
+  \mr{exp}(\ts{\sum_{a}t_a^i a_a\dg a_i})\,
+  a_i\dg
+  \kt{\vac}
+=
+  (\ts{
+    1
+  +
+    \sum_a
+    t_a^i
+    a_a\dg
+    a_i
+  })\,
+    a_i\dg
+  \kt{\vac}
+=
+  \kt{\y_i}
++
+  \ts{\sum_a}
+  t_a^i
+  \kt{\y_a}
+\end{align*}
+ using $a_i^2=0$ as well as $a_ia_i\dg\kt{\vac}=\kt{\vac}$.
+}
+
+\item
+\thmstatement{
+  Any intermediately normalized determinant
+  $
+    \widetilde{\F}
+  =
+    \tfr{1}{\sqrt{n!}}
+    \mr{det}(\tilde{\y}_1\cd\tilde{\y}_n)
+  $
+  can be written as $e^{T_1}\,\F$.
+}
+\thmproof{
+  Intermediate normalization is only possible if $\widetilde{\F}$ has non-zero overlap with the reference determinant.
+  Therefore, $\widetilde{\F}$ can be written as
+  $\F'/\ip{\F|\F'}$
+  where $\F'$ is a Slater determinant.
+  The overlap of $\ip{\F|\F'}$ is given by
+\begin{align*}
+\ts{
+  \ip{\F|\F'}
+=
+  \tfr{1}{n!}
+  \sum_{\pi,\si}^{\mr{S}_n}
+  \e_\pi
+  \e_\si
+  \ip{\y_{\pi(1)}|\y'_{\si(1)}}
+  \cd
+  \ip{\y_{\pi(n)}|\y'_{\si(n)}}
+=
+  \sum_{\si}^{\mr{S}_n}
+  \e_\si
+  \ip{\y_{1}|\y'_{\si(1)}}
+  \cd
+  \ip{\y_{n}|\y'_{\si(n)}}
+=
+  \mr{det}(\bo{U}_{\mr{oo}})
+}
+\end{align*}
+  where $\bo{U}_\mr{oo}$ is the occupied block of the orbital transformation matrix $\bo{U}$, defined according to \cref{ntt:orbital-transformation}.
+  Therefore, 
+  $
+    \widetilde{\F}
+  =
+    \F'/
+    \mr{det}(\bo{U}_\mr{oo})
+  =
+    \F'\,
+    \mr{det}(\bo{U}_\mr{oo}^{-1})
+  $
+  and the rows of $\widetilde{\F}$ are given by the following.
+\begin{align*}
+\ts{
+  \kt{\bm{\tilde{\y}}_\mr{o}}
+=
+  \kt{\bm{\y}'_\mr{o}}\,
+  \bo{U}_\mr{oo}^{-1}
+=
+  \kt{\bm{\y}_\mr{o}}\,
++
+  \kt{\bm{\y}_\mr{v}}\,
+  \bo{U}_\mr{vo}
+  \bo{U}_\mr{oo}^{-1}
+\implies
+  \tilde{\y}_i
+=
+  \y_i
++
+  \sum_a
+  (\bo{U}_\mr{vo}\bo{U}_\mr{oo}^{-1})_{ai}\,
+  \y_a
+}
+\end{align*}
+  The second equality follows from
+  $
+    \kt{\bm{\y}_\mr{o}'}
+  =
+    \kt{\bm{\y}_\mr{o}}\,
+    \bo{U}_\mr{oo}
+  +
+    \kt{\bm{\y}_\mr{v}}\,
+    \bo{U}_\mr{vo}
+  $
+  where $\bo{1}_\mr{o}$ is an identity matrix in the occupied block.
+  According to \cref{item:thouless-part-1}, this implies that
+  $\widetilde{\F}$
+  equals
+  $
+    e^{T_1}\F
+  $
+  with amplitudes 
+  $
+    t_a^i
+  \equiv
+    (\bo{U}_\mr{vo}\bo{U}_\mr{oo}^{-1})_{ai}
+  $.
+}
+\end{enumerate}
+\end{thm}
+
+
+
 
 \end{document}
