@@ -33,7 +33,7 @@
 \begin{dfn}
 \thmtitle{Normal ordering}
 The \textit{normal ordering} of a string $q_1\cd q_n$ of particle-hole operators is the mapping $q_1\cd q_n\mapsto\no{q_1\cd q_n}\equiv\e_{\pi}q_{\pi(1)}\cd q_{\pi(n)}$ where $\pi\in\mr{S}_n$ is a permutation that puts the string in normal order.
-More generally, \textit{$\F$-normal ordering} maps the string into 
+More generally, \textit{$\F$-normal ordering} maps the string into
 $\gno{q_1\cd q_n}\equiv\e_{\si}q_{\si(1)}\cd q_{\si(n)}$ where $\si$ puts the string in $\F$-normal order.
 \end{dfn}
 
@@ -92,7 +92,7 @@ In this case, contractions of like operators still vanish but the mixed cases ar
 \left\{
 \begin{array}{cc}
 \d_{pq} & \text{$p,q$ occupied in $\F$} \\
-0 & \text{$p,q$ virtual} 
+0 & \text{$p,q$ virtual}
 \end{array}
 \right.
 &&
@@ -101,7 +101,7 @@ In this case, contractions of like operators still vanish but the mixed cases ar
 \left\{
 \begin{array}{cc}
 0 & \text{$p,q$ occupied in $\F$} \\
-\d_{pq} & \text{$p,q$ virtual} 
+\d_{pq} & \text{$p,q$ virtual}
 \end{array}
 \right.
 \end{align}
@@ -171,7 +171,7 @@ This is one example of a general a result known as Wick's theorem, which will be
 \begin{ntt}\label{ntt:contraction-notation}
 For a particle-hole operator string $Q=q_1\cd q_n$, let the $\gno{Q(\ctr{}{q}{_i}{q}q_iq_j)}$ denote $\gno{q_1\cd\ctr{}{q}{_i\cd}{q}q_i\cd q_j\cd q_n}$.
 This is well-defined as long as $i<j$.
-Let $\gno{\ol{Q}}$ stand for the sum of all unique single, double, triple, etc. contractions of $Q$
+Let $\gno{\ol{Q}}$ stand for the sum of all unique single, double, triple, etc.\ contractions of $Q$
 \begin{align*}
   \gno{\ol{Q}}
 \equiv
@@ -187,9 +187,9 @@ Let $\gno{\ol{Q}}$ stand for the sum of all unique single, double, triple, etc. 
 \end{align*}
 where $\mr{Ctr}_k(Q)$ runs over all unique sets $\{(i_1j_2)\cd(i_kj_k)\,|\,i_p<j_p\}$ of $k$ pairs of operator indices in $Q$ and $\floor{\cdot}$ is the floor function.
 Let $\gno{\ol{\ol{Q}}}$ denote the sum of all \textit{complete contractions}: the terms from $\gno{\ol{Q}}$ in which every operator in $Q$ is involved in a contraction.
-Finally, let $\gno{\ctr{}{Q}{}{Q} QQ'}$ denote the sum of all single, double, etc.~\textit{cross contractions}: those in which all contractions have an operator from $Q$ on the left and one from $Q'$ on the right.
+Finally, let $\gno{\ctr{}{Q}{}{Q} QQ'}$ denote the sum of all single, double, etc.\ \textit{cross contractions}: those in which all contractions have an operator from $Q$ on the left and one from $Q'$ on the right.
 In this context, contractions involving two operators from $Q$ or two operators from $Q'$ are called \textit{internal contractions} of $Q$ or $Q'$.
-To review, in this notation equation \ref{eq:wicks-theorem-first-example} would be written as
+To review, in this notation equation~\ref{eq:wicks-theorem-first-example} would be written as
 $
   a_p a_q a_s\dg a_r\dg
 =
@@ -342,7 +342,7 @@ $\gno{Q}\gno{Q'}=\gno{QQ'}+\gno{\ctr{}{Q}{}{Q}  QQ'}$
 \thmtitle{Wick's theorem for expectation values}\vspace{5pt}
 $\ip{\F|Q|\F}=\gno{\ol{\ol{Q}}}$
 \thmproof{
-  From Wick's theorem $\ip{\F|Q|\F}=\ip{\F|\gno{Q}|\F}+\ip{\F|\gno{\ol{Q}}|\F}$ and any incompletely contracted terms have vanishing expectation values.  Therefore, $\ip{\F|\gno{Q}|\F}=0$ and $\ip{\F|\gno{\ol{Q}}|\F}=\gno{\ol{\ol{Q}}}$.
+  From Wick's theorem $\ip{\F|Q|\F}=\ip{\F|\gno{Q}|\F}+\ip{\F|\gno{\ol{Q}}|\F}$ and any incompletely contracted terms have vanishing expectation values. Therefore, $\ip{\F|\gno{Q}|\F}=0$ and $\ip{\F|\gno{\ol{Q}}|\F}=\gno{\ol{\ol{Q}}}$.
 }
 \end{cor}
 
@@ -454,7 +454,7 @@ The configuration interaction singles (CIS) equations take the form
   \ip{\F_i^a|H - E_\mr{ref}|\F_j^b}\,
   (\bo{c}_k)_b^j
 =
-  \w_k\, 
+  \w_k\,
   (\bo{c}_k)_a^i
 \end{align}
 where $\w_k$ approximates the excitation energy of the $k\eth$ state, $\w_k=E_k-E_\mr{ref}$.

@@ -64,12 +64,12 @@ The most accurate solution possible for a given atomic orbital (AO) basis set\fo
 \end{align}
 in terms of all possible Slater determinants $\F_\mu$ that can be formed from an orthonormal one-electron basis of spin-orbitals, $\{\y_p\}$.
 The expansion coefficients $(\bo{c})_k=c_{\mu k}$ are eigenvectors of the matrix $(\bo{H})_{\mu\nu}=\ip{\F_\mu|\op{H}|\F_\nu}$, which is the matrix representation of the Hamiltonian in the determinant basis.
-This is called the {\it full configuration-interaction} (FCI) solution.
+This is called the {\it full configuration-interaction}\ (FCI) solution.
 
 Any one-electron basis spans the same ``function space'' as the AO basis set itself, and the full $n$-electron basis $\{\F_\mu\}$ spans the same space of $n$-electron functions regardless of how one forms spin orbitals from the AO basis set.
 As a result, one obtains the same FCI solution for any choice of spin-orbitals.
 In general, however, FCI solutions are completely unfeasible for basis sets of sufficient size to approach the complete basis set limit.
-One can think of this as a simple counting problem: if there are $m$ functions in the AO basis, then there are $2m$ spin-orbitals in the one-electron basis,\footnote{$m$ $\a$-orbitals and $m$ $\b$-orbitals.} and there are ``$2m$ choose $n$'' \footnote{The number of unique sets of $n$ marbles that can be drawn from a bag of $2m$ marbles.  See \url{http://en.wikipedia.org/wiki/Combination}}
+One can think of this as a simple counting problem: if there are $m$ functions in the AO basis, then there are $2m$ spin-orbitals in the one-electron basis,\footnote{$m$ $\a$-orbitals and $m$ $\b$-orbitals.} and there are ``$2m$ choose $n$''\footnote{The number of unique sets of $n$ marbles that can be drawn from a bag of $2m$ marbles. See \url{http://en.wikipedia.org/wiki/Combination}}
 \begin{align*}
 {2m \choose n}\equiv\fr{(2m)!}{n!(2m-n)!}
 \end{align*}
@@ -93,7 +93,7 @@ That is, we wish to optimize
   \F(1,\ld,n)
 =
 \fr{1}{\sqrt{n!}}
-\left|\ar{
+\left|\ar{%
   \y_1(1)&\y_2(1)&\cd&\y_n(1)\\
   \y_1(2)&\y_2(2)&\cd&\y_n(2)\\
   \vd    &\vd    &\dd&\vd    \\
@@ -105,7 +105,7 @@ This optimization problem is the idea behind \textit{Hartree-Fock theory}.
 
 Once we have solved for the Hartree-Fock optimization problem, the expectation value $\ip{\F|\op{H}_e|\F}$ is itself a good first approximation to the electronic energy.
 More importantly, however, when we use this new set of Hartree-Fock spin-orbitals, $\{\y_p\}$, the FCI expansion tends to converge much more quickly to the true wavefunction.
-Specifically, when we rewrite equation~\ref{eq:full-ci-wavefunction-expansion} in terms of single $\{\F_i^a\}$, double $\{\F_{ij}^{ab}\}$, triple $\{\F_{ijk}^{abc}\}$, etc.\ replacements \footnote{It is typical to use dummy indices $i,j,k,l$ to count over the orbitals in the reference determinant $\F$ -- the ``occupied orbitals'' -- and to use $a,b,c,d,$ to count over the orbitals not contained in $\F$ -- the ``unoccupied'' or ``virtual orbitals.''  Dummy indices $p,q,r,s$ are generally used to count over the full set of spin-orbitals, whether occupied or not.} of the orbitals in the Hartree-Fock determinant $\F$ with the remaining orbitals in the basis
+Specifically, when we rewrite equation~\ref{eq:full-ci-wavefunction-expansion} in terms of single $\{\F_i^a\}$, double $\{\F_{ij}^{ab}\}$, triple $\{\F_{ijk}^{abc}\}$, etc.\ replacements\footnote{It is typical to use dummy indices $i,j,k,l$ to count over the orbitals in the reference determinant $\F$ -- the ``occupied orbitals'' -- and to use $a,b,c,d,$ to count over the orbitals not contained in $\F$ -- the ``unoccupied'' or ``virtual orbitals.''  Dummy indices $p,q,r,s$ are generally used to count over the full set of spin-orbitals, whether occupied or not.} of the orbitals in the Hartree-Fock determinant $\F$ with the remaining orbitals in the basis
 \begin{align}
   \Y
 =
@@ -183,7 +183,7 @@ where the one- and two-electron integrals are defined as follows.
   \op{g}(1,2)
   \y_r(1)\y_s(2)
 \end{align}
-We wish to optimize equation \ref{eq:slater-rule-1} while constraining the orbitals to be normalized and orthogonal.\footnote{The $\overset{!}=$ sign means ``must equal'' -- these are conditions to be satisfied.}
+We wish to optimize equation~\ref{eq:slater-rule-1} while constraining the orbitals to be normalized and orthogonal.\footnote{The $\overset{!}=$ sign means ``must equal'' -- these are conditions to be satisfied.}
 \begin{align}
   \ip{\y_i|\y_j}
 \overset{!}{=}
