@@ -1,0 +1,30 @@
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.glo
+*.idx
+*.ilg
+*.ist
+*.ind
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+*.toc
+# latexmk files
+*.fdb_latexmk
+*.fls
+*.latexmain
+
+# Swap files
+*.swp
