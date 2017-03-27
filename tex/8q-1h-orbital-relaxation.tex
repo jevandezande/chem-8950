@@ -1,0 +1,590 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section,skip=9pt plus 2pt minus 7pt]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 8, Handout 1: Orbital relaxation}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\makeatother
+\newcommand{\resolventline}[2][1]{
+  \tikz[overlay]{
+      \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
+  }
+}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+
+
+\setcounter{section}{7}
+\section{Orbital relaxation}
+
+
+\begin{rmk}
+\thmtitle{Orbital relaxation}
+According to the Thouless theorem (\cref{appendix:thouless}), the effect of the singles CC operator is to transform the orbitals of the reference determinant into a new set $\{\widetilde{\y}_i\}$ by ``mixing in'' some of the virtual orbitals.
+\begin{align}
+  \Y_\mr{CC}
+=
+  \mr{exp}(T_2 + T_3 + \cd)
+  \widetilde{\F}
+&&
+  \widetilde{\F}
+\equiv
+  \mr{exp}(T_1)
+  \F
+=
+  \tfr{1}{\sqrt{n!}}\,
+  \mr{det}(\widetilde{\y}_1\cd \widetilde{\y}_n)
+&&
+  \widetilde{\y}_i
+=
+  \y_i
++
+  \sum_a
+  \y_a
+  t_a^i
+\end{align}
+This can be thought of as ``relaxing'' the orbitals in the presence of electron correlation.
+The size of this \textit{orbital relaxation effect} can be monitored as the root mean square difference from the reference orbitals, which is known as the \textit{$\mc{T}_1$ diagnostic}.
+\begin{align}
+  \mc{T}_1
+\equiv
+  \sqrt{
+  \fr{1}{n}
+  \sum_{i=1}^n
+  \|\widetilde{\y}_i - \y_i\|^2
+  }
+=
+  \fr{\|\bo{t}_1\|}{\sqrt{n}}
+\end{align}
+Significant orbital relaxation generally indicates that the reference determinant forms a poor approximation to the wavefunction, which can lead to large errors for low-order truncated methods like CCSD or CCSD(T).
+In closed-shell systems, significant orbital relaxation is usually associated with an inherent \textit{multireference character}, which means that no single determinant dominates the wavefunction with any choice of orbitals.
+Empirically, $\mc{T}_1\geq 0.02$ is considered large in this context.
+In open-shell systems, mean-field methods like Hartree-Fock theory are often deficient even for non-multireference systems.
+In this case, orbital relaxation effects can generally be cured by choosing a new determinant which is optimized in the presence of dynamical\footnote{As opposed to mean-field.} electron correlation.
+\end{rmk}
+
+\begin{rmk}
+\thmtitle{Brueckner and orbital-optimized methods}
+The two most common ways of defining an ideal reference determinant for the correlated wavefunction are the \textit{best overlap criterion} and the \textit{best energy criterion}.\footnote{See \url{https://en.wikipedia.org/wiki/Arg_max} for the notation used here.}
+\begin{align}
+\label{eq:brueckner-and-oo-general-condition}
+  \F_{\mr{B}}
+=
+  \underset{\F}{\arg\max}\,
+  \ip{\F|\Y}
+&&
+  \F_{\mr{O}}
+=
+  \underset{\F}{\arg\min}\,
+  \ip{\Y|H|\Y},\ \ 
+  \Y
+=
+  \W\,\F
+\end{align}
+The \textit{best overlap} or \textit{Brueckner determinant}, $\F_\mr{B}$, has maximum overlap with the wavefunction.
+The \textit{best energy} or \textit{orbital-optimized determinant}, $\F_\mr{O}$, yields the lowest energy for a given Ansatz.
+The spin-orbital sets from which these determinants are constructed will be denoted $\{\y_p\}_\mr{B}$ and $\{\y_p\}_\mr{O}$.
+\end{rmk}
+
+\begin{rmk}
+\Cref{appendix:orbital-rotations}
+shows that non-redundant transformations of the orbitals in $\F$ can be parametrized as
+\begin{align}
+  \F(\bo{x})
+=
+  \mr{exp}(X - X\dg)
+  \F
+\end{align}
+where $X$ has the form of a $T_1$ operator.
+This parametrization can be substituted into equation~\ref{eq:brueckner-and-oo-general-condition} to derive the explicit conditions satisfied by Brueckner orbitals and energy-optimized orbitals.\footnote{
+  $\kt{\Y(\bm{x})}=\mr{exp}(X-X\dg)\kt{\Y}$ applies the orbital rotation to all of the determinants in the wavefunction expansion.
+  }
+\begin{align*}
+  \{\y_p\}_\mr{B}:\,\,
+  \left.
+  \pd{}{x_a^{i*}}
+  \ip{\F(\bo{x})|\Y}
+  \right|_{\bo{x}=\bo{0}}
+=
+  \ip{\F_i^a|\Y}
+\overset{!}{=}
+  0
+&&
+  \{\y_p\}_\mr{O}:\,\,
+  \left.
+  \pd{}{x_a^{i*}}
+  \ip{\Y(\bm{x})|H|\Y(\bm{x})}
+  \right|_{\bo{x}=\bo{0}}
+=
+  \ip{\Y|\,[a^i_a, H]\,|\Y}
+\overset{!}{=}
+  0
+\end{align*}
+\end{rmk}
+
+
+
+
+
+\newpage
+\appendix
+
+\section{The Thouless theorem}
+\label{appendix:thouless}
+
+\begin{ntt}
+\label{ntt:orbital-transformation}
+Let $\bm{\y}$ be a row vector of orthonormal spin-orbitals, $(\bm{\y})_p=\y_p$, which can be split into occupied and virtual blocks as $\bm{\y}=[\bm{\y}_\mr{o}\ \bm{\y}_\mr{v}]$.
+Other sets of spin-orbitals are related to this one by a transformation
+$
+  \kt{\bm{\y}'}
+=
+  \kt{\bm{\y}}\,
+  \bo{U}
+$
+which is unitary if the primed orbitals are also orthonormal.
+Let $\F'$ be the \textit{transformed reference determinant}, constructed from the first $n$ orbitals in the transformed space.
+Then the occupied and virtual orbitals of the transformed space are given by
+\begin{align}
+\label{eq:block-transformation}
+  \kt{\bm{\y}'_\mr{o}}
+=
+  \kt{\bm{\y}_\mr{o}}\,
+  \bo{U}_\mr{oo}
++
+  \kt{\bm{\y}_\mr{v}}\,
+  \bo{U}_\mr{vo}
+&&
+  \kt{\bm{\y}'_\mr{v}}
+=
+  \kt{\bm{\y}_\mr{o}}\,
+  \bo{U}_\mr{ov}
++
+  \kt{\bm{\y}_\mr{v}}\,
+  \bo{U}_\mr{vv}
+\end{align}
+in terms of the occupied and virtual blocks of the transformation.
+This kind of unitary transformation of the spin-orbital basis is sometimes referred to as an \textit{orbital rotation}.
+
+%If $\bm{\y}$ is constructed from a basis set $\bm{\x}=[\x_\mu]$ as $\bm{\y}=\bm{\x}\,\bo{C}$ where $\bo{C}$, then the coefficients of $\bm{\y}'$ are given by $\bo{C}'=\bo{C}\bo{U}$.
+
+\end{ntt}
+
+
+\begin{thm}
+\label{thm:thouless}
+\thmtitle{The Thouless theorem}
+\begin{enumerate}
+\item
+\label{item:thouless-part-1}
+\thmstatement{
+  The function
+  $e^{T_1}\F$
+  is an intermediately normalized determinant
+  $
+    \tfr{1}{\sqrt{n!}}
+    \mr{det}(\widetilde{\y}_1\cd\widetilde{\y}_n)
+  $
+  with orbitals
+  $
+    \widetilde{\y}_i
+  =
+    \y_i
+  +
+    \sum_a
+    \y_a
+    t_a^i
+  $.
+}
+\thmproof{
+  Intermediate normalization follows from
+  $
+    \ip{\F|e^{T_1}\F}
+  =
+    1
+  $.
+  This function has the form of a determinant
+\begin{align*}
+  e^{T_1}
+  \kt{\F}
+=
+  e^{\sum_{a}t_a^1 a_1^a + \cd + \sum_a t_a^n a_n^a}
+  a_1\dg
+  \cd
+  a_n\dg
+  \kt{\vac}
+=
+  \widetilde{a}_1\dg
+  \cd
+  \widetilde{a}_n\dg
+  \kt{\vac}
+=
+  \kt{\widetilde{\F}}
+&&
+  \widetilde{a}_i\dg
+\equiv
+  \mr{exp}(\ts{\sum_{a}t_a^i a_i^a})\,
+  a_i\dg
+\end{align*}
+  since $\sum_a t_a^ia_i^a$ commutes with all creation operators except $a_i\dg$.
+  The transformed orbitals are given by
+\begin{align*}
+  \kt{\widetilde{\y}_i}
+=
+  \widetilde{a}_i\dg
+  \kt{\vac}
+=
+  \mr{exp}(\ts{\sum_{a}t_a^i a_a\dg a_i})\,
+  a_i\dg
+  \kt{\vac}
+=
+  (\ts{
+    1
+  +
+    \sum_a
+    t_a^i
+    a_a\dg
+    a_i
+  })\,
+    a_i\dg
+  \kt{\vac}
+=
+  \kt{\y_i}
++
+  \ts{\sum_a}
+  t_a^i
+  \kt{\y_a}
+\end{align*}
+ using $a_i^2=0$ and $a_ia_i\dg\kt{\vac}=\kt{\vac}$.
+}
+
+\item
+\thmstatement{
+  Any intermediately normalized determinant
+  $
+    \widetilde{\F}
+  =
+    \tfr{1}{\sqrt{n!}}
+    \mr{det}(\widetilde{\y}_1\cd\widetilde{\y}_n)
+  $
+  can be written as $e^{T_1}\,\F$.
+}
+\thmproof{
+  Intermediate normalization is only possible if $\widetilde{\F}$ has non-zero overlap with the reference determinant.
+  Therefore, $\widetilde{\F}$ can be written as
+  $\F'/\ip{\F|\F'}$
+  where $\F'$ is a Slater determinant.
+  The normalization factor is given by
+\begin{align*}
+\ts{
+  \ip{\F|\F'}
+=
+  \tfr{1}{n!}
+  \sum_{\pi,\si}^{\mr{S}_n}
+  \e_\pi
+  \e_\si
+  \ip{\y_{\pi(1)}|\y'_{\si(1)}}
+  \cd
+  \ip{\y_{\pi(n)}|\y'_{\si(n)}}
+=
+  \sum_{\si}^{\mr{S}_n}
+  \e_\si
+  \ip{\y_{1}|\y'_{\si(1)}}
+  \cd
+  \ip{\y_{n}|\y'_{\si(n)}}
+=
+  \mr{det}(\bo{U}_{\mr{oo}})
+}
+\end{align*}
+  following \cref{ntt:orbital-transformation}.
+  Therefore, 
+  $
+    \widetilde{\F}
+  =
+    \F'/
+    \mr{det}(\bo{U}_\mr{oo})
+  =
+    \F'\,
+    \mr{det}(\bo{U}_\mr{oo}^{-1})
+  $
+  and the rows of $\widetilde{\F}$ are given by
+\begin{align*}
+  \kt{\bm{\widetilde{\y}}_\mr{o}}
+=
+  \kt{\bm{\y}'_\mr{o}}\,
+  \bo{U}_\mr{oo}^{-1}
+=
+  \kt{\bm{\y}_\mr{o}}\,
++
+  \kt{\bm{\y}_\mr{v}}\,
+  \bo{U}_\mr{vo}
+  \bo{U}_\mr{oo}^{-1}
+\end{align*}
+  where we have expanded $\kt{\bm{\y}_\mr{o}'}$ according to eq~\ref{eq:block-transformation}.
+  The columns of this equation are
+  $
+    \widetilde{\y}_i
+  =
+    \y_i
+  +
+    \sum_a
+    \y_a\,
+    (\bo{U}_\mr{vo}\bo{U}_\mr{oo}^{-1})_{ai}
+  $.
+  Referring back to the first proposition, this shows that
+  $
+    \widetilde{\F}
+  =
+    e^{T_1}\F
+  $
+  with 
+  $
+    t_a^i
+  =
+    (\bo{U}_\mr{vo}\bo{U}_\mr{oo}^{-1})_{ai}
+  $.
+}
+\end{enumerate}
+\end{thm}
+
+
+
+
+\newpage
+\section{Orbital rotations}
+\label{appendix:orbital-rotations}
+
+
+\begin{dfn}
+\label{dfn:normal-matrix}
+\thmtitle{Normal matrix}
+A square matrix satisfying $\bo{N}\dg\bo{N}=\bo{N}\bo{N}\dg$ is termed \textit{normal}.
+Several important kinds of matrices meet this criterion:
+\textit{Hermitian matrices}, $\bo{H}\dg=\bo{H}$;
+\textit{anti-Hermitian matrices}, $\bo{A}\dg=-\bo{A}$;
+and
+\textit{unitary matrices}, $\bo{U}\dg=\bo{U}^{-1}$.
+Note that Hermitian and anti-Hermitian matrices can always be written as $\bo{X}+\bo{X}\dg$ and $\bo{X}-\bo{X}\dg$.
+\end{dfn}
+
+\begin{rmk}
+\label{rmk:spectral-theorem}
+The Spectral Theorem\footnote{See \url{https://en.wikipedia.org/wiki/Spectral_theorem}} says that every normal matrix can be diagonalized by a unitary transformation.
+A direct corollary\footnote{Since there exists a basis in which $\bo{N}$ is diagonal, statements about $\bo{N}$ translate into statements about its eigenvalues.} is that the eigenvalues of Hermitian, anti-Hermitian, and unitary matrices can be written as follows.
+\begin{align}
+  h^*
+=
+  h
+\implies
+  h
+=
+  \f
+&&
+  a^*
+=
+-
+  a
+\implies
+  a
+=
+  i\f
+&&
+  u^*
+=
+  u^{-1}
+\implies
+  u
+=
+  e^{i\f}
+&&
+  \f
+\in
+  \mb{R}
+\end{align}
+In words, Hermitian eigenvalues are real, anti-Hermitian eigenvalues are pure imaginary, and unitary eigenvalues lie on the unit circle.
+Note that unitary eigenvalues have the form $u=\mr{exp}(a)$ where $a$ is an anti-Hermitian eigenvalue.
+This implies that any unitary matrix $\bo{U}$ can be written as $\mr{exp}(\bo{A})$, where $\bo{A}$ is anti-Hermitian.
+\end{rmk}
+
+\begin{rmk}
+According to \cref{dfn:normal-matrix} and \cref{rmk:spectral-theorem}, unitary transformations of the spin-orbitals can be parametrized as
+\begin{align}
+\label{eq:spin-orbital-transformation}
+  \y_p'
+=
+  \sum_q
+  \y_q
+  (\mr{exp}(\bo{X} - \bo{X}\dg))_{qp}
+\end{align}
+in terms a square matrix $\bo{X}$.
+The anti-Hermitian form of this parametrization leads to redundancies.
+In particular, notice that $\bo{X}=[z\,\d_{pq}]$ generates the same transformation as $\bo{X}\dg=[-z^*\,\d_{qp}]$.
+These redundancies are eliminated by setting the upper or lower triangle of $\bo{X}$ to zero.
+For most single-reference methods, transformations within the occupied and virtual blocks are also redundant because they don't change the energy.\footnote{This is what allows us to diagonalize the Fock matrix in canonical Hartree-Fock theory.}
+Setting all but one of the off-diagonal blocks to zero yields a non-redundant parametrization.
+Here, we will choose $\bo{X}_\mr{vo}=[x_a^i]$.
+\end{rmk}
+
+
+\begin{prop}
+\label{prop:creation-operator-similarity-transform}
+\thmstatement{
+The identity\ \
+$\ds{
+  \mr{exp}(G)\,a_p\dg\,\mr{exp}(-G)
+=
+  \sum_q
+  a_q\dg\,
+  (\mr{exp}(\bo{G}))_{qp}
+}$\ 
+holds for any
+$
+  G
+=
+  \sum_{pq}
+  (\bo{G})_{pq}\,
+  a_p\dg a_q
+$.
+}\vspace{3pt}
+\thmproof{
+  This follows from
+  $
+    [G,\cdot\,]^m(a_p\dg)
+  =
+    \sum_q
+    a_q\dg
+    (\bo{G}^m)_{qp}
+  $,
+  which we will prove by induction.
+  For $m=0$ the statement is trivially true.
+  If we assume it holds for $m$, then the following shows that it also holds for $m+1$,\footnote{
+  The second equality here follows from expanding $G$ and using
+$
+  [a_r\dg a_s, a_q\dg]
+=
+  \no{
+    a_r\dg
+    \ctr{}{a}{_s}{}
+    a_s a_q\dg
+  }
+=
+  a_r\dg\,
+  \d_{sq}
+$.
+}
+\begin{align*}
+\ts{
+  [G,\cdot\,]^{m+1}(a_p\dg)
+=
+  \sum_q
+  [G, a_q\dg]\,
+  (\bo{G}^m)_{qp}
+=
+  \sum_{qr}
+  a_r\dg
+  (\bo{G})_{rq}
+  (\bo{G}^m)_{qp}
+=
+  \sum_r
+  a_r\dg
+  (\bo{G}^{m+1})_{rp}
+}
+\end{align*}
+  which completes the induction.
+  Substituting this result into the Hausdorff expansion of
+$
+  \mr{exp}(G)\,a_p\dg\,\mr{exp}(-G)
+$
+  recognizing the Taylor expansion of $\mr{exp}(\bo{G})$ completes the proof.
+}
+\end{prop}
+
+
+\begin{rmk}
+The identity $a_p\dg\kt{\vac}=\kt{\y_p}$ implies that creation operators transform like orbitals.
+Therefore, the creation operator corresponding to $\y'_p$ in equation~\ref{eq:spin-orbital-transformation} is given by
+$
+  a_p^{\prime\,\dagger}
+=
+  \sum_q
+  a_q\dg
+  (\mr{exp}(\bo{X} - \bo{X}\dg))_{qp}
+$.
+By \cref{prop:creation-operator-similarity-transform}, this is equivalent to
+\begin{align}
+  a_p^{\prime\,\dagger}
+=
+  \mr{exp}(X - X\dg)
+  a_p\dg\,
+  \mr{exp}(X\dg - X)
+&&
+  X
+\equiv
+  \sum_{ai}
+  x_a^i\,
+  a^a_i
+\end{align}
+where we have eliminated the redundant parameters.
+Substituting this into 
+$
+  \kt{\F'_{(p_1\cd p_n)}}
+=
+  a_{p_1}^{\prime\,\dagger}
+  \cd
+  a_{p_n}^{\prime\,\dagger}
+  \kt{\vac}
+$
+gives a convenient expression for determinants of the transformed orbitals.\,\footnote{This follows from 
+$
+  \mr{exp}(X\dg - X)
+  \mr{exp}(X - X\dg)
+=
+  1
+$
+and
+$
+  \mr{exp}(X\dg - X)
+  \kt{\vac}
+=
+  0
+$.
+}
+\begin{align}
+  \kt{\F'_{(p_1\cd p_n)}}
+=
+  \mr{exp}(X - X\dg)
+  \kt{\F_{(p_1\cd p_n)}}
+&&
+  \br{\F'_{(p_1\cd p_n)}}
+=
+  \br{\F_{(p_1\cd p_n)}}
+  \mr{exp}(X\dg - X)
+\end{align}
+
+\end{rmk}
+
+
+
+
+
+\end{document}
