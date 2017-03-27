@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 8, Suggested Problems 1: Orbital relaxation}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\usepackage{multicol}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Prove the Thouless theorem.
+
+\item
+Assuming the spectral theorem for normal matrices, prove that every unitary matrix can be written as
+$
+  \bo{U}
+=
+  \mr{exp}(\bo{X} - \bo{X}\dg)
+$
+for some square matrix $\bo{X}$.
+If the dimension of these matrices is $m$, explain why $m(m+1)/2$ of the elements in $\bo{X}$ are redundant for this parametrization.
+
+\item
+Prove the following.
+\begin{align}
+  \mr{exp}(G)\,a_p\dg\,\mr{exp}(-G)
+=
+  \sum_q
+  a_q\dg\,
+  (\mr{exp}(\bo{G}))_{qp}
+&&
+  G
+=
+  \sum_{pq}
+  (\bo{G})_{pq}\,
+  a_p\dg a_q
+\end{align}
+
+
+
+\item
+Show that the creation and annihilation operators associated with a set of spin-orbitals $\{\y_p'\}$ transformed from the original basis by $\bo{U}=\mr{exp}(\bo{X} - \bo{X}\dg)$ can be written as follows.
+\begin{align}
+\begin{array}{r@{\ }l}
+  a_p^{\prime\,\dagger}
+&=
+  \mr{exp}(X - X\dg)
+  a_p\dg\,
+  \mr{exp}(X\dg - X)
+\\
+  a_p^{\prime}
+&=
+  \mr{exp}(X - X\dg)
+  a_p\,
+  \mr{exp}(X\dg - X)
+\end{array}
+&&
+  X
+\equiv
+  \sum_{pq}
+  (\bo{X})_{pq}\,
+  a_p\dg a_q
+\end{align}
+
+
+\item
+Prove the following.
+\begin{align}
+  \kt{\F'_{(p_1\cd p_n)}}
+=
+  \mr{exp}(X - X\dg)
+  \kt{\F_{(p_1\cd p_n)}}
+\end{align}
+
+
+
+
+\end{enumerate}
+
+
+\end{document}
