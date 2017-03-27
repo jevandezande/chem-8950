@@ -215,7 +215,7 @@ Since all of the off-diagonal elements in the spin basis vanish, we can separate
 \subsection{RHF: The Roothaan-Hall Equations}
 
 Assuming a closed-shell system with $n_\a=n_\b=n/2$, we can impose the restriction that $\f_{i_\a}=\f_{i_\b}$ for each pair of electrons.
-Then equations \ref{eq:canonical-uhf-equation-alpha} and \ref{eq:canonical-uhf-equation-beta} collapse into a single expression.
+Then equations~\ref{eq:canonical-uhf-equation-alpha} and~\ref{eq:canonical-uhf-equation-beta} collapse into a single expression.
 \begin{align*}
   \op{f}_\textsc{r}\f_p
 =
@@ -298,10 +298,10 @@ which is conveniently given in terms of a ``density matrix'' $D_{\mu\nu}$.
 
 \subsubsection{Solving the Roothaan-Hall Equations}
 
-Equation \ref{eq:roothaan-hall} would look like an ordinary eigenvalue problem if $\bo{S}$ were an identity matrix.
+Equation~\ref{eq:roothaan-hall} would look like an ordinary eigenvalue problem if $\bo{S}$ were an identity matrix.
 This would be the case if the AO basis were orthogonal, but that generally isn't the case.
 We can get around this problem using the following algebraic trick:
-if we multiply both sides of equation \ref{eq:roothaan-hall} by $\bo{S}^{-\frac{1}{2}}$ and insert $\bo{I}=\bo{S}^{-\frac{1}{2}}\bo{S}^{\frac{1}{2}}$ between $\bo{F}$ and $\bo{C}$, we can write
+if we multiply both sides of equation~\ref{eq:roothaan-hall} by $\bo{S}^{-\frac{1}{2}}$ and insert $\bo{I}=\bo{S}^{-\frac{1}{2}}\bo{S}^{\frac{1}{2}}$ between $\bo{F}$ and $\bo{C}$, we can write
 \begin{align}
 \label{orthogonalized-roothaan-hall}
 &
@@ -322,24 +322,24 @@ This is equivalent to a transformation to an orthogonalized AO basis $\tl\x_\mu=
 After diagonalizing the transformed Fock matrix, $\tl{\bo{F}}$, the MO coefficients with respect to the original non-orthogonal AO basis can be recovered as $\bo{C}=\bo{S}^{-\frac{1}{2}}\tl{\bo{C}}$.
 
 \begin{samepage}
-Equation \ref{orthogonalized-roothaan-hall} is still not exactly an ordinary eigenvalue problem because $\bo{F}$ depends on the MOs via the density matrix $\bo{D}$.
+Equation~\ref{orthogonalized-roothaan-hall} is still not exactly an ordinary eigenvalue problem because $\bo{F}$ depends on the MOs via the density matrix $\bo{D}$.
 The standard procedure for solving the Roothaan-Hall equations repeatedly diagonalizes $\tl{\bo{F}}$ and feeds in the new density until the equation becomes self-consistent.
 The algorithm looks as follows.
 \begin{enumerate}
   \item Get integrals $\ip{\x_\mu|\x_\nu}, \ip{\x_\mu|\op{h}|\x_\nu}, \ip{\x_\mu\x_\nu|\x_\rho\x_\si}$ and form orthogonalizer $\bo{S}^{-\frac{1}{2}}$
   \item Guess $\bo{D}=\bo{0}$
-  \item\label{loop} Build $\bo{F}$ (equation \ref{eq:rhf-ao-basis-fock})
+  \item\label{loop} Build $\bo{F}$ (equation~\ref{eq:rhf-ao-basis-fock})
   \item Diagonalize $\tl{\bo{F}}=\bo{S}^{-\frac{1}{2}}\bo{F}\bo{S}^{-\frac{1}{2}}$ to get $\tl{\bo{C}}$ and $\bm\ev$
   \item Backtransform to original basis: $\bo{C}=\bo{S}^{-\frac{1}{2}}\tl{\bo{C}}$
   \item Form new density matrix: $D_{\mu\nu}=\sum_i^{n/2} C_{\mu i}^*C_{\nu i}$
-  \item If the new $\bo{D}$ differs from the old $\bo{D}$ by more than some threshold, return to step \ref{loop}
+  \item If the new $\bo{D}$ differs from the old $\bo{D}$ by more than some threshold, return to step~\ref{loop}
 \end{enumerate}
 \end{samepage}
 
 
 \subsection{UHF: The Pople-Nesbet Equations}
 
-For open-shell systems of arbitrary $n_\a, n_\b$, we can solve equations \ref{eq:canonical-uhf-equation-alpha} and \ref{eq:canonical-uhf-equation-beta} without requiring $\f_{i_\a}=\f_{i_\b}$.
+For open-shell systems of arbitrary $n_\a, n_\b$, we can solve equations~\ref{eq:canonical-uhf-equation-alpha} and~\ref{eq:canonical-uhf-equation-beta} without requiring $\f_{i_\a}=\f_{i_\b}$.
 By exactly the same procedure as was used for the Roothaan-Hall equations, this leads to \textit{Pople-Nesbet equations}
 \begin{align*}
 &
@@ -377,7 +377,7 @@ By exactly the same procedure as was used for the Roothaan-Hall equations, this 
   \ev_{p_\b}\d_{p_\b q_\b}
 \end{align*}
 where $\bo{C}^\a=[C_{\mu p_\a}]$ is an $m\times m$ matrix of MO coefficients for $\{\f_{p_\a}\}$ and $\bo{C}^\b=[C_{\mu p_\b}]$ is an $m\times m$ matrix of MO coefficients for $\{\f_{p_\b}\}$.
-Expanding the $\a$ and $\b$ Fock matrices as in equation \ref{eq:rhf-ao-basis-fock}, we find
+Expanding the $\a$ and $\b$ Fock matrices as in equation~\ref{eq:rhf-ao-basis-fock}, we find
 \begin{align*}
 &
   F_{\mu\nu}^\a
@@ -414,7 +414,7 @@ Expanding the $\a$ and $\b$ Fock matrices as in equation \ref{eq:rhf-ao-basis-fo
   \sum_{i_\b}^{n_\b} C_{\mu i_\b}^*C_{\nu i_\b}
 \end{align*}
 where $\bo{D}^\a$ and $\bo{D}^\b$ are the $\a$ and $\b$ density matrices.
-The procedure for solving the Pople-Nesbet equations is identical to the one given for RHF.
+The procedure for solving the Pople-Nesbet equations is identical to the one given for RHF\@.
 However, note that one must solve the $\a$ and $\b$ equations simultaneously because each Fock operator depends on both $\bo{C}^\a$ and $\bo{C}^\b$ (via $\bo{D}^\a$ and $\bo{D}^\b$).
 
 

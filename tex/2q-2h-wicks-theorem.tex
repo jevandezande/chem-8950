@@ -171,7 +171,7 @@ This is one example of a general a result known as Wick's theorem, which will be
 \begin{ntt}\label{ntt:contraction-notation}
 For a particle-hole operator string $Q=q_1\cd q_n$, let the $\gno{Q(\ctr{}{q}{_i}{q}q_iq_j)}$ denote $\gno{q_1\cd\ctr{}{q}{_i\cd}{q}q_i\cd q_j\cd q_n}$.
 This is well-defined as long as $i<j$.
-Let $\gno{\ol{Q}}$ stand for the sum of all unique single, double, triple, etc. contractions of $Q$
+Let $\gno{\ol{Q}}$ stand for the sum of all unique single, double, triple, etc.\ contractions of $Q$
 \begin{align*}
   \gno{\ol{Q}}
 \equiv
@@ -187,9 +187,9 @@ Let $\gno{\ol{Q}}$ stand for the sum of all unique single, double, triple, etc. 
 \end{align*}
 where $\mr{Ctr}_k(Q)$ runs over all unique sets $\{(i_1j_2)\cd(i_kj_k)\,|\,i_p<j_p\}$ of $k$ pairs of operator indices in $Q$ and $\floor{\cdot}$ is the floor function.
 Let $\gno{\ol{\ol{Q}}}$ denote the sum of all \textit{complete contractions}: the terms from $\gno{\ol{Q}}$ in which every operator in $Q$ is involved in a contraction.
-Finally, let $\gno{\ctr{}{Q}{}{Q} QQ'}$ denote the sum of all single, double, etc.~\textit{cross contractions}: those in which all contractions have an operator from $Q$ on the left and one from $Q'$ on the right.
+Finally, let $\gno{\ctr{}{Q}{}{Q} QQ'}$ denote the sum of all single, double, etc.\ \textit{cross contractions}: those in which all contractions have an operator from $Q$ on the left and one from $Q'$ on the right.
 In this context, contractions involving two operators from $Q$ or two operators from $Q'$ are called \textit{internal contractions} of $Q$ or $Q'$.
-To review, in this notation equation \ref{eq:wicks-theorem-first-example} would be written as
+To review, in this notation equation~\ref{eq:wicks-theorem-first-example} would be written as
 $
   a_p a_q a_s\dg a_r\dg
 =
@@ -342,7 +342,7 @@ $\gno{Q}\gno{Q'}=\gno{QQ'}+\gno{\ctr{}{Q}{}{Q}  QQ'}$
 \thmtitle{Wick's theorem for expectation values}\vspace{5pt}
 $\ip{\F|Q|\F}=\gno{\ol{\ol{Q}}}$
 \thmproof{
-  From Wick's theorem $\ip{\F|Q|\F}=\ip{\F|\gno{Q}|\F}+\ip{\F|\gno{\ol{Q}}|\F}$ and any incompletely contracted terms have vanishing expectation values.  Therefore, $\ip{\F|\gno{Q}|\F}=0$ and $\ip{\F|\gno{\ol{Q}}|\F}=\gno{\ol{\ol{Q}}}$.
+  From Wick's theorem $\ip{\F|Q|\F}=\ip{\F|\gno{Q}|\F}+\ip{\F|\gno{\ol{Q}}|\F}$ and any incompletely contracted terms have vanishing expectation values. Therefore, $\ip{\F|\gno{Q}|\F}=0$ and $\ip{\F|\gno{\ol{Q}}|\F}=\gno{\ol{\ol{Q}}}$.
 }
 \end{cor}
 
