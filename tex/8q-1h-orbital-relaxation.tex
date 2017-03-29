@@ -27,6 +27,8 @@
       \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
   }
 }
+\usepackage{accents}
+\newcommand{\oc}[1]{\ensuremath{\accentset{\circ}{#1}}}
 
 \begin{document}
 
@@ -77,8 +79,8 @@ The size of this \textit{orbital relaxation effect} can be monitored as the root
   \fr{\|\bo{t}_1\|}{\sqrt{n}}
 \end{align}
 Significant orbital relaxation generally indicates that the reference determinant forms a poor approximation to the wavefunction, which can lead to large errors for low-order truncated methods like CCSD or CCSD(T).
-In closed-shell systems, significant orbital relaxation is usually associated with an inherent \textit{multireference character}, which means that no single determinant dominates the wavefunction with any choice of orbitals.
-Empirically, $\mc{T}_1\geq 0.02$ is considered large in this context.
+In closed-shell systems, significant orbital relaxation is usually associated with an inherent \textit{multireference character}, which means that no single determinant dominates the wavefunction for any choice of orbitals.
+Empirically, $\mc{T}_1\geq 0.02$ is considered large for closed-shell species.
 In open-shell systems, mean-field methods like Hartree-Fock theory are often deficient even for non-multireference systems.
 In this case, orbital relaxation effects can generally be cured by choosing a new determinant which is optimized in the presence of dynamical\footnote{As opposed to mean-field.} electron correlation.
 \end{rmk}
@@ -88,63 +90,408 @@ In this case, orbital relaxation effects can generally be cured by choosing a ne
 The two most common ways of defining an ideal reference determinant for the correlated wavefunction are the \textit{best overlap criterion} and the \textit{best energy criterion}.\footnote{See \url{https://en.wikipedia.org/wiki/Arg_max} for the notation used here.}
 \begin{align}
 \label{eq:brueckner-and-oo-general-condition}
-  \F_{\mr{B}}
+  \{\y_p\}_{\mr{B}}
 =
-  \underset{\F}{\arg\max}\,
-  \ip{\F|\Y}
+  \underset{\{\y_p\}}{\arg\max}\,
+  \|\ip{\F|\Y}\|^2
 &&
-  \F_{\mr{O}}
+  \{\y_p\}_{\mr{O}}
 =
-  \underset{\F}{\arg\min}\,
-  \ip{\Y|H|\Y},\ \
-  \Y
-=
-  \W\,\F
+  \underset{\{\y_p\}}{\arg\min}\,
+  \ip{\Y|H|\Y}
 \end{align}
-The \textit{best overlap} or \textit{Brueckner determinant}, $\F_\mr{B}$, has maximum overlap with the wavefunction.
-The \textit{best energy} or \textit{orbital-optimized determinant}, $\F_\mr{O}$, yields the lowest energy for a given Ansatz.
-The spin-orbital sets from which these determinants are constructed will be denoted $\{\y_p\}_\mr{B}$ and $\{\y_p\}_\mr{O}$.
+The \textit{best overlap} or \textit{Brueckner orbitals} yield a reference determinant, $\F_\mr{B}$, that has maximum overlap with the wavefunction.
+The \textit{best energy} or \textit{optimized orbitals} yield the lowest energy expectation value within a given Ansatz.
+Note that these two conditions are in general mutually exclusive, so one must choose one or the other.
 \end{rmk}
 
+\begin{dfn}
+\thmtitle{Orbital invariance}
+An Ansatz is usually termed \textit{orbital invariant} if it preserves the rotational invariances of the reference function.
+For single-reference methods, this means that the total energy is unchanged by orbital rotations within the occupied and virtual spaces.
+In this context, the occupied and virtual blocks of $\bo{X}$ in equation~\ref{eq:operator-transformation} are redundant in the sense that they produce transformations which do not change the energy.
+\end{dfn}
+
 \begin{rmk}
-\Cref{appendix:orbital-rotations}
-shows that non-redundant transformations of the orbitals in $\F$ can be parametrized as
+The non-redundant orbital rotations (\cref{appendix:orbital-rotations}) for an orbital-invariant Ansatz can be parametrized as\footnote{Note that we are using Einstein summation.}
 \begin{align}
-  \F(\bo{x})
+  \Th(\bo{x})
+=
+  U(\bo{x})
+  \Th
+&&
+  U(\bo{x})
 =
   \mr{exp}(X - X\dg)
-  \F
+&&
+  X
+=
+  x_a^i
+  a^a_i
 \end{align}
-where $X$ has the form of a $T_1$ operator.
-This parametrization can be substituted into equation~\ref{eq:brueckner-and-oo-general-condition} to derive the explicit conditions satisfied by Brueckner orbitals and optimized orbitals.\footnote{
-  $\kt{\Y(\bo{x})}=\mr{exp}(X-X\dg)\kt{\Y}$ applies the orbital rotation to all of the determinants in the wavefunction expansion.
-  }
-\begin{align*}
-  \{\y_p\}_\mr{B}:\,\,
+where $\Th$ is an arbitrary Fock state.
+Brueckner orbitals and optimized orbitals can then be determined from the following.\footnote{%
+  Note that $a^i_a\kt{\F}=0$, which eliminates the second term in the overlap derivative.
+}
+\begin{align}
   \left.
   \pd{}{x_a^{i*}}
-  \ip{\F(\bo{x})|\Y}
+  \|\ip{\F(\bo{x})|\Y}\|^2
   \right|_{\bo{x}=\bo{0}}
 =
-  \ip{\F_i^a|\Y}
-\overset{!}{=}
-  0
+  \ip{\F|\,a^i_a|\Y}
+  \ip{\Y|\F}
 &&
-  \{\y_p\}_\mr{O}:\,\,
   \left.
   \pd{}{x_a^{i*}}
   \ip{\Y(\bo{x})|H|\Y(\bo{x})}
   \right|_{\bo{x}=\bo{0}}
 =
-  \ip{\Y|\,[a^i_a, H]\,|\Y}
+  \ip{\Y|a^i_a H|\Y}
+-
+  \ip{\Y|H a^i_a|\Y}
+\end{align}
+In the overlap derivative, we have allowed the orbitals of the determinant to vary while holding the wavefunction constant.
+In the energy derivative, we have allowed the wavefunction to vary while holding the orbitals of the Hamiltonian constant.\footnote{
+  In each case we could have made the opposite choice, but note that we do not want to transform \textit{everything}.
+  Transforming everything corresponds to a Fock space isomorphism rather than a transformation of orbitals used to construct the wavefunction.
+  By definition, an isomorphism would leave these matrix elements unchanged:
+  $
+    \ip{\F(\bo{x})|\Y(\bo{x})}
+  =
+    \ip{\F|\Y}
+  $
+  and
+  $
+    \ip{\Y(\bo{x})|H(\bo{x})|\Y(\bo{x})}
+  =
+    \ip{\Y|H|\Y}
+  $.
+}
+The best overlap and best energy orbitals make these derivatives vanish, which leads to a new set of conditions
+\begin{align}
+  \{\y_p\}_\mr{B}\,:\,\,
+  \ip{\F_i^a|\Y}
 \overset{!}{=}
   0
-\end{align*}
+&&
+  \{\y_p\}_\mr{O}\,:\,\,
+  \ip{\Y|[a_a^i, H]|\Y}
+\overset{!}{=}
+  0
+\end{align}
+which are equivalent to equation~\ref{eq:brueckner-and-oo-general-condition}.
+\end{rmk}
+
+\newpage
+\begin{rmk}
+\thmtitle{Brueckner algorithm}
+\end{rmk}
+
+\begin{rmk}
+\thmtitle{Orbital optimization algorithm}
+\begin{align}
+  E(\bo{x})
+-
+  E
+\approx
+  \bo{x}\dg
+  \bo{w}
++
+  \tfr{1}{2}\,
+  \bo{x}\dg
+  \bo{A}
+  \bo{x}
+&&
+  (\bo{w})_{ia}
+\equiv
+  \left.
+  \pd{E}{x_a^{i*}}
+  \right|_{\bo{x}=\bo{0}}
+&&
+  (\bo{A})_{ia,jb}
+\equiv
+  \left.
+  \pd{^2 E}{x_a^{i*}\pt x_b^j}
+  \right|_{\bo{x}=\bo{0}}
+\end{align}
+\begin{align}
+  \bo{x}
+=
+-
+  \bo{A}^{-1}\,
+  \bo{w}
+&&
+  (\bo{w})_{ia}
+=
+  \ip{\Y|
+    [a^i_a, H]
+  |\Y}
+&&
+  (\bo{A})_{ia,jb}
+=
+  \ip{\Y|
+    [[a^i_a, H], a^b_j]
+  |\Y}
+\end{align}
+
+\begin{enumerate}
+\item
+$
+  t_{a_1\cd a_k}^{i_a\cd a_k}
+=
+  (\mc{E}_{a_1\cd a_k}^{i_1\cd a_k})^{-1}\,
+  \ip{\F_{i_1\cd i_k}^{a_1\cd a_k}|
+    V_\mr{c}\,
+    \mr{exp}(T)
+  |\F}_\mr{C}
+$
+
+\item
+$
+  \la_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  (\mc{E}_{a_1\cd a_k}^{i_1\cd a_k})^{-1}\,
+  \ip{\F|
+    (1 + \La)
+    V_\mr{c}\,
+    \mr{exp}(T)
+  |\F_{i_1\cd i_k}^{a_1\cd a_k}}_\mr{C}
+$
+
+\item
+build
+$
+  \bo{A}^{-1}
+$
+and
+$
+  \bo{w}
+$
+
+\item
+$
+  x_a^i
+=
+  (-\bo{A}^{-1}\,\bo{w})_{ia}
+$
+
+\item
+$
+  \bo{U}
+=
+  \mr{exp}(\bo{X} - \bo{X}\dg)
+$
+where
+$
+  \bo{X}_\mr{vo}
+=
+  [x_a^i]
+$
+
+\item
+$
+  \bo{C}
+\mapsto
+  \bo{C}\bo{U}
+$
+
+\item
+Recompute integrals in the new MO basis
+
+\item
+Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
+\end{enumerate}
+\end{rmk}
+
+\begin{rmk}
+\end{rmk}
+
+
+\begin{dfn}
+\thmtitle{Density matrices}
+\begin{align}
+  H
+=
+  h_p^q
+  a^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  a^{pq}_{rs}
+\end{align}
+\begin{align}
+  E
+=
+  h_p^q
+  \g^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \g^{pq}_{rs}
+&&
+  \g^p_q
+=
+  \ip{\Y|a^p_q|\Y}
+&&
+  \g^{pq}_{rs}
+=
+  \ip{\Y|a^{pq}_{rs}|\Y}
+\end{align}
+\end{dfn}
+
+\begin{rmk}
+\begin{align}
+  [a_a^i, a^p_q]
+=&\
+  \no{
+    a^i_{a^\ptcl}
+    a^{p^\ptcl}_q
+  }
+-
+  \no{
+    a^p_{q^\ptcl}
+    a^{i^\ptcl}_a
+  }
+=
+  \d^p_a\,
+  a^i_q
+-
+  \d^q_i\,
+  a^p_a
+\\
+  [a_a^i, a^{pq}_{rs}]
+=&\
+  P^{(p/q)}
+  \no{
+    a^i_{a^\ptcl}
+    a^{p^\ptcl q}_{r^{\phantom\ptcl}s}
+  }
+-
+  P^{(r/s)}
+  \no{
+    a^{p^{\phantom\ptcl}q}_{r^\ptcl s}
+    a^{i^\ptcl}_a
+  }
+=
+  P^{(p/q)}
+  \d^p_a\,
+  a^{iq}_{rs}
+-
+  P_{(r/s)}
+  \d^i_r
+  a^{pq}_{as}
+\end{align}
+\begin{align}
+  (\bo{w})_{ia}
+=
+  \ip{\Y|[a_a^i, H]|\Y}
+=
+  (
+    \bo{F}
+  -
+    \bo{F}\dg
+  )_a^i
+&&
+  (\bo{F})_p^q
+\equiv
+  h_p^r
+  \g^q_r
++
+  \tfr{1}{2}
+  \ol{g}_{pr}^{st}
+  \g^{qr}_{st}
+\end{align}
+\begin{align}
+  (\bo{A})_{ia,jb}
+=
+  \ip{\Y|[[a^i_a, H], a^b_j]|\Y}
+\approx
+  \ip{\F|[[a^i_a, H_0], a^b_j]|\F}
+=
+  \ip{\F^a_i|H_0|\F^b_j}
+=
+  \mc{E}_j^b
+  \d^i_j
+  \d^b_a
+\implies
+  (-\bo{A}^{-1})_{ia,jb}
+=
+  (\mc{E}_b^j)^{-1}\,
+  \d^i_j
+  \d^b_a
+\end{align}
+\begin{align}
+  (-\bo{A}^{-1}\,\bo{w})_{ia}
+=
+-
+  \sum_{jb}
+  (\bo{A}^{-1})_{ia,jb}
+  (\bo{w})_{jb}
+=
+-
+  \sum_{jb}
+  (\mc{E}_b^j)^{-1}
+  \d^i_j
+  \d^b_a
+  (\bo{F} - \bo{F}\dg)_b^j
+=
+  \fr{(\bo{F} - \bo{F}\dg)_a^i}{\mc{E}_a^i}
+\end{align}
 \end{rmk}
 
 
 
+\begin{rmk}
+\begin{align}
+  a^p_q
+=
+  \tl{a}^p_q
++
+  \oc{\g}^p_q
+&&
+  a^{pq}_{rs}
+=
+  \tl{a}^{pq}_{rs}
++
+  P^{(p/q)}_{(r/s)}
+  \tl{a}^p_r\,
+  \oc{\g}^r_s
++
+  P_{(r/s)}
+  \oc{\g}^p_r
+  \oc{\g}^q_s
+\end{align}
+\begin{align}
+  \g^p_q
+=
+  \tl{\g}^p_q
++
+  \oc{\g}^p_q
+&&
+  \g^{pq}_{rs}
+=
+  \tl{\g}^{pq}_{rs}
++
+  P^{(p/q)}_{(r/s)}
+  \tl{\g}^p_r\,
+  \oc{\g}^r_s
++
+  P_{(r/s)}
+  \oc{\g}^p_r
+  \oc{\g}^q_s
+\end{align}
 
+\begin{align}
+  \tl{\g}^p_q
+=
+  \ip{\F|(1 + \La)\,\tl{a}^p_q\,\mr{exp}(T)|\F}_\mr{C}
+=
+\diagram{
+  \interaction{2}{g}{(0,0)}{ddot}{sawtooth};
+}
+\end{align}
+\end{rmk}
 
 \newpage
 \appendix
@@ -154,16 +501,16 @@ This parametrization can be substituted into equation~\ref{eq:brueckner-and-oo-g
 
 \begin{ntt}
 \label{ntt:orbital-transformation}
-Let $\bm{\y}$ be a row vector of orthonormal spin-orbitals, $(\bm{\y})_p=\y_p$, which can be split into occupied and virtual blocks as $\bm{\y}=[\bm{\y}_\mr{o}\ \bm{\y}_\mr{v}]$.
-Other sets of spin-orbitals are related to this one by a transformation
+Let $\bm{\y}=[\y_p]$ be a row vector of orthonormal spin-orbitals, composed of occupied and virtual blocks, $\bm{\y}=[\bm{\y}_\mr{o}\ \bm{\y}_\mr{v}]$, with respect to a reference determinant, $\F$.
+Other spin-orbital bases relate to this one via
 $
   \kt{\bm{\y}'}
 =
   \kt{\bm{\y}}\,
   \bo{U}
-$
-which is unitary if the primed orbitals are also orthonormal.
-Let $\F'$ be the \textit{transformed reference determinant}, constructed from the first $n$ orbitals in the transformed space.
+$,
+which is a unitary transformation if the primed orbitals are orthonormal.
+Let $\F'$ be the \textit{transformed reference determinant}, constructed from the first $n$ orbitals in $\bm{\y}'$.
 Then the occupied and virtual orbitals of the transformed space are given by
 \begin{align}
 \label{eq:block-transformation}
@@ -183,11 +530,8 @@ Then the occupied and virtual orbitals of the transformed space are given by
   \kt{\bm{\y}_\mr{v}}\,
   \bo{U}_\mr{vv}
 \end{align}
-in terms of the occupied and virtual blocks of the transformation.
-This kind of unitary transformation of the spin-orbital basis is sometimes referred to as an \textit{orbital rotation}.
-
-%If $\bm{\y}$ is constructed from a basis set $\bm{\x}=[\x_\mu]$ as $\bm{\y}=\bm{\x}\,\bo{C}$ where $\bo{C}$, then the coefficients of $\bm{\y}'$ are given by $\bo{C}'=\bo{C}\bo{U}$.
-
+in terms of the occupied and virtual blocks of $\bo{U}$.
+This kind of transformation is sometimes called an \textit{orbital rotation}.
 \end{ntt}
 
 
@@ -278,6 +622,7 @@ This kind of unitary transformation of the spin-orbital basis is sometimes refer
  using $a_i^2=0$ and $a_ia_i\dg\kt{\vac}=\kt{\vac}$.
 }
 
+
 \item
 \thmstatement{
   Any intermediately normalized determinant
@@ -290,7 +635,7 @@ This kind of unitary transformation of the spin-orbital basis is sometimes refer
   can be written as $e^{T_1}\,\F$.
 }
 \thmproof{
-  Intermediate normalization is only possible if $\widetilde{\F}$ has non-zero overlap with the reference determinant.
+  Intermediate normalization implies that $\widetilde{\F}$ has non-zero overlap with the reference determinant.
   Therefore, $\widetilde{\F}$ can be written as
   $\F'/\ip{\F|\F'}$
   where $\F'$ is a Slater determinant.
@@ -313,10 +658,9 @@ This kind of unitary transformation of the spin-orbital basis is sometimes refer
   \cd
   \ip{\y_{n}|\y'_{\si(n)}}
 =
-  \mr{det}(\bo{U}_{\mr{oo}})
+  \mr{det}(\bo{U}_{\mr{oo}})\,\,.
 }
 \end{align*}
-  following \cref{ntt:orbital-transformation}.
   Therefore,
   $
     \widetilde{\F}
@@ -327,7 +671,9 @@ This kind of unitary transformation of the spin-orbital basis is sometimes refer
     \F'\,
     \mr{det}(\bo{U}_\mr{oo}^{-1})
   $
-  and the rows of $\widetilde{\F}$ are given by
+  and the rows of $\widetilde{\F}$ are given by the following vector\footnote{
+    The second equality follows from expanding $\kt{\bm{\y}_\mr{o}'}$ according to eq~\ref{eq:block-transformation}.
+  }
 \begin{align*}
   \kt{\bm{\widetilde{\y}}_\mr{o}}
 =
@@ -340,8 +686,7 @@ This kind of unitary transformation of the spin-orbital basis is sometimes refer
   \bo{U}_\mr{vo}
   \bo{U}_\mr{oo}^{-1}
 \end{align*}
-  where we have expanded $\kt{\bm{\y}_\mr{o}'}$ according to eq~\ref{eq:block-transformation}.
-  The columns of this equation are
+  with elements
   $
     \widetilde{\y}_i
   =
@@ -351,7 +696,7 @@ This kind of unitary transformation of the spin-orbital basis is sometimes refer
     \y_a\,
     (\bo{U}_\mr{vo}\bo{U}_\mr{oo}^{-1})_{ai}
   $.
-  Referring back to the first proposition, this shows that
+  Referring back to part one,
   $
     \widetilde{\F}
   =
@@ -427,6 +772,7 @@ This implies that any unitary matrix $\bo{U}$ can be written as $\mr{exp}(\bo{A}
 \end{rmk}
 
 \begin{rmk}
+\label{rmk:spin-orbital-transformation-law}
 According to \cref{dfn:normal-matrix} and \cref{rmk:spectral-theorem}, unitary transformations of the spin-orbitals can be parametrized as
 \begin{align}
 \label{eq:spin-orbital-transformation}
@@ -440,9 +786,14 @@ in terms a square matrix $\bo{X}$.
 The anti-Hermitian form of this parametrization leads to redundancies.
 In particular, notice that $\bo{X}=[z\,\d_{pq}]$ generates the same transformation as $\bo{X}\dg=[-z^*\,\d_{qp}]$.
 These redundancies are eliminated by setting the upper or lower triangle of $\bo{X}$ to zero.
-For most single-reference methods, transformations within the occupied and virtual blocks are also redundant because they don't change the energy.\footnote{This is what allows us to diagonalize the Fock matrix in canonical Hartree-Fock theory.}
-Setting all but one of the off-diagonal blocks to zero yields a non-redundant parametrization.
-Here, we will choose $\bo{X}_\mr{vo}=[x_a^i]$.
+The creation operators for these orbitals are given by
+$
+  a_p^{\prime\,\dagger}
+=
+  \sum_q
+  a_q\dg
+  (\mr{exp}(\bo{X} - \bo{X}\dg))_{qp}
+$.
 \end{rmk}
 
 
@@ -521,45 +872,60 @@ and  recognizing the Taylor expansion of $\mr{exp}(\bo{G})$ completes the proof.
 
 
 \begin{rmk}
-The identity $a_p\dg\kt{\vac}=\kt{\y_p}$ implies that creation operators transform like orbitals.
-Therefore, the creation operator corresponding to $\y'_p$ in equation~\ref{eq:spin-orbital-transformation} is given by
-$
-  a_p^{\prime\,\dagger}
-=
-  \sum_q
-  a_q\dg
-  (\mr{exp}(\bo{X} - \bo{X}\dg))_{qp}
-$.
-By \cref{prop:creation-operator-similarity-transform}, this is equivalent to
+Given \cref{rmk:spin-orbital-transformation-law} and \cref{prop:creation-operator-similarity-transform}, the transformation of particle-hole operators can be expressed as
 \begin{align}
+\label{eq:operator-transformation}
+\begin{array}{r@{\ }l}
   a_p^{\prime\,\dagger}
-=
+&=
   \mr{exp}(X - X\dg)
   a_p\dg\,
   \mr{exp}(X\dg - X)
+\\[4pt]
+  a_p^{\prime}
+&=
+  \mr{exp}(X - X\dg)
+  a_p\,
+  \mr{exp}(X\dg - X)
+\end{array}
 &&
   X
-\equiv
-  \sum_{ai}
-  x_a^i\,
-  a^a_i
-\end{align}
-where we have eliminated the redundant parameters.
-Substituting this into
-$
-  \kt{\F'_{(p_1\cd p_n)}}
 =
+  \sum_{p>q}
+  (\bo{X})_{pq}
+  a_p\dg a_q
+\end{align}
+where the annihilation operator transformation is simply the adjoint of the one for creation operators.
+\end{rmk}
+
+
+\begin{rmk}
+If $\Th'$ is obtained by replacing all of the orbitals in the basis expansion of $\Th\in\mc{F}$ with primed orbitals, then
+\begin{align}
+  \Th'
+=
+  \mr{exp}(X - X\dg)
+  \Th
+\end{align}
+which follows from substituting equation~\ref{eq:operator-transformation} into
+$
   a_{p_1}^{\prime\,\dagger}
   \cd
   a_{p_n}^{\prime\,\dagger}
   \kt{\vac}
 $
-gives a convenient expression for determinants of the transformed orbitals.\,\footnote{This follows from
+to prove that
+$
+  \kt{\F'_{(p_1\cd p_n)}}
+=
+  \mr{exp}(X - X\dg)
+  \kt{\F_{(p_1\cd p_n)}}
+$\footnote{
+  Note that
 $
   \mr{exp}(X\dg - X)
-  \mr{exp}(X - X\dg)
 =
-  1
+  \pr{\mr{exp}(X - X\dg)}^{-1}
 $
 and
 $
@@ -569,17 +935,8 @@ $
   0
 $.
 }
-\begin{align}
-  \kt{\F'_{(p_1\cd p_n)}}
-=
-  \mr{exp}(X - X\dg)
-  \kt{\F_{(p_1\cd p_n)}}
-\end{align}
-Since this transformation applies to every determinant, this generalizes to arbitrary states in Fock space.
+for any basis state.
 \end{rmk}
-
-
-
 
 
 \end{document}
