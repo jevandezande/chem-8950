@@ -86,7 +86,7 @@ In this case, orbital relaxation effects can generally be cured by choosing a ne
 \end{rmk}
 
 \begin{rmk}
-\thmtitle{Brueckner and orbital-optimized methods}
+\thmtitle{Brueckner orbitals and optimized orbitals}
 The two most common ways of defining an ideal reference determinant for the correlated wavefunction are the \textit{best overlap criterion} and the \textit{best energy criterion}.\footnote{See \url{https://en.wikipedia.org/wiki/Arg_max} for the notation used here.}
 \begin{align}
 \label{eq:brueckner-and-oo-general-condition}
@@ -113,7 +113,7 @@ In this context, the occupied and virtual blocks of $\bo{X}$ in equation~\ref{eq
 \end{dfn}
 
 \begin{rmk}
-The non-redundant orbital rotations (\cref{appendix:orbital-rotations}) for an orbital-invariant Ansatz can be parametrized as\footnote{Note that we are using Einstein summation.}
+The non-redundant orbital rotations (\cref{appendix:orbital-rotations}) for an orbital-invariant Ansatz can be parametrized as
 \begin{align}
   \Th(\bo{x})
 =
@@ -126,14 +126,18 @@ The non-redundant orbital rotations (\cref{appendix:orbital-rotations}) for an o
 &&
   X
 =
+\ts{
+  \sum_{ia}
   x_a^i
   a^a_i
+}
 \end{align}
 where $\Th$ is an arbitrary Fock state.
 Brueckner orbitals and optimized orbitals can then be determined from the following.\footnote{%
   Note that $a^i_a\kt{\F}=0$, which eliminates the second term in the overlap derivative.
 }
 \begin{align}
+\label{eq:brueckner-and-oo-condition-derivatives}
   \left.
   \pd{}{x_a^{i*}}
   \|\ip{\F(\bo{x})|\Y}\|^2
@@ -170,6 +174,7 @@ In the energy derivative, we have allowed the wavefunction to vary while holding
 }
 The best overlap and best energy orbitals make these derivatives vanish, which leads to a new set of conditions
 \begin{align}
+\label{eq:brueckner-and-oo-explicit-condition}
   \{\y_p\}_\mr{B}\,:\,\,
   \ip{\F_i^a|\Y}
 \overset{!}{=}
@@ -181,20 +186,166 @@ The best overlap and best energy orbitals make these derivatives vanish, which l
   0
 \end{align}
 which are equivalent to equation~\ref{eq:brueckner-and-oo-general-condition}.
+These conditions can be used to iteratively determine best overlap or best energy orbitals for any wavefunction Ansatz.
+Since orbital rotations generate singly-excited determinants, one generally excludes singles from the wavefunction parametrization in methods like \textit{orbital-optimized coupled cluster (OCC)} theory.\footnote{%
+  Caveat:
+  This is actually slightly problematic for TCC because it turns out that OCCD${\cd}m$ is not equivalent to full CI for an $m$-electron system.
+  This is a quirk of the way amplitudes are determined in TCC and is not an issue when the wavefunction parametrization is determined from a stationarity condition, such as for orbital-optimized configuration interaction.%
+}
+For Brueckner methods, the best overlap condition is equivalent to determining the orbitals which make the singles coefficients vanish entirely, which means $T_1=0$ for a converged \textit{Brueckner coupled-cluster (BCC)} wavefunction.
 \end{rmk}
 
-\newpage
 \begin{rmk}
-\thmtitle{Brueckner algorithm}
-\end{rmk}
-
-\begin{rmk}
-\thmtitle{Orbital optimization algorithm}
+\label{rmk:brueckner-algorithm-explanation}
+One method of determining Brueckner orbitals is to set the non-redundant orbital rotation parameters equal to the $T_1$ amplitudes each iteration.
+To see how this works, consider the Taylor expansion of
+$
+  \kt{\bm{\y}(\bo{x})}
+=
+  \kt{\bm{\y}}\,
+  \mr{exp}(\bo{X} - \bo{X}\dg)
+$.\footnote{%
+  This is equation~\ref{eq:spin-orbital-transformation}.
+  Note that
+  $
+    \kt{\bm{\y}}\,
+    \bo{X}
+  =
+    \kt{\bm{\y}_\mr{v}}\,
+    \bo{X}_\mr{vo}
+  $
+  and
+  $
+    \kt{\bm{\y}}\,
+    \bo{X}\dg
+  =
+    \kt{\bm{\y}_\mr{o}}\,
+    \bo{X}_\mr{vo}\dg
+  $
+  since the other blocks of $\bo{X}$ are zero.
+}
 \begin{align}
+  \kt{\bm{\y}(\bo{x})}
+=
+  \kt{\bm{\y}_\mr{v}}\,
+  \bo{X}_\mr{vo}
+-
+  \kt{\bm{\y}_\mr{o}}\,
+  \bo{X}_\mr{vo}\dg
++
+  \mc{O}(\bo{x}^2)
+\end{align}
+The columns of this equation are as follows
+\begin{align}
+  \y_i(\bo{x})
+=
+  \y_i
++
+  \sum_a
+  \y_a\,
+  x_a^i
++
+  \mc{O}(\bo{x}^2)
+&&
+  \y_a(\bo{x})
+=
+  \y_a
+-
+  \sum_i
+  \y_i\,
+  x_a^{i*}
++
+  \mc{O}(\bo{x}^2)
+\end{align}
+which implies
+$
+\left.
+  \F(\bo{x})
+\right|{}_{x_a^i=t_a^i}
+\approx
+  \mr{exp}(T_1)
+  \F
+$
+by the Thouless theorem.
+Repeatedly absorbing this factor into the transformed determinant causes the singles amplitudes to vanish at convergence, so that equation~\ref{eq:brueckner-and-oo-explicit-condition} is satisfied.
+\end{rmk}
+
+
+\begin{rmk}
+\thmtitle{BCC algorithm}
+The discussion of \cref{rmk:brueckner-algorithm-explanation} leads to the following algorithm for BCC methods.
+\begin{enumerate}
+\item
+\label{item:brueckner-step-one}
+Update non-singles amplitudes:
+$
+  t_{ab\cd}^{ij\cd}
+=
+  (\mc{E}_{ab\cd}^{ij\cd})^{-1}\,
+  \ip{\F_{ij\cd}^{ab\cd}|
+    V_\mr{c}\,
+    \mr{exp}(T)
+  |\F}_\mr{C}
+$.
+
+\item
+\label{item:brueckner-step-two}
+Update singles amplitudes:
+$
+  t_a^i
+=
+  (\mc{E}_a^i)^{-1}\,
+  \ip{\F_i^a|
+    V_\mr{c}\,
+    \mr{exp}(T)
+  |\F}_\mr{C}
+$.
+
+\item
+Build an orbital rotation matrix from the singles amplitudes:
+$
+  \bo{U}
+=
+  \mr{exp}(\bo{X} - \bo{X}\dg)
+$
+where
+$
+  \bo{X}_\mr{vo}
+=
+  [t_a^i]
+$.
+
+\item
+Rotate the spin-orbital coefficients:\footnote{
+  If $\bm{\x}$ is a row vector of basis functions, the spin-orbitals are obtained from this coefficient matrix as
+  $\bm{\y}=\bm{\x}\,\bo{C}$.
+}
+$
+  \bo{C}
+\leftarrow
+  \bo{C}\bo{U}
+$.
+
+\item
+Transform the one- and two-electon integrals to the spin-orbital basis using the new coefficient matrix.
+
+\item
+Unless $\|\bo{t}_1\|\approx0$ and the non-singles amplitudes are converged, return to step~\ref{item:brueckner-step-one}.
+\end{enumerate}
+Note that the amplitude equations in steps~\ref{item:brueckner-step-one} and \ref{item:brueckner-step-two} here are non-canonical $\mr{CCSD}{\cd}m$ equations.
+\end{rmk}
+
+
+\begin{rmk}
+\label{rmk:orbital-newton-raphson}
+\thmtitle{The Newton-Raphson step for orbital rotations}
+Optimized orbitals can be determined from
+\begin{align}
+\label{eq:orbital-rotation-taylor-expansion}
   E(\bo{x})
 -
-  E
-\approx
+  E(\bo{0})
+=
   \bo{x}\dg
   \bo{w}
 +
@@ -202,6 +353,8 @@ which are equivalent to equation~\ref{eq:brueckner-and-oo-general-condition}.
   \bo{x}\dg
   \bo{A}
   \bo{x}
++
+  \mc{O}(\bo{x}^3)
 &&
   (\bo{w})_{ia}
 \equiv
@@ -215,13 +368,10 @@ which are equivalent to equation~\ref{eq:brueckner-and-oo-general-condition}.
   \pd{^2 E}{x_a^{i*}\pt x_b^j}
   \right|_{\bo{x}=\bo{0}}
 \end{align}
+which is a Taylor expansion for the total energy with respect to orbital rotations, $\bo{w}$ being the \textit{orbital gradient} and $\bo{A}$ the \textit{orbital Hessian} evaluated at with the current orbitals.
+These are given by
 \begin{align}
-  \bo{x}
-=
--
-  \bo{A}^{-1}\,
-  \bo{w}
-&&
+\label{eq:orbital-gradient-orbital-hessian}
   (\bo{w})_{ia}
 =
   \ip{\Y|
@@ -234,42 +384,54 @@ which are equivalent to equation~\ref{eq:brueckner-and-oo-general-condition}.
     [[a^i_a, H], a^b_j]
   |\Y}
 \end{align}
+where the gradient was already derived in equation~\ref{eq:brueckner-and-oo-condition-derivatives} and the Hessian can be derived similarly.
+The step
+\begin{align}
+  \bo{x}
+=
+-
+  \bo{A}^{-1}\,
+  \bo{w}
+\end{align}
+rotates the orbitals to make the gradient vanish, assuming $E(\bo{x})$ is quadratic.\footnote{To see this, solve for $\pd{E(\bo{x})}{\bo{x}}\overset{!}{=}\bo{0}$ in equation~\ref{eq:orbital-rotation-taylor-expansion}.}
+This known as the \textit{Newton-Raphson step}.
+Note that the expectation values in equation~\ref{eq:orbital-gradient-orbital-hessian} will require us to solve the lambda equations in order to determine $\br{\Y}$.
+\end{rmk}
 
+
+\begin{rmk}
+\thmtitle{OCC algorithm}
+The discussion of \cref{rmk:orbital-newton-raphson} leads to the following algorithm for OCC methods.
 \begin{enumerate}
 \item
+\label{item:occ-step-one}
+Update non-singles amplitudes:
 $
-  t_{a_1\cd a_k}^{i_a\cd a_k}
+  t_{ab\cd}^{ij\cd}
 =
-  (\mc{E}_{a_1\cd a_k}^{i_1\cd a_k})^{-1}\,
-  \ip{\F_{i_1\cd i_k}^{a_1\cd a_k}|
+  (\mc{E}_{ab\cd}^{ij\cd})^{-1}\,
+  \ip{\F_{ij\cd}^{ab\cd}|
     V_\mr{c}\,
     \mr{exp}(T)
   |\F}_\mr{C}
-$
+$.
 
 \item
+\label{item:occ-step-two}
+Update the Lagrange multipliers:
 $
-  \la_{i_1\cd i_k}^{a_1\cd a_k}
+  \la_{ij\cd}^{ab\cd}
 =
-  (\mc{E}_{a_1\cd a_k}^{i_1\cd a_k})^{-1}\,
+  (\mc{E}_{ab\cd}^{ij\cd})^{-1}\,
   \ip{\F|
     (1 + \La)
     V_\mr{c}\,
     \mr{exp}(T)
-  |\F_{i_1\cd i_k}^{a_1\cd a_k}}_\mr{C}
-$
+  |\F_{ij\cd}^{ab\cd}}_\mr{C}
+$.
 
 \item
-build
-$
-  \bo{A}^{-1}
-$
-and
-$
-  \bo{w}
-$
-
-\item
+Compute the Newton-Raphson step:
 $
   x_a^i
 =
@@ -277,6 +439,7 @@ $
 $
 
 \item
+Build the Newton-Raphson orbital rotation matrix:
 $
   \bo{U}
 =
@@ -287,30 +450,30 @@ $
   \bo{X}_\mr{vo}
 =
   [x_a^i]
-$
+$.
 
 \item
+Rotate the spin-orbital coefficients:
 $
   \bo{C}
-\mapsto
+\leftarrow
   \bo{C}\bo{U}
-$
+$.
 
 \item
-Recompute integrals in the new MO basis
+Transform the one- and two-electon integrals to the spin-orbital basis using the new coefficient matrix.
 
 \item
-Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
+Unless $\|\bo{w}\|\approx0$ and the non-singles amplitudes are converged, return to step~\ref{item:occ-step-one}.
 \end{enumerate}
-\end{rmk}
-
-\begin{rmk}
+Note that the amplitude and lambda equations in steps~\ref{item:occ-step-one} and \ref{item:occ-step-two} here are non-canonical $\mr{CCD}{\cd}m$ equations.
 \end{rmk}
 
 
 \begin{dfn}
 \thmtitle{Density matrices}
-\begin{align}
+The energy expectation value of the Hamiltonian,
+$
   H
 =
   h_p^q
@@ -319,9 +482,13 @@ Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
   \tfr{1}{4}
   \ol{g}_{pq}^{rs}
   a^{pq}_{rs}
-\end{align}
+$,
+can be expressed expressed in terms of the \textit{one-particle} and \textit{two-particle density matrices} of the wavefunction
 \begin{align}
+\label{eq:one-and-two-particle-density-matrices}
   E
+=
+  \ip{\Y|H|\Y}
 =
   h_p^q
   \g^p_q
@@ -338,9 +505,40 @@ Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
 =
   \ip{\Y|a^{pq}_{rs}|\Y}
 \end{align}
+which generalize the one-particle reference density matrix that we have already encountered.
+In traditional coupled-cluster theory, this expectation value is the coupled-cluster Lagrangian and we have
+\begin{align}
+  \mc{L}
+=
+  \ip{\F|(1+\La)H\mr{exp}(T)|\F}_\mr{C}
+=
+  h_p^q
+  \g^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \g^{pq}_{rs}
+&&
+\begin{array}{r@{\ }l}
+  \g^p_q
+&=
+  \ip{\F|(1 + \La)\, a^p_q\,\mr{exp}(T)|\F}_\mr{C}
+\\[5pt]
+  \g^{pq}_{rs}
+&=
+  \ip{\F|(1 + \La)\, a^{pq}_{rs}\,\mr{exp}(T)|\F}_\mr{C}
+\end{array}
+\end{align}
+where $\g^p_q$ and $\g^{pq}_{rs}$ are sometimes called \textit{response density matrices}.
+For Hermitian methods, the density matrices satisfy $\g^p_q=\g^{q*}_{p}$ and $\g^{pq}_{rs}=\g^{rs*}_{pq}$.
+This is not the case for TCC response density matrices.
 \end{dfn}
 
+
 \begin{rmk}
+Evaluating the commutators of equation~\ref{eq:orbital-gradient-orbital-hessian} using Wick's theorem\footnote{
+  Note that here we are doing Wick's theorem with respect to the physical vacuum.
+}
 \begin{align}
   [a_a^i, a^p_q]
 =&\
@@ -382,6 +580,7 @@ Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
   \d^i_r
   a^{pq}_{as}
 \end{align}
+yields an expression for the orbital gradient in terms of density matrices.
 \begin{align}
   (\bo{w})_{ia}
 =
@@ -402,11 +601,17 @@ Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
   \ol{g}_{pr}^{st}
   \g^{qr}_{st}
 \end{align}
+The intermediate $\bo{F}$ is sometimes called a \textit{generalized Fock matrix}.
+\end{rmk}
+
+\begin{rmk}
+The orbital Hessian can also be expanded in terms of one- and two-particle density matrices, but this expression is rather complicated.
+A more common approach is to use its zeroth order approximation.
 \begin{align}
   (\bo{A})_{ia,jb}
-=
-  \ip{\Y|[[a^i_a, H], a^b_j]|\Y}
 \approx
+  \ip{\Y|[[a^i_a, H], a^b_j]|\Y}\ord{0}
+=
   \ip{\F|[[a^i_a, H_0], a^b_j]|\F}
 =
   \ip{\F^a_i|H_0|\F^b_j}
@@ -414,26 +619,24 @@ Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
   \mc{E}_j^b
   \d^i_j
   \d^b_a
-\implies
-  (-\bo{A}^{-1})_{ia,jb}
-=
-  (\mc{E}_b^j)^{-1}\,
-  \d^i_j
-  \d^b_a
 \end{align}
+This approximation has the additional advantage of being diagonal and hence trivial to invert.
+This leads to the following formula for the Newton-Raphson step in terms of orbital energies, integrals, and density matrices.
 \begin{align}
   (-\bo{A}^{-1}\,\bo{w})_{ia}
 =
--
   \sum_{jb}
-  (\bo{A}^{-1})_{ia,jb}
+  (-\bo{A}^{-1})_{ia,jb}
   (\bo{w})_{jb}
-=
--
+\approx
+  -
   \sum_{jb}
-  (\mc{E}_b^j)^{-1}
-  \d^i_j
-  \d^b_a
+  \fr{
+    \d^i_j
+    \d^b_a
+  }{
+    \mc{E}_j^b
+  }
   (\bo{F} - \bo{F}\dg)_b^j
 =
   \fr{(\bo{F} - \bo{F}\dg)_a^i}{\mc{E}_a^i}
@@ -443,25 +646,7 @@ Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
 
 
 \begin{rmk}
-\begin{align}
-  a^p_q
-=
-  \tl{a}^p_q
-+
-  \oc{\g}^p_q
-&&
-  a^{pq}_{rs}
-=
-  \tl{a}^{pq}_{rs}
-+
-  P^{(p/q)}_{(r/s)}
-  \tl{a}^p_r\,
-  \oc{\g}^r_s
-+
-  P_{(r/s)}
-  \oc{\g}^p_r
-  \oc{\g}^q_s
-\end{align}
+Expanding excitation operators of equation~\ref{eq:one-and-two-particle-density-matrices} using Wick's theorem gives
 \begin{align}
   \g^p_q
 =
@@ -480,16 +665,310 @@ Check $\|\bo{w}\|$, $\bo{t}$, and $\bm{\la}$ for convergence
   P_{(r/s)}
   \oc{\g}^p_r
   \oc{\g}^q_s
+&&
+\begin{array}{r@{\ }lr@{\ }l}
+  \tl{\g}^p_q
+=&
+  \ip{\Y|\tl{a}^p_q|\Y}
+\\[3pt]
+  \tl{\g}^{pq}_{rs}
+=&
+  \ip{\Y|\tl{a}^{pq}_{rs}|\Y}
+\end{array}
 \end{align}
-
+where
+$
+  \oc{\g}^p_q
+\equiv
+  \ip{\F|a^p_q|\F}
+$
+is the density matrix of the reference determinant, whose non-vanishing elements are
+$
+  \oc{\g}^i_j
+=
+  \d^i_j
+$
+as usual as long as $\F$ is constructed from the current spin-orbital basis.
+For CCD, the correlation contributions are given by
 \begin{align}
   \tl{\g}^p_q
 =
-  \ip{\F|(1 + \La)\,\tl{a}^p_q\,\mr{exp}(T)|\F}_\mr{C}
+  \ip{\F|(1 + \La_2)\,\tl{a}^p_q\,\mr{exp}(T_2)|\F}_\mr{C}
+&&
+  \tl{\g}^{pq}_{rs}
 =
+  \ip{\F|(1 + \La_2)\,\tl{a}^{pq}_{rs}\,\mr{exp}(T_2)|\F}_\mr{C}
+\end{align}
+which can be evaluated diagrammatically.
+\begin{align*}
+\diagram[top, bottom]{
+  \node at (0,+0.8) {
+  $
+    \left(
+      1
+    +
+    \diagram{
+      \interaction{2}{l}{(0,+0.25)}{ddot}{overhang};
+      \draw[->-] (l1) to ++(-0.25,-0.5);
+      \draw[-<-] (l1) to ++(+0.25,-0.5);
+      \draw[->-] (l2) to ++(-0.25,-0.5);
+      \draw[-<-] (l2) to ++(+0.25,-0.5);
+    }
+    \right)
+  $
+  };
+  \node[ddot=white] (a) at (0,0) {};
+  \draw[->-] (a) to ++(0,+0.5);
+  \draw[-<-] (a) to ++(0,-0.5);
+  \node at (0,-0.8) {
+  $
+    \mr{exp}\left(\,
+    \diagram{
+      \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
+      \draw[->-] (t1) to ++(-0.25,+0.5);
+      \draw[-<-] (t1) to ++(+0.25,+0.5);
+      \draw[->-] (t2) to ++(-0.25,+0.5);
+      \draw[-<-] (t2) to ++(+0.25,+0.5);
+    }
+    \right)
+  $
+  };
+}_\mr{C}
+\hspace{-5pt}
+=\,
 \diagram{
-  \interaction{2}{g}{(0,0)}{ddot}{sawtooth};
+  \interaction{2}{l}{(0,+0.5)}{ddot}{overhang};
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[-<-] (l1) to ++(-125:0.5) node[smalldot] {};
+  \draw[-<-] (t1) to (l1);
+  \draw[->-,bend left ] (t2) to (l2);
+  \draw[-<-,bend right] (t2) to (l2);
 }
++
+\diagram{
+  \interaction{2}{l}{(0,+0.5)}{ddot}{overhang};
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-] (t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[->-] (l1) to ++(-125:0.5) node[smalldot] {};
+  \draw[->-] (t1) to (l1);
+  \draw[-<-,bend left ] (t2) to (l2);
+  \draw[->-,bend right] (t2) to (l2);
+}
+\hspace{1.5cm}
+\diagram[top, bottom]{
+  \node at (0,+0.9) {
+  $
+    \left(
+      1
+    +
+    \diagram{
+      \interaction{2}{l}{(0,+0.25)}{ddot}{overhang};
+      \draw[->-] (l1) to ++(-0.25,-0.5);
+      \draw[-<-] (l1) to ++(+0.25,-0.5);
+      \draw[->-] (l2) to ++(-0.25,-0.5);
+      \draw[-<-] (l2) to ++(+0.25,-0.5);
+    }
+    \right)
+  $
+  };
+  \interaction{2}{a}{(-0.5,0)}{ddot=white}{dotted};
+  \draw[->-] (a1) to ++(0,+0.5);
+  \draw[-<-] (a1) to ++(0,-0.5);
+  \draw[->-] (a2) to ++(0,+0.5);
+  \draw[-<-] (a2) to ++(0,-0.5);
+  \node at (0,-0.9) {
+  $
+    \mr{exp}\left(\,
+    \diagram{
+      \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
+      \draw[->-] (t1) to ++(-0.25,+0.5);
+      \draw[-<-] (t1) to ++(+0.25,+0.5);
+      \draw[->-] (t2) to ++(-0.25,+0.5);
+      \draw[-<-] (t2) to ++(+0.25,+0.5);
+    }
+    \right)
+  $
+  };
+}_\mr{C}
+\hspace{-5pt}
+=
+\left\{
+\begin{array}{@{}l}
+\,\hphantom{+}\,
+\diagram{
+  \interaction{2}{l}{(0,+0.25)}{ddot}{overhang};
+  \draw[-<-] (l1) to ++(-0.25,-0.5) node[smalldot] {};
+  \draw[->-] (l1) to ++(+0.25,-0.5) node[smalldot] {};
+  \draw[-<-] (l2) to ++(-0.25,-0.5) node[smalldot] {};
+  \draw[->-] (l2) to ++(+0.25,-0.5) node[smalldot] {};
+}
+\,+\,
+\diagram{
+  \interaction{2}{t}{(0,-0.25)}{ddot}{overhang};
+  \draw[-<-] (t1) to ++(-0.25,+0.5) node[smalldot] {};
+  \draw[->-] (t1) to ++(+0.25,+0.5) node[smalldot] {};
+  \draw[-<-] (t2) to ++(-0.25,+0.5) node[smalldot] {};
+  \draw[->-] (t2) to ++(+0.25,+0.5) node[smalldot] {};
+}
+\\[15pt]
+\,+\,
+\diagram{
+  \interaction{2}{l}{(0,+0.5)}{ddot}{overhang};
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[-<-] (l1) to ++(-125:0.5) node[smalldot] {};
+  \draw[-<-] (t1) to (l1);
+  \draw[->-] (t2) to ++(+55:0.5) node[smalldot] {};
+  \draw[-<-] (l2) to ++(-55:0.5) node[smalldot] {};
+  \draw[-<-] (t2) to (l2);
+}
+\,+\,
+\diagram{
+  \interaction{2}{l}{(0,+0.5)}{ddot}{overhang};
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-] (t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[->-] (l1) to ++(-125:0.5) node[smalldot] {};
+  \draw[->-] (t1) to (l1);
+  \draw[-<-] (t2) to ++(+55:0.5) node[smalldot] {};
+  \draw[->-] (l2) to ++(-55:0.5) node[smalldot] {};
+  \draw[->-] (t2) to (l2);
+}
+\,+\,
+\diagram{
+  \interaction{2}{l}{(1,+0.5)}{ddot}{overhang};
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(-0.25,+0.5) node[smalldot] {};
+  \draw[-<-] (t1) to ++(+0.25,+0.5) node[smalldot] {};
+  \draw[->-,bend left ] (t2) to (l1);
+  \draw[-<-,bend right] (t2) to (l1);
+  \draw[-<-] (l2) to ++(-0.25,-0.5) node[smalldot] {};
+  \draw[->-] (l2) to ++(+0.25,-0.5) node[smalldot] {};
+}
+\\[15pt]
+\,+\,
+\diagram{
+  \interaction{2}{1t}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{2t}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{l}{(1,+0.5)}{ddot}{overhang};
+  \draw[->-] (1t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[->-] (1t2) to ++(+125:0.5) node[smalldot] {};
+  \draw[-<-=0.6] (1t1) to (l1);
+  \draw[-<-=0.6] (1t2) to (l2);
+  \draw[->-=0.4] (2t1) to (l1);
+  \draw[->-=0.4] (2t2) to (l2);
+  \draw[-<-] (2t1) to ++(+55:0.5) node[smalldot] {};
+  \draw[-<-] (2t2) to ++(+55:0.5) node[smalldot] {};
+}
+\,+\,
+\diagram{
+  \interaction{2}{1t}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{2t}{(2,-0.5)}{ddot}{overhang};
+  \interaction{2}{l}{(1,+0.5)}{ddot}{overhang};
+  \draw[->-] (1t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[-<-] (1t1) to ++(+55:0.5) node[smalldot] {};
+  \draw[->-,bend left ] (1t2) to (l1);
+  \draw[-<-,bend right] (1t2) to (l1);
+  \draw[->-,bend left ] (2t1) to (l2);
+  \draw[-<-,bend right] (2t1) to (l2);
+  \draw[->-] (2t2) to ++(+125:0.5) node[smalldot] {};
+  \draw[-<-] (2t2) to ++(+55:0.5) node[smalldot] {};
+}
+\\[15pt]
+\,+\,
+\diagram{
+  \interaction{2}{1t}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{2t}{(2,-0.5)}{ddot}{overhang};
+  \draw[overhang] (1.5,+0.5) node[ddot] (l1) {} to ++(1.5,0) node[ddot] (l2) {};
+  \draw[->-] (1t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[-<-] (1t1) to ++(+55:0.5) node[smalldot] {};
+  \draw[->-] (1t2) to ++(+125:0.5) node[smalldot] {};
+  \draw[-<-] (1t2) to (l1);
+  \draw[->-] (2t1) to (l1);
+  \draw[-<-] (2t1) to ++(+55:0.5) node[smalldot] {};
+  \draw[->-,bend left ] (2t2) to (l2);
+  \draw[-<-,bend right] (2t2) to (l2);
+}
+\,+\,
+\diagram{
+  \interaction{2}{1t}{(0,-0.5)}{ddot}{overhang};
+  \interaction{2}{2t}{(2,-0.5)}{ddot}{overhang};
+  \draw[overhang] (1.5,+0.5) node[ddot] (l1) {} to ++(1.5,0) node[ddot] (l2) {};
+  \draw[-<-] (1t1) to ++(+125:0.5) node[smalldot] {};
+  \draw[->-] (1t1) to ++(+55:0.5) node[smalldot] {};
+  \draw[-<-] (1t2) to ++(+125:0.5) node[smalldot] {};
+  \draw[->-] (1t2) to (l1);
+  \draw[-<-] (2t1) to (l1);
+  \draw[->-] (2t1) to ++(+55:0.5) node[smalldot] {};
+  \draw[-<-,bend left ] (2t2) to (l2);
+  \draw[->-,bend right] (2t2) to (l2);
+}
+\end{array}
+\right.
+\end{align*}
+Separating these diagrams into unique blocks yields the following.
+\begin{align}
+  \tl{\g}^a_b
+=
+  \tfr{1}{2}
+  \la^{ac}_{ij}
+  t_{bc}^{ij}
+&&
+  \tl{\g}^i_j
+=
+-
+  \tfr{1}{2}
+  \la^{ab}_{jk}
+  t_{ab}^{ik}
+&&
+  \tl{\g}^{ab}_{cd}
+=
+  \tfr{1}{2}
+  \la^{ab}_{ij}
+  t_{cd}^{ij}
+&&
+  \tl{\g}^{ij}_{kl}
+=
+  \tfr{1}{2}
+  \la^{ab}_{kl}
+  t_{ab}^{ij}
+&&
+  \tl{\g}^{aj}_{ib}
+=
+  \la^{ac}_{ik}
+  t_{cb}^{kj}
+\end{align}
+\begin{align}
+  \tl{\g}_{ij}^{ab}
+=
+  \la_{ij}^{ab}
+&&
+  \tl{\g}_{ab}^{ij}
+=
+  t_{ab}^{ij}
++
+  (\tfr{1}{2})^2\,
+  t_{ab}^{kl}
+  \la_{kl}^{cd}
+  t_{cd}^{ij}
++
+  \tfr{1}{2}
+  P^{(i/j)}_{(a/b)}
+  t_{ac}^{ik}
+  \la_{kl}^{cd}
+  t_{cb}^{lj}
+-
+  \tfr{1}{2}
+  P^{(i/j)}
+  t_{ab}^{ik}
+  \la_{kl}^{cd}
+  t_{cd}^{jl}
+-
+  \tfr{1}{2}
+  P_{(a/b)}
+  t_{ac}^{ij}
+  \la_{kl}^{cd}
+  t_{bd}^{kl}
 \end{align}
 \end{rmk}
 
