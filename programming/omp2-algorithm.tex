@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby,skip=9pt plus 2pt minus 7pt]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage{accents}
+\newcommand{\oc}[1]{\ensuremath{\accentset{\circ}{#1}}}
+
+\begin{document}
+
+\section*{OMP2}
+
+
+\begin{enumerate}
+\item
+Build $h_p^q$ and $\ol{g}_{pq}^{rs}$ in the Hartree-Fock spin-orbital basis.
+
+\item
+Build an empty array of amplitudes, $t_{ab}^{ij}=0$.
+
+\item
+\label{item:recursive-step}
+Build the Fock matrix.
+\begin{align}
+  f_p^q
+=
+  h_p^q
++
+  \ol{g}_{pi}^{qi}
+\end{align}
+
+\item
+Build the off-diagonal Fock matrix and the orbital energies.
+\begin{align}
+  \ev_p
+=
+  f_p^p
+&&
+  f'{}_p^q
+=
+  (1 - \d_p^q)
+  f_p^q
+\end{align}
+
+\item
+\label{itemocc-step-one}
+Update the amplitudes.
+\begin{align}
+  {}\ord{1}t_{ab}^{ij}
+=
+  (\mc{E}_{ab}^{ij})^{-1}
+  \pr{
+    \ol{g}_{ab}^{ij}
+  +
+    P_{(a/b)}
+    f'{}_a^c
+    t_{cb}^{ij}
+  -
+    P^{(i/j)}
+    f'{}_k^i
+    t_{ab}^{kj}
+  }
+\end{align}
+
+\item
+Build the one- and two-particle density matrices.
+\begin{align}
+  \g^p_q
+=
+  \tl{\g}^p_q
++
+  \oc{\g}^p_q
+&&
+  \g^{pq}_{rs}
+=
+  \tl{\g}^{pq}_{rs}
++
+  P^{(p/q)}_{(r/s)}
+  \tl{\g}^p_r\,
+  \oc{\g}^q_s
++
+  P_{(r/s)}
+  \oc{\g}^p_r
+  \oc{\g}^q_s
+&&
+  \oc{\g}^p_q
+=
+\left\{
+\begin{array}{ll}
+  \d^i_j
+&
+  \text{for $p=i$, $q=j$}
+\\
+  0
+&
+  \text{otherwise}
+\end{array}
+\right.
+\end{align}
+\begin{align}
+  \tl{\g}^a_b
+=
+  \tfr{1}{2}
+  t^{ac*}_{ij}
+  t_{bc}^{ij}
+&&
+  \tl{\g}^i_j
+=
+-
+  \tfr{1}{2}
+  t^{ab*}_{jk}
+  t_{ab}^{ik}
+&&
+  \tl{\g}^{ab}_{cd}
+=
+  \tfr{1}{2}
+  t^{ab*}_{ij}
+  t_{cd}^{ij}
+&&
+  \tl{\g}^{ij}_{kl}
+=
+  \tfr{1}{2}
+  t^{ab*}_{kl}
+  t_{ab}^{ij}
+\end{align}
+\begin{align}
+  \tl{\g}^{aj}_{ib}
+=
+-
+  \tl{\g}^{aj}_{bi}
+=
+-
+  \tl{\g}^{ja}_{ib}
+=
+  \tl{\g}^{ja}_{bi}
+=
+  t^{ac*}_{ik}
+  t_{cb}^{kj}
+&&
+  \tl{\g}_{ij}^{ab}
+=
+  t_{ij}^{ab*}
+&&
+  \tl{\g}_{ab}^{ij}
+=
+  t_{ab}^{ij}
+\end{align}
+
+\item
+Compute the Newton-Raphson step.
+\begin{align}
+  x_a^i
+=
+  \fr{(\bo{F} - \bo{F}\dg)_a^i}{\ev_i - \ev_a}
+&&
+  (\bo{F})_p^q
+\equiv
+  h_p^r
+  \g^q_r
++
+  \tfr{1}{2}
+  \ol{g}_{pr}^{st}
+  \g^{qr}_{st}
+\end{align}
+
+\item
+Build the Newton-Raphson orbital rotation matrix.
+\begin{align}
+  \bo{U}
+=
+  \mr{exp}(\bo{X} - \bo{X}\dg)
+&&
+  \bo{X}_\mr{vo}
+=
+  [x_a^i]
+\end{align}
+
+\item
+Rotate the spin-orbital coefficients.
+\begin{align}
+  \bo{C}
+\leftarrow
+  \bo{C}\bo{U}
+\end{align}
+
+\item
+Transform the one- and two-electon integrals to the spin-orbital basis using the new coefficient matrix.
+\begin{align}
+  h_p^q
+=
+  \sum_{\mu\nu}
+  C_{\mu p}^*\,
+  h_{\mu\nu}\,
+  C_{\nu q}
+&&
+  \ol{g}_{pq}^{rs}
+=
+  \sum_{\mu\nu\rh\si}
+  C_{\mu p}^*\,
+  C_{\nu q}^*\,
+  \ip{\mu \nu||\rh\si}
+  C_{\rh r}
+  C_{\si s}
+\end{align}
+
+\item
+Evaluate the energy.
+\begin{align}
+  E
+=
+  h_p^q
+  \g^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \g^{pq}_{rs}
+\end{align}
+
+\item
+If the energy is converged, quit.
+Otherwise, return to step~\ref{item:recursive-step}.
+\end{enumerate}
+
+
+\end{document}
