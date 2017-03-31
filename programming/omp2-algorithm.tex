@@ -87,20 +87,6 @@ Build the one- and two-particle density matrices.
   P_{(r/s)}
   \oc{\g}^p_r
   \oc{\g}^q_s
-&&
-  \oc{\g}^p_q
-=
-\left\{
-\begin{array}{ll}
-  \d^i_j
-&
-  \text{for $p=i$, $q=j$}
-\\
-  0
-&
-  \text{otherwise}
-\end{array}
-\right.
 \end{align}
 \begin{align}
   \tl{\g}^a_b
@@ -116,32 +102,6 @@ Build the one- and two-particle density matrices.
   t^{ab*}_{jk}
   t_{ab}^{ik}
 &&
-  \tl{\g}^{ab}_{cd}
-=
-  \tfr{1}{2}
-  t^{ab*}_{ij}
-  t_{cd}^{ij}
-&&
-  \tl{\g}^{ij}_{kl}
-=
-  \tfr{1}{2}
-  t^{ab*}_{kl}
-  t_{ab}^{ij}
-\end{align}
-\begin{align}
-  \tl{\g}^{aj}_{ib}
-=
--
-  \tl{\g}^{aj}_{bi}
-=
--
-  \tl{\g}^{ja}_{ib}
-=
-  \tl{\g}^{ja}_{bi}
-=
-  t^{ac*}_{ik}
-  t_{cb}^{kj}
-&&
   \tl{\g}_{ij}^{ab}
 =
   t_{ij}^{ab*}
@@ -149,6 +109,20 @@ Build the one- and two-particle density matrices.
   \tl{\g}_{ab}^{ij}
 =
   t_{ab}^{ij}
+&&
+  \oc{\g}^p_q
+=
+\left\{
+\begin{array}{ll}
+  \d^i_j
+&
+  \text{for $p=i$, $q=j$}
+\\
+  0
+&
+  \text{otherwise}
+\end{array}
+\right.
 \end{align}
 
 \item
