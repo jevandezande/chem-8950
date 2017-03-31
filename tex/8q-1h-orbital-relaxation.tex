@@ -42,7 +42,7 @@
 
 \begin{rmk}
 \thmtitle{Orbital relaxation}
-According to the Thouless theorem (\cref{appendix:thouless}), the effect of the singles CC operator is to transform the orbitals of the reference determinant into a new set $\{\widetilde{\y}_i\}$ by ``mixing in'' some of the virtual orbitals.
+According to the Thouless theorem (\cref{appendix:thouless}), the effect of the singles CC operator is to transform the orbitals of the reference determinant into a new set $\{\widetilde{\y}_i\}$ by mixing in some of the virtual orbitals.
 \begin{align}
   \Y_\mr{CC}
 =
@@ -107,7 +107,7 @@ Note that these two conditions are in general mutually exclusive, so one must ch
 
 \begin{dfn}
 \thmtitle{Orbital invariance}
-An Ansatz is usually termed \textit{orbital invariant} if it preserves the rotational invariances of the reference function.
+An Ansatz is usually termed \textit{orbital invariant} if it preserves the unitary invariances of its reference function.
 For single-reference methods, this means that the total energy is unchanged by orbital rotations within the occupied and virtual spaces.
 In this context, the occupied and virtual blocks of $\bo{X}$ in equation~\ref{eq:operator-transformation} are redundant in the sense that they produce transformations which do not change the energy.
 \end{dfn}
@@ -506,7 +506,7 @@ can be expressed expressed in terms of the \textit{one-particle} and \textit{two
   \ip{\Y|a^{pq}_{rs}|\Y}
 \end{align}
 which generalize the one-particle reference density matrix that we have already encountered.
-In traditional coupled-cluster theory, this expectation value is the coupled-cluster Lagrangian and we have
+In traditional coupled-cluster theory this expectation value is the CC Lagrangian, whose density matrices are the \textit{CC response density matrices}.
 \begin{align}
   \mc{L}
 =
@@ -528,10 +528,9 @@ In traditional coupled-cluster theory, this expectation value is the coupled-clu
 &=
   \ip{\F|(1 + \La)\, a^{pq}_{rs}\,\mr{exp}(T)|\F}_\mr{C}
 \end{array}
-\end{align}
-where $\g^p_q$ and $\g^{pq}_{rs}$ are sometimes called \textit{response density matrices}.
-For Hermitian methods, the density matrices satisfy $\g^p_q=\g^{q*}_{p}$ and $\g^{pq}_{rs}=\g^{rs*}_{pq}$.
-This is not the case for TCC response density matrices.
+\end{align} 
+For Hermitian methods, $\g^p_q=\g^{q*}_{p}$ and $\g^{pq}_{rs}=\g^{rs*}_{pq}$.
+This is not the case for TCC.
 \end{dfn}
 
 
