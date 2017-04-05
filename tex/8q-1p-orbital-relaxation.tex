@@ -88,9 +88,54 @@ Prove the following.
 =
   \mr{exp}(X - X\dg)
   \kt{\F_{(p_1\cd p_n)}}
+&&
+\begin{array}{r@{\ }l}
+  \kt{\F'_{(p_1\cd p_n)}}
+&=
+  a_{p_1}^{\prime \dagger}
+\cd
+  a_{p_n}^{\prime \dagger}
+  \kt{\vac}
+\\[5pt]
+  \kt{\F_{(p_1\cd p_n)}}
+&=
+  a_{p_1}^{ \dagger}
+\cd
+  a_{p_n}^{ \dagger}
+  \kt{\vac}
+\end{array}
 \end{align}
 
+\item
+Derive the following conditions for Brueckner/optimized orbitals
+\begin{align}
+\label{eq:brueckner-and-oo-explicit-condition}
+  \{\y_p\}_\mr{B}\,:\,\,
+  \ip{\F_i^a|\Y}
+\overset{!}{=}
+  0
+&&
+  \{\y_p\}_\mr{O}\,:\,\,
+  \ip{\Y|[a_a^i, H]|\Y}
+\overset{!}{=}
+  0
+\end{align}
+from the best-overlap/best-energy criteria.  Explain why the Brueckner condition is equivalent to requiring that singles coefficients vanish, for both the coupled-cluster and configuration interaction Ans\"atze.
 
+
+\item
+Write down an algorithm for computing BCC orbitals.  In particular, explain how to rotate the orbitals each iteration in order to satisfy the Brueckner condition.
+
+
+\item
+Write down an algorithm for computing OCC orbitals.    In particular, explain how to rotate the orbitals each iteration in order to satisfy the optimization condition.
+
+\item
+Derive an explicit formula for the orbital Newton-Raphson step, using a zeroth-order approximation for the orbital Hessian.
+
+\item
+Derive density matrices for the CEPA$_0$ approximation.
+Give both the diagrams and algebraic expressions.
 
 
 \end{enumerate}
