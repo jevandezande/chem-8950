@@ -368,7 +368,7 @@ Optimized orbitals can be determined from
   \pd{^2 E}{x_a^{i*}\pt x_b^j}
   \right|_{\bo{x}=\bo{0}}
 \end{align}
-which is a Taylor expansion for the total energy with respect to orbital rotations, $\bo{w}$ being the \textit{orbital gradient} and $\bo{A}$ the \textit{orbital Hessian} evaluated at with the current orbitals.
+which is a Taylor expansion for the total energy with respect to orbital rotations, $\bo{w}$ being the \textit{orbital gradient} and $\bo{A}$ the \textit{orbital Hessian} evaluated at the current orbitals.
 These are given by
 \begin{align}
 \label{eq:orbital-gradient-orbital-hessian}
@@ -483,7 +483,7 @@ $
   \ol{g}_{pq}^{rs}
   a^{pq}_{rs}
 $,
-can be expressed expressed in terms of the \textit{one-particle} and \textit{two-particle density matrices} of the wavefunction
+can be expressed in terms of the \textit{one-particle} and \textit{two-particle density matrices} of the wavefunction
 \begin{align}
 \label{eq:one-and-two-particle-density-matrices}
   E
@@ -1260,9 +1260,9 @@ According to \cref{dfn:normal-matrix} and \cref{rmk:spectral-theorem}, unitary t
   \y_q
   (\mr{exp}(\bo{X} - \bo{X}\dg))_{qp}
 \end{align}
-in terms a square matrix $\bo{X}$.
-The anti-Hermitian form of this parametrization leads to redundancies.
-In particular, notice that $\bo{X}=[z\,\d_{pq}]$ generates the same transformation as $\bo{X}\dg=[-z^*\,\d_{qp}]$.
+in terms of a square matrix $\bo{X}$.
+The form of this parametrization leads to redundancies.
+In particular, notice that $(\bo{X})_{pq}\equiv z\,\d_{pp'}\d_{qq'}$ generates the same transformation as $(\bo{X})_{pq}\equiv -z^*\,\d_{qp'}\d_{pq'}$.
 These redundancies are eliminated by setting the upper or lower triangle of $\bo{X}$ to zero.
 The creation operators for these orbitals are given by
 $
