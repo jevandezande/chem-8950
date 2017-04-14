@@ -125,8 +125,9 @@ $
   \tl{V}(t')\,
   \tl{U}(t',t_0)
 $.
-Infinite recursion of this identity leads to the following.
+Infinite recursion yields the following.
 \begin{align}
+\label{eq:time-evolution-infinite-recursion}
   \tl{U}(t,t_0)
 =
   \sum_{n=0}^\infty
@@ -146,6 +147,7 @@ Infinite recursion of this identity leads to the following.
 \end{dfn}
 
 \begin{dfn}
+\label{dfn:time-ordering}
 \thmtitle{Time-ordering}
 Let 
 $
@@ -176,8 +178,9 @@ where $\pi\in\mr{S}_n$ is a permutation that puts the time arguments in reverse-
 \end{dfn}
 
 \begin{ntt}
+The following notation proves convenient for manipulating multiple integrals
 \begin{align}
-  \int_{t_1,t_2,t_3,\ld}^{[t_0,t]}
+  \int_{t_1t_2t_3\ld}^{[t_0,t]}
   dt_1dt_2dt_3\cd
 \equiv
   \int_{t_0}^t
@@ -199,16 +202,44 @@ where $\pi\in\mr{S}_n$ is a permutation that puts the time arguments in reverse-
   dt_3
   \cd
 \end{align}
+which is defined by analogy with summation notation
+$
+  \sum_{i_1i_2i_3\cd}^{\{n_0,\ld,n\}}
+$
+and
+$
+  \sum_{i_1>i_2>i_3\cd}^{\{n_0,\ld,n\}}
+$.
+That is, the $t_i$'s are dummy variables which we integrate over all values in $[t_0,t]$ satisfying a condition, such as $t_1>t_2>t_3>\cd$.
+Then the identity
 \begin{align}
+\label{eq:integral-identity}
   \int_{t_1\cd t_n}^{[t_0,t]}
   dt_1\cd t_n\,
   f(t_1\cd t_n)
 =
-  \sum_{\pi\in\mr{S}_n}
+  \sum_\pi^{\mr{S}_n}
   \int_{t_{\pi(1)}>\ld>t_{\pi(n)}}^{[t_0,t]}
   dt_1\cd t_n\,
   f(t_1\cd t_n)
 \end{align}
+follows from considering all possible chronologies for $t_1,\ld,t_n$ in the unrestricted integral.\footnotemark
+\footnote{
+  The corresponding summation identity would be
+$
+  \sum_{i_1\neq i_2\neq i_3\neq\cd}^{\{n_0,n\}}
+=
+  \sum_{\pi}^{\mr{S}_n}
+  \sum_{i_{\pi(1)}> i_{\pi(2)}> i_{\pi(3)}>\cd}^{\{n_0,n\}}
+$.
+  The unrestricted integral is equivalent to an integral over $t_1\neq t_2\neq t_3\neq\cd$ because individual integrand values have ``measure zero'':
+$
+  \int_{t_j}^{t_j}
+  dt_i
+=
+  0
+$.
+}
 \end{ntt}
 
 
@@ -230,6 +261,7 @@ $\ds{
 }$
 }
 \thmproof{
+   Expanding the exponential in a Taylor series and applying equation~\ref{eq:integral-identity} gives the following
 \begin{align}
   \sum_{n=0}^\infty
   \fr{(-i)^n}{n!}
@@ -243,7 +275,7 @@ $\ds{
 =
   \sum_{n=0}^\infty
   \fr{(-i)^n}{n!}
-  \sum_{\pi\in\mr{S}_n}
+  \sum_\pi^{\mr{S}_n}
   \int_{t_{\pi(1)}>\ld>t_{\pi(n)}}^{[t_0,t]}
   dt_1\cd dt_n\,
   \mc{T}\{
@@ -252,6 +284,7 @@ $\ds{
     \tl{V}(t_n)
   \}
 \end{align}
+which simplifies to equation~\ref{eq:time-evolution-infinite-recursion} because all $n!$ terms in the sum over $\pi$ are equivalent by \cref{dfn:time-ordering}.\footnote{We are assuming that $\tl{V}(t)$ is particle-number-conserving, or at least contains only even operator products.}
 }
 \end{prop}
 
@@ -261,21 +294,81 @@ $\ds{
 \section{Response functions}
 
 \begin{rmk}
+A convenient starting point for \textit{response theory} is to cast the interaction Hamiltonian in the following form
 \begin{align}
+\label{}
   V(t)
 =
   \sum_\b
   V_\b
   f_\b(t)
-&&
+\end{align}
+where $\{V_\b\}$ is a set of one-particle operators and the $f_\b(t)$'s are scalar-valued \textit{time envelopes}.
+\end{rmk}
+
+\begin{ex}
+Interactions with electric and magnetic fields are approximately described by the following Hamiltonians
+\begin{align}
+\begin{array}{r@{\ }l@{\ }l@{\hspace{2cm}}r@{\ }l@{\hspace{2cm}}r@{\ }l}
+  V_{\bo{E}}(t)
+=&
+-\,
+  \bm{\mu}\cdot\bo{E}(t)
+&=
+-
+  \sum_\b
+  \mu_\b
+  \mc{E}_\b(t)
+&
+  \bm{\mu}
+&=
+\ds{
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{\mu}}\,|\y_q}
+  a_p\dg a_q
+}
+&
+  \op{\bm{\mu}}
+&=
+-
+  \op{\bo{r}}
+\\
+  V_{\bo{B}}(t)
+=&
+-
+  \bm{m}\cdot\bo{B}(t)
+&=
+-
+  \sum_\b
+  m_\b
+  \mc{B}_\b(t)
+&
+  \bm{m}
+&=
+\ds{
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{m}}|\y_q}
+  a_p\dg a_q
+}
+&
+  \op{\bm{m}}
+&=
+-
+  \dfr{\op{\bo{r}}\times\op{\bo{p}}}{2}
+\end{array}
+\end{align}
+where $\bm{\mu}$ and $\bm{m}$ are the electric and magnetic dipole operators and the field components, $\mc{E}_\b(t)$ and $\mc{B}_\b(t)$, are scalar-valued functions of time.
+This is known as the \textit{dipole approximation}.
+\end{ex}
+
+\begin{rmk}
+A convenient set of boundary conditions for response theory turns the interaction off in the infinite past and requires that the system begins in a stationary state, which is usually chosen to be the ground state.
+\begin{align}
   \lim_{t\rightarrow-\infty}
   f_\b(t)
 =
   0
-\end{align}
-\begin{align}
-  \tl{\Y}\ord{0}(t)
-=
+&&
   \lim_{t\rightarrow-\infty}
   \tl{\Y}(t)
 =
@@ -287,14 +380,17 @@ $\ds{
   E_k
   \Y_k
 \end{align}
+This can be imposed on any time envelope with a finite $t\rightarrow-\infty$ limit by building in a factor $e^{-\ev t}$ where $\ev$ is a real number.
+For sufficiently small $\ev$, this new envelope will match the old one to arbitrary precision in an arbitrarily wide window about the time origin.
+The Dyson series for the wavefunction can then be written in the form
 \begin{align}
   \tl{\Y}(t)
 =
-  \sum_{n=0}^\infty
-  \tl{\Y}\ord{n}(t)
-&&
-  \tl{\Y}\ord{n}(t)
+  \lim_{t_0\rightarrow-\infty}
+  \tl{U}(t,t_0)
+  \Y_0
 =
+  \sum_{n=0}^\infty
   \fr{(-i)^n}{n!}
   \int_{\mb{R}^n}
   dt_1\cd dt_n\,
@@ -308,11 +404,21 @@ $\ds{
   \}
   \Y_0
 \end{align}
+where
+$
+  \th(x)
+=
+  \int_{-\infty}^x
+  dx'
+  \d(x')
+$
+is the Heaviside step function, which here enforces an upper limit of $t$ for each integral over $t_i$.
 \end{rmk}
 
 \begin{dfn}
-\thmtitle{Response function}
+Any perturbation-dependent quantity $X(t)$ can be expanded in a Taylor expansion of the time-envelopes
 \begin{align}
+\label{eq:}
   X(t)
 =
   \sum_{n=0}^\infty
@@ -337,9 +443,16 @@ $\ds{
   }
   \right|_{\bm{f}=\bo{0}}
 \end{align}
+where the coefficients $X_{t;t_1\cd t_n}^{\b_1\cd \b_n}$ are $n\eth$-order \textit{responses} or \textit{response functions}, although the latter term is often restricted to the case where $X(t)$ is an observable expectation value, $\ip{W}(t)=\ip{\Y(t)|W(t)|\Y(t)}$, in which case we denote the response with double-brackets
+$
+  \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
+\equiv
+  \ip{W}_{t;t_1\cd t_n}^{\b_1\cd \b_n}
+$.
+In some contexts these property response functions are referred to as \textit{retarded propagators} or \textit{retarded Green's functions}.
 \end{dfn}
 
-\begin{prop}
+\begin{ex}
 \begin{align}
   \Y^{\b_1\cd \b_n}_{t; t_1\cd t_n}
 =
@@ -348,13 +461,13 @@ $\ds{
   \cd
   \th(t-t_n)\,
   \mc{T}\{
-    \tl{V}(t_1)
+    \tl{V}_{\b_1}(t_1)
   \cd
-    \tl{V}(t_n)
+    \tl{V}_{\b_n}(t_n)
   \}
   \Y_0
 \end{align}
-\end{prop}
+\end{ex}
 
 \begin{ntt}
 \begin{align}
