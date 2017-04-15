@@ -38,17 +38,11 @@
 
 
 \setcounter{section}{8}
-%\section{Response theory}
-
-
-\newpage
-\appendix
-
-\section{Time-dependent perturbation theory}
+\section{Response theory}
 
 \begin{rmk}
-In an time-varying field, the electronic wavefunction is no longer simply an eigenfunction of the Hamiltonian.
-This more general system is described by the following \textit{time-dependent Schr\"odinger equation}
+In the presence of a time-varying field, the electronic wavefunction is no longer simply an eigenfunction of the Hamiltonian.
+Instead, the electronic structure is described by the \textit{time-dependent Schr\"odinger equation}
 \begin{align}
 \label{eq:schrodinger-equation}
   H(t)
@@ -63,7 +57,237 @@ This more general system is described by the following \textit{time-dependent Sc
 +
   V(t)
 \end{align}
-where $H$ is the usual electronic Hamiltonian and $V(t)$ describes the interaction with the external field.
+where $H$ is the usual electronic Hamiltonian and the \textit{interaction Hamiltonian} $V(t)$ describes electronic coupling to the external field.
+Most interactions can be expressed as a sum over one-electron operators $V_\b$ representing the electronic degrees of freedom which are coupled to the field, scaled by \textit{time-envelopes} $f_\b(t)$ representing the field strength over time.
+\begin{align}
+  V(t)
+=
+  \sum_\b
+  V_\b
+  f_\b(t)
+\end{align}
+
+
+
+where $\{V_\b\}$ is a set of one-electron operators 
+
+$V(t)$ is a time-dependent perturbation describing the energetic coupling to the .
+
+
+ the time-dependent perturbation $V(t)$ is the Hamiltonian of the interaction between the electrons and the time-varying field.
+\end{rmk}
+
+\begin{rmk}
+In the presence of a time-varying field, the electronic wavefunction is no longer simply an eigenfunction of the Hamiltonian.
+This more general system is described by the following \textit{time-dependent Schr\"odinger equation}
+where $H$ is the usual electronic Hamiltonian and $V(t)$ describes the interaction with the external field.\\
+\Cref{appendix:tdpt} shows how to solve this.\\
+\label{rmk:time-envelopes}
+A convenient starting point for \textit{response theory} is to cast the interaction Hamiltonian in the following form
+\begin{align}
+\label{eq:interaction-time-envelopes}
+  V(t)
+=
+\ts{
+  \sum_\b
+  V_\b
+  f_\b(t)
+}
+\end{align}
+where $\{V_\b\}$ is a set of one-particle operators and the $f_\b(t)$'s are scalar-valued \textit{time envelopes}.
+A convenient set of boundary conditions for response theory turns the interaction off in the infinite past and requires that the system begins in a stationary state, which is usually chosen to be the ground state.
+\begin{align}
+  \lim_{t\rightarrow-\infty}
+  f_\b(t)
+=
+  0
+&&
+  \lim_{t\rightarrow-\infty}
+  \tl{\Y}(t)
+=
+  \Y_0
+&&
+  H
+  \Y_k
+=
+  E_k
+  \Y_k
+\end{align}
+This can be imposed on any time envelope with a finite $t\rightarrow-\infty$ limit by building in a factor $e^{-\ev t}$ where $\ev$ is a real number.
+For sufficiently small $\ev$, this new envelope will match the old one to arbitrary precision in an arbitrarily wide window about the time origin.
+\end{rmk}
+
+
+
+\begin{ex}
+\thmtitle{The dipole approximation}
+The dominant coupling of an electronic system to an external electric or magnetic field, $\bo{E}(t)$ or $\bo{B}(t)$, is mediated through its dipoles.
+Quantizing the classical formulae for these interactions gives
+\begin{align}
+\begin{array}{r@{\ }l@{\ }l@{\hspace{2cm}}r@{\ }l@{\hspace{2cm}}r@{\ }l}
+  V_{\bo{E}}(t)
+\approx&
+-\,
+  \bm{\mu}\cdot\bo{E}(t)
+&=
+-
+  \sum_\b
+  \mu_\b
+  \mc{E}_\b(t)
+&
+  \bm{\mu}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{\mu}}\,|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{\mu}}
+&=
+-
+  \op{\bo{r}}
+\\
+  V_{\bo{B}}(t)
+\approx&
+-
+  \bm{m}\cdot\bo{B}(t)
+&=
+-
+  \sum_\b
+  m_\b
+  \mc{B}_\b(t)
+&
+  \bm{m}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{m}}|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{m}}
+&=
+-
+  \tfr{1}{2}
+  (
+    \op{\bm{l}}
+  +
+    2\,
+    \op{\bo{s}}
+  )
+\end{array}
+\end{align}
+where $\op{\bm{\mu}}$ and $\op{\bm{m}}$ are the first-quantized electric and magnetic dipole operators of a single electron.\footnote{
+More generally, these expressions are
+$
+  \op{\bm{\mu}}
+=
+  q_e\,\op{\bo{r}}
+$,
+where $q_e=-e$ is the charge of an electron,
+and
+$
+  \op{\bm{m}}
+=
+  \mu_\mr{B}
+  (
+    g_l\,
+    \op{\bm{l}}
+  +
+    g_{\mr{s}}\,
+    \op{\bo{s}}
+  )
+$
+where $\mu_{\mr{B}}=\tfr{1}{2}\cdot\tfr{e\hbar}{m_e}$ is the Bohr magneton and $g_l=-1$, $g_\mr{s}=-2$ are the spin and orbital \textit{$g$-factors}.
+Note that the exact $g_\mr{s}$ actually deviates very slightly from $2$ due to effects arising in quantum field theory.
+}
+The orbital angular momentum operator is $\op{\bm{l}}=\op{\bo{r}}\times\op{\bo{p}}$, and $\op{\bo{s}}$ is the intrinsic spin angular momentum operator.
+
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Quasi-energy}
+\begin{align}
+  \Y(t)
+=
+  e^{-i\th(t)}
+  \bar{\Y}(t)
+&&
+  \lim_{t\rightarrow-\infty}
+  \bar{\Y}(t)
+=
+  \Y_0
+&&
+  \left.
+  \th(t)
+  \right|_{\bm{f}=\bo{0}}
+=
+  E_0
+  t
+\end{align}
+\begin{align}
+  (
+    H(t)
+  -
+    i
+    \tpd{}{t}
+  )
+  \bar{\Y}(t)
+=
+  \dot{\th}(t)
+  \bar{\Y}(t)
+\end{align}
+\begin{align}
+  \dot{\th}(t)
+=
+  \int_0^t
+  dt'
+  \ip{\bar{\Y}(t')|
+    H(t')
+  -
+    i\tpd{}{t'}
+  |\bar{\Y}(t')}
+\end{align}
+\begin{align}
+  \br{\d\bar{\Y}(t)}
+    H(t)
+  -
+    i
+    \tpd{}{t}
+  \kt{\bar{\Y}(t)}
+=
+  \dot{\th}(t)
+  \ip{\d\bar{\Y}(t)|\bar{\Y}(t)}
+\end{align}
+\begin{align}
+  \ip{\d\bar{\Y}(t)|\bar{\Y}(t)}
++
+  \ip{\bar{\Y}(t)|\d\bar{\Y}(t)}
+=
+  0
+\end{align}
+\begin{align}
+  \d
+  \ip{\bar{\Y}(t)|
+    H(t)
+  -
+    i
+    \tpd{}{t}
+  |\bar{\Y}(t)}
++
+  i
+  \tpd{}{t}
+  \ip{\bar{\Y}(t)|\d\bar{\Y}(t)}
+=
+  0
+\end{align}
+\end{dfn}
+
+
+\newpage
+\appendix
+
+\section{Time-dependent perturbation theory}
+\label{appendix:tdpt}
+
+\begin{rmk}
 If the electrons are prepared in a particular state $\Y_0$ at some time $t_0$, the system is completely described by a \textit{time-evolution operator}.
 \begin{align}
   \Y(t)=U(t,t_0)\Y_0
@@ -288,98 +512,7 @@ which simplifies to equation~\ref{eq:time-evolution-infinite-recursion} because 
 }
 \end{prop}
 
-
-
-\newpage
-\section{Response functions}
-
 \begin{rmk}
-A convenient starting point for \textit{response theory} is to cast the interaction Hamiltonian in the following form
-\begin{align}
-\label{eq:interaction-time-envelopes}
-  V(t)
-=
-\ts{
-  \sum_\b
-  V_\b
-  f_\b(t)
-}
-\end{align}
-where $\{V_\b\}$ is a set of one-particle operators and the $f_\b(t)$'s are scalar-valued \textit{time envelopes}.
-\end{rmk}
-
-\begin{ex}
-Interactions with electric and magnetic fields are approximately described by the following Hamiltonians
-\begin{align}
-\begin{array}{r@{\ }l@{\ }l@{\hspace{2cm}}r@{\ }l@{\hspace{2cm}}r@{\ }l}
-  V_{\bo{E}}(t)
-=&
--\,
-  \bm{\mu}\cdot\bo{E}(t)
-&=
--
-  \sum_\b
-  \mu_\b
-  \mc{E}_\b(t)
-&
-  \bm{\mu}
-&=
-  \sum_{pq}
-  \ip{\y_p|\op{\bm{\mu}}\,|\y_q}
-  a_p\dg a_q
-&
-  \op{\bm{\mu}}
-&=
--
-  \op{\bo{r}}
-\\
-  V_{\bo{B}}(t)
-=&
--
-  \bm{m}\cdot\bo{B}(t)
-&=
--
-  \sum_\b
-  m_\b
-  \mc{B}_\b(t)
-&
-  \bm{m}
-&=
-  \sum_{pq}
-  \ip{\y_p|\op{\bm{m}}|\y_q}
-  a_p\dg a_q
-&
-  \op{\bm{m}}
-&=
--
-  \dfr{\op{\bo{r}}\times\op{\bo{p}}}{2}
-\end{array}
-\end{align}
-where $\bm{\mu}$ and $\bm{m}$ are the electric and magnetic dipole operators and the field components, $\mc{E}_\b(t)$ and $\mc{B}_\b(t)$, are scalar-valued functions of time.
-This is known as the \textit{dipole approximation}.
-\end{ex}
-
-\begin{rmk}
-A convenient set of boundary conditions for response theory turns the interaction off in the infinite past and requires that the system begins in a stationary state, which is usually chosen to be the ground state.
-\begin{align}
-  \lim_{t\rightarrow-\infty}
-  f_\b(t)
-=
-  0
-&&
-  \lim_{t\rightarrow-\infty}
-  \tl{\Y}(t)
-=
-  \Y_0
-&&
-  H
-  \Y_k
-=
-  E_k
-  \Y_k
-\end{align}
-This can be imposed on any time envelope with a finite $t\rightarrow-\infty$ limit by building in a factor $e^{-\ev t}$ where $\ev$ is a real number.
-For sufficiently small $\ev$, this new envelope will match the old one to arbitrary precision in an arbitrarily wide window about the time origin.
 The Dyson series for the wavefunction can then be written in the form
 \begin{align}
 \label{eq:wavefunction-dyson-series}
@@ -413,6 +546,13 @@ $
 $
 is the Heaviside step function, which here enforces an upper limit of $t$ for each integral over $t_i$.
 \end{rmk}
+
+
+
+\newpage
+\section{Response functions}
+\label{appendix:response-functions}
+
 
 \begin{dfn}
 Any perturbation-dependent quantity $X(t)$ can be expanded in a Taylor expansion of the time-envelopes
@@ -500,7 +640,6 @@ which can be further simplified using the permutational symmetries of the wavefu
 
 \begin{prop}
 \label{prop:linear-response-commutator-expression}
-\thmtitle{Linear response function}
 \thmstatement{
 $\ds{
   \iip{\tl{W}(t);\tl{V}_\b(t')}
@@ -518,9 +657,8 @@ This follows from equations~\ref{eq:general-wavefunction-response} and \ref{eq:g
 
 \begin{samepage}
 \begin{cor}
-\thmtitle{Linear response function (spectral resolution)}
 \thmstatement{
-The linear response function can be expressed as
+Defining the excitation energy $\w_k\equiv E_k-E_0$, the linear response function can be expressed as follows.
 \begin{align*}
   \iip{\tl{W}(t);\tl{V}_\b(t')}
 =
@@ -538,9 +676,7 @@ The linear response function can be expressed as
     \ip{\Y_k|W|\Y_0}
   )
 \end{align*}
-where $\w_k\equiv E_k-E_0$ is the excitation energy of the $k\eth$ stationary state, $H\Y_k=E_k\Y_k$.
-}\vspace{5pt}
-\thmproof{
+}\thmproof{
 Expanding the interaction-picture operators of \cref{prop:linear-response-commutator-expression} in the Schr\"odinger picture yields the following
 \begin{align}
   \iip{\tl{W}(t);\tl{V}_\b(t')}
@@ -564,6 +700,9 @@ The proposition follows by inserting resolution of the identity
 \newpage
 \section{Fourier transforms}
 
+\begin{rmk}
+The time-envelopes of 
+\end{rmk}
 
 \begin{rmk}
 \begin{align}
