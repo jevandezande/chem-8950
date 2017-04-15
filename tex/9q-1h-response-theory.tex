@@ -1,0 +1,719 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section,skip=9pt plus 2pt minus 7pt]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\numberwithin{equation}{section}
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 9, Handout 1: Response theory}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\makeatother
+\newcommand{\resolventline}[2][1]{
+  \tikz[overlay]{
+      \draw[thick,flexdotted] (0,-1ex) to ++(0,#1*4.5ex) node[above,inner sep=1pt] {#2};
+  }
+}
+\usepackage{accents}
+\newcommand{\oc}[1]{\ensuremath{\accentset{\circ}{#1}}}
+\newcommand{\wtl}[1]{\ensuremath{\widetilde{#1}}}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+
+
+\setcounter{section}{8}
+%\section{Response theory}
+
+
+\newpage
+\appendix
+
+\section{Time-dependent perturbation theory}
+
+\begin{rmk}
+In an time-varying field, the electronic wavefunction is no longer simply an eigenfunction of the Hamiltonian.
+This more general system is described by the following \textit{time-dependent Schr\"odinger equation}
+\begin{align}
+\label{eq:schrodinger-equation}
+  H(t)
+  \Y(t)
+=
+  i
+  \pd{\Y(t)}{t}
+&&
+  H(t)
+=
+  H
++
+  V(t)
+\end{align}
+where $H$ is the usual electronic Hamiltonian and $V(t)$ describes the interaction with the external field.
+If the electrons are prepared in a particular state $\Y_0$ at some time $t_0$, the system is completely described by a \textit{time-evolution operator}.
+\begin{align}
+  \Y(t)=U(t,t_0)\Y_0
+&&
+  \Y_0
+=
+  \Y(t_0)
+\end{align}
+The following discussion shows how to expand this operator in orders of the perturbing interaction, $V(t)$.
+\end{rmk}
+
+\begin{dfn}
+\thmtitle{Interaction picture}
+The \textit{interaction picture} results from to the following similarity transformation.
+\begin{align}
+  \tl{\Th}(t)
+\equiv
+  e^{+iHt}
+  \Th(t)
+&&
+  \tl{W}(t)
+\equiv
+  e^{+iHt}
+  W
+  e^{-iHt}
+\end{align}
+Expanding the Schr\"odinger equation in the interaction picture yields the the \textit{Schwinger-Tomonaga equation}.
+\begin{align}
+\label{eq:schwinger-tomonaga}
+  \tl{V}(t)
+  \tl{\Y}(t)
+=
+  i
+  \pd{\tl{\Y}(t)}{t}
+\end{align}
+Multiplying both sides by $-i$ and integrating from $t_0$ to $t$ yields a recursive equation for the interaction-picture wavefunction
+\begin{align}
+\label{eq:integrated-schwinger-tomonaga-equation}
+  \tl{\Y}(t)
+-
+  \tl{\Y}(t_0)
+=
+-
+  i
+  \int_{t_0}^t
+  dt'\,
+  \tl{V}(t')
+  \tl{\Y}(t')
+\end{align}
+from which we infer
+$
+  \tl{U}(t,t_0)
+=
+  1
+-
+  i
+  \int_{t_0}^t
+  dt'
+  \tl{V}(t')\,
+  \tl{U}(t',t_0)
+$.
+Infinite recursion yields the following.
+\begin{align}
+\label{eq:time-evolution-infinite-recursion}
+  \tl{U}(t,t_0)
+=
+  \sum_{n=0}^\infty
+  (-i)^n
+  \int_{t_0}^t
+  dt_1
+  \int_{t_0}^{t_1}
+  dt_2
+  \cd
+  \int_{t_0}^{t_{n-1}}
+  dt_n
+  \,
+  \tl{V}(t_1)
+  \cd
+  \tl{V}(t_n)
+\end{align}
+\end{dfn}
+
+\begin{dfn}
+\label{dfn:time-ordering}
+\thmtitle{Time-ordering}
+Let 
+$
+  \tl{q}_1(t_1)\cd \tl{q}_n(t_n)
+$
+be a string of particle-hole operators in the interaction picture.\footnotemark
+\footnotetext{
+As in
+$
+  \tl{q}(t)
+\equiv
+  e^{+iHt}
+  q
+  e^{-iHt}
+$
+for some
+$q\in\{a_p\}\cup\{a_p\dg\}$.
+}
+The \textit{time-ordering map} takes this string into
+$
+  \mc{T}\{
+  \tl{q}_1(t_1)\cd \tl{q}_n(t_n)
+  \}
+\equiv
+  \e_\pi \,\tl{q}_{\pi(1)}(t_{\pi(1)})\cd \tl{q}_{\pi(n)}(t_{\pi(n)})
+$,
+where $\pi\in\mr{S}_n$ is a permutation that puts the time arguments in reverse-chronological order, $t_{\pi(1)}>\cd>t_{\pi(n)}$.
+\end{dfn}
+
+\begin{ntt}
+The following notation proves convenient for manipulating multiple integrals
+\begin{align}
+  \int_{t_1t_2t_3\ld}^{[t_0,t]}
+  dt_1dt_2dt_3\cd
+\equiv
+  \int_{t_0}^t
+  dt_1
+  \int_{t_0}^t
+  dt_2
+  \int_{t_0}^t
+  dt_3
+  \cd
+&&
+  \int_{t_1>t_2>t_3>\cd}^{[t_0,t]}
+  dt_1dt_2dt_3\cd
+\equiv
+  \int_{t_0}^t
+  dt_1
+  \int_{t_0}^{t_1}
+  dt_2
+  \int_{t_0}^{t_2}
+  dt_3
+  \cd
+\end{align}
+which is defined by analogy with summation notation
+$
+  \sum_{i_1i_2i_3\cd}^{\{n_0,\ld,n\}}
+$
+and
+$
+  \sum_{i_1>i_2>i_3\cd}^{\{n_0,\ld,n\}}
+$.
+That is, the $t_i$'s are dummy variables which we integrate over all values in $[t_0,t]$ satisfying a condition, such as $t_1>t_2>t_3>\cd$.
+Then the identity
+\begin{align}
+\label{eq:integral-identity}
+  \int_{t_1\cd t_n}^{[t_0,t]}
+  dt_1\cd t_n\,
+  f(t_1\cd t_n)
+=
+  \sum_\pi^{\mr{S}_n}
+  \int_{t_{\pi(1)}>\ld>t_{\pi(n)}}^{[t_0,t]}
+  dt_1\cd t_n\,
+  f(t_1\cd t_n)
+\end{align}
+follows from considering all possible chronologies for $t_1,\ld,t_n$ in the unrestricted integral.\footnotemark
+\footnote{
+  The corresponding summation identity would be
+$
+  \sum_{i_1\neq i_2\neq i_3\neq\cd}^{\{n_0,n\}}
+=
+  \sum_{\pi}^{\mr{S}_n}
+  \sum_{i_{\pi(1)}> i_{\pi(2)}> i_{\pi(3)}>\cd}^{\{n_0,n\}}
+$.
+  The unrestricted integral is equivalent to an integral over $t_1\neq t_2\neq t_3\neq\cd$ because individual integrand values have ``measure zero'':
+$
+  \int_{t_j}^{t_j}
+  dt_i
+=
+  0
+$.
+}
+\end{ntt}
+
+
+\begin{prop}
+\thmtitle{The Dyson series}
+\thmstatement{
+$\ds{
+  \tl{U}(t,t_0)
+=
+  \mc{T}\{
+    e^{
+    -
+      i
+      \int_{t_0}^t
+      dt'\,
+      \tl{V}(t')
+    }
+  \}
+}$
+}
+\thmproof{
+   Expanding the exponential in a Taylor series and applying equation~\ref{eq:integral-identity} gives the following
+\begin{align}
+  \sum_{n=0}^\infty
+  \fr{(-i)^n}{n!}
+  \int_{t_1\cd t_n}^{[t_0,t]}
+  dt_1\cd dt_n\,
+  \mc{T}\{
+    \tl{V}(t_1)
+    \cd
+    \tl{V}(t_n)
+  \}
+=
+  \sum_{n=0}^\infty
+  \fr{(-i)^n}{n!}
+  \sum_\pi^{\mr{S}_n}
+  \int_{t_{\pi(1)}>\ld>t_{\pi(n)}}^{[t_0,t]}
+  dt_1\cd dt_n\,
+  \mc{T}\{
+    \tl{V}(t_1)
+    \cd
+    \tl{V}(t_n)
+  \}
+\end{align}
+which simplifies to equation~\ref{eq:time-evolution-infinite-recursion} because all $n!$ terms in the sum over $\pi$ are equivalent by \cref{dfn:time-ordering}.\footnote{We are assuming that $\tl{V}(t)$ is particle-number-conserving, or at least contains only even operator products.}
+}
+\end{prop}
+
+
+
+\newpage
+\section{Response functions}
+
+\begin{rmk}
+A convenient starting point for \textit{response theory} is to cast the interaction Hamiltonian in the following form
+\begin{align}
+\label{eq:interaction-time-envelopes}
+  V(t)
+=
+\ts{
+  \sum_\b
+  V_\b
+  f_\b(t)
+}
+\end{align}
+where $\{V_\b\}$ is a set of one-particle operators and the $f_\b(t)$'s are scalar-valued \textit{time envelopes}.
+\end{rmk}
+
+\begin{ex}
+Interactions with electric and magnetic fields are approximately described by the following Hamiltonians
+\begin{align}
+\begin{array}{r@{\ }l@{\ }l@{\hspace{2cm}}r@{\ }l@{\hspace{2cm}}r@{\ }l}
+  V_{\bo{E}}(t)
+=&
+-\,
+  \bm{\mu}\cdot\bo{E}(t)
+&=
+-
+  \sum_\b
+  \mu_\b
+  \mc{E}_\b(t)
+&
+  \bm{\mu}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{\mu}}\,|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{\mu}}
+&=
+-
+  \op{\bo{r}}
+\\
+  V_{\bo{B}}(t)
+=&
+-
+  \bm{m}\cdot\bo{B}(t)
+&=
+-
+  \sum_\b
+  m_\b
+  \mc{B}_\b(t)
+&
+  \bm{m}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{m}}|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{m}}
+&=
+-
+  \dfr{\op{\bo{r}}\times\op{\bo{p}}}{2}
+\end{array}
+\end{align}
+where $\bm{\mu}$ and $\bm{m}$ are the electric and magnetic dipole operators and the field components, $\mc{E}_\b(t)$ and $\mc{B}_\b(t)$, are scalar-valued functions of time.
+This is known as the \textit{dipole approximation}.
+\end{ex}
+
+\begin{rmk}
+A convenient set of boundary conditions for response theory turns the interaction off in the infinite past and requires that the system begins in a stationary state, which is usually chosen to be the ground state.
+\begin{align}
+  \lim_{t\rightarrow-\infty}
+  f_\b(t)
+=
+  0
+&&
+  \lim_{t\rightarrow-\infty}
+  \tl{\Y}(t)
+=
+  \Y_0
+&&
+  H
+  \Y_k
+=
+  E_k
+  \Y_k
+\end{align}
+This can be imposed on any time envelope with a finite $t\rightarrow-\infty$ limit by building in a factor $e^{-\ev t}$ where $\ev$ is a real number.
+For sufficiently small $\ev$, this new envelope will match the old one to arbitrary precision in an arbitrarily wide window about the time origin.
+The Dyson series for the wavefunction can then be written in the form
+\begin{align}
+\label{eq:wavefunction-dyson-series}
+  \tl{\Y}(t)
+=
+  \lim_{t_0\rightarrow-\infty}
+  \tl{U}(t,t_0)
+  \Y_0
+=
+  \sum_{n=0}^\infty
+  \fr{(-i)^n}{n!}
+  \int_{\mb{R}^n}
+  dt_1\cd dt_n\,
+  \th(t-t_1)
+  \cd
+  \th(t-t_n)\,
+  \mc{T}\{
+    \tl{V}(t_1)
+    \cd
+    \tl{V}(t_n)
+  \}
+  \Y_0
+\end{align}
+where
+$
+  \th(x)
+=
+  \int_{-\infty}^x
+  dx'
+  \d(x')
+$
+is the Heaviside step function, which here enforces an upper limit of $t$ for each integral over $t_i$.
+\end{rmk}
+
+\begin{dfn}
+Any perturbation-dependent quantity $X(t)$ can be expanded in a Taylor expansion of the time-envelopes
+\begin{align}
+\label{eq:general-perturbation-expansion}
+  X(t)
+=
+  \sum_{n=0}^\infty
+  \fr{1}{n!}
+  \sum_{\b_1,\ld,\b_n}
+  \int_{\mb{R}^n}
+  dt_1\cd t_n\,
+  f_{\b_1}(t_1)
+  \cd
+  f_{\b_n}(t_n)\,
+  X^{\b_1\cd \b_n}_{t;t_1\cd\,t_n}
+&&
+  X^{\b_1\cd \b_n}_{t;t_1\cd\,t_n}
+\equiv
+  \left.
+  \fd{^n
+    X(t)
+  }{
+    f_{\b_1}(t_1)
+    \cd
+    df_{\b_n}(t_n)
+  }
+  \right|_{\bm{f}=\bo{0}}
+\end{align}
+where the coefficients $X_{t;t_1\cd t_n}^{\b_1\cd \b_n}$ are $n\eth$-order \textit{responses} of $X$.
+When the quantity of interest is an observable expectation value, $W(t)=\ip{\Y(t)|W|\Y(t)}$, we write
+$
+  \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
+\equiv
+  W_{t;t_1\cd t_n}^{\b_1\cd \b_n}
+$.
+In some contexts, these \textit{property response functions} are also known to as \textit{retarded propagators} or \textit{retarded Green's functions}.
+Note that, since $W$ does not explicitly depend on time, shifting the time origin does not change the value of $W(t)$, because $U(t,t_0)$ only depends on the time elapsed between $t_0$ and $t$.
+This implies
+$
+  \iip{\tl{W}(t);\tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
+=
+  \iip{\tl{W}(0);\tl{V}_{\b_1}(\ta_1),\ld,\tl{V}_{\b_n}(\ta_n)}
+$
+where we have shifted the origin to $t$ and defined $\ta_j\equiv t_j-t$.
+\end{dfn}
+
+\begin{ex}
+Substituting eq~\ref{eq:interaction-time-envelopes} into eq~\ref{eq:wavefunction-dyson-series} and comparing the result to eq~\ref{eq:general-perturbation-expansion} yields the wavefunction responses.
+\begin{align}
+\label{eq:general-wavefunction-response}
+  \tl{\Y}^{\b_1\cd \b_n}_{t; t_1\cd t_n}
+=
+  (-i)^n
+  \th(t-t_1)
+  \cd
+  \th(t-t_n)\,
+  \mc{T}\{
+    \tl{V}_{\b_1}(t_1)
+  \cd
+    \tl{V}_{\b_n}(t_n)
+  \}
+  \Y_0
+\end{align}
+Substituting this expansion into $\ip{\Y(t)|W|\Y(t)}=\ip{\tl{\Y}(t)|\tl{W}(t)|\tl{\Y}(t)}$ and grouping powers of $\bm{f}$ gives the following
+\begin{align}
+\label{eq:general-linear-response}
+  \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
+=
+  \sum_{p=0}^n
+  \fr{1}{p!(n-p)!}
+  \sum_\pi^{\mr{S}_n}
+  \ip{
+    \tl{\Y}_{t;t_{\pi(1)}\cd t_{\pi(p)}}
+           ^{\b_{\pi(1)}\cd\b_{\pi(p)}}
+  |
+    \tl{W}(t)
+  |
+    \tl{\Y}_{t;t_{\pi(p+1)}\cd t_{\pi(n)}}
+           ^{\b_{\pi(p+1)}\cd \b_{\pi(n)}}
+  }
+\end{align}
+which can be further simplified using the permutational symmetries of the wavefunction responses.
+\end{ex}
+
+\begin{prop}
+\label{prop:linear-response-commutator-expression}
+\thmtitle{Linear response function}
+\thmstatement{
+$\ds{
+  \iip{\tl{W}(t);\tl{V}_\b(t')}
+=
+-
+  i
+  \th(t-t')
+  \ip{\Y_0|[\tl{W}(t), \tl{V}_\b(t')]|\Y_0}
+}$
+}\vspace{6pt}
+\thmproof{
+This follows from equations~\ref{eq:general-wavefunction-response} and \ref{eq:general-linear-response} with $n=1$.
+}
+\end{prop}
+
+\begin{samepage}
+\begin{cor}
+\thmtitle{Linear response function (spectral resolution)}
+\thmstatement{
+The linear response function can be expressed as
+\begin{align*}
+  \iip{\tl{W}(t);\tl{V}_\b(t')}
+=
+-
+  i
+  \th(t-t')
+  \sum_{k=0}^\infty
+  (
+    e^{-i\w_k (t-t')}
+    \ip{\Y_0|W|\Y_k}
+    \ip{\Y_k|V_\b|\Y_0}
+  -
+    e^{-i\w_k (t'-t)}
+    \ip{\Y_0|V_\b|\Y_k}
+    \ip{\Y_k|W|\Y_0}
+  )
+\end{align*}
+where $\w_k\equiv E_k-E_0$ is the excitation energy of the $k\eth$ stationary state, $H\Y_k=E_k\Y_k$.
+}\vspace{5pt}
+\thmproof{
+Expanding the interaction-picture operators of \cref{prop:linear-response-commutator-expression} in the Schr\"odinger picture yields the following
+\begin{align}
+  \iip{\tl{W}(t);\tl{V}_\b(t')}
+=&\
+-
+  i
+  \th(t-t')
+  (
+    \ip{\Y_0|We^{-i(H-E_0)(t-t')}V_\b |\Y_0}
+  -
+    \ip{\Y_0|V_\b e^{-i(H-E_0)(t'-t)}W|\Y_0}
+  )
+\end{align}
+where we have used $H\Y_0=E_0\Y_0$.
+The proposition follows by inserting resolution of the identity 
+}
+\end{cor}
+\end{samepage}
+
+
+\newpage
+\section{Fourier transforms}
+
+
+\begin{rmk}
+\begin{align}
+  f_\b(t)
+=
+  \int_{-\infty}^\infty
+  d\w\,
+  f_\b(\w_\ev)
+  e^{-i\w_\ev t}
+&&
+  f_\b(\w_\ev)
+\equiv
+  (2\pi)^{-1}
+  \int_{-\infty}^\infty
+  dt\,
+  f_\b(t)
+  e^{+i\w_\ev t}
+&&
+  \w_\ev
+\equiv
+  \w
++
+  i\ev
+\end{align}
+$
+  f_\b(-\w)
+=
+  f_\b^*(\w)
+$\\
+Footnote:
+Fourier transforms can always be verified using
+$\ds{
+  \int_\mb{R}
+  dk\,
+  e^{ikx}
+=
+  2\pi\,\d(x)
+}$
+\end{rmk}
+
+
+\begin{rmk}
+Define $\ta_j\equiv t_j-t$
+and note that
+$
+  X^{\b_1\cd \b_n}_{t;t_1\cd t_n}
+=
+  X^{\b_1\cd \b_n}_{0;\ta_1\cd \ta_n}
+$
+\begin{align}
+  X^{\b_1\cd \b_n}_{0;\ta_1\cd \ta_n}
+\equiv
+  (2\pi)^{-n}
+  \int_{\mb{R}^n}
+  d\w_1\cd d\w_n\,
+  X^{\b_1\cd \b_n}_{\w_{\ev,1}\cd\w_{\ev,n}}
+  e^{+i\sum_j\w_{\ev,j}\ta_j}
+&&
+  X^{\b_1\cd \b_n}_{\w_{\ev,1}\cd\w_{\ev,n}}
+\equiv
+  \int_{\mb{R}^n}
+  d\ta_1\cd d\ta_n\,
+  X^{\b_1\cd \b_n}_{0;\ta_1\cd \ta_n}
+  e^{-i\sum_j\w_{\ev,j}\ta_j}
+\end{align}
+\end{rmk}
+
+\begin{rmk}
+\thmstatement{
+$\ds{
+  \int_{\mb{R}^n}
+  dt_1\cd dt_n\,
+  f_{\b_1}(t_1)
+  \cd
+  f_{\b_n}(t_n)\,
+  X_{t;t_1\cd t_n}^{\b_1\cd\b_n}
+=
+  \int_{\mb{R}^n}
+  d\w_1\cd d\w_n\,
+  f_{\b_1}(\w_{\ev,1})
+  \cd
+  f_{\b_n}(\w_{\ev,n})
+  X^{\b_1\cd \b_n}_{\w_{\ev,1}\cd\w_{\ev,n}}
+  e^{-i\sum_j\w_{\ev,j}t}
+}$
+}
+\end{rmk}
+
+
+\begin{align}
+  \iip{\tl{W}(t);\tl{V}_\b(t')}
+=&\
+  \sum_{k=0}^\infty
+  (
+    g_k^+(\ta)
+    \ip{\Y_0|W|\Y_k}
+    \ip{\Y_k|V_\b|\Y_0}
+  -
+    g_k^-(\ta)
+    \ip{\Y_0|V_\b|\Y_k}
+    \ip{\Y_k|W|\Y_0}
+  )
+&&
+  g_k^{\pm}(\ta)
+\equiv
+-
+  i
+  \th(-\ta)
+    e^{\pm i\w_k \ta}
+\end{align}
+\begin{align}
+  g_k^\pm(\w_\ev)
+=&\
+  \int_{-\infty}^\infty
+  d\ta\,
+  g_k^\pm(\ta)
+  e^{-i\w_\ev \ta}
+=
+-
+  i
+  \int_{-\infty}^0
+  d\ta\,
+  e^{-i(\w_\ev \mp \w_k) \ta}
+=
+  \fr{
+    1
+  }{
+    \w_\ev \mp \w_k
+  }
+\\
+  g_k^{\pm}(\ta)
+=&\
+  \fr{1}{2\pi}
+  \int_{-\infty}^{\infty}
+  d\w\,
+  g_k^\pm(\w_\ev)
+  e^{+i\w_\ev \ta}
+=
+  \fr{1}{2\pi}
+  \int_{-\infty}^{\infty}
+  d\w\,
+  \fr{
+    e^{+i\w_\ev \ta}
+  }{
+    \w_\ev \mp \w_k
+  }
+\end{align}
+
+\newpage
+\section{Complex Calculus}
+
+
+\end{document}
