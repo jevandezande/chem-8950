@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+%%AVC PACKAGES
+\usepackage{avcgreek}
+\usepackage{avcfonts}
+\usepackage{avcmath}
+\usepackage[numberby=section]{avcthm}
+\usepackage{qcmacros}
+\usepackage{goldstone}
+%%MACROS FOR THIS DOCUMENT
+\usepackage[
+  margin=1.5cm,
+  includefoot,
+  footskip=30pt,
+  headsep=0.2cm,headheight=1.3cm
+]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Quiz 9, Suggested Problems 1: Response theory}
+\fancyfoot[CE,CO]{\thepage}
+\usepackage{url}
+\usepackage{multicol}
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Using
+$\ts{
+  \int_{-\infty}^\infty
+  dk\,
+  e^{ikx}
+=
+  2\pi\,\d(x)
+}$,
+prove that $f_\b(t)$ can be expressed as follows.
+\begin{align}
+  f_\b(t)
+=
+  \int_{-\infty}^\infty
+  d\w\,
+  f_\b(\w_\ev)
+  e^{-i\w_\ev t}
+&&
+  f_\b(\w_\ev)
+\equiv
+  (2\pi)^{-1}
+  \int_{-\infty}^\infty
+  dt\,
+  f_\b(t)
+  e^{+i\w_\ev t}
+&&
+  \w_\ev
+\equiv
+  \w
++
+  i\ev
+\end{align}
+
+\item
+  Show that time envelopes satisfy $f_\b^*(t)=f_\b(t)$ and frequency envelopes satisfy $f_\b^*(\w_{\ev})=f_\b(-\w_{-\ev})$.\footnotemark
+\footnotetext{
+  Assume that the operator $V_\b$ is Hermitian.
+}
+
+\item
+  Give a step-by-step derivation of the following, starting from the time-envelope expansion.
+\begin{align*}
+  \ip{\Y(t)|W|\Y(t)}
+=
+  \sum_{n=0}^\infty
+  \fr{1}{n!}
+  \sum_{\b_1,\ld,\b_n}
+  \int_{\mb{R}^n}
+  d\w_1\cd d\w_n\,
+  f_{\b_1}(\w_{\ev,1})
+  \cd
+  f_{\b_n}(\w_{\ev,n})\,
+  \iip{W; V_{\b_1},\ld,V_{\b_n}}_{\w_{\ev,1}\cd\w_{\ev,n}}\,
+  e^{-i\sum_j\w_{\ev,j}t}
+\end{align*}
+\end{enumerate}
+
+
+\end{document}

@@ -30,6 +30,7 @@
 \usepackage{accents}
 \newcommand{\oc}[1]{\ensuremath{\accentset{\circ}{#1}}}
 \newcommand{\wtl}[1]{\ensuremath{\widetilde{#1}}}
+\usepackage{multicol}
 
 \begin{document}
 
@@ -38,17 +39,11 @@
 
 
 \setcounter{section}{8}
-%\section{Response theory}
-
-
-\newpage
-\appendix
-
-\section{Time-dependent perturbation theory}
+\section{Response theory}
 
 \begin{rmk}
-In an time-varying field, the electronic wavefunction is no longer simply an eigenfunction of the Hamiltonian.
-This more general system is described by the following \textit{time-dependent Schr\"odinger equation}
+In the presence of a time-varying field, a molecule's electronic wavefunction is no longer simply an eigenfunction of the Hamiltonian.
+Instead, its electronic structure is described by the \textit{time-dependent Schr\"odinger equation}
 \begin{align}
 \label{eq:schrodinger-equation}
   H(t)
@@ -63,17 +58,291 @@ This more general system is described by the following \textit{time-dependent Sc
 +
   V(t)
 \end{align}
-where $H$ is the usual electronic Hamiltonian and $V(t)$ describes the interaction with the external field.
-If the electrons are prepared in a particular state $\Y_0$ at some time $t_0$, the system is completely described by a \textit{time-evolution operator}.
+where $H$ is the usual electronic Hamiltonian and $V(t)$ is an \textit{interaction Hamiltonian} describing the energetic influence of the field.
+A general series solution to equation~\ref{eq:schrodinger-equation}, known as the \textit{Dyson series}, is derived in \cref{appendix:dyson-series}.
+The interaction Hamiltonian can be expressed as a sum over one-electron operators $V_\b$, representing the electronic degrees of freedom which couple to the external field, scaled by \textit{time-envelopes} $f_\b(t)$ which control the strength of the applied field over time.
 \begin{align}
-  \Y(t)=U(t,t_0)\Y_0
-&&
-  \Y_0
+\label{eq:interaction-time-envelopes}
+  V(t)
 =
-  \Y(t_0)
+\ts{
+  \sum_\b
+  V_\b
+  f_\b(t)
+}
 \end{align}
-The following discussion shows how to expand this operator in orders of the perturbing interaction, $V(t)$.
+One of the most important examples is the Hamiltonian of a dipole in an electric field, which is discussed in \cref{ex:dipole-approximation} below.
+The zeroth order solutions of equation~\ref{eq:schrodinger-equation} are termed \textit{stationary states}, which have the following form.\footnotemark
+\footnotetext{
+When $\bm{f}=\bo{0}$, the Hamiltonian loses its time-dependence and we can write $\left.\Y(t)\right|_{\bm{f}=\bo{0}}=\f(t)\Y$ where $\f(t)$ is independent of the electronic coordinates.
+Substituting this into eq~\ref{eq:schrodinger-equation} and rearranging gives
+$
+  H\Y/\Y
+=
+  i\dot{\f}(t)/\f(t)
+$, which equals a constant $E$ since each side depends in different variables.
+Therefore, $H\Y=E\Y$ and $i\dot{\f}(t)=E\f(t)$.  Integrating the latter gives $\f(t)=e^{-iEt}$.
+}
+\begin{align}
+  \left.
+  \Y(t)
+  \right|_{\bm{f}=\bo{0}}
+=
+  e^{-iE_kt}
+  \Y_k
+&&
+  H\Y_k
+=
+  E_k\Y_k
+\end{align}
+As a boundary condition we assume that $V(t)$ vanishes in the past, where $\Y(t)$ is initially in the ground stationary state.
+\begin{align}
+\label{eq:boundary-conditions}
+  \lim_{t\rightarrow-\infty}
+  f_\b(t)
+=
+  0
+&&
+  \lim_{t\rightarrow-\infty}
+  e^{+iHt}
+  \Y(t)
+=
+  \Y_0
+\end{align}
+This limiting behavior can be enforced by introducing a complex shift in the frequency domain of $f_\b(t)$'s Fourier expansion.\footnotemark
+\footnotetext{
+  This is a slightly unusual convention for the Fourier transform.
+  A useful mnemonic for checking these is
+  $
+    \int_{-\infty}^\infty
+    dk\,
+    e^{ikx}
+  =
+    2\pi\,
+    \d(x)
+  $.
+}
+\begin{align}
+\label{eq:frequency-envelopes}
+  f_\b(t)
+=
+  \int_{-\infty}^\infty
+  d\w\,
+  f_\b(\w_\ev)
+  e^{-i\w_\ev t}
+&&
+  f_\b(\w_\ev)
+\equiv
+  (2\pi)^{-1}
+  \int_{-\infty}^\infty
+  dt\,
+  f_\b(t)
+  e^{+i\w_\ev t}
+&&
+  \w_\ev
+\equiv
+  \w
++
+  i\ev
+&&
+  \ev
+=
+  |\ev|
+\end{align}
+This has the effect of scaling the time envelope by a damping factor $e^{\ev t}$.
+For sufficiently small $\ev$, this scaled envelope will match the original one to arbitrary precision in an arbitrarily wide window about the time origin.
+The fact that the interaction Hamiltonian and the coupling operators $\{V_\b\}$ are Hermitian implies the following identities.
+\begin{align}
+  f_\b^*(t)
+=
+  f_\b(t)
+&&
+  f_\b^*(\w_{\ev})
+=
+  f_\b(-\w_{-\ev})
+\end{align}
 \end{rmk}
+
+
+\begin{ex}
+\label{ex:dipole-approximation}
+The dominant coupling of an electronic system to an external electric or magnetic field is mediated through its dipoles, leading to \textit{the dipole approximation}.
+Quantizing the classical formulae for these interaction energies gives
+\begin{align}
+\begin{array}{r@{\ }l@{\ }l@{\hspace{2cm}}r@{\ }l@{\hspace{2cm}}r@{\ }l}
+  V_{\bo{E}}(t)
+\approx&
+-\,
+  \bm{\mu}\cdot\bo{E}(t)
+&=
+-
+  \sum_\b
+  \mu_\b
+  \mc{E}_\b(t)
+&
+  \bm{\mu}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{\mu}}\,|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{\mu}}
+&=
+-
+  \op{\bo{r}}
+\\
+  V_{\bo{B}}(t)
+\approx&
+-
+  \bm{m}\cdot\bo{B}(t)
+&=
+-
+  \sum_\b
+  m_\b
+  \mc{B}_\b(t)
+&
+  \bm{m}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{m}}|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{m}}
+&=
+-
+  \tfr{1}{2}
+  (
+    \op{\bm{l}}
+  +
+    2\,
+    \op{\bo{s}}
+  )
+\end{array}
+\end{align}
+where $\op{\bm{\mu}}$ and $\op{\bm{m}}$ are the first-quantized electric and magnetic dipole operators.\footnote{
+More generally, these expressions are
+$
+  \op{\bm{\mu}}
+=
+  q_e\,\op{\bo{r}}
+$,
+where $q_e=-e$ is the charge of an electron,
+and
+$
+  \op{\bm{m}}
+=
+  \mu_\mr{B}
+  (
+    g_l\,
+    \op{\bm{l}}
+  +
+    g_{\mr{s}}\,
+    \op{\bo{s}}
+  )
+$
+where $\mu_{\mr{B}}=\tfr{1}{2}\cdot\tfr{e\hbar}{m_e}$ is the Bohr magneton and $g_l=-1$, $g_\mr{s}=-2$ are the spin and orbital \textit{$g$-factors}.
+Note that the exact $g_\mr{s}$ actually deviates very slightly from $2$ due to effects arising in quantum field theory.
+The orbital angular momentum operator is given by $\op{\bm{l}}=\op{\bo{r}}\times\op{\bo{p}}$ and $\op{\bo{s}}$ is the intrinsic spin angular momentum operator.
+}
+The leading terms neglected by the dipole approximation are quadratic in the field amplitudes.
+These weaker interactions are mediated through the higher moments (quadrupole, octupole, etc.) of the charge and current distributions and may become important in symmetric molecules where certain dipole interactions are ``symmetry forbidden''.
+\end{ex}
+
+
+
+
+
+\begin{dfn}
+\thmtitle{Quasi-energy}
+\begin{align}
+  \Y(t)
+=
+  e^{-i\th(t)}
+  \bar{\Y}(t)
+&&
+  \left.
+  \th(t)
+  \right|_{\bm{f}=\bo{0}}
+=
+  E_0
+  t
+&&
+  \lim_{t\rightarrow-\infty}
+  \bar{\Y}(t)
+=
+  \Y_0
+\end{align}
+\begin{align}
+  (
+    H(t)
+  -
+    i
+    \tpd{}{t}
+  )
+  \bar{\Y}(t)
+=
+  \dot{\th}(t)
+  \bar{\Y}(t)
+\end{align}
+\begin{align}
+  \dot{\th}(t)
+=
+  \int_0^t
+  dt'
+  \ip{\bar{\Y}(t')|
+    H(t')
+  -
+    i\tpd{}{t'}
+  |\bar{\Y}(t')}
+\end{align}
+\begin{align}
+  \br{\d\bar{\Y}(t)}
+    H(t)
+  -
+    i
+    \tpd{}{t}
+  \kt{\bar{\Y}(t)}
+=
+  \dot{\th}(t)
+  \ip{\d\bar{\Y}(t)|\bar{\Y}(t)}
+\end{align}
+\begin{align}
+  \ip{\d\bar{\Y}(t)|\bar{\Y}(t)}
++
+  \ip{\bar{\Y}(t)|\d\bar{\Y}(t)}
+=
+  0
+\end{align}
+\begin{align}
+  \d
+  \ip{\bar{\Y}(t)|
+    H(t)
+  -
+    i
+    \tpd{}{t}
+  |\bar{\Y}(t)}
++
+  i
+  \tpd{}{t}
+  \ip{\bar{\Y}(t)|\d\bar{\Y}(t)}
+=
+  0
+\end{align}
+\end{dfn}
+
+
+\newpage
+\appendix
+
+\section{Dyson series}
+\label{appendix:dyson-series}
+
+\begin{dfn}
+\thmtitle{Time-evolution operator}
+If we know the wavefunction at a particular time $t_0$, we can express the wavefunction at any other time as a unitary transformation of this initial state, $\Y(t)=U(t,t_0)\Y(t_0)$.
+This unitary transformation is called the \textit{time-evolution operator}.
+\end{dfn}
+
 
 \begin{dfn}
 \thmtitle{Interaction picture}
@@ -87,7 +356,7 @@ The \textit{interaction picture} results from to the following similarity transf
   \tl{W}(t)
 \equiv
   e^{+iHt}
-  W
+  W(t)
   e^{-iHt}
 \end{align}
 Expanding the Schr\"odinger equation in the interaction picture yields the the \textit{Schwinger-Tomonaga equation}.
@@ -99,7 +368,7 @@ Expanding the Schr\"odinger equation in the interaction picture yields the the \
   i
   \pd{\tl{\Y}(t)}{t}
 \end{align}
-Multiplying both sides by $-i$ and integrating from $t_0$ to $t$ yields a recursive equation for the interaction-picture wavefunction
+Multiplying both sides by $-i$ and integrating from $t_0$ to $t$ yields a recursive equation for the time-evolution operator
 \begin{align}
 \label{eq:integrated-schwinger-tomonaga-equation}
   \tl{\Y}(t)
@@ -112,9 +381,9 @@ Multiplying both sides by $-i$ and integrating from $t_0$ to $t$ yields a recurs
   dt'\,
   \tl{V}(t')
   \tl{\Y}(t')
-\end{align}
-from which we infer
-$
+&&
+\implies
+&&
   \tl{U}(t,t_0)
 =
   1
@@ -124,8 +393,8 @@ $
   dt'
   \tl{V}(t')\,
   \tl{U}(t',t_0)
-$.
-Infinite recursion yields the following.
+\end{align}
+and infinite recursion of this identity leads to the following expansion.
 \begin{align}
 \label{eq:time-evolution-infinite-recursion}
   \tl{U}(t,t_0)
@@ -174,11 +443,22 @@ $
 \equiv
   \e_\pi \,\tl{q}_{\pi(1)}(t_{\pi(1)})\cd \tl{q}_{\pi(n)}(t_{\pi(n)})
 $,
-where $\pi\in\mr{S}_n$ is a permutation that puts the time arguments in reverse-chronological order, $t_{\pi(1)}>\cd>t_{\pi(n)}$.
+where $\pi\in\mr{S}_n$ is a permutation that puts the time arguments in chronological order, $t_{\pi(1)}>\cd>t_{\pi(n)}$.
 \end{dfn}
 
 \begin{ntt}
-The following notation proves convenient for manipulating multiple integrals
+Let us define the following notation for multivariate integrals by analogy with multi-index summations.\footnotemark
+\footnotetext{
+Compare these integrals to
+$
+  \sum_{i_1i_2i_3\cd}^{\{n_0,\ld,n\}}
+$
+and
+$
+  \sum_{i_1>i_2>i_3\cd}^{\{n_0,\ld,n\}}
+$.
+The subscript defines the summation variables, along with any conditions restricting their values, and the superscript indicates the allowed range of values for each variable.
+}
 \begin{align}
   \int_{t_1t_2t_3\ld}^{[t_0,t]}
   dt_1dt_2dt_3\cd
@@ -202,28 +482,8 @@ The following notation proves convenient for manipulating multiple integrals
   dt_3
   \cd
 \end{align}
-which is defined by analogy with summation notation
-$
-  \sum_{i_1i_2i_3\cd}^{\{n_0,\ld,n\}}
-$
-and
-$
-  \sum_{i_1>i_2>i_3\cd}^{\{n_0,\ld,n\}}
-$.
-That is, the $t_i$'s are dummy variables which we integrate over all values in $[t_0,t]$ satisfying a condition, such as $t_1>t_2>t_3>\cd$.
-Then the identity
-\begin{align}
-\label{eq:integral-identity}
-  \int_{t_1\cd t_n}^{[t_0,t]}
-  dt_1\cd t_n\,
-  f(t_1\cd t_n)
-=
-  \sum_\pi^{\mr{S}_n}
-  \int_{t_{\pi(1)}>\ld>t_{\pi(n)}}^{[t_0,t]}
-  dt_1\cd t_n\,
-  f(t_1\cd t_n)
-\end{align}
-follows from considering all possible chronologies for $t_1,\ld,t_n$ in the unrestricted integral.\footnotemark
+This notation should elucidate the following identity, 
+which breaks an unrestricted integral into all possible chronologies.\footnotemark
 \footnote{
   The corresponding summation identity would be
 $
@@ -240,13 +500,25 @@ $
   0
 $.
 }
+\begin{align}
+\label{eq:integral-identity}
+  \int_{t_1\cd t_n}^{[t_0,t]}
+  dt_1\cd t_n\,
+  f(t_1\cd t_n)
+=
+  \sum_\pi^{\mr{S}_n}
+  \int_{t_{\pi(1)}>\ld>t_{\pi(n)}}^{[t_0,t]}
+  dt_1\cd t_n\,
+  f(t_1\cd t_n)
+\end{align}
 \end{ntt}
 
 
 \begin{prop}
 \thmtitle{The Dyson series}
 \thmstatement{
-$\ds{
+If $\tl{V}(t)$ is particle-number consering, then
+$
   \tl{U}(t,t_0)
 =
   \mc{T}\{
@@ -258,10 +530,10 @@ $\ds{
       \tl{V}(t')
     }
   \}
-}$
-}
+$.
+}\vspace{5pt}
 \thmproof{
-   Expanding the exponential in a Taylor series and applying equation~\ref{eq:integral-identity} gives the following
+   Expanding the time-ordered exponential in a Taylor series and applying equation~\ref{eq:integral-identity} gives the following
 \begin{align}
   \sum_{n=0}^\infty
   \fr{(-i)^n}{n!}
@@ -284,110 +556,19 @@ $\ds{
     \tl{V}(t_n)
   \}
 \end{align}
-which simplifies to equation~\ref{eq:time-evolution-infinite-recursion} because all $n!$ terms in the sum over $\pi$ are equivalent by \cref{dfn:time-ordering}.\footnote{We are assuming that $\tl{V}(t)$ is particle-number-conserving, or at least contains only even operator products.}
+which simplifies to equation~\ref{eq:time-evolution-infinite-recursion} because all $n!$ terms in the sum over chronologies are equal by \cref{dfn:time-ordering}.
 }
 \end{prop}
 
-
-
-\newpage
-\section{Response functions}
-
 \begin{rmk}
-A convenient starting point for \textit{response theory} is to cast the interaction Hamiltonian in the following form
-\begin{align}
-\label{eq:interaction-time-envelopes}
-  V(t)
-=
-\ts{
-  \sum_\b
-  V_\b
-  f_\b(t)
-}
-\end{align}
-where $\{V_\b\}$ is a set of one-particle operators and the $f_\b(t)$'s are scalar-valued \textit{time envelopes}.
-\end{rmk}
-
-\begin{ex}
-Interactions with electric and magnetic fields are approximately described by the following Hamiltonians
-\begin{align}
-\begin{array}{r@{\ }l@{\ }l@{\hspace{2cm}}r@{\ }l@{\hspace{2cm}}r@{\ }l}
-  V_{\bo{E}}(t)
-=&
--\,
-  \bm{\mu}\cdot\bo{E}(t)
-&=
--
-  \sum_\b
-  \mu_\b
-  \mc{E}_\b(t)
-&
-  \bm{\mu}
-&=
-  \sum_{pq}
-  \ip{\y_p|\op{\bm{\mu}}\,|\y_q}
-  a_p\dg a_q
-&
-  \op{\bm{\mu}}
-&=
--
-  \op{\bo{r}}
-\\
-  V_{\bo{B}}(t)
-=&
--
-  \bm{m}\cdot\bo{B}(t)
-&=
--
-  \sum_\b
-  m_\b
-  \mc{B}_\b(t)
-&
-  \bm{m}
-&=
-  \sum_{pq}
-  \ip{\y_p|\op{\bm{m}}|\y_q}
-  a_p\dg a_q
-&
-  \op{\bm{m}}
-&=
--
-  \dfr{\op{\bo{r}}\times\op{\bo{p}}}{2}
-\end{array}
-\end{align}
-where $\bm{\mu}$ and $\bm{m}$ are the electric and magnetic dipole operators and the field components, $\mc{E}_\b(t)$ and $\mc{B}_\b(t)$, are scalar-valued functions of time.
-This is known as the \textit{dipole approximation}.
-\end{ex}
-
-\begin{rmk}
-A convenient set of boundary conditions for response theory turns the interaction off in the infinite past and requires that the system begins in a stationary state, which is usually chosen to be the ground state.
-\begin{align}
-  \lim_{t\rightarrow-\infty}
-  f_\b(t)
-=
-  0
-&&
-  \lim_{t\rightarrow-\infty}
-  \tl{\Y}(t)
-=
-  \Y_0
-&&
-  H
-  \Y_k
-=
-  E_k
-  \Y_k
-\end{align}
-This can be imposed on any time envelope with a finite $t\rightarrow-\infty$ limit by building in a factor $e^{-\ev t}$ where $\ev$ is a real number.
-For sufficiently small $\ev$, this new envelope will match the old one to arbitrary precision in an arbitrarily wide window about the time origin.
-The Dyson series for the wavefunction can then be written in the form
+Assuming the boundary conditions of eq~\ref{eq:boundary-conditions}, the Dyson series for the wavefunction is
 \begin{align}
 \label{eq:wavefunction-dyson-series}
   \tl{\Y}(t)
 =
   \lim_{t_0\rightarrow-\infty}
   \tl{U}(t,t_0)
-  \Y_0
+  \Y(t_0)
 =
   \sum_{n=0}^\infty
   \fr{(-i)^n}{n!}
@@ -411,11 +592,20 @@ $
   dx'
   \d(x')
 $
-is the Heaviside step function, which here enforces an upper limit of $t$ for each integral over $t_i$.
+is the Heaviside step function, which here enforces the upper limits of integration.
 \end{rmk}
 
+
+
+\newpage
+\section{Response functions}
+\label{appendix:response-functions}
+
+
 \begin{dfn}
-Any perturbation-dependent quantity $X(t)$ can be expanded in a Taylor expansion of the time-envelopes
+\thmtitle{Response functions}
+Any quantity $X(t)$ which depends on the time-envelopes $\{f_\b(t)\}$ can be expanded in a Taylor series.
+The expansion coefficients in this series are called the \textit{response functions} of $X(t)$.
 \begin{align}
 \label{eq:general-perturbation-expansion}
   X(t)
@@ -442,26 +632,10 @@ Any perturbation-dependent quantity $X(t)$ can be expanded in a Taylor expansion
   }
   \right|_{\bm{f}=\bo{0}}
 \end{align}
-where the coefficients $X_{t;t_1\cd t_n}^{\b_1\cd \b_n}$ are $n\eth$-order \textit{responses} of $X$.
-When the quantity of interest is an observable expectation value, $W(t)=\ip{\Y(t)|W|\Y(t)}$, we write
-$
-  \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
-\equiv
-  W_{t;t_1\cd t_n}^{\b_1\cd \b_n}
-$.
-In some contexts, these \textit{property response functions} are also known to as \textit{retarded propagators} or \textit{retarded Green's functions}.
-Note that, since $W$ does not explicitly depend on time, shifting the time origin does not change the value of $W(t)$, because $U(t,t_0)$ only depends on the time elapsed between $t_0$ and $t$.
-This implies
-$
-  \iip{\tl{W}(t);\tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
-=
-  \iip{\tl{W}(0);\tl{V}_{\b_1}(\ta_1),\ld,\tl{V}_{\b_n}(\ta_n)}
-$
-where we have shifted the origin to $t$ and defined $\ta_j\equiv t_j-t$.
 \end{dfn}
 
 \begin{ex}
-Substituting eq~\ref{eq:interaction-time-envelopes} into eq~\ref{eq:wavefunction-dyson-series} and comparing the result to eq~\ref{eq:general-perturbation-expansion} yields the wavefunction responses.
+Substituting equation~\ref{eq:interaction-time-envelopes} into equation~\ref{eq:wavefunction-dyson-series} and comparing the result to equation~\ref{eq:general-perturbation-expansion} implies the following.
 \begin{align}
 \label{eq:general-wavefunction-response}
   \tl{\Y}^{\b_1\cd \b_n}_{t; t_1\cd t_n}
@@ -477,7 +651,57 @@ Substituting eq~\ref{eq:interaction-time-envelopes} into eq~\ref{eq:wavefunction
   \}
   \Y_0
 \end{align}
-Substituting this expansion into $\ip{\Y(t)|W|\Y(t)}=\ip{\tl{\Y}(t)|\tl{W}(t)|\tl{\Y}(t)}$ and grouping powers of $\bm{f}$ gives the following
+Defining $\ta_i\equiv t_i-t$, we find that wavefunction responses transform as follows when we move the time origin to $t$.\footnotemark
+\footnotetext{
+  This follows from $\th(t-t_i)=\th(0-\ta_i)$ and
+  $
+    \tl{V}_{\b_i}(\ta_i)
+  =
+    e^{-iHt}\tl{V}_{\b_i}(t_i)e^{+iHt}
+  \implies
+    \tl{V}_{\b_1}(\ta_1)
+    \cd
+    \tl{V}_{\b_n}(\ta_n)
+  =
+    e^{-iHt}
+    \tl{V}_{\b_1}(t_1)
+    \cd
+    \tl{V}_{\b_n}(t_n)
+    e^{+iHt}
+  $.
+}
+\begin{align}
+\label{eq:wavefunction-time-shift}
+  \tl{\Y}^{\b_1\cd \b_n}_{0; \ta_1\cd \ta_n}
+=
+  e^{-i(H - E_0)t}\,
+  \tl{\Y}^{\b_1\cd \b_n}_{t; t_1\cd t_n}
+\end{align}
+\end{ex}
+
+
+\begin{dfn}
+\thmtitle{Property response functions}
+Response functions for the expectation value of an observable property $W$ are usually denoted with the following double-brackets notation.
+\begin{align}
+  \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
+\equiv
+  \left.
+  \fd{^n
+    \ip{\Y(t)|W|\Y(t)}
+  }{
+    f_{\b_1}(t_1)
+    \cd
+    df_{\b_n}(t_n)
+  }
+  \right|_{\bm{f}=\bo{0}}
+\end{align}%
+In some contexts, these \textit{property response functions} are known as \textit{retarded propagators} or \textit{retarded Green's functions}.
+
+\end{dfn}
+
+\begin{ex}
+Substituting the response-function expansion of the wavefunction into $\ip{\Y(t)|W|\Y(t)}=\ip{\tl{\Y}(t)|\tl{W}(t)|\tl{\Y}(t)}$ and grouping powers of $\bm{f}$ gives the following expression for property response functions.
 \begin{align}
 \label{eq:general-linear-response}
   \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
@@ -495,12 +719,17 @@ Substituting this expansion into $\ip{\Y(t)|W|\Y(t)}=\ip{\tl{\Y}(t)|\tl{W}(t)|\t
            ^{\b_{\pi(p+1)}\cd \b_{\pi(n)}}
   }
 \end{align}
-which can be further simplified using the permutational symmetries of the wavefunction responses.
+Using equation~\ref{eq:wavefunction-time-shift} and $\tl{W}(t)=e^{-iHt}\tl{W}(0)e^{+iHt}$, we can show that the property responses are invariant to time translation.
+\begin{align}
+  \iip{\tl{W}(0); \tl{V}_{\b_1}(\ta_1),\ld,\tl{V}_{\b_n}(\ta_n)}
+=
+  \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
+\end{align}
 \end{ex}
 
 \begin{prop}
 \label{prop:linear-response-commutator-expression}
-\thmtitle{Linear response function}
+\thmtitle{Linear property response function}
 \thmstatement{
 $\ds{
   \iip{\tl{W}(t);\tl{V}_\b(t')}
@@ -518,29 +747,26 @@ This follows from equations~\ref{eq:general-wavefunction-response} and \ref{eq:g
 
 \begin{samepage}
 \begin{cor}
-\thmtitle{Linear response function (spectral resolution)}
 \thmstatement{
-The linear response function can be expressed as
+Defining $\w_k\equiv E_k-E_0$ and $\ta\equiv t'-t$, the linear property reponse can be expressed as follows.
 \begin{align*}
   \iip{\tl{W}(t);\tl{V}_\b(t')}
 =
 -
   i
-  \th(t-t')
+  \th(-\ta)
   \sum_{k=0}^\infty
   (
-    e^{-i\w_k (t-t')}
+    e^{+i\w_k \ta}
     \ip{\Y_0|W|\Y_k}
     \ip{\Y_k|V_\b|\Y_0}
   -
-    e^{-i\w_k (t'-t)}
+    e^{-i\w_k \ta}
     \ip{\Y_0|V_\b|\Y_k}
     \ip{\Y_k|W|\Y_0}
   )
 \end{align*}
-where $\w_k\equiv E_k-E_0$ is the excitation energy of the $k\eth$ stationary state, $H\Y_k=E_k\Y_k$.
-}\vspace{5pt}
-\thmproof{
+}\thmproof{
 Expanding the interaction-picture operators of \cref{prop:linear-response-commutator-expression} in the Schr\"odinger picture yields the following
 \begin{align}
   \iip{\tl{W}(t);\tl{V}_\b(t')}
@@ -554,68 +780,18 @@ Expanding the interaction-picture operators of \cref{prop:linear-response-commut
     \ip{\Y_0|V_\b e^{-i(H-E_0)(t'-t)}W|\Y_0}
   )
 \end{align}
-where we have used $H\Y_0=E_0\Y_0$.
-The proposition follows by inserting resolution of the identity 
+since $H\Y_0=E_0\Y_0$.
+The proposition follows from a spectral resolution of $e^{\mp(H-E_0)(t-t')}$ in each term.
 }
 \end{cor}
 \end{samepage}
 
-
-\newpage
-\section{Fourier transforms}
-
-
-\begin{rmk}
-\begin{align}
-  f_\b(t)
-=
-  \int_{-\infty}^\infty
-  d\w\,
-  f_\b(\w_\ev)
-  e^{-i\w_\ev t}
-&&
-  f_\b(\w_\ev)
-\equiv
-  (2\pi)^{-1}
-  \int_{-\infty}^\infty
-  dt\,
-  f_\b(t)
-  e^{+i\w_\ev t}
-&&
-  \w_\ev
-\equiv
-  \w
-+
-  i\ev
-\end{align}
-$
-  f_\b(-\w)
-=
-  f_\b^*(\w)
-$\\
-Footnote:
-Fourier transforms can always be verified using
-$\ds{
-  \int_\mb{R}
-  dk\,
-  e^{ikx}
-=
-  2\pi\,\d(x)
-}$
-\end{rmk}
-
-
-\begin{rmk}
-Define $\ta_j\equiv t_j-t$
-and note that
-$
-  X^{\b_1\cd \b_n}_{t;t_1\cd t_n}
-=
-  X^{\b_1\cd \b_n}_{0;\ta_1\cd \ta_n}
-$
+\begin{dfn}
+\thmtitle{Response functions (frequency domain)}
+The frequency-domain response functions of $X(t)$ at $t=0$ are defined as $\ev$-shifted Fourier transforms of the time-domain response functions with respect to $\ta_1,\ld,\ta_n$.
 \begin{align}
   X^{\b_1\cd \b_n}_{0;\ta_1\cd \ta_n}
-\equiv
+=
   (2\pi)^{-n}
   \int_{\mb{R}^n}
   d\w_1\cd d\w_n\,
@@ -629,29 +805,63 @@ $
   X^{\b_1\cd \b_n}_{0;\ta_1\cd \ta_n}
   e^{-i\sum_j\w_{\ev,j}\ta_j}
 \end{align}
-\end{rmk}
-
-\begin{rmk}
-\thmstatement{
-$\ds{
-  \int_{\mb{R}^n}
-  dt_1\cd dt_n\,
-  f_{\b_1}(t_1)
-  \cd
-  f_{\b_n}(t_n)\,
-  X_{t;t_1\cd t_n}^{\b_1\cd\b_n}
+From equations~\ref{eq:frequency-envelopes} and~\ref{eq:general-perturbation-expansion}, we find that these are coefficients in the frequency-envelope Taylor expansion of $X(0)$.
+\begin{align}
+  X(0)
 =
+  \sum_{n=0}^\infty
+  \fr{1}{n!}
+  \sum_{\b_1\cd\b_n}
+  \int_{\mb{R}^n}
+  d\w_1\cd d\w_n\,
+  f_{\b_1}(\w_{\ev,1})\cd
+  f_{\b_n}(\w_{\ev,n})\,
+  X^{\b_1\cd \b_n}_{\w_{\ev,1}\cd \w_{\ev,n}}
+&&
+  X^{\b_1\cd \b_n}_{\w_{\ev,1}\cd \w_{\ev,n}}
+=
+  \left.
+  \fd{^n\,X(0)}{f_{\b_1}(\w_{\ev,1})\cd df_{\b_n}(\w_{\ev,n})}
+  \right|_{\bm{f}=\bo{0}}
+\end{align}
+Property response functions in the frequency domain are denoted by $\iip{W; V_{\b_1},\ld,V_{\b_n}}_{\w_{\ev,1}\cd\w_{\ev,n}}$, which can be written as a Fourier transform of
+$
+  \iip{\tl{W}(t); \tl{V}_{\b_1}(t_1),\ld,\tl{V}_{\b_n}(t_n)}
+$
+itself due to its translational invariance.
+\Cref{prop:property-response-frequency-expansion} shows that these frequency-domain functions can be used to expand $\ip{\Y(t)|W|\Y(t)}$ away from the time origin.
+\end{dfn}
+
+
+\begin{prop}
+\label{prop:property-response-frequency-expansion}
+\thmstatement{
+The expectation value of an observable $W$ at time $t$ is given by the following.
+\begin{align*}
+  \ip{\Y(t)|W|\Y(t)}
+=
+  \sum_{n=0}^\infty
+  \fr{1}{n!}
+  \sum_{\b_1,\ld,\b_n}
   \int_{\mb{R}^n}
   d\w_1\cd d\w_n\,
   f_{\b_1}(\w_{\ev,1})
   \cd
-  f_{\b_n}(\w_{\ev,n})
-  X^{\b_1\cd \b_n}_{\w_{\ev,1}\cd\w_{\ev,n}}
+  f_{\b_n}(\w_{\ev,n})\,
+  \iip{W; V_{\b_1},\ld,V_{\b_n}}_{\w_{\ev,1}\cd\w_{\ev,n}}\,
   e^{-i\sum_j\w_{\ev,j}t}
-}$
+\end{align*}
+}%
+\thmproof{
+This follows from substituting equation~\ref{eq:frequency-envelopes} into the time-envelope expansion and inserting $e^{-i\sum_j\w_{\ev,j}t} e^{+i\sum_j\w_{\ev,j}t}$.
 }
-\end{rmk}
+\end{prop}
 
+
+\begin{rmk}
+\begin{align*}
+\end{align*}
+\end{rmk}
 
 \begin{align}
   \iip{\tl{W}(t);\tl{V}_\b(t')}
@@ -713,7 +923,1054 @@ $\ds{
 \end{align}
 
 \newpage
-\section{Complex Calculus}
+\section{Complex analysis}
+
+\begin{dfn}
+\thmtitle{Continuity}
+A complex-valued function $f$ is said to be \textit{continuous} at $z\in\mb{C}$ if for any positive real number $\ev$ we can choose a radius $\d>0$ such that all complex values $z'$ within $\d$ of $z$ satisfy $|f(z')-f(z)|<\ev$.
+That is, we can always choose a circle small enough that all function values lie within some threshold.
+\end{dfn}
+
+\begin{dfn}
+\label{dfn:holomorphic-function}
+\thmtitle{Holomorphic function}
+The function $f(z)$ is \textit{differentiable} at $z$ if the following limit exists and
+has the same value with $h$ approaching from any direction in the complex plane.
+\begin{align}
+  \pd{f(z)}{z}
+\equiv
+  \lim_{h\rightarrow0}
+  \fr{f(z+h)-f(z)}{h}
+\end{align}
+A \textit{holomorphic function} is a complex-valued function which is differentiable everywhere on $\mb{C}$.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Wirtinger derivatives}
+Denoting the real and imaginary components of $z$ by $x$ and $y$ we find
+\begin{align}
+  z
+=
+  x
++
+  iy
+&&
+\implies
+&&
+  dz
+=
+  dx
++
+  idy
+,\ \ 
+  dz^*
+=
+  dx
+-
+  idy
+&&
+\implies
+&&
+  dx
+=
+  \tfr{1}{2}
+  \pr{
+    dz
+  +
+    dz^*
+  }
+,\ \ 
+  dy
+=
+  \tfr{1}{2i}
+  \pr{
+    dz
+  -
+    dz^*
+  }
+\end{align}
+by adding and subtracting differentials.
+Comparing these to the total derivative expansion for each variable, we find
+\begin{align}
+  \pd{x}{z}
+=
+  \fr{1}{2}
+&&
+  \pd{x}{z^*}
+=
+  \fr{1}{2}
+&&
+  \pd{y}{z}
+=
+  \fr{1}{2i}
+&&
+  \pd{y}{z^*}
+=
+-
+  \fr{1}{2i}
+\end{align}
+which can lead to the following formulas for derivatives with respect to $z$ and $z^*$, known as \textit{Wirtinger derivatives}.
+\begin{align}
+  \pd{}{z}
+=
+  \pd{x}{z}
+  \pd{}{x}
++
+  \pd{y}{z}
+  \pd{}{y}
+=
+  \fr{1}{2}
+  \pr{
+    \pd{}{x}
+  -
+    i
+    \pd{}{y}
+  }
+&&
+  \pd{}{z^*}
+=
+  \pd{x}{z^*}
+  \pd{}{x}
++
+  \pd{y}{z^*}
+  \pd{}{y}
+=
+  \fr{1}{2}
+  \pr{
+    \pd{}{x}
+  +
+    i
+    \pd{}{y}
+  }
+\end{align}
+These can be used to show that $\pd{z^*}{z}=\pd{z}{z^*}=0$, confirming that $z$ and $z^*$ are independent variables.
+\end{dfn}
+
+\begin{prop}
+\thmstatement{
+  The function $f$ is differentiable at $z$ if and only if
+  $
+    \dpd{f(z)}{z^*}
+  =
+    0
+  $.
+}
+\thmproof{
+  Let $z=x+iy$ and assume the derivatives with respect to $x$ and $y$ exist.
+  Then we can express $f(z+h)-f(h)$ as a bivariate Taylor expansion in $\mr{Re}(h)$ and $\mr{Im}(h)$, whose linear term is given by the following.
+\begin{align*}
+  \pd{f(z)}{x}
+  \mr{Re}(h)
++
+  \pd{f(z)}{y}
+  \mr{Im}(h)
+=
+  \pd{f(z)}{x}
+  \fr{
+    h + h^*
+  }{
+    2
+  }
++
+  \pd{f(z)}{y}
+  \fr{
+    h - h^*
+  }{
+    2i
+  }
+\end{align*}
+  Dividing this expression by $h$ and taking the limit as $h\rightarrow 0$ gives the complex derivative of $f$ at $z$.
+\begin{align*}
+  \lim_{h\rightarrow0}
+  \fr{f(z+h)-f(z)}{h}
+=
+  \fr{1}{2}
+  \pr{
+    \pd{f(z)}{x}
+  +
+    \fr{1}{i}
+    \pd{f(z)}{y}
+  }
++
+  \fr{1}{2}
+  \pr{
+    \pd{f(z)}{x}
+  -
+    \fr{1}{i}
+    \pd{f(z)}{y}
+  }
+  \lim_{h\rightarrow h^*}
+  \fr{h^*}{h}
+\end{align*}
+  If $h$ approaches along the real axis, the limit of $h^*/h$ is $+1$.
+  If $h$ approaches along the imaginary axis, the limit of $h^*/h$ is $-1$.
+  Therefore, $f$ is differentiable if and only if
+  $
+    \fr{1}{2}
+    \pr{
+      \pd{f(z)}{x}
+    -
+      \fr{1}{i}
+      \pd{f(z)}{y}
+    }
+  =
+    0
+  $,
+  which is equivalent to
+  $
+    \pd{f(z)}{z^*}
+  =
+    0
+  $.
+  If the derivatives with respect to $x$ and $y$ do not exist then $f$ is not differentiable and
+  $
+    \pd{f(z)}{z^*}
+  $
+  is undefined.
+}
+\end{prop}
+
+\begin{ntt}
+\thmtitle{Complex integration}
+The notation
+$
+  \int_\g
+  dz\,
+  f(z)
+$
+denotes the line integral of $f$ over a path $\g$ in the complex plane, which is known as \textit{contour integration}.
+The notation
+$
+  \oint_\g
+  dz\,
+  f(z)
+$
+means that $\g$ is a closed and counterclockwise. 
+\end{ntt}
+
+\begin{prop}
+\thmstatement{
+  If $\g$ is a circular path containing the point $z$, then
+$\ds{
+  \oint_\g
+  dz'\,
+  \fr{1}{z'-z}
+=
+  2\pi i
+}$.
+}
+\thmproof{
+  We can assume without loss of generality that $z$ is at the origin and parametrize the path as $z'(\th)=re^{i\th}$.
+  Using
+  $
+    dz'(\th)
+  =
+    ire^{i\th}
+    d\th
+  $,
+  the integrand simplifies to
+  $
+    dz'(\th)/
+    z'(\th)
+  =
+    id\th
+  $.
+  Integrating from $0$ to $2\pi$ concludes the proof.
+}
+\end{prop}
+
+
+
+
+\newpage
+\section{The generalized Stokes' theorem}
+
+\begin{dfn}
+\thmtitle{Topological space}
+Let $X$ be a set and let $T_X$ be a family of subsets of $X$.
+$T_X$ qualifies as a \textit{topology} if
+\begin{multicols}{2}%
+\begin{enumerate}
+\item
+  $T_X$ contains the empty set and $X$ itself.
+\item
+  Any finite or infinite union of sets in $T_X$ is in $T_X$.
+\item
+  Any finite intersection of sets in $T_X$ is in $T_X$.
+\setcounter{enumi}{0}
+\item[]
+  $\O\in T_X,\ X\in T_X$
+\item[]
+  $\ds{
+    S
+  \subseteq
+    T_X
+  \implies
+    \cup_{O\in S}
+    O
+  \in
+    T_X
+  }$
+\item[]
+  $
+    \{O_1,\ld,O_n\}
+  \subseteq
+    T_X
+  \implies
+    O_1\cap\cd\cap O_n
+  \in
+    T_X
+  $
+\end{enumerate}%
+\end{multicols}%
+\noindent
+in which case we call $(X,T_X)$ a \textit{topological space}.
+The elements of $X$ are called \textit{points} and the elements of $T_X$ are called \textit{open subsets}.
+An arbitrary subset $V\subseteq X$, not necessarily open, qualifies as a \textit{neighborhood of the point $p$} if it contains an open subset containing $p$.\footnotemark
+\footnotetext{
+  That is, there is some $O\in T_X$ such that $p\in O\subseteq V$.
+}
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Hausdorff space}
+Two points $p$ and $p'$ are \textit{distinct} if $p\neq p'$.
+Two points are \textit{separated by neighborhoods} if they have any neighborhoods that are disjoint from each other.
+A \textit{Hausdorff space} is a topological space in which all distinct points are separated by neighborhoods.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Base}
+A collection of open subsets $B\subset T_X$ is termed a \textit{base} for the topology if every member of $T_X$ can be written as a union of the elements of $B$.
+We say that $T_X$ is the topology \textit{generated} by $B$.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Euclidean space}
+Given a positive number $r$ and a point $\bo{x}$ in $\mb{R}^n$, the \textit{open ball of radius $r$ at $\bo{x}$} is defined as $\mb{B}_r(\bo{x})\equiv\{\bo{x}'\in\mb{R}^n\,|\,\|\bo{x}'-\bo{x}\|<r\}$, which is an open subset of $\mb{R}^n$.
+The \textit{Euclidean topology} on $\mb{R}^n$ is given by
+\begin{align}
+  T_{\mb{R}^n}
+\equiv
+  \{
+    \cup_{O\in S}
+    O
+  \,|\,
+    S
+  \subseteq
+    B
+  \}
+&&
+  B
+=
+  \{
+    \mb{B}_r(\bo{x})
+  \,|\,
+    r>0,
+    \bo{x}\in\mb{R}^n
+  \}
+\end{align}
+where the set of open balls $B$ serves as a base.
+With this topology, $\mb{R}^n$ is called the \textit{Euclidean $n$-space}.
+\end{dfn}
+
+\begin{ex}
+We can easily show that Euclidean space is a Hausdorff space:
+Two points, $\bo{x}$ and $\bo{x}'$, are distinct if and only if they are separated by some distance non-zero distance, $\|\bo{x}-\bo{x}'\|$.
+If so, the open balls $B_r(\bo{x})$ and $B_r(\bo{x}')$ are disjoint for $r=\|\bo{x}-\bo{x}'\|/2$, which proves that they are separated by neighborhoods.
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Differentiability class}
+A mapping  $\varphi:V\rightarrow V'$ between Euclidean subspaces $V\in \mb{R}^n$ and $V'\in\mb{R}^{n'}$ belongs to \textit{differentiability class $C^k$} if it has continuous $k\eth$ derivatives.
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Homeomorphism}
+An invertible map $\mu:X\rightarrow X'$ that takes open subsets of $X$ into open subsets of $X'$ and vice versa is called \textit{bicontinuous}.
+A bicontinuous map whose image covers the codomain is called a \textit{homeomorphism}.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Local homeomorphism}
+A \textit{local homeomorphism} is map $\la:X\rightarrow X'$ for which every point in $X$ is a member of at least one open subset $O$ whose restriction $\la|_O$ is a homeomorphism onto an open subset of $X'$.
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Chart}
+If the image of a local homeomorphism is Euclidean, $\la(X)\subseteq\mb{R}^n$, we say $X$ is \textit{locally~Euclidean}.
+For each homeomorphic restriction $\xi=\la|_O$, we call the pair $(O, \xi)$ a \textit{chart}.
+A chart is also called a \textit{local coordinate frame} because it relates each point $p$ in a region of the manifold to a coordinate vector $\bo{x}=\xi(p)$ in $\mb{R}^n$.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Topological manifold}
+A \textit{topological manifold} is a locally Euclidean Hausdorff space, $(M, T_M)$.
+In particular, a \textit{topological manifold of dimension $n$} is locally homeomorphic to Euclidean $n$-space.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Atlas}
+An \textit{atlas} is a collection of charts $\mc{A}\equiv\{(O_\a, \xi_\a)\}$ that cover a manifold,
+$
+  \cup_\a
+  O_\a
+=
+  M
+$.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Transition map}
+The \textit{transition map}
+$
+  \ta_{\a\b}(\bo{x})
+=
+  \xi_\b(\xi_\a^{-1}(\bo{x}))
+$
+converts between overlapping frames,
+$
+  \xi_\a(O_\a\cap O_\b)
+$
+and
+$
+  \xi_\b(O_\a\cap O_\b)
+$.
+We say that $\mc{A}$ is a \textit{$C^k$-differentiable atlas} if all of its transition maps are $C^k$ differentiable.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Differentiable manifold}
+Two $C^k$-differentiable atlases are considered \textit{compatible}, $\mc{A}\sim\mc{A}'$, if their union is also $C^k$ differentiable.
+An equivalence class of compatible $C^k$-differentiable atlases, $[\mc{A}]\equiv\{\mc{A}'\,|\,\mc{A}\sim\mc{A}'\}$, is called a \textit{$C^k$-differentiable structure}.
+A manifold equipped with a $C^k$-differentiable structure is a \textit{$C^k$-differentiable manifold}.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Smooth manifold}
+A manifold with an infinitely differentiable structure is called \textit{smooth}.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Smooth function}
+Real-valued functions on a manifold $f:M\rightarrow\mb{R}$ are classified as \textit{$C^k$-differentiable} according to the differentiability class of $f(\xi_a^{-1}(\bo{x}))$ for the charts $\xi_\a$ in its differential structure.
+The set of these functions is denoted $C^k(M)$.
+The space of \textit{smooth functions on $M$} is $C^\infty(M)$, which is also called the space of \textit{differential $0$-forms}. 
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Derivation}
+A \textit{derivation at $p$} is a linear functional on $C^\infty(M)$ that satisfies the \textit{product rule}.
+\begin{align}
+  (c\mc{D}_p + c'\mc{D}_p')(f)
+=
+  c\mc{D}_p(f)
++
+  c'\mc{D}_p'(f)
+&&
+  \mc{D}_p(fg)
+=
+  \mc{D}_p(f)\cdot g(p)
++
+  f(p) \cdot \mc{D}_p(g)
+\end{align}
+The set of derivations at $p$ forms a vector space called the \textit{tangent space at $p$}, denoted $T_pM$.
+\end{dfn}
+
+\begin{ex}
+A simple example of a derivation is derivative $(\pt_{x_i})_{\bo{x}}$ along one of the coordinate axes $\bo{e}_i$ at the point $\bo{x}$ in Euclidean $n$-space.
+This map $(\pt_{x_i})_{\bo{x}}:C^\infty(\mb{R}^n)\rightarrow\mb{R}$ is defined as follows.
+\begin{align}
+\label{eq:coordinate-directional-derivative}
+  (\pt_{x_i})_{\bo{x}}(f)
+\equiv
+  \pr{\pd{f}{x_i}}_\bo{x}
+\end{align}
+The coordinate derivatives at a point $\{(\pt_{x_i})_{\bo{x}}\,|\,1\leq i\leq n\}$ make up the \textit{standard basis} for its tangent space $T_\bo{x}\mb{R}^n$.
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Differential 1-forms}
+The \textit{cotangent space at $p$}, denoted $T_p^*M$ is the space of linear functionals on $T_pM$.
+That is, its elements $\a_p:T_pM\rightarrow\mb{R}$ eat derivations and spit out real numbers.
+These are called \textit{differential $1$-forms}.
+\end{dfn}
+
+\begin{ex}
+An example of a $1$-form is $(dx_i)_\bo{x}:T_\bo{x}\mb{R}^n\rightarrow\mb{R}$ which acts on derivations as $(dx_i)_\bo{x}(\mc{D}_\bo{x})\equiv\mc{D}_\bo{x}(x_i)$.
+As a linear functional, this map is characterized by its action on a basis for $T_\bo{x}\mb{R}^n$.
+Acting on $(\pt_{x_j})_\bo{x}$ gives the following.
+\begin{align}
+\label{eq:coordinate-independence}
+  (dx_i)_\bo{x}
+  (\pt_{x_j})_\bo{x}
+=
+  \pr{\pd{x_i}{x_j}}_\bo{x}
+=
+  \d_{ij}
+\end{align}
+These tangent functionals $\{(dx_i)_\bo{x}\,|\,1\leq i\leq n\}$ are called \textit{coordinate differentials} and form the \textit{standard basis} for $T_\bo{x}^*\mb{R}^n$.
+\end{ex}
+
+\begin{ex}
+\label{ex:tangent-cotangent-expansions}
+General derivations and differential 1-forms over Euclidean $n$-space can be expanded as follows
+\begin{align}
+  \mc{D}_\bo{x}
+=
+  D_\bo{x}^1\,
+  (\pt_{x_1})_\bo{x}
++
+\cd
++
+  D_\bo{x}^n\,
+  (\pt_{x_n})_\bo{x}
+&&
+  \a_\bo{x}
+=
+  A_\bo{x}^1\,
+  (dx_i)_\bo{x}
++
+\cd
++
+  A_\bo{x}^n\,
+  (dx_n)_\bo{x}
+&&
+  D_\bo{x}^i
+\in
+  \mb{R}
+,\,
+  A_\bo{x}^i
+\in
+  \mb{R}
+\end{align}
+in terms of the standard bases for $T_\bo{x}\mb{R}^n$ and $T_\bo{x}^*\mb{R}^n$.
+\end{ex}
+
+\begin{dfn}
+\label{eq:differential-map-on-0-forms}
+\thmtitle{Differential map}
+The \textit{differential map at $p$} maps $0$-forms into $1$-forms, $(d\,\cdot)_p:C^\infty(M)\rightarrow T_p^*(M)$.
+The image of $f$ under this map is the tangent-space functional $(df)_p:T_p(M)\rightarrow\mb{R}$ that acts on derivations in the tangent space as $(df)_p(\mc{D}_p)\equiv\mc{D}_p(f)$.
+From the properties of derivations, we can show that
+\begin{align}
+  d(cf + c'f')_p
+=
+  c(df)_p
++
+  c'(df')_p
+&&
+  d(fg)
+=
+  (df)_p\cdot g(p)
++
+  f(p)\cdot (dg)_p
+\end{align}
+where pointwise multiplication by a 0-form is defined as $(g(p)\cdot(df)_p)(\mc{D}_p)\equiv g(p)\cdot(df)_p(\mc{D}_p)$ which equals $g(p)\cdot\mc{D}_p(f)$.
+In words, the differential map on 0-forms is linear and satisfies its own product rule.
+\end{dfn}
+
+\begin{dfn}
+\label{eq:exact-differential}
+\thmtitle{Exact differential}
+A $1$-form $\a_p\in T_p^*M$ which can be written as a differential map of a 0-form, $\a_p=(df)_p$, is called an \textit{exact differential}.
+All other 1-forms are \textit{inexact differentials}.
+\end{dfn}
+
+\begin{ex}
+An example of an exact differential is a 1-form $\a_\bo{x}\in T_\bo{x}^*\mb{R}^n$ with coefficients of the form $A_\bo{x}^i=(\pd{f}{x_i})_\bo{x}$ for some 0-form $f$.
+We can prove that this is an exact differential by acting it on $\mc{D}_\bo{x}$ and expanding both according to \cref{ex:tangent-cotangent-expansions}
+\begin{align}
+  \a_\bo{x}(\mc{D}_\bo{x})
+=
+  \sum_{ij}
+  \pr{\pd{f}{x_i}}_\bo{x}
+  D_\bo{x}^j
+  (dx_i)_\bo{x}(\pt_{x_j})_\bo{x}
+=
+  \sum_i
+  \pr{\pd{f}{x_i}}_\bo{x}
+  D_\bo{x}^i
+=
+  \mc{D}_\bo{x}(f)
+=
+  (df)_\bo{x}(\mc{D}_\bo{x})
+\end{align}
+which proves that
+$
+  \a_\bo{x}
+=
+  (df)_\bo{x}
+$.
+Here we have made use of equations~\ref{eq:coordinate-directional-derivative} and~\ref{eq:coordinate-independence}.
+\end{ex}
+
+
+\begin{samepage}
+\begin{dfn}
+\thmtitle{Exterior power}
+The \textit{$k\eth$ exterior power} $\bigwedge^k(V)$ of a vector space $V$ a vector space with elements $\{\sum v_1\wedge\cd\wedge v_k\,|\,v_i\in V\}$.
+The \textit{wedge product}, $\wedge$, is antisymmetric, 
+$
+  v_1\wedge\cd\wedge v_k
+=
+  \e_\pi
+  v_{\pi(1)}\wedge\cd\wedge v_{\pi(k)}
+$,
+and multilinear
+\begin{align}
+  v_1\wedge\cd \wedge(cv_i + d w_i)\wedge\cd\wedge v_k
+= 
+  c(
+  v_1\wedge\cd \wedge v_i\wedge\cd\wedge v_k
+  )
++
+  d(
+  v_1\wedge\cd \wedge w_i\wedge\cd\wedge v_k
+  )
+\end{align}
+where $c$ and $d$ are scalars, making $\bigwedge^k(V)$ isomorphic to the antisymmetric subspace of $V^{\otimes k}$.
+\end{dfn}
+\end{samepage}
+
+\begin{dfn}
+\thmtitle{Differential $k$-form}
+A \textit{differential $k$-form at $p$} is an element of $\bigwedge^k(T_p^*M)$.
+We have already defined $0$-forms $\bigwedge^0(T_p^*M)=\left.C^\infty(M)\right|_p=\mb{R}$ and $1$-forms $\bigwedge^1(T_p^*M)=T_p^*M$.
+If the manifold has dimension $n$ and $\{(\e_1)_p, \ld, (\e_n)_p\}$ is a basis for $T_p^*M$, then a general differential $k$-form $\b_p$ can be expanded as
+\begin{align}
+  \b_p
+=
+  \sum_{i_1\cd i_n}
+  \b_p^{i_1\cd i_n}
+  \,
+  (\e_{i_1})_p
+  \wedge
+  \cd
+  \wedge
+  (\e_{i_n})_p
+\end{align}
+where the $\b_p^{i_1\cd i_n}$ forms a real-valued coordinate array.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Exterior derivative}
+The differential map of \cref{eq:differential-map-on-0-forms} is a specific case of the \textit{exterior derivative} of a differential $k$-form, which is a map $d$ characterized by the following properties.
+\begin{multicols}{2}%
+\begin{enumerate}
+\item
+  The exterior derivative of a $k$-form is a $(k+1)$-form.
+\item
+  The exterior derivative of a $0$-form is a differential map.
+\item
+  The exterior derivative of an exact differential vanishes.
+\item
+  The exterior derivative of a wedge product satisfies the generalize product rule.
+\setcounter{enumi}{0}
+\item[]
+  $d:\bigwedge^k(T_p^*M)\rightarrow\bigwedge^{k+1}(T_p^*M)$
+\item[]
+  $\ds{
+  }$
+\item[]
+  $\ds{
+  }$
+\item[]
+  $
+    \{O_1,\ld,O_n\}
+  \subseteq
+    T_X
+  \implies
+    O_1\cap\cd\cap O_n
+  \in
+    T_X
+  $
+\end{enumerate}%
+\end{multicols}%
+\noindent
+blasdf
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Differential $k$-form}
+Smooth functions in $C^\infty(M)$ are called \textit{differential $0$-forms}.
+Higher differential forms are defined by a map $d$ which takes \textit{differential $k$-forms} $\a, \b$ into $(k+1)$-forms according to the following axioms.
+\begin{align}
+  df
+\equiv
+  \text{differential of $f$}
+&&
+  d^2
+=
+  0
+&&
+  d(\a \wedge \b)
+=
+  d\a \wedge \b
++
+  (-)^k
+  \a \wedge d\b
+\end{align}
+The wedge product of a $k$-form and a $0$-form is defined as $f\wedge \a=\a\wedge f=f\a$ for all $f\in C^\infty(M)$.
+\end{dfn}
+
+
+
+
+\newpage
+
+\begin{dfn}
+\thmtitle{Compact subset}
+A subset $V\subseteq X$ is \textit{compact} if every infinite family $S\subseteq T_X$ of open subsets whose union contains $V$ has a finite subfamily $\{O_1,\ld,O_n\}\subseteq S$ whose union still contains $V$.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Compact support}
+The \textit{support} of a smooth function $f$ is the set of points on which the function is non-zero, $\mr{supp}(f)\equiv\{p\in M\,|\,f(p)\neq0\}$.
+A function has \textit{compact support} if $\mr{supp}(f)$ forms a compact subset on $M$.
+\end{dfn}
+
+
+\begin{ex}
+Consider $\si=u dx^1\wedge dx^2$ on the 1-form basis $dx^1,\ld,dx^n$. Its exterior derivative is
+\begin{align}
+  d\si
+=
+  du
+  \wedge
+  dx^1
+  \wedge
+  dx^2
+=
+  \sum_{i=1}^3
+  \pd{u}{x^i}
+  dx^i
+  \wedge
+  dx^1
+  \wedge
+  dx^2
+\end{align}
+\end{ex}
+
+\begin{align}
+  \w
+=
+  \sum_{i=1}^3
+  F_i(\bo{x})
+  dx_i
+&&
+  d\w
+=
+  \sum_{i=1}^3
+  dF_i(\bo{x})
+  \wedge
+  dx_i
+=
+  \sum_{i=1}^3
+  \sum_{j=1}^3
+  \pd{F_i(\bo{x})}{x_j}
+  dx_j
+  \wedge
+  dx_i
+\end{align}
+
+
+
+\begin{rmk}
+A manifold is \textit{orientable} if it has an atlas whose transition functions all have positive Jacobian determinants.
+\begin{align}
+  \bo{J}_{\a\b}
+\equiv
+  \pd{\bm{\ta}_{\a\b}(\bo{x})}{\bo{x}}
+&&
+  \mr{det}(\bo{J}_{\a\b})
+>
+  0
+\end{align}
+A maximal atlas is the union of its own equivalence class $\mc{A}=\cup_{\mc{A}'\in[\mc{A}]}\mc{A}'$.
+A \textit{volume form} $\w$ on $M$ gives rise to a natural orientation, which is the atlas of coordinate charts on $M$ that set $\w$ into a positive multiple of the Euclidean volume form $dx^1\wedge\cd\wedge dx^n$.
+Call a basis of \textit{tangent vectors} $\{X_1,\ld,X_n\}$ \textit{right-ahnded} if
+\begin{align}
+  \w(X_1,\ld,X_n)
+>
+  0
+\end{align}
+\end{rmk}
+
+\begin{dfn}
+\thmtitle{Pullback}
+Suppose that $\f:M\rightarrow M'$ is a smooth map between smooth manifolds $M$ and $M'$.
+The \textit{pullback} of a smooth function $f'\in C^\infty(M')$ is the function $\f^*f'\in C^\infty(M)$ defined by $(\f^*f)(p)=f(\f(p))$.
+If $\a'$ is a one-form on $M'$, the \textit{pullback} of $\a'$ by $\f$ is the one-form on $M$ defined by
+\begin{align}
+  (\f^*\a')_p(D)
+\equiv
+  \a'_{\f(p)}
+  (d\f_p(D))
+=
+  \a'_{\f(p)}
+  (\mc{D}_p(\f))
+\end{align}
+The line integral of $\a$ over $\W$ is defined as
+\begin{align}
+  \int_\W
+  \a
+=
+  \int_{\xi(O)}
+  (\xi^{-1})^*\a
+\end{align}
+where $(O, \xi)$ is the local coordinate chart and $\xi:O\rightarrow \mb{R}^n$ and $(\xi^{-1})^*$ is the pullback to $\mb{R}^n$.
+\end{dfn}
+
+
+\begin{rmk}
+\begin{align}
+  d\xi_1
+  \wedge
+  \cd
+  \wedge
+  d\xi_n
+=
+  \sum_{i_1\cd i_n}
+  \pd{\xi_1}{x_{i_1}}
+  \cd
+  \pd{\xi_n}{x_{i_n}}
+  dx_{i_1}
+  \wedge
+  \cd
+  \wedge
+  dx_{i_n}
+=
+  \pr{
+    \sum_{i_1\cd i_n}
+    \e_{i_1\cd i_n}
+    \pd{\xi_1}{x_{i_1}}
+    \cd
+    \pd{\xi_n}{x_{i_n}}
+  }
+  dx_1
+  \wedge
+  \cd
+  \wedge
+  dx_n
+=
+\left|
+  \pd{\bm{\xi}}{\bo{x}}
+\right|
+  dx_1
+  \wedge
+  \cd
+  \wedge
+  dx_n
+\end{align}
+\end{rmk}
+
+\newpage
+\begin{dfn}
+\thmtitle{Derivation}
+A \textit{derivation} is a map between smooth functions $D:C^\infty(M)\rightarrow C^\infty(M)$ which satisfies
+\begin{align}
+  (cD + c'D')(f)
+=
+  cD(f)
++
+  c'D'(f)
+&&
+  D(fg)
+=
+  D(f)\cdot g
++
+  f\cdot D(g)
+\end{align}
+where $\cdot$ denotes the pointwise function multiplication, $(f\cdot g)(p)\equiv f(p)g(p)$.
+The condition on the right is called the \textit{product rule}.
+The set of derivations for a given manifold forms a vector space, which is denoted $\mr{Der}(C^\infty(M))$.
+A \textit{derivation at the point $p$} is a real-valued functional
+$
+  \mc{D}_p
+:
+  C^\infty(M)
+\rightarrow
+  \mb{R}
+$
+defined by
+$
+  \mc{D}_p(f)
+\equiv
+  \pr{D(f)}(p)
+$.
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Tangent bundle}
+The set of derivations as $p$ forms a vector space called the \textit{tangent space at $p$}, denoted $T_pM$.
+The elements of $T_pM$ are \textit{tangent vectors}.
+Associating each point in the manifold with its tangent space yields the \textit{tangent bundle}, which is written as
+$
+  TM
+\equiv
+  \{(p,\mc{D}_p)\,|\,p\in M, \mc{D}_p\in T_pM\}
+$
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Differential}
+A \textit{differential} maps a derivation into a function, 
+$
+  df
+:
+  \mr{Der}(C^\infty(M))
+\rightarrow
+  C^\infty(M)
+$.
+This is expressed in terms of a smooth function $f$ as
+$
+  df(D)
+\equiv
+  D(f)
+$.
+From the properties of derivations, one finds that
+\begin{align}
+  d(cf + c'f')
+=
+  cdf
++
+  c'df'
+&&
+  d(fg)
+=
+  df\cdot g
++
+  f\cdot dg
+\end{align}
+where pointwise multiplication with a smooth function is defined as
+$
+  (df\cdot g)(D)
+\equiv
+  df(D)\cdot g
+$.
+The \textit{differential at the point~$p$}
+is a real-valued function on the tangent space at that point,
+$
+  df_p
+:
+  T_pM
+\rightarrow
+  \mb{R}
+$
+where
+$
+  df_p(D)
+\equiv
+  \pr{D(f)}(p)
+$.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Cotangent bundle}
+The set of differentials at $p$ forms a vector space called the \textit{cotangent space at $p$}, denoted
+$
+  T_p^*M
+$.
+The elements of $T_p^*M$ are called \textit{cotangent vectors} or \textit{one-forms}.
+Associating each point in the manifold with its cotangent space yields the \textit{cotangent bundle},
+$
+  T^*M
+\equiv
+\{
+  (p, df_p)
+\,|\,
+  p\in M,
+  f\in C^\infty(M)
+\}
+$.
+\end{dfn}
+
+
+
+
+\begin{dfn}
+\thmtitle{Differential}
+\begin{enumerate}
+\item
+the differential of $f$ is
+$
+  df
+:
+  T_pM
+\rightarrow
+  C^\infty(M)
+$
+\item
+given by
+$
+  df(D)
+=
+  D(f)
+$
+
+\item
+Can show that
+whereointwise scalar multiplication
+
+\item
+the differential of $f$ at $p$ is
+$
+  df_p
+:
+  T_pM
+\rightarrow
+  \mb{R}
+$
+\item
+$
+  df_p(D)
+=
+  \pr{D(f)}(p)
+$
+\item
+The set $\{df_p\,|\,f\in C^\infty(M)\}$ of differentials at $p$ forms a vector space called the \textit{cotangent space at $p$}, denoted $T_p^*M$, whose elements are \textit{cotangent vectors}.
+
+\item
+Cotangent vectors are alos called \textit{one-forms}.
+
+\item
+Associating each point in the manifold with its cotangent space yields the \textit{cotangent bundle},
+$
+  T^*M
+\equiv
+\{
+  (p, df_p)
+\,|\,
+  p\in M,
+  df_p\in T_p^*M
+\}
+$
+
+\end{enumerate}
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Differential $k$-form}
+A \textit{differential $k$-form at the point $p$} is an element of the $k\eth$ exterior power of the cotangent bundle at that point, $\a_p\in\bigwedge^k T_p^*M$.
+\end{dfn}
+
+
+\begin{ex}
+An example of a derivation is the \textit{directional derivative at the point $p(t)$} along a curve $p:\mb{R}\rightarrow M$
+\begin{align}
+  D_{p(t)}(f)
+=
+  \fd{f(p(t))}{t}
+\end{align}
+Which is equal to the differential $df_{p(t)}$ evaluated at $D$.
+\end{ex}
 
 
 \end{document}
