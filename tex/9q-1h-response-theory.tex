@@ -1122,11 +1122,6 @@ These can be used to show that $\pd{z^*}{z}=\pd{z}{z^*}=0$, confirming that $z$ 
   =
     0
   $.
-  If the derivatives with respect to $x$ and $y$ do not exist then $f$ is not differentiable and
-  $
-    \pd{f(z)}{z^*}
-  $
-  is undefined.
 }
 \end{prop}
 
@@ -1175,7 +1170,7 @@ $\ds{
   =
     id\th
   $.
-  Integrating from $0$ to $2\pi$ concludes the proof.
+  Integrating from $0$ to $2\pi$ completes the proof.
 }
 \end{prop}
 
@@ -1183,106 +1178,170 @@ $\ds{
 
 
 \newpage
-\section{The generalized Stokes' theorem}
+\section{Differential geometry}
 
 \begin{dfn}
 \thmtitle{Topological space}
-Let $X$ be a set and let $T_X$ be a family of subsets of $X$.
-$T_X$ qualifies as a \textit{topology} if
-\begin{multicols}{2}%
-\begin{enumerate}
-\item
-  $T_X$ contains the empty set and $X$ itself.
-\item
-  Any finite or infinite union of sets in $T_X$ is in $T_X$.
-\item
-  Any finite intersection of sets in $T_X$ is in $T_X$.
-\setcounter{enumi}{0}
-\item[]
-  $\O\in T_X,\ X\in T_X$
-\item[]
+Let $\mc{O}_X$ be a collection of subsets from the set $X$.
+This collection is a \textit{topology} if%
+\\[5pt]
+\begin{tabular}{@{\hspace{\parindent}}r@{\ \ }p{0.5\linewidth}p{0.4\linewidth}}
+  1.
+&
+  $\mc{O}_X$ contains the empty set and $X$ itself.
+&
+  $\O\in \mc{O}_X,\ X\in \mc{O}_X$
+\\[5pt]
+  2.
+&
+  Any finite or infinite union of sets in $\mc{O}_X$ is in $\mc{O}_X$.
+&
   $\ds{
-    S
+    \mc{S}
   \subseteq
-    T_X
+    \mc{O}_X
   \implies
-    \cup_{O\in S}
+    \cup_{O\in \mc{S}}
     O
   \in
-    T_X
+    \mc{O}_X
   }$
-\item[]
+\\[5pt]
+  3.
+&
+  Any finite intersection of sets in $\mc{O}_X$ is in $\mc{O}_X$.
+&
   $
     \{O_1,\ld,O_n\}
   \subseteq
-    T_X
+    \mc{O}_X
   \implies
     O_1\cap\cd\cap O_n
   \in
-    T_X
+    \mc{O}_X
   $
-\end{enumerate}%
-\end{multicols}%
-\noindent
-in which case we call $(X,T_X)$ a \textit{topological space}.
-The elements of $X$ are called \textit{points} and the elements of $T_X$ are called \textit{open subsets}.
-An arbitrary subset $V\subseteq X$, not necessarily open, qualifies as a \textit{neighborhood of the point $p$} if it contains an open subset containing $p$.\footnotemark
+\end{tabular}\\[5pt]
+in which case we call $(X,\mc{O}_X)$ a \textit{topological space}.
+The elements of $X$ are called \textit{points} and the elements of $\mc{O}_X$ are called \textit{open subsets}.
+The set complements of open subsets are \textit{closed subsets}.
+An arbitrary subset $N\subseteq X$, not necessarily open, qualifies as a \textit{neighborhood of the point $p$} if it contains an open subset containing $p$.\footnotemark
 \footnotetext{
-  That is, there is some $O\in T_X$ such that $p\in O\subseteq V$.
+  That is, there is some $O\in \mc{O}_X$ such that $p\in O\subseteq V$.
 }
 \end{dfn}
 
 \begin{dfn}
-\thmtitle{Hausdorff space}
+Let $V$ be an open or closed subset of $X$.
+Then any point $p$ in the space falls into one of three categories.%
+\\[5pt]
+\begin{tabular}{@{\hspace{\parindent}}r@{\ \ }p{0.6\linewidth}p{0.35\linewidth}}
+  1.
+&
+  $V$ contains an open subset containing $p$.
+&
+  $
+  \exists\,
+    O
+  \in
+    \mc{O}_X
+  :
+    p
+  \in
+    O
+  \subset
+    V
+  $
+\\[5pt]
+  2.
+&
+  The complement of $V$ contains an open subset containing $p$.
+&
+  $
+  \exists\,
+    O
+  \in
+    \mc{O}_X
+  :
+    p
+  \in
+    O
+  \subset
+    X\setminus V
+  $
+\\[5pt]
+  3.
+&
+  Any open subset containing $p$ intersects both $V$ and its complement.
+&
+  $
+    p
+  \in
+    O
+  \in
+    \mc{O}_X
+  \implies
+  \left\{
+  \begin{array}{@{}l@{}}
+    O
+  \cap
+    V
+  \neq
+    \O
+  \ \text{ and}
+  \\
+    O
+  \cap
+    X\setminus V
+  \neq
+    \O
+  \end{array}
+  \right\}
+  $
+\end{tabular}\\[5pt]
+Points in the first and second categories constitute the \textit{interior} and the \textit{exterior} of $V$.
+Points in the third category constitute the \textit{boundary} of $V$, which is denoted $\pt V$.
+An open subset is equal to its interior set, whereas a closed subset is given by the union of its interior and boundary sets.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Hausdorff condition}
 Two points $p$ and $p'$ are \textit{distinct} if $p\neq p'$.
 Two points are \textit{separated by neighborhoods} if they have any neighborhoods that are disjoint from each other.
-A \textit{Hausdorff space} is a topological space in which all distinct points are separated by neighborhoods.
+A topological space in which all distinct points are separated by neighborhoods is said to satisfy the \textit{Hausdorff condition}.
 \end{dfn}
 
 \begin{dfn}
 \thmtitle{Base}
-A collection of open subsets $B\subset T_X$ is termed a \textit{base} for the topology if every member of $T_X$ can be written as a union of the elements of $B$.
-We say that $T_X$ is the topology \textit{generated} by $B$.
+A collection of open subsets $\mc{B}\subset \mc{O}_X$ is termed a \textit{base} for the topology if every member of $\mc{O}_X$ can be written as a union of the elements of $\mc{B}$.
+We say that $\mc{O}_X$ is the topology \textit{generated} by $\mc{B}$.
 \end{dfn}
 
 \begin{dfn}
 \thmtitle{Euclidean space}
-Given a positive number $r$ and a point $\bo{x}$ in $\mb{R}^n$, the \textit{open ball of radius $r$ at $\bo{x}$} is defined as $\mb{B}_r(\bo{x})\equiv\{\bo{x}'\in\mb{R}^n\,|\,\|\bo{x}'-\bo{x}\|<r\}$, which is an open subset of $\mb{R}^n$.
-The \textit{Euclidean topology} on $\mb{R}^n$ is given by
+The \textit{open ball of radius $r>0$ at $\bo{x}\in\mb{R}^n$} is defined as $\mb{B}^n_r(\bo{x})\equiv\{\bo{x}'\in\mb{R}^n\,|\,\|\bo{x}'-\bo{x}\|<r\}$, which is an open subset of $\mb{R}^n$.
+The \textit{Euclidean topology} on $\mb{R}^n$ is the topology generated from the set of open balls.
 \begin{align}
-  T_{\mb{R}^n}
+  \mc{O}_{\mb{R}^n}
 \equiv
   \{
-    \cup_{O\in S}
+    \cup_{O\in \mc{S}}
     O
   \,|\,
-    S
+    \mc{S}
   \subseteq
-    B
+    \mc{B}
   \}
 &&
-  B
+  \mc{B}
 =
   \{
-    \mb{B}_r(\bo{x})
+    \mb{B}^n_r(\bo{x})
   \,|\,
     r>0,
     \bo{x}\in\mb{R}^n
   \}
 \end{align}
-where the set of open balls $B$ serves as a base.
-With this topology, $\mb{R}^n$ is called the \textit{Euclidean $n$-space}.
-\end{dfn}
-
-\begin{ex}
-We can easily show that Euclidean space is a Hausdorff space:
-Two points, $\bo{x}$ and $\bo{x}'$, are distinct if and only if they are separated by some distance non-zero distance, $\|\bo{x}-\bo{x}'\|$.
-If so, the open balls $B_r(\bo{x})$ and $B_r(\bo{x}')$ are disjoint for $r=\|\bo{x}-\bo{x}'\|/2$, which proves that they are separated by neighborhoods.
-\end{ex}
-
-\begin{dfn}
-\thmtitle{Differentiability class}
-A mapping  $\varphi:V\rightarrow V'$ between Euclidean subspaces $V\in \mb{R}^n$ and $V'\in\mb{R}^{n'}$ belongs to \textit{differentiability class $C^k$} if it has continuous $k\eth$ derivatives.
+The resulting topological space, $(\mb{R}^n, \mc{O}_{\mb{R}^n})$, is called \textit{Euclidean $n$-space}.
 \end{dfn}
 
 
@@ -1297,680 +1356,854 @@ A bicontinuous map whose image covers the codomain is called a \textit{homeomorp
 A \textit{local homeomorphism} is map $\la:X\rightarrow X'$ for which every point in $X$ is a member of at least one open subset $O$ whose restriction $\la|_O$ is a homeomorphism onto an open subset of $X'$.
 \end{dfn}
 
+\begin{dfn}
+\thmtitle{Topological manifold}
+An \textit{$n$-dimensional topological manifold} is a topological space  $(M, \mc{O}_M)$ that is locally homeomorphic to Euclidean $n$-space and satisfies the Hausdorff condition.
+\end{dfn}
+
+\begin{prop}
+\thmstatement{
+  Euclidean $n$-space is a topological manifold.
+}
+\thmproof{
+  Since we are dealing with a Euclidean space, we only need to show that it satisfies the Hausdorff condition.
+  By identity of indiscernibles,\footnotemark
+\footnotetext{
+  \url{https://en.wikipedia.org/wiki/Metric_(mathematics)}
+}
+the points $\bo{x}$ and $\bo{x}'$ are distinct if and only if $r=\|\bo{x}-\bo{x}'\|/2$ is a positive number.
+  If so, then $\mb{B}^n_r(\bo{x})$ and $\mb{B}^n_r(\bo{x}')$ are disjoint open subsets containing each and they are separated by neighborhoods.
+}
+\end{prop}
 
 \begin{dfn}
 \thmtitle{Chart}
-If the image of a local homeomorphism is Euclidean, $\la(X)\subseteq\mb{R}^n$, we say $X$ is \textit{locally~Euclidean}.
-For each homeomorphic restriction $\xi=\la|_O$, we call the pair $(O, \xi)$ a \textit{chart}.
-A chart is also called a \textit{local coordinate frame} because it relates each point $p$ in a region of the manifold to a coordinate vector $\bo{x}=\xi(p)$ in $\mb{R}^n$.
-\end{dfn}
-
-\begin{dfn}
-\thmtitle{Topological manifold}
-A \textit{topological manifold} is a locally Euclidean Hausdorff space, $(M, T_M)$.
-In particular, a \textit{topological manifold of dimension $n$} is locally homeomorphic to Euclidean $n$-space.
-\end{dfn}
-
-\begin{dfn}
-\thmtitle{Atlas}
-An \textit{atlas} is a collection of charts $\mc{A}\equiv\{(O_\a, \xi_\a)\}$ that cover a manifold,
-$
-  \cup_\a
-  O_\a
-=
-  M
-$.
+A \textit{chart} $(O, \xi)$ consists of a map to Euclidean space $\xi:M\rightarrow\mb{R}^n$ together with an open subset $O$ on which this map is a homeomorphism.
+This is also called a \textit{local coordinate frame} because it relates each point $p$ in a region of the manifold to a coordinate vector $\xi(p)=\bo{x}$ in $\mb{R}^n$.
 \end{dfn}
 
 \begin{dfn}
 \thmtitle{Transition map}
-The \textit{transition map}
-$
-  \ta_{\a\b}(\bo{x})
-=
-  \xi_\b(\xi_\a^{-1}(\bo{x}))
-$
-converts between overlapping frames,
-$
-  \xi_\a(O_\a\cap O_\b)
-$
-and
-$
-  \xi_\b(O_\a\cap O_\b)
-$.
-We say that $\mc{A}$ is a \textit{$C^k$-differentiable atlas} if all of its transition maps are $C^k$ differentiable.
+A transition map defines the conversion between overlapping coordinate frames.
+If $(O, \xi)$ and $(O', \xi')$ are overlapping charts, their transition map is defined by $\ta(\bo{x})=\xi'(\xi^{-1}(\bo{x}))$, which takes the image of their overlap under one chart, $\xi(O\cap O')\subseteq \mb{R}^n$, into the image of their overlap under the second chart, $\xi'(O\cap O')\subseteq \mb{R}^n$.
 \end{dfn}
 
+\begin{dfn}
+\thmtitle{Differentiability class}
+Consider a function or mapping that is compatible with differential calculus.
+If its $k\eth$ derivatives are continuous, we say that the function belongs to \textit{differentiability class $C^k$}.
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Differential structure}
+An \textit{atlas} is a collection of charts $\mc{A}\equiv\{(O_\a, \xi_\a)\}$ covering a manifold,
+$
+  \cup_{O\in\mc{A}}
+  O
+=
+  M
+$.
+We say that $\mc{A}$ is $C^k$-differentiable if all of its transition maps are.
+Two $C^k$-differentiable atlases are considered \textit{compatible}, $\mc{A}\sim\mc{A}'$, if their union is also $C^k$ differentiable.
+The equivalence class $[\mc{A}]\equiv\{\mc{A}'\,|\,\mc{A}\sim\mc{A}'\}$ of atlases compatible with a $C^k$ atlas $\mc{A}$ constitutes a \textit{$C^k$ differential structure}.
+Each differential structure on a manifold is associated with a unique \textit{maximal atlas} containing all of the members of its equivalence class.
+\end{dfn}
+
+\begin{samepage}
 \begin{dfn}
 \thmtitle{Differentiable manifold}
-Two $C^k$-differentiable atlases are considered \textit{compatible}, $\mc{A}\sim\mc{A}'$, if their union is also $C^k$ differentiable.
-An equivalence class of compatible $C^k$-differentiable atlases, $[\mc{A}]\equiv\{\mc{A}'\,|\,\mc{A}\sim\mc{A}'\}$, is called a \textit{$C^k$-differentiable structure}.
-A manifold equipped with a $C^k$-differentiable structure is a \textit{$C^k$-differentiable manifold}.
+A manifold with a $C^k$ differential structure is called a \textit{$C^k$-differentiable manifold}.
+A real-valued function on the manifold $f:M\rightarrow\mb{R}$ is categorized as $C^{k'}$ differentiable according to the lowest differentiability class of $f(\xi^{-1}(\bo{x}))$ for the charts in its differential structure.
+The set of manifold functions in a given differentiability class is denoted $C^{k'}(M)$.
+Infinitely differentiable manifolds and manifold functions are called \textit{smooth}.
 \end{dfn}
-
-\begin{dfn}
-\thmtitle{Smooth manifold}
-A manifold with an infinitely differentiable structure is called \textit{smooth}.
-\end{dfn}
-
-\begin{dfn}
-\thmtitle{Smooth function}
-Real-valued functions on a manifold $f:M\rightarrow\mb{R}$ are classified as \textit{$C^k$-differentiable} according to the differentiability class of $f(\xi_a^{-1}(\bo{x}))$ for the charts $\xi_\a$ in its differential structure.
-The set of these functions is denoted $C^k(M)$.
-The space of \textit{smooth functions on $M$} is $C^\infty(M)$, which is also called the space of \textit{differential $0$-forms}. 
-\end{dfn}
-
-\begin{dfn}
-\thmtitle{Derivation}
-A \textit{derivation at $p$} is a linear functional on $C^\infty(M)$ that satisfies the \textit{product rule}.
-\begin{align}
-  (c\mc{D}_p + c'\mc{D}_p')(f)
-=
-  c\mc{D}_p(f)
-+
-  c'\mc{D}_p'(f)
-&&
-  \mc{D}_p(fg)
-=
-  \mc{D}_p(f)\cdot g(p)
-+
-  f(p) \cdot \mc{D}_p(g)
-\end{align}
-The set of derivations at $p$ forms a vector space called the \textit{tangent space at $p$}, denoted $T_pM$.
-\end{dfn}
-
-\begin{ex}
-A simple example of a derivation is derivative $(\pt_{x_i})_{\bo{x}}$ along one of the coordinate axes $\bo{e}_i$ at the point $\bo{x}$ in Euclidean $n$-space.
-This map $(\pt_{x_i})_{\bo{x}}:C^\infty(\mb{R}^n)\rightarrow\mb{R}$ is defined as follows.
-\begin{align}
-\label{eq:coordinate-directional-derivative}
-  (\pt_{x_i})_{\bo{x}}(f)
-\equiv
-  \pr{\pd{f}{x_i}}_\bo{x}
-\end{align}
-The coordinate derivatives at a point $\{(\pt_{x_i})_{\bo{x}}\,|\,1\leq i\leq n\}$ make up the \textit{standard basis} for its tangent space $T_\bo{x}\mb{R}^n$.
-\end{ex}
-
-\begin{dfn}
-\thmtitle{Differential 1-forms}
-The \textit{cotangent space at $p$}, denoted $T_p^*M$ is the space of linear functionals on $T_pM$.
-That is, its elements $\a_p:T_pM\rightarrow\mb{R}$ eat derivations and spit out real numbers.
-These are called \textit{differential $1$-forms}.
-\end{dfn}
-
-\begin{ex}
-An example of a $1$-form is $(dx_i)_\bo{x}:T_\bo{x}\mb{R}^n\rightarrow\mb{R}$ which acts on derivations as $(dx_i)_\bo{x}(\mc{D}_\bo{x})\equiv\mc{D}_\bo{x}(x_i)$.
-As a linear functional, this map is characterized by its action on a basis for $T_\bo{x}\mb{R}^n$.
-Acting on $(\pt_{x_j})_\bo{x}$ gives the following.
-\begin{align}
-\label{eq:coordinate-independence}
-  (dx_i)_\bo{x}
-  (\pt_{x_j})_\bo{x}
-=
-  \pr{\pd{x_i}{x_j}}_\bo{x}
-=
-  \d_{ij}
-\end{align}
-These tangent functionals $\{(dx_i)_\bo{x}\,|\,1\leq i\leq n\}$ are called \textit{coordinate differentials} and form the \textit{standard basis} for $T_\bo{x}^*\mb{R}^n$.
-\end{ex}
-
-\begin{ex}
-\label{ex:tangent-cotangent-expansions}
-General derivations and differential 1-forms over Euclidean $n$-space can be expanded as follows
-\begin{align}
-  \mc{D}_\bo{x}
-=
-  D_\bo{x}^1\,
-  (\pt_{x_1})_\bo{x}
-+
-\cd
-+
-  D_\bo{x}^n\,
-  (\pt_{x_n})_\bo{x}
-&&
-  \a_\bo{x}
-=
-  A_\bo{x}^1\,
-  (dx_i)_\bo{x}
-+
-\cd
-+
-  A_\bo{x}^n\,
-  (dx_n)_\bo{x}
-&&
-  D_\bo{x}^i
-\in
-  \mb{R}
-,\,
-  A_\bo{x}^i
-\in
-  \mb{R}
-\end{align}
-in terms of the standard bases for $T_\bo{x}\mb{R}^n$ and $T_\bo{x}^*\mb{R}^n$.
-\end{ex}
-
-\begin{dfn}
-\label{eq:differential-map-on-0-forms}
-\thmtitle{Differential map}
-The \textit{differential map at $p$} maps $0$-forms into $1$-forms, $(d\,\cdot)_p:C^\infty(M)\rightarrow T_p^*(M)$.
-The image of $f$ under this map is the tangent-space functional $(df)_p:T_p(M)\rightarrow\mb{R}$ that acts on derivations in the tangent space as $(df)_p(\mc{D}_p)\equiv\mc{D}_p(f)$.
-From the properties of derivations, we can show that
-\begin{align}
-  d(cf + c'f')_p
-=
-  c(df)_p
-+
-  c'(df')_p
-&&
-  d(fg)
-=
-  (df)_p\cdot g(p)
-+
-  f(p)\cdot (dg)_p
-\end{align}
-where pointwise multiplication by a 0-form is defined as $(g(p)\cdot(df)_p)(\mc{D}_p)\equiv g(p)\cdot(df)_p(\mc{D}_p)$ which equals $g(p)\cdot\mc{D}_p(f)$.
-In words, the differential map on 0-forms is linear and satisfies its own product rule.
-\end{dfn}
-
-\begin{dfn}
-\label{eq:exact-differential}
-\thmtitle{Exact differential}
-A $1$-form $\a_p\in T_p^*M$ which can be written as a differential map of a 0-form, $\a_p=(df)_p$, is called an \textit{exact differential}.
-All other 1-forms are \textit{inexact differentials}.
-\end{dfn}
-
-\begin{ex}
-An example of an exact differential is a 1-form $\a_\bo{x}\in T_\bo{x}^*\mb{R}^n$ with coefficients of the form $A_\bo{x}^i=(\pd{f}{x_i})_\bo{x}$ for some 0-form $f$.
-We can prove that this is an exact differential by acting it on $\mc{D}_\bo{x}$ and expanding both according to \cref{ex:tangent-cotangent-expansions}
-\begin{align}
-  \a_\bo{x}(\mc{D}_\bo{x})
-=
-  \sum_{ij}
-  \pr{\pd{f}{x_i}}_\bo{x}
-  D_\bo{x}^j
-  (dx_i)_\bo{x}(\pt_{x_j})_\bo{x}
-=
-  \sum_i
-  \pr{\pd{f}{x_i}}_\bo{x}
-  D_\bo{x}^i
-=
-  \mc{D}_\bo{x}(f)
-=
-  (df)_\bo{x}(\mc{D}_\bo{x})
-\end{align}
-which proves that
-$
-  \a_\bo{x}
-=
-  (df)_\bo{x}
-$.
-Here we have made use of equations~\ref{eq:coordinate-directional-derivative} and~\ref{eq:coordinate-independence}.
-\end{ex}
+\end{samepage}
 
 
 \begin{samepage}
 \begin{dfn}
-\thmtitle{Exterior power}
-The \textit{$k\eth$ exterior power} $\bigwedge^k(V)$ of a vector space $V$ a vector space with elements $\{\sum v_1\wedge\cd\wedge v_k\,|\,v_i\in V\}$.
-The \textit{wedge product}, $\wedge$, is antisymmetric, 
-$
-  v_1\wedge\cd\wedge v_k
-=
-  \e_\pi
-  v_{\pi(1)}\wedge\cd\wedge v_{\pi(k)}
-$,
-and multilinear
+\thmtitle{Tangent space}
+A \textit{tangent at $p$} is a real functional on $C^\infty(M)$ with the following characteristics.
 \begin{align}
-  v_1\wedge\cd \wedge(cv_i + d w_i)\wedge\cd\wedge v_k
-= 
-  c(
-  v_1\wedge\cd \wedge v_i\wedge\cd\wedge v_k
-  )
-+
-  d(
-  v_1\wedge\cd \wedge w_i\wedge\cd\wedge v_k
-  )
-\end{align}
-where $c$ and $d$ are scalars, making $\bigwedge^k(V)$ isomorphic to the antisymmetric subspace of $V^{\otimes k}$.
-\end{dfn}
-\end{samepage}
-
-\begin{dfn}
-\thmtitle{Differential $k$-form}
-A \textit{differential $k$-form at $p$} is an element of $\bigwedge^k(T_p^*M)$.
-We have already defined $0$-forms $\bigwedge^0(T_p^*M)=\left.C^\infty(M)\right|_p=\mb{R}$ and $1$-forms $\bigwedge^1(T_p^*M)=T_p^*M$.
-If the manifold has dimension $n$ and $\{(\e_1)_p, \ld, (\e_n)_p\}$ is a basis for $T_p^*M$, then a general differential $k$-form $\b_p$ can be expanded as
-\begin{align}
-  \b_p
-=
-  \sum_{i_1\cd i_n}
-  \b_p^{i_1\cd i_n}
-  \,
-  (\e_{i_1})_p
-  \wedge
-  \cd
-  \wedge
-  (\e_{i_n})_p
-\end{align}
-where the $\b_p^{i_1\cd i_n}$ forms a real-valued coordinate array.
-\end{dfn}
-
-\begin{dfn}
-\thmtitle{Exterior derivative}
-The differential map of \cref{eq:differential-map-on-0-forms} is a specific case of the \textit{exterior derivative} of a differential $k$-form, which is a map $d$ characterized by the following properties.
-\begin{multicols}{2}%
-\begin{enumerate}
-\item
-  The exterior derivative of a $k$-form is a $(k+1)$-form.
-\item
-  The exterior derivative of a $0$-form is a differential map.
-\item
-  The exterior derivative of an exact differential vanishes.
-\item
-  The exterior derivative of a wedge product satisfies the generalize product rule.
-\setcounter{enumi}{0}
-\item[]
-  $d:\bigwedge^k(T_p^*M)\rightarrow\bigwedge^{k+1}(T_p^*M)$
-\item[]
-  $\ds{
-  }$
-\item[]
-  $\ds{
-  }$
-\item[]
-  $
-    \{O_1,\ld,O_n\}
-  \subseteq
-    T_X
-  \implies
-    O_1\cap\cd\cap O_n
-  \in
-    T_X
-  $
-\end{enumerate}%
-\end{multicols}%
-\noindent
-blasdf
-\end{dfn}
-
-
-\begin{dfn}
-\thmtitle{Differential $k$-form}
-Smooth functions in $C^\infty(M)$ are called \textit{differential $0$-forms}.
-Higher differential forms are defined by a map $d$ which takes \textit{differential $k$-forms} $\a, \b$ into $(k+1)$-forms according to the following axioms.
-\begin{align}
-  df
-\equiv
-  \text{differential of $f$}
-&&
-  d^2
-=
-  0
-&&
-  d(\a \wedge \b)
-=
-  d\a \wedge \b
-+
-  (-)^k
-  \a \wedge d\b
-\end{align}
-The wedge product of a $k$-form and a $0$-form is defined as $f\wedge \a=\a\wedge f=f\a$ for all $f\in C^\infty(M)$.
-\end{dfn}
-
-
-
-
-\newpage
-
-\begin{dfn}
-\thmtitle{Compact subset}
-A subset $V\subseteq X$ is \textit{compact} if every infinite family $S\subseteq T_X$ of open subsets whose union contains $V$ has a finite subfamily $\{O_1,\ld,O_n\}\subseteq S$ whose union still contains $V$.
-\end{dfn}
-
-\begin{dfn}
-\thmtitle{Compact support}
-The \textit{support} of a smooth function $f$ is the set of points on which the function is non-zero, $\mr{supp}(f)\equiv\{p\in M\,|\,f(p)\neq0\}$.
-A function has \textit{compact support} if $\mr{supp}(f)$ forms a compact subset on $M$.
-\end{dfn}
-
-
-\begin{ex}
-Consider $\si=u dx^1\wedge dx^2$ on the 1-form basis $dx^1,\ld,dx^n$. Its exterior derivative is
-\begin{align}
-  d\si
-=
-  du
-  \wedge
-  dx^1
-  \wedge
-  dx^2
-=
-  \sum_{i=1}^3
-  \pd{u}{x^i}
-  dx^i
-  \wedge
-  dx^1
-  \wedge
-  dx^2
-\end{align}
-\end{ex}
-
-\begin{align}
-  \w
-=
-  \sum_{i=1}^3
-  F_i(\bo{x})
-  dx_i
-&&
-  d\w
-=
-  \sum_{i=1}^3
-  dF_i(\bo{x})
-  \wedge
-  dx_i
-=
-  \sum_{i=1}^3
-  \sum_{j=1}^3
-  \pd{F_i(\bo{x})}{x_j}
-  dx_j
-  \wedge
-  dx_i
-\end{align}
-
-
-
-\begin{rmk}
-A manifold is \textit{orientable} if it has an atlas whose transition functions all have positive Jacobian determinants.
-\begin{align}
-  \bo{J}_{\a\b}
-\equiv
-  \pd{\bm{\ta}_{\a\b}(\bo{x})}{\bo{x}}
-&&
-  \mr{det}(\bo{J}_{\a\b})
->
-  0
-\end{align}
-A maximal atlas is the union of its own equivalence class $\mc{A}=\cup_{\mc{A}'\in[\mc{A}]}\mc{A}'$.
-A \textit{volume form} $\w$ on $M$ gives rise to a natural orientation, which is the atlas of coordinate charts on $M$ that set $\w$ into a positive multiple of the Euclidean volume form $dx^1\wedge\cd\wedge dx^n$.
-Call a basis of \textit{tangent vectors} $\{X_1,\ld,X_n\}$ \textit{right-ahnded} if
-\begin{align}
-  \w(X_1,\ld,X_n)
->
-  0
-\end{align}
-\end{rmk}
-
-\begin{dfn}
-\thmtitle{Pullback}
-Suppose that $\f:M\rightarrow M'$ is a smooth map between smooth manifolds $M$ and $M'$.
-The \textit{pullback} of a smooth function $f'\in C^\infty(M')$ is the function $\f^*f'\in C^\infty(M)$ defined by $(\f^*f)(p)=f(\f(p))$.
-If $\a'$ is a one-form on $M'$, the \textit{pullback} of $\a'$ by $\f$ is the one-form on $M$ defined by
-\begin{align}
-  (\f^*\a')_p(D)
-\equiv
-  \a'_{\f(p)}
-  (d\f_p(D))
-=
-  \a'_{\f(p)}
-  (\mc{D}_p(\f))
-\end{align}
-The line integral of $\a$ over $\W$ is defined as
-\begin{align}
-  \int_\W
-  \a
-=
-  \int_{\xi(O)}
-  (\xi^{-1})^*\a
-\end{align}
-where $(O, \xi)$ is the local coordinate chart and $\xi:O\rightarrow \mb{R}^n$ and $(\xi^{-1})^*$ is the pullback to $\mb{R}^n$.
-\end{dfn}
-
-
-\begin{rmk}
-\begin{align}
-  d\xi_1
-  \wedge
-  \cd
-  \wedge
-  d\xi_n
-=
-  \sum_{i_1\cd i_n}
-  \pd{\xi_1}{x_{i_1}}
-  \cd
-  \pd{\xi_n}{x_{i_n}}
-  dx_{i_1}
-  \wedge
-  \cd
-  \wedge
-  dx_{i_n}
-=
-  \pr{
-    \sum_{i_1\cd i_n}
-    \e_{i_1\cd i_n}
-    \pd{\xi_1}{x_{i_1}}
-    \cd
-    \pd{\xi_n}{x_{i_n}}
-  }
-  dx_1
-  \wedge
-  \cd
-  \wedge
-  dx_n
-=
-\left|
-  \pd{\bm{\xi}}{\bo{x}}
-\right|
-  dx_1
-  \wedge
-  \cd
-  \wedge
-  dx_n
-\end{align}
-\end{rmk}
-
-\newpage
-\begin{dfn}
-\thmtitle{Derivation}
-A \textit{derivation} is a map between smooth functions $D:C^\infty(M)\rightarrow C^\infty(M)$ which satisfies
-\begin{align}
-  (cD + c'D')(f)
-=
-  cD(f)
-+
-  c'D'(f)
-&&
-  D(fg)
-=
-  D(f)\cdot g
-+
-  f\cdot D(g)
-\end{align}
-where $\cdot$ denotes the pointwise function multiplication, $(f\cdot g)(p)\equiv f(p)g(p)$.
-The condition on the right is called the \textit{product rule}.
-The set of derivations for a given manifold forms a vector space, which is denoted $\mr{Der}(C^\infty(M))$.
-A \textit{derivation at the point $p$} is a real-valued functional
-$
+\label{eq:tangent-properties}
   \mc{D}_p
 :
   C^\infty(M)
 \rightarrow
   \mb{R}
+&&
+  \mc{D}_p(c\,f + c'\,f')
+=
+  c\,\mc{D}_p(f)
++
+  d\,\mc{D}_p(g)
+&&
+  \mc{D}_p(ff')
+=
+  \mc{D}_p(f)\cdot f'(p)
++
+  f(p) \cdot \mc{D}_p(f')
+\end{align}
+In words, tangents are linear functionals on $C^\infty(M)$ that satisfy the product rule of differential calculus, which is called the \textit{product rule of derivations}.
+The set of tangents at a point constitutes its \textit{tangent space}, which is denoted $T_pM$.
+\end{dfn}
+\end{samepage}
+
+\begin{ex}
+A general tangent vector at a point $p$ can be defined as the \textit{directional derivative} along a path $\g:\mb{R}\rightarrow M$ containing the point.
+If $\g(t)=p$, the directional derivative along $\g$ at $p$ is the functional
+$
+  (\pt_\g)_p
+:
+  C^\infty
+\rightarrow
+  \mb{R}
 $
 defined by
-$
-  \mc{D}_p(f)
-\equiv
-  \pr{D(f)}(p)
-$.
-\end{dfn}
-
-
-\begin{dfn}
-\thmtitle{Tangent bundle}
-The set of derivations as $p$ forms a vector space called the \textit{tangent space at $p$}, denoted $T_pM$.
-The elements of $T_pM$ are \textit{tangent vectors}.
-Associating each point in the manifold with its tangent space yields the \textit{tangent bundle}, which is written as
-$
-  TM
-\equiv
-  \{(p,\mc{D}_p)\,|\,p\in M, \mc{D}_p\in T_pM\}
-$
-\end{dfn}
-
-
-\begin{dfn}
-\thmtitle{Differential}
-A \textit{differential} maps a derivation into a function, 
-$
-  df
-:
-  \mr{Der}(C^\infty(M))
-\rightarrow
-  C^\infty(M)
-$.
-This is expressed in terms of a smooth function $f$ as
-$
-  df(D)
-\equiv
-  D(f)
-$.
-From the properties of derivations, one finds that
 \begin{align}
-  d(cf + c'f')
+  (\pt_\g)_p(f)
+\equiv
+  \pd{}{t}
+  (f\circ \g)(t)
 =
-  cdf
-+
-  c'df'
+  \pd{f(g(t))}{t}
+\end{align}
+which can be evaluated by ordinary differential calculus because the composed function $(f\circ \g)$ is a real-valued function of a real parameter.
+On an $n$-manifold one can always find a set of paths $\{\g_i:\mb{R}\rightarrow M\,|\,\g_i(t)=p\}$ such that
+$
+  \{(\pt_{\g_1})_p,\ld,(\pt_{\g_n})_p\}
+$
+is linearly independent, and therefore serves as a basis for $T_pM$.
+\end{ex}
+
+\begin{ex}
+Directional derivatives along the coordinate axes provide the \textit{standard basis} for Euclidean tangent spaces.
+\begin{align}
+\label{eq:coordinate-directional-derivative}
+  T_\bo{x}\mb{R}^n
+=
+  \mr{span}
+  \{
+    (\pt_{x_1})_{\bo{x}}
+  ,
+    \ld
+  ,
+    (\pt_{x_n})_{\bo{x}}
+  \}
 &&
+  (\pt_{x_i})_{\bo{x}}(f)
+\equiv
+  \pr{\pd{f}{x_i}}_\bo{x}
+\end{align}.
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Cotangent space}
+The \textit{cotangent space at $p$}, denoted $T_p^*M$, is the space of linear functionals on~$T_pM$.
+\begin{align}
+  \a_p
+:
+  T_pM
+\rightarrow
+  \mb{R}
+&&
+  \a_p
+  (c\,\mc{D}_p + c'\,\mc{D}_p')
+=
+  c\,
+  \a_p(\mc{D}_p)
++
+  c'\,
+  \a_p(\mc{D}_p')
+\end{align}
+That is, each cotangent $\a_p$ takes a tangent at $p$ as its argument and spits out a real number, 
+\end{dfn}
+
+\begin{ex}
+If
+$
+  \{(\pt_{\g_1})_p,\ld,(\pt_{\g_n})_p\}
+$
+\end{ex}
+
+\begin{dfn}
+\label{eq:differential-map-on-0-forms}
+\thmtitle{Differential map}
+The \textit{differential map}, $(d\,\cdot)_p:C^\infty(M)\rightarrow T_p^*(M)$, takes smooth functions into cotangents at $p$ according the the following rule:
+$(df)_p(\mc{D}_p)\equiv\mc{D}_p(f)$.
+In words, the differential of a function at $p$ maps tangents into their value on on that function at $p$.
+From the properties of tangents, one can show that this map is linear,
+$
+  d(cf + c'f')_p
+=
+  c(df)_p
++
+  c'(df')_p
+$
+, and satisfies its own form of product rule,
+$
   d(fg)
 =
-  df\cdot g
+  (df)_p\cdot g(p)
 +
-  f\cdot dg
-\end{align}
-where pointwise multiplication with a smooth function is defined as
-$
-  (df\cdot g)(D)
-\equiv
-  df(D)\cdot g
-$.
-The \textit{differential at the point~$p$}
-is a real-valued function on the tangent space at that point,
-$
-  df_p
-:
-  T_pM
-\rightarrow
-  \mb{R}
-$
-where
-$
-  df_p(D)
-\equiv
-  \pr{D(f)}(p)
-$.
+  f(p)\cdot (dg)_p
+$.\footnotemark
+\footnotetext{
+  Pointwise multiplication of cotangents and functions is defined by $(g(p)\cdot(df)_p)(\mc{D}_p)\equiv g(p)\cdot(df)_p(\mc{D}_p)$.
+}
 \end{dfn}
 
 \begin{dfn}
-\thmtitle{Cotangent bundle}
-The set of differentials at $p$ forms a vector space called the \textit{cotangent space at $p$}, denoted
-$
-  T_p^*M
-$.
-The elements of $T_p^*M$ are called \textit{cotangent vectors} or \textit{one-forms}.
-Associating each point in the manifold with its cotangent space yields the \textit{cotangent bundle},
-$
-  T^*M
-\equiv
-\{
-  (p, df_p)
-\,|\,
-  p\in M,
-  f\in C^\infty(M)
-\}
-$.
-\end{dfn}
-
-
-
-
-\begin{dfn}
-\thmtitle{Differential}
-\begin{enumerate}
-\item
-the differential of $f$ is
-$
-  df
-:
-  T_pM
-\rightarrow
-  C^\infty(M)
-$
-\item
-given by
-$
-  df(D)
-=
-  D(f)
-$
-
-\item
-Can show that
-whereointwise scalar multiplication
-
-\item
-the differential of $f$ at $p$ is
-$
-  df_p
-:
-  T_pM
-\rightarrow
-  \mb{R}
-$
-\item
-$
-  df_p(D)
-=
-  \pr{D(f)}(p)
-$
-\item
-The set $\{df_p\,|\,f\in C^\infty(M)\}$ of differentials at $p$ forms a vector space called the \textit{cotangent space at $p$}, denoted $T_p^*M$, whose elements are \textit{cotangent vectors}.
-
-\item
-Cotangent vectors are alos called \textit{one-forms}.
-
-\item
-Associating each point in the manifold with its cotangent space yields the \textit{cotangent bundle},
-$
-  T^*M
-\equiv
-\{
-  (p, df_p)
-\,|\,
-  p\in M,
-  df_p\in T_p^*M
-\}
-$
-
-\end{enumerate}
-\end{dfn}
-
-
-\begin{dfn}
-\thmtitle{Differential $k$-form}
-A \textit{differential $k$-form at the point $p$} is an element of the $k\eth$ exterior power of the cotangent bundle at that point, $\a_p\in\bigwedge^k T_p^*M$.
+\label{eq:exact-differential}
+\thmtitle{Exact differential}
+A cotangent $\a_p\in T_p^*M$ which can be written as the differential of a function, $\a_p=(df)_p$, is called an \textit{exact differential}.
+All other cotangents are \textit{inexact differentials}.
 \end{dfn}
 
 
 \begin{ex}
-An example of a derivation is the \textit{directional derivative at the point $p(t)$} along a curve $p:\mb{R}\rightarrow M$
+As an example of a cotangent, consider the coordinate differential $(dx_i)_\bo{x}.$
+Acting on $(\pt_{x_j})_\bo{x}$ gives
 \begin{align}
-  D_{p(t)}(f)
+\label{eq:coordinate-independence}
+  (dx_i)_\bo{x}
+  ((\pt_{x_j})_\bo{x})
 =
-  \fd{f(p(t))}{t}
+  \pr{\pd{x_i}{x_j}}_\bo{x}
+=
+  \d_{ij}
 \end{align}
-Which is equal to the differential $df_{p(t)}$ evaluated at $D$.
+which, by linearity, can be used to determine its action on other tangents in $T_\bo{x}\mb{R}^n$.
+The set $\{(dx_i)_\bo{x}\,|\,1\leq i\leq n\}$  of coordinate differentials makes up the \textit{standard basis} for $T_\bo{x}^*\mb{R}^n$.
 \end{ex}
 
+
+\begin{ex}
+\label{ex:tangent-cotangent-expansions}
+General tangents and cotangents $\bo{x}\in\mb{R}^n$ are linear combinations of coordinate derivatives and differentials.
+\begin{align}
+\label{eq:tangent-cotangent-expansions}
+  \mc{D}_\bo{x}
+=
+\ts{
+  \sum_i
+  D_\bo{x}^i\,
+  (\pt_{x_i})_\bo{x}
+}
+&&
+  \a_\bo{x}
+=
+\ts{
+  \sum_i
+  A_\bo{x}^i\,
+  (dx_i)_\bo{x}
+}
+\end{align}
+The value of a cotangent on a given tangent vector can therefore be expressed in terms of their expansion coefficients as
+\begin{align}
+\label{eq:cotangent-tangent-dot-product-expansion}
+\ts{
+  \a_\bo{x}(\mc{D}_\bo{x})
+=
+  \sum_{ij}
+  A_\bo{x}^i
+  D_\bo{x}^j\,
+  (dx_i)_\bo{x}((\pt_{x_j})_\bo{x})
+=
+  \sum_i
+  A_\bo{x}^i
+  D_\bo{x}^i
+}
+\end{align}
+where the second equality follows from equation~\ref{eq:coordinate-independence}.
+\end{ex}
+
+
+\begin{prop}
+\thmstatement{
+The cotangent $\a_\bo{x}$ in $T_\bo{x}^*\mb{R}^n$ is an exact differential at if and only if its expansion coefficients in the standard basis have the form $A_\bo{x}^i=(\pd{f}{x_i})_\bo{x}$ for some smooth function $f$ in $C^\infty(\mb{R}^n)$.
+}\vspace{5pt}
+\thmproof{
+  Writing the expansion coefficients as
+  $
+    A_\bo{x}^i
+  =
+    (\pt_{x_i})_\bo{x}(f)
+  $,
+  and expanding $\a_\bo{x}(\mc{D}_\bo{x})$ according to equation~\ref{eq:cotangent-tangent-dot-product-expansion} gives
+\begin{align}
+\ts{
+  \a_\bo{x}(\mc{D}_\bo{x})
+=
+  \sum_i
+  (\pt_{x_i})_\bo{x}(f)\,
+  D_\bo{x}^i
+=
+  \mc{D}_\bo{x}(f)
+}
+\end{align}
+  where we have used the tangent expansion from equation~\ref{eq:tangent-cotangent-expansions} in the second step.
+  According to the definition of the differential map this equals
+  $
+  (df)_\bo{x}(\mc{D}_\bo{x})
+  $,
+  which shows that
+  $
+    \a_\bo{x}
+  =
+    (df)_\bo{x}
+  $
+  is an exact differential.
+}
+\end{prop}
+
+
+\begin{samepage}
+\begin{dfn}
+\thmtitle{Exterior power}
+The \textit{$k\eth$ exterior power} of a vector space $V$ is $\La^k(V)\equiv\{\sum v_1\wedge\cd\wedge v_k\,|\,v_i\in V\}$, where the \textit{wedge product} $\wedge$ is an associative bilinear product that is antisymmetric in its arguments.
+\begin{align}
+  (v\wedge w)\wedge x
+=
+  v\wedge (w\wedge x)
+&&
+  c\,(v\wedge w)
+=
+  (cv)\wedge w
+&&
+  (cv + c'v')\wedge w
+=
+  c\,v\wedge w
++
+  c'\,v'\wedge w
+&&
+  v\wedge w
+=
+-
+  w\wedge v
+\end{align}
+More generally, if $\a$ is in $\La^k(V)$ and $\b$ is in $\La^{k'}(V)$, we have
+$
+  \a
+  \wedge
+  \b
+=
+  (-)^{k\cdot k'}
+  \b
+  \wedge
+  \a
+$.
+The $0\eth$ exterior power of $V$ is its underlying scalar field,
+$
+  \La^0(V)
+\equiv
+  \mb{R}
+$,
+whose wedge product is equivalent to scalar multiplication,
+$
+  c\wedge\a
+=
+  \a\wedge c
+=
+  c\,\a
+$.
+\end{dfn}
+\end{samepage}
+
+\begin{dfn}
+\thmtitle{Differential $k$-form}
+A \textit{differential $k$-form at a point $p$} is an element of the $k\eth$ exterior power of its cotangent space, $\La^k(T_p^*M)$.
+The dimension of this space is
+$
+  {n\choose k}
+=
+  \fr{n!}{k!(n-k)!}
+$,
+where $n$ is the dimension of its underlying manifold.
+A $k$-form can be expanded in terms of the unique wedge products of the cotangent basis
+$\{(\e_1)_p, \ld, (\e_n)_p\}$
+as
+\begin{align}
+\ts{
+  \a_p
+=
+  \sum_{i_1<\cd<i_k}\,
+  \a_p^{i_1\cd i_k}
+  \,
+  (\e_{i_1})_p
+  \wedge
+  \cd
+  \wedge
+  (\e_{i_k})_p
+}
+\end{align}
+where $\a_p^{i_1\cd i_k}$ is a real-valued array whose indices range from $1$ to $n$ and the wedge products of $(\e_i)_p$'s constitute a basis for the space of $k$-forms.
+Keep in mind that the cotangent vectors are functionals on the tangent space, so each $k$-form eats $k$ tangents $\mc{D}_{1,p},\ld,\mc{D}_{k,p}$ in $T_pM$ and spits out a real number,
+$
+  \a_p(
+    \mc{D}_{1,p}
+  ,
+    \ld
+  ,
+    \mc{D}_{k,p}
+  )
+\in
+  \mb{R}
+$.
+\end{dfn}
+
+\begin{rmk}
+It's worth highlighting some special types of $k$-forms.
+First of all, note that the 1-forms are simply cotangents.
+The 0-forms comprise the one-dimensional space of scalars $\La^0(T_p^* M)=\mb{R}$.
+Treating $p$ as a variable, we can think of 0-forms as point values of smooth functions on the manifold: $f_p=f(p)$ for some $f:M\rightarrow\mb{R}$.
+Finally, note that on an $n$-dimensional manifold the $n$-forms live in a one-dimensional space as well.
+These \textit{top-dimensional forms} are scalar multiples of a single basis vector $(\e_1)_p\wedge\cd\wedge(\e_n)_p$.
+\end{rmk}
+
+\begin{ex}
+As an example of a $k$-form, consider $\a_\bo{x}$ in $T_\bo{x}^*\mb{R}^n$.
+Expanding this quantity in terms of coordinate differentials, we can identify its coordinate array as values of $\a_\bo{x}$ on the coordinate differentials
+\begin{align}
+  \a_\bo{x}
+=
+  \sum_{i_1<\cd<i_k}
+  \a_\bo{x}^{i_1\cd i_k}\,
+  (dx_{i_1})_\bo{x}
+  \wedge
+  \cd
+  \wedge
+  (dx_{i_k})_\bo{x}
+&&
+\implies
+&&
+  \a_\bo{x}
+  (
+    (\pt_{x_{i_1}})_\bo{x}
+  ,
+    \ld
+  ,
+    (\pt_{x_{i_k}})_\bo{x}
+  )
+=
+  \a_\bo{x}^{i_1\cd i_k}
+\end{align}
+which follows from equation~\ref{eq:coordinate-independence}.
+This can be used to express the value of $\a_\bo{x}$ on a general set of tangents as
+\begin{align}
+  \a_\bo{x}
+  (
+    \mc{D}_{1, \bo{x}}
+  ,
+    \ld
+  ,
+    \mc{D}_{k, \bo{x}}
+  )
+=
+  \sum_{i_1<\cd<i_k}
+  \a_\bo{x}^{i_1\cd i_k}\,
+  D_{1, \bo{x}}^{i_1}
+  \cd
+  D_{k, \bo{x}}^{i_k}
+\end{align}
+in terms of expansion coefficients with respect to the coordinate derivatives.
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Exterior derivative}
+The \textit{exterior derivative} is a map $\mr{d}:\La^k(T_p^*M)\rightarrow\La^{k+1}(T_p^*M)$ characterized by
+\begin{align}
+  \mr{d}f_p
+=
+  (df)_p
+&&
+  \mr{d}^2\a_p
+=
+  0
+&&
+  \mr{d}(\a_p\wedge\b_p)
+=
+  \mr{d}\a_p\wedge \b_p
++
+  (-)^k
+  \a_p\wedge \mr{d}\b_p
+\end{align}
+where $\a_p$ is a $k$-form.
+The first property says that the exterior derivative takes 0-forms into their differentials.
+A $k$-form that can be expressed as an exterior derivative of a $(k-1)$-form is called an \textit{exact form}, so the second property says that exact forms have vanishing exterior derivatives.
+The third property is called the \textit{product rule of antiderivations}.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Partitions of unity}
+A set of smooth functions $\y\in\Up\subset C^\infty(M)$ qualifies as a \textit{partition of unity} if
+\begin{align}
+  0
+\leq
+  \y(p)
+\leq
+  1
+&&
+  \sum_{\y\in\Up}
+  \y(p)
+=
+  1
+&&
+\exists\,
+  O
+\ni
+  p
+:
+  |\{
+    \y\in\Up
+  \,|\,
+    \y(p')
+  \neq
+    0
+  ,\,
+    p'
+  \in
+    O
+  \}|
+=
+  n
+\in
+  \mb{N}
+\end{align}
+for every point $p$ on the manifold.
+In words, the third condition says that there is an open neighborhood of $p$ on which all but a finite number of functions in the partition are zero.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Pushforward}
+The \textit{pushforward} of a map $\varphi:M\rightarrow M'$ is a mapping
+$
+  \varphi_*
+:
+  T_pM
+\rightarrow
+  T_{\varphi(p)}M'
+$
+between their tangent spaces
+which takes the tangent $\mc{D}_p$ at the point $p$ on the original manifold into a tangent at $\varphi(p)$ that acts on smooth functions $f'$ on the target manifold as
+$
+  (\varphi_*\mc{D}_p)_{\varphi(p)}(f')
+\equiv
+  \mc{D}_p(f'\circ\varphi)
+$
+where
+$\circ$
+denotes function composition.
+\end{dfn}
+
+\begin{ex}
+
+\end{ex}
+
+\begin{thm}
+\thmtitle{Stokes' theorem}
+\thmstatement{
+Let $M$ be a be a differentiable $n$-manifold with boundary $\pt M$, and let $\a$ be an exact $n$-form on the manifold, $\a=\mr{d}\w$.
+Then the integral of $\a$ equals the integral of $\w$ on the manifold boundary. 
+\begin{align*}
+  \int_{M}
+  \mr{d}\w
+=
+  \oint_{\pt M}
+  \w
+\end{align*}
+}
+\end{thm}
+
+\begin{ex}
+\thmtitle{Green's theorem}
+\begin{align}
+  \w
+=
+  \w_1
+  \mr{d}x_1
++
+  \w_2
+  \mr{d}x_2
+&&
+  \mr{d}\w
+=
+  \mr{d}\w_1\wedge\mr{d}x_1
++
+  \mr{d}\w_2\wedge\mr{d}x_2
+&&
+  \mr{d}\w_i
+=
+  \pd{\w_i}{x_1}
+  \mr{d}x_1
++
+  \pd{\w_i}{x_2}
+  \mr{d}x_2
+&&
+  \mr{d}\w
+=
+  \pr{
+    \pd{\w_2}{x_1}
+  -
+    \pd{\w_1}{x_2}
+  }
+  \mr{d}x_1\wedge\mr{d}x_2
+\end{align}
+\begin{align}
+  \int_M
+  \mr{d}x_1\wedge\mr{d}x_2
+  \pr{
+    \pd{\w_2}{x_1}
+  -
+    \pd{\w_1}{x_2}
+  }
+=
+  \oint_{\pt M}
+  \pr{
+    \mr{d}x_1
+    \w_1
+  +
+    \mr{d}x_2
+    \w_2
+  }
+\end{align}
+\end{ex}
+
+\begin{ex}
+\thmtitle{Kelvin-Stokes theorem}
+\begin{align}
+  \w
+=
+  \w_1
+  \mr{d}x_1
++
+  \w_2
+  \mr{d}x_2
++
+  \w_3
+  \mr{d}x_3
+\end{align}
+\begin{align}
+  \mr{d}\w
+=&\
+  \mr{d}\w_1
+  \wedge
+  \mr{d}x_1
++
+  \mr{d}\w_2
+  \wedge
+  \mr{d}x_2
++
+  \mr{d}\w_3
+  \wedge
+  \mr{d}x_3
+\\=&\
+  \pd{\w_1}{x_2}
+  \mr{d}x_2
+  \wedge
+  \mr{d}x_1
++
+  \pd{\w_1}{x_3}
+  \mr{d}x_3
+  \wedge
+  \mr{d}x_1
++
+  \pd{\w_2}{x_1}
+  \mr{d}x_1
+  \wedge
+  \mr{d}x_2
++
+  \pd{\w_2}{x_3}
+  \mr{d}x_3
+  \wedge
+  \mr{d}x_2
++
+  \pd{\w_3}{x_1}
+  \mr{d}x_1
+  \wedge
+  \mr{d}x_3
++
+  \pd{\w_3}{x_2}
+  \mr{d}x_2
+  \wedge
+  \mr{d}x_3
+\\=&\
+  \mr{d}x_2
+  \wedge
+  \mr{d}x_3
+  \pr{
+    \pd{\w_3}{x_2}
+  -
+    \pd{\w_2}{x_3}
+  }
++
+  \mr{d}x_1
+  \wedge
+  \mr{d}x_2
+  \pr{
+    \pd{\w_2}{x_1}
+  -
+    \pd{\w_1}{x_2}
+  }
++
+  \mr{d}x_1
+  \wedge
+  \mr{d}x_3
+  \pr{
+    \pd{\w_3}{x_1}
+  -
+    \pd{\w_1}{x_3}
+  }
+\end{align}
+\end{ex}
+
+
+\newpage
+
+\begin{ex}
+A vector field $\bo{v}: M\rightarrow\mb{R}^n$ with elements  $\bo{e}_i\cdot\bo{v}(p)=v_i(p)$ is described by an $(n-1)$-form
+\begin{align}
+  \w_{\bo{v}(p)}
+=
+  \sum_{i=1}^n
+  (-)^{i-1}
+  v_i\,
+  dx_1
+  \wedge
+  \cd
+  \wedge
+  \cancel{
+    dx_i
+    \wedge
+  }
+  \cd
+  \wedge
+  dx_n
+\end{align}
+The exterior derivative of this form is the divergence
+\begin{align}
+  \mr{d}
+  \w_{\bo{v}(p)}
+=
+  \sum_{i=1}^n
+  \mr{d}x_1
+  \wedge
+  \cd
+  \wedge
+  \mr{d}v_i
+  \wedge
+  \cd
+  \wedge
+  \mr{d}x_n
+=
+  \pr{
+    \sum_{i=1}^n
+    \pd{v_i}{x_i}
+  }
+  \mr{d}x_1
+  \wedge
+  \cd
+  \wedge
+  \mr{d}x_n
+=
+  (\nabla\cdot\bo{v})\,\,
+  \mr{d}^n\bo{x}
+\end{align}
+This vector field is also associated with a $1$-form
+\begin{align}
+  \h_{\bo{v}(p)}
+=
+  \sum_{i=1}^n
+  v_i\,
+  \mr{d}x_i
+\end{align}
+whose exterior derivative as follows.
+\begin{align}
+  \mr{d}\h_{\bo{v}(p)}
+=
+  \sum_j
+  \mr{d}v_j\wedge\mr{d}x_j
+=
+  \sum_{i\neq j}
+  \pd{v_j}{x_i}\,
+  \mr{d}x_i
+  \wedge
+  \mr{d}x_j
+=
+  \sum_{i<j}
+  \pr{
+    \pd{v_j}{x_i}
+  -
+    \pd{v_i}{x_j}
+  }
+  \mr{d}x_i
+  \wedge
+  \mr{d}x_j
+\end{align}
+For $n=3$, this is equal to the curl.
+\begin{align*}
+  \mr{d}\h_{\bo{v}(p)}
+=&\
+  \pr{
+    \pd{v_3}{x_2}
+  -
+    \pd{v_2}{x_3}
+  }\,
+  \mr{d}x_2
+  \wedge
+  \mr{d}x_3
++
+  \pr{
+    \pd{v_3}{x_1}
+  -
+    \pd{v_1}{x_3}
+  }\,
+  \mr{d}x_1
+  \wedge
+  \mr{d}x_3
++
+  \pr{
+    \pd{v_2}{x_1}
+  -
+    \pd{v_1}{x_3}
+  }\,
+  \mr{d}x_1
+  \wedge
+  \mr{d}x_2
+\\=&\
+  (-)^{1-1}
+  (\nabla\times\bo{v})_1\,
+  \cancel{
+    \mr{d}x_1
+  }
+  \wedge
+  \mr{d}x_2
+  \wedge
+  \mr{d}x_3
++
+  (-)^{2-1}
+  (\nabla\times\bo{v})_2\,
+  \mr{d}x_1
+  \wedge
+  \cancel{
+    \mr{d}x_2
+  }
+  \wedge
+  \mr{d}x_3
++
+  (-)^{3-1}
+  (\nabla\times\bo{v})_3\,
+  \mr{d}x_1
+  \wedge
+  \mr{d}x_2
+  \wedge
+  \cancel{
+    \mr{d}x_3
+  }
+\\=&\
+  \w_{\nabla\times\bo{v}(p)}
+\end{align*}
+\end{ex}
 
 \end{document}
