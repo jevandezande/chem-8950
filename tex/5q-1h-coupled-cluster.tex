@@ -512,8 +512,14 @@ It can be shown that the determinant basis forms an eigenbasis for the diagonal 
   \sum_{r=1}^k
   f_{q_r}^{q_r}
 \end{align}
-Noting that $H_0$ is Hermitian, this implies $\ip{\F_{ij\cd}^{ab\cd}|H_0\,\mr{exp}(T)|\F}=\mc{E}_{ij\cd}^{ab\cd}\ip{\F_{ij\cd}^{ab\cd}|\mr{exp}(T)|\F}=\mc{E}_{ij\cd}^{ab\cd}t_{ab\cd}^{ij\cd}$.
-This can be used to rearrange the amplitude equation in (\ref{eq:traditional-cc-equations-2}) as follows, which defines the working equations used to iteratively solve TCC.
+Noting that $H_0$ is Hermitian, this implies
+$\ip{\F_{ij\cd}^{ab\cd}|H_0\,T|\F}=\mc{E}_{ij\cd}^{ab\cd}\ip{\F_{ij\cd}^{ab\cd}|T|\F}=\mc{E}_{ij\cd}^{ab\cd}t_{ab\cd}^{ij\cd}$.
+This can be used to rearrange the amplitude equation in
+(\ref{eq:traditional-cc-equations-2}) as follows, which defines the working
+equations used to iteratively solve TCC.%
+\footnote{%
+    Note that $\ip{\F_{ij\cd}^{ab\cd}|H_0\,\exp(T)|\F}_\mr{C}=\ip{\F_{ij\cd}^{ab\cd}|H_0\,T|\F}$.
+}
 \begin{align}
   t_{ab\cd}^{ij\cd}
 =
